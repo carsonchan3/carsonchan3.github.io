@@ -1,0 +1,15 @@
+Starting video analysis...
+Submitting video analysis task...
+Task submitted (ID: video-analysis-bf60e4d0-1929-4dbf-bbd7-be59d1f22133)
+[8s] Status: Analyzing video content with AI...
+[10s] Status: Analysis completed
+[10s] Analysis completed!
+Full analysis result saved to: /home/ubuntu/video_vli-hero-background_analysis_20260812_071206.md
+Note: This tool performs AI-based visual and audio analysis, not verbatim transcription. For detailed speech transcription, use `manus-speech-to-text` instead.
+Analysis result:
+
+The video features a motion capture technology setup, showcasing a laptop screen with tracking software and several OptiTrack cameras. A hand moves a tracking object with reflective markers in front of the cameras, and the software on the laptop screen reflects these movements in real-time.
+
+The camera framing starts with a medium shot of the entire desk setup and then zooms in for a close-up of the laptop screen. The scene is brightly lit by indoor lighting and the glow from the monitors and camera rings. The primary motion is the hand moving the tracking object and the camera zooming in on the screen.
+
+For a hero text overlay, the **right side** of the frame is less visually busy, as the left side is dominated by the detailed and complex interface of the tracking software.

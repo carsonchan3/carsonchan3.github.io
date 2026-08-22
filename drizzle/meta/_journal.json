@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1785470641911,
+      "tag": "0000_nifty_johnny_storm",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1786498580055,
+      "tag": "0001_charming_viper",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1786688632095,
+      "tag": "0002_curvy_franklin_storm",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1786926231995,
+      "tag": "0003_long_dragon_lord",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1786932243343,
+      "tag": "0004_workable_lethal_legion",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1786939498881,
+      "tag": "0005_peaceful_karma",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1786945661863,
+      "tag": "0006_blushing_namorita",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1786961152424,
+      "tag": "0007_outgoing_skrulls",
+      "breakpoints": true
+    }
+  ]
+}

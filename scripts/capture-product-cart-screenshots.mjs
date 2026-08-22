@@ -1,0 +1,52 @@
+import { chromium } from "playwright-core";
+
+const baseUrl = "http://127.0.0.1:3000/product";
+const browser = await chromium.launch({ executablePath: "/usr/bin/chromium", headless: true });
+
+const desktopContext = await browser.newContext({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 });
+const desktopPage = await desktopContext.newPage();
+await desktopPage.goto(baseUrl, { waitUntil: "networkidle" });
+await desktopPage.getByTestId("product-catalogue-card").first().scrollIntoViewIfNeeded();
+await desktopPage.waitForTimeout(300);
+await desktopPage.screenshot({ path: "/home/ubuntu/product-catalogue-desktop-controls.png" });
+await desktopPage.getByTestId("product-detail-trigger").first().click();
+await desktopPage.getByTestId("product-detail-title").waitFor({ state: "visible" });
+await desktopPage.waitForTimeout(350);
+await desktopPage.screenshot({ path: "/home/ubuntu/product-detail-desktop-dialog.png" });
+await desktopPage.getByTestId("product-detail-variant").nth(1).click();
+await desktopPage.screenshot({ path: "/home/ubuntu/product-detail-desktop-pnp-dialog.png" });
+await desktopPage.getByTestId("product-detail-add-to-cart").click();
+await desktopPage.keyboard.press("Escape");
+await desktopPage.waitForTimeout(150);
+await desktopPage.screenshot({ path: "/home/ubuntu/product-floating-cart-desktop.png" });
+await desktopPage.getByTestId("floating-product-cart").click();
+await desktopPage.getByTestId("floating-product-cart-panel").waitFor({ state: "visible" });
+await desktopPage.screenshot({ path: "/home/ubuntu/product-floating-cart-panel-desktop.png" });
+await desktopPage.getByTestId("floating-cart-close").click();
+await desktopContext.close();
+
+const mobileContext = await browser.newContext({ viewport: { width: 375, height: 812 }, deviceScaleFactor: 1 });
+const mobilePage = await mobileContext.newPage();
+await mobilePage.goto(baseUrl, { waitUntil: "networkidle" });
+const firstCard = mobilePage.getByTestId("product-catalogue-card").first();
+await firstCard.scrollIntoViewIfNeeded();
+await firstCard.getByTestId("product-detail-trigger").click();
+await mobilePage.getByTestId("product-detail-title").waitFor({ state: "visible" });
+await mobilePage.getByTestId("product-detail-variant").nth(1).click();
+await mobilePage.getByTestId("product-detail-add-to-cart").click();
+await mobilePage.keyboard.press("Escape");
+await mobilePage.waitForTimeout(150);
+await mobilePage.screenshot({ path: "/home/ubuntu/product-floating-cart-mobile.png" });
+await mobilePage.getByTestId("floating-product-cart").click();
+await mobilePage.getByTestId("floating-product-cart-panel").waitFor({ state: "visible" });
+await mobilePage.screenshot({ path: "/home/ubuntu/product-floating-cart-panel-mobile.png" });
+await mobilePage.getByTestId("floating-cart-ask-pricing").click();
+await mobilePage.getByTestId("cart-pricing-form").waitFor({ state: "visible" });
+await mobilePage.waitForTimeout(350);
+await mobilePage.screenshot({ path: "/home/ubuntu/product-cart-pricing-mobile-dialog.png" });
+await mobilePage.getByTestId("cart-pricing-delivery-address").scrollIntoViewIfNeeded();
+await mobilePage.getByTestId("cart-pricing-delivery-address").fill("Unit 12, 8 Science Park West Avenue, Hong Kong");
+await mobilePage.screenshot({ path: "/home/ubuntu/product-cart-delivery-address-mobile-dialog.png" });
+await mobileContext.close();
+
+await browser.close();

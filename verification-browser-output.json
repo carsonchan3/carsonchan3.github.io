@@ -1,0 +1,1426 @@
+[
+  {
+    "viewport": "desktop",
+    "cardCount": 3,
+    "cardHrefs": [
+      "/dronesportsreferee",
+      "/product",
+      "/services"
+    ],
+    "cardTitles": [
+      "Smart Referee",
+      "Drone Equipment",
+      "Services"
+    ],
+    "imagesLoaded": true,
+    "hoverScale": "1.1",
+    "desktopNavLabels": [
+      "Smart RefereeProductServicesPeopleContact"
+    ],
+    "headerBackground": "rgb(255, 255, 255)",
+    "headerLanguageControls": 1,
+    "englishSelected": true,
+    "requestDemoInHeader": 0,
+    "toolbarLanguageDisplay": "none",
+    "floatingControlAbsent": true,
+    "homepageContactSectionAbsent": true,
+    "chineseAvailabilityPopupCorrect": true,
+    "generalOrganizationOptionStyles": [
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ],
+    "mobileMenuValid": true,
+    "mobileLanguageControlPresent": true,
+    "mobileToolbarLanguagePresent": true,
+    "routeChecks": [
+      {
+        "route": "/",
+        "heading": "Every Frame Matters.\nEvery Call Counts.",
+        "footer": true,
+        "revealTargetCount": 7,
+        "explicitRevealTargetCount": 7,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/dronesportsreferee",
+        "heading": "Make every call defensible.",
+        "footer": true,
+        "revealTargetCount": 25,
+        "explicitRevealTargetCount": 25,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/product",
+        "heading": "Select a starting point.",
+        "footer": true,
+        "revealTargetCount": 2,
+        "explicitRevealTargetCount": 2,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/services",
+        "heading": "Build skill.\nFly with purpose.",
+        "footer": true,
+        "revealTargetCount": 7,
+        "explicitRevealTargetCount": 7,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/people",
+        "heading": "People behind the precision.",
+        "footer": true,
+        "revealTargetCount": 4,
+        "explicitRevealTargetCount": 4,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/use-cases",
+        "heading": "One calibrated view. More confident competition.",
+        "footer": true,
+        "revealTargetCount": 9,
+        "explicitRevealTargetCount": 9,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/contact",
+        "heading": "Let’s build the right next step.",
+        "footer": true,
+        "revealTargetCount": 3,
+        "explicitRevealTargetCount": 3,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/404",
+        "heading": "This route is outside the competition boundary.",
+        "footer": false,
+        "revealTargetCount": 1,
+        "explicitRevealTargetCount": 1,
+        "allRevealTargetsVisible": true
+      }
+    ],
+    "contactPage": {
+      "heading": "Let’s build the right next step.",
+      "formPresent": true,
+      "formControlCount": 7,
+      "contactNavigationActive": true
+    },
+    "contactSubmissionSuccess": true,
+    "contactFormReset": true,
+    "smartRefereeHeroActionState": {
+      "count": 1,
+      "href": "#pricing",
+      "pricingAnchorNavigationWorks": true,
+      "hasExpectedLabel": true,
+      "legacyConfigureActionAbsent": true,
+      "duplicateExploreServiceActionAbsent": true
+    },
+    "officiatingComparisonState": {
+      "present": true,
+      "traditionalPanelPresent": true,
+      "smartRefereePanelPresent": true,
+      "traditionalFlowPresent": true,
+      "smartRefereeFlowPresent": true,
+      "traditionalFlowStepCount": 3,
+      "smartRefereeFlowStepCount": 3,
+      "containsDecisionSupportPositioning": true,
+      "containsHumanOnlyLimits": true
+    },
+    "smartRefereeVisualState": {
+      "heroHeightRatio": 0.8041666666666667,
+      "traditionalComparisonGraphicPresent": true,
+      "smartRefereeComparisonGraphicPresent": true,
+      "systemFlowRemoved": true,
+      "ecosystemAudienceCardCount": 3,
+      "ecosystemIllustrationCount": 3,
+      "ecosystemIllustrationSources": [
+        "/manus-storage/vli-ecosystem-event-organizers_f82296b8.png",
+        "/manus-storage/vli-ecosystem-clubs-replacement_e3af6edd.png",
+        "/manus-storage/vli-ecosystem-educators-replacement_3c55b4c5.png"
+      ],
+      "ecosystemIllustrationStates": [
+        {
+          "complete": true,
+          "naturalWidth": 1920,
+          "naturalHeight": 1920
+        },
+        {
+          "complete": true,
+          "naturalWidth": 1920,
+          "naturalHeight": 1920
+        },
+        {
+          "complete": true,
+          "naturalWidth": 1920,
+          "naturalHeight": 1920
+        }
+      ]
+    },
+    "pricingSectionPresent": true,
+    "pricingPriceLabels": [
+      "From $XXXX",
+      "From $XXXX",
+      "From $XXXX"
+    ],
+    "pricingCageNote": "A Class 20 cage, venue integration, and tailored equipment are quoted separately according to the final package scope.",
+    "managedSelected": true,
+    "pricingTierSelectionStates": [
+      {
+        "tierId": "assist",
+        "selected": true,
+        "allTierCardsVisible": true
+      },
+      {
+        "tierId": "managed",
+        "selected": true,
+        "allTierCardsVisible": true
+      },
+      {
+        "tierId": "evidence-pro",
+        "selected": true,
+        "allTierCardsVisible": true
+      }
+    ],
+    "pricingTierRequestStates": [
+      {
+        "tierId": "assist",
+        "dialogOpen": true,
+        "selectedTier": "assist",
+        "selectedAcquisition": "rental"
+      },
+      {
+        "tierId": "managed",
+        "dialogOpen": true,
+        "selectedTier": "managed",
+        "selectedAcquisition": "rental"
+      },
+      {
+        "tierId": "evidence-pro",
+        "dialogOpen": true,
+        "selectedTier": "evidence-pro",
+        "selectedAcquisition": "rental"
+      }
+    ],
+    "pricingDialogOpened": true,
+    "pricingDialogStyles": {
+      "background": "rgb(28, 29, 32)",
+      "color": "rgb(255, 255, 255)"
+    },
+    "pricingDialogInputClasses": [
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "file:text-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border-white/15 bg-black/20 text-white placeholder:text-white/45",
+      "file:text-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border-white/15 bg-black/20 text-white placeholder:text-white/45",
+      "file:text-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border-white/15 bg-black/20 text-white placeholder:text-white/45",
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content w-full rounded-md border px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-28 border-white/15 bg-black/20 text-white placeholder:text-white/45"
+    ],
+    "pricingDialogOptionStyles": [
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ],
+    "legacyPricingRedirected": true,
+    "legacyEquipmentRedirected": true,
+    "productTopHeading": "Select a starting point.",
+    "productPlaceholderTextPresent": false,
+    "customQuotePresent": true,
+    "productCustomRequestTopPriority": true,
+    "productPriceTags": [
+      "From HK$2,110",
+      "From HK$2,110",
+      "HK$4,040",
+      "HK$4,610",
+      "HK$4,300",
+      "HK$4,320",
+      "HK$4,610",
+      "From HK$4,150",
+      "From HK$180",
+      "HK$90",
+      "From HK$40",
+      "HK$1,050",
+      "From HK$4,410"
+    ],
+    "productImageSources": [
+      "/manus-storage/excel_prod_30_a7d07b66.png",
+      "/manus-storage/excel_prod_9_417b350f.png",
+      "/manus-storage/excel_prod_10_e5fc5653.png",
+      "/manus-storage/excel_prod_11_fc95565c.png",
+      "/manus-storage/excel_prod_13_712f9740.png",
+      "/manus-storage/excel_prod_15_cb880557.png",
+      "/manus-storage/excel_prod_17_584dbd72.png",
+      "/manus-storage/excel_prod_26_26e91f83.png",
+      "/manus-storage/excel_prod_3_aa72f902.png",
+      "/manus-storage/excel_prod_6_81781e24.png",
+      "/manus-storage/excel_prod_1_f4a517d6.png",
+      "/manus-storage/excel_prod_25_422ab006.png",
+      "/manus-storage/excel_prod_7_7475981f.png"
+    ],
+    "productImageStates": [
+      {
+        "complete": true,
+        "naturalWidth": 225,
+        "naturalHeight": 173
+      },
+      {
+        "complete": true,
+        "naturalWidth": 481,
+        "naturalHeight": 457
+      },
+      {
+        "complete": true,
+        "naturalWidth": 500,
+        "naturalHeight": 334
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1281
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1000,
+        "naturalHeight": 667
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1281
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1281
+      },
+      {
+        "complete": true,
+        "naturalWidth": 491,
+        "naturalHeight": 647
+      },
+      {
+        "complete": true,
+        "naturalWidth": 374,
+        "naturalHeight": 249
+      },
+      {
+        "complete": true,
+        "naturalWidth": 451,
+        "naturalHeight": 388
+      },
+      {
+        "complete": true,
+        "naturalWidth": 620,
+        "naturalHeight": 557
+      },
+      {
+        "complete": true,
+        "naturalWidth": 601,
+        "naturalHeight": 443
+      },
+      {
+        "complete": true,
+        "naturalWidth": 800,
+        "naturalHeight": 800
+      }
+    ],
+    "productGridColumns": 3,
+    "productCardRects": [
+      {
+        "top": -1969,
+        "height": 504
+      },
+      {
+        "top": -1969,
+        "height": 504
+      },
+      {
+        "top": -1969,
+        "height": 532
+      },
+      {
+        "top": -1417,
+        "height": 532
+      },
+      {
+        "top": -1417,
+        "height": 532
+      },
+      {
+        "top": -1417,
+        "height": 532
+      },
+      {
+        "top": -866,
+        "height": 532
+      },
+      {
+        "top": -866,
+        "height": 532
+      },
+      {
+        "top": -866,
+        "height": 532
+      },
+      {
+        "top": -314,
+        "height": 532
+      },
+      {
+        "top": -314,
+        "height": 532
+      },
+      {
+        "top": -314,
+        "height": 532
+      },
+      {
+        "top": 238,
+        "height": 532
+      }
+    ],
+    "productCatalogueVisibilityState": {
+      "mainUsesSectionRevealTarget": false,
+      "cards": [
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        }
+      ]
+    },
+    "selectedPnpVariantState": {
+      "price": "HK$2,110",
+      "model": "TZ009"
+    },
+    "productDiscussSetupActionsAbsent": true,
+    "productCartSummary": "QUOTE CART\n\n1 item type · 1 unit\n\nSelect quantities below. We will confirm final availability and pricing with you.\n\nAsk for pricing",
+    "productAskPricingEnabled": true,
+    "floatingProductCartState": {
+      "count": 1,
+      "enabled": true,
+      "unitCount": "2",
+      "styles": {
+        "position": "fixed",
+        "bottom": "299px",
+        "right": "24px"
+      }
+    },
+    "restoredCartState": {
+      "summary": "QUOTE CART\n\n1 item type · 2 units\n\nSelect quantities below. We will confirm final availability and pricing with you.\n\nAsk for pricing",
+      "unitCount": "2",
+      "storageValue": "{\"26\":2}"
+    },
+    "floatingCartPanelState": {
+      "itemCount": 1,
+      "initialQuantity": "2"
+    },
+    "floatingCartQuantityAfterDecrease": "1",
+    "floatingCartQuantityAfterIncrease": "2",
+    "emptyCartAfterRemoval": {
+      "panelVisible": true,
+      "storageCleared": true,
+      "askPricingDisabled": true
+    },
+    "productDetailDialogState": {
+      "open": true,
+      "title": "TOPS Shield 205",
+      "variantCount": 2,
+      "defaultPrice": "HK$3,330",
+      "addActionPresent": true
+    },
+    "cartPricingDialogState": {
+      "open": true,
+      "cartSummary": "YOUR CART\n\n1 item type · 2 units\n\n2 × TOPS Shield 205 PNP\nHK$2,110",
+      "productQuantityIncluded": true
+    },
+    "cartPricingDeliveryAddressState": {
+      "present": true,
+      "required": true,
+      "payloadIncluded": true
+    },
+    "ownerDashboardPublicState": {
+      "signInRequired": true,
+      "enquiryContentHidden": true
+    },
+    "serviceBannerTitles": [
+      "Drone Repair Service",
+      "PID tuning service",
+      "Drone Building Course",
+      "Advanced drone course for adults"
+    ],
+    "serviceBannerCtaCount": 4,
+    "serviceBannerHeights": [
+      394,
+      318,
+      318,
+      346
+    ],
+    "serviceHeroHeight": 305,
+    "serviceGuidanceCount": 4,
+    "durationGuidanceCount": 4,
+    "pricingGuidanceCount": 4,
+    "serviceEnquiryDialogOpen": true,
+    "preselectedService": "Drone Repair Service",
+    "repairMailInGuidance": "Mail-in assessment and quotation\n\nPlease describe the issue first. We will provide mail-in instructions, assess the drone, and send a repair solution and quotation before work begins. Delivery fees can be waived if the proposed repair is accepted and completed.",
+    "repairDialogDescription": "Tell us about the repair issue and we will reply with mail-in instructions for assessment and quotation.",
+    "repairIntakeChecklistState": {
+      "present": true,
+      "requiredFieldsPresent": true,
+      "photoConfirmationPresent": true
+    },
+    "serviceOrganizationSelectClass": "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+    "serviceOrganizationOptionStyles": [
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ],
+    "serviceThumbnailSources": [
+      "/manus-storage/vli-service-repair_13ee3faf.png",
+      "/manus-storage/vli-service-pid-tuning_e541b71d.png",
+      "/manus-storage/vli-service-building-skills_c32759ba.png",
+      "/manus-storage/vli-service-advanced-course_d14dd579.png"
+    ],
+    "serviceThumbnailWidths": [
+      607,
+      607,
+      607,
+      607
+    ],
+    "serviceImageFadeStyles": [
+      "linear-gradient(to right, rgba(0, 0, 0, 0) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.25) 50%, rgb(28, 29, 32) 100%)",
+      "linear-gradient(to left, rgba(0, 0, 0, 0) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.25) 50%, rgb(28, 29, 32) 100%)",
+      "linear-gradient(to right, rgba(0, 0, 0, 0) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.25) 50%, rgb(28, 29, 32) 100%)",
+      "linear-gradient(to left, rgba(0, 0, 0, 0) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.25) 50%, rgb(28, 29, 32) 100%)"
+    ],
+    "serviceImagePanelRatios": [
+      {
+        "width": 0.5,
+        "height": 1
+      },
+      {
+        "width": 0.5,
+        "height": 1
+      },
+      {
+        "width": 0.5,
+        "height": 1
+      },
+      {
+        "width": 0.5,
+        "height": 1
+      }
+    ],
+    "serviceThumbnailStates": [
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "cardCount": 3,
+    "cardHrefs": [
+      "/dronesportsreferee",
+      "/product",
+      "/services"
+    ],
+    "cardTitles": [
+      "Smart Referee",
+      "Drone Equipment",
+      "Services"
+    ],
+    "imagesLoaded": true,
+    "hoverScale": "1.1",
+    "desktopNavLabels": [
+      "Smart RefereeProductServicesPeopleContact"
+    ],
+    "headerBackground": "rgb(255, 255, 255)",
+    "headerLanguageControls": 1,
+    "englishSelected": true,
+    "requestDemoInHeader": 0,
+    "toolbarLanguageDisplay": "flex",
+    "floatingControlAbsent": true,
+    "homepageContactSectionAbsent": true,
+    "chineseAvailabilityPopupCorrect": true,
+    "generalOrganizationOptionStyles": [
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ],
+    "mobileMenuValid": true,
+    "mobileLanguageControlPresent": true,
+    "mobileToolbarLanguagePresent": true,
+    "routeChecks": [
+      {
+        "route": "/",
+        "heading": "Every Frame Matters.\nEvery Call Counts.",
+        "footer": true,
+        "revealTargetCount": 7,
+        "explicitRevealTargetCount": 7,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/dronesportsreferee",
+        "heading": "Make every call defensible.",
+        "footer": true,
+        "revealTargetCount": 25,
+        "explicitRevealTargetCount": 25,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/product",
+        "heading": "Select a starting point.",
+        "footer": true,
+        "revealTargetCount": 2,
+        "explicitRevealTargetCount": 2,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/services",
+        "heading": "Build skill.\nFly with purpose.",
+        "footer": true,
+        "revealTargetCount": 7,
+        "explicitRevealTargetCount": 7,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/people",
+        "heading": "People behind the precision.",
+        "footer": true,
+        "revealTargetCount": 4,
+        "explicitRevealTargetCount": 4,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/use-cases",
+        "heading": "One calibrated view. More confident competition.",
+        "footer": true,
+        "revealTargetCount": 9,
+        "explicitRevealTargetCount": 9,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/contact",
+        "heading": "Let’s build the right next step.",
+        "footer": true,
+        "revealTargetCount": 3,
+        "explicitRevealTargetCount": 3,
+        "allRevealTargetsVisible": true
+      },
+      {
+        "route": "/404",
+        "heading": "This route is outside the competition boundary.",
+        "footer": false,
+        "revealTargetCount": 1,
+        "explicitRevealTargetCount": 1,
+        "allRevealTargetsVisible": true
+      }
+    ],
+    "contactPage": {
+      "heading": "Let’s build the right next step.",
+      "formPresent": true,
+      "formControlCount": 7,
+      "contactNavigationActive": true
+    },
+    "contactSubmissionSuccess": true,
+    "contactFormReset": true,
+    "smartRefereeHeroActionState": {
+      "count": 1,
+      "href": "#pricing",
+      "pricingAnchorNavigationWorks": true,
+      "hasExpectedLabel": true,
+      "legacyConfigureActionAbsent": true,
+      "duplicateExploreServiceActionAbsent": true
+    },
+    "officiatingComparisonState": {
+      "present": true,
+      "traditionalPanelPresent": true,
+      "smartRefereePanelPresent": true,
+      "traditionalFlowPresent": true,
+      "smartRefereeFlowPresent": true,
+      "traditionalFlowStepCount": 3,
+      "smartRefereeFlowStepCount": 3,
+      "containsDecisionSupportPositioning": true,
+      "containsHumanOnlyLimits": true
+    },
+    "smartRefereeVisualState": {
+      "heroHeightRatio": 1.0336360837438423,
+      "traditionalComparisonGraphicPresent": true,
+      "smartRefereeComparisonGraphicPresent": true,
+      "systemFlowRemoved": true,
+      "ecosystemAudienceCardCount": 3,
+      "ecosystemIllustrationCount": 3,
+      "ecosystemIllustrationSources": [
+        "/manus-storage/vli-ecosystem-event-organizers_f82296b8.png",
+        "/manus-storage/vli-ecosystem-clubs-replacement_e3af6edd.png",
+        "/manus-storage/vli-ecosystem-educators-replacement_3c55b4c5.png"
+      ],
+      "ecosystemIllustrationStates": [
+        {
+          "complete": true,
+          "naturalWidth": 1920,
+          "naturalHeight": 1920
+        },
+        {
+          "complete": true,
+          "naturalWidth": 1920,
+          "naturalHeight": 1920
+        },
+        {
+          "complete": true,
+          "naturalWidth": 1920,
+          "naturalHeight": 1920
+        }
+      ]
+    },
+    "pricingSectionPresent": true,
+    "pricingPriceLabels": [
+      "From $XXXX",
+      "From $XXXX",
+      "From $XXXX"
+    ],
+    "pricingCageNote": "A Class 20 cage, venue integration, and tailored equipment are quoted separately according to the final package scope.",
+    "managedSelected": true,
+    "pricingTierSelectionStates": [
+      {
+        "tierId": "assist",
+        "selected": true,
+        "allTierCardsVisible": true
+      },
+      {
+        "tierId": "managed",
+        "selected": true,
+        "allTierCardsVisible": true
+      },
+      {
+        "tierId": "evidence-pro",
+        "selected": true,
+        "allTierCardsVisible": true
+      }
+    ],
+    "pricingTierRequestStates": [
+      {
+        "tierId": "assist",
+        "dialogOpen": true,
+        "selectedTier": "assist",
+        "selectedAcquisition": "rental"
+      },
+      {
+        "tierId": "managed",
+        "dialogOpen": true,
+        "selectedTier": "managed",
+        "selectedAcquisition": "rental"
+      },
+      {
+        "tierId": "evidence-pro",
+        "dialogOpen": true,
+        "selectedTier": "evidence-pro",
+        "selectedAcquisition": "rental"
+      }
+    ],
+    "pricingDialogOpened": true,
+    "pricingDialogStyles": {
+      "background": "rgb(28, 29, 32)",
+      "color": "rgb(255, 255, 255)"
+    },
+    "pricingDialogInputClasses": [
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "file:text-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border-white/15 bg-black/20 text-white placeholder:text-white/45",
+      "file:text-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border-white/15 bg-black/20 text-white placeholder:text-white/45",
+      "file:text-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border-white/15 bg-black/20 text-white placeholder:text-white/45",
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+      "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content w-full rounded-md border px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-28 border-white/15 bg-black/20 text-white placeholder:text-white/45"
+    ],
+    "pricingDialogOptionStyles": [
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ],
+    "legacyPricingRedirected": true,
+    "legacyEquipmentRedirected": true,
+    "productTopHeading": "Select a starting point.",
+    "productPlaceholderTextPresent": false,
+    "customQuotePresent": true,
+    "productCustomRequestTopPriority": true,
+    "productPriceTags": [
+      "From HK$2,110",
+      "From HK$2,110",
+      "HK$4,040",
+      "HK$4,610",
+      "HK$4,300",
+      "HK$4,320",
+      "HK$4,610",
+      "From HK$4,150",
+      "From HK$180",
+      "HK$90",
+      "From HK$40",
+      "HK$1,050",
+      "From HK$4,410"
+    ],
+    "productImageSources": [
+      "/manus-storage/excel_prod_30_a7d07b66.png",
+      "/manus-storage/excel_prod_9_417b350f.png",
+      "/manus-storage/excel_prod_10_e5fc5653.png",
+      "/manus-storage/excel_prod_11_fc95565c.png",
+      "/manus-storage/excel_prod_13_712f9740.png",
+      "/manus-storage/excel_prod_15_cb880557.png",
+      "/manus-storage/excel_prod_17_584dbd72.png",
+      "/manus-storage/excel_prod_26_26e91f83.png",
+      "/manus-storage/excel_prod_3_aa72f902.png",
+      "/manus-storage/excel_prod_6_81781e24.png",
+      "/manus-storage/excel_prod_1_f4a517d6.png",
+      "/manus-storage/excel_prod_25_422ab006.png",
+      "/manus-storage/excel_prod_7_7475981f.png"
+    ],
+    "productImageStates": [
+      {
+        "complete": true,
+        "naturalWidth": 225,
+        "naturalHeight": 173
+      },
+      {
+        "complete": true,
+        "naturalWidth": 481,
+        "naturalHeight": 457
+      },
+      {
+        "complete": true,
+        "naturalWidth": 500,
+        "naturalHeight": 334
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1281
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1000,
+        "naturalHeight": 667
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1281
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1281
+      },
+      {
+        "complete": true,
+        "naturalWidth": 491,
+        "naturalHeight": 647
+      },
+      {
+        "complete": true,
+        "naturalWidth": 374,
+        "naturalHeight": 249
+      },
+      {
+        "complete": true,
+        "naturalWidth": 451,
+        "naturalHeight": 388
+      },
+      {
+        "complete": true,
+        "naturalWidth": 620,
+        "naturalHeight": 557
+      },
+      {
+        "complete": true,
+        "naturalWidth": 601,
+        "naturalHeight": 443
+      },
+      {
+        "complete": true,
+        "naturalWidth": 800,
+        "naturalHeight": 800
+      }
+    ],
+    "productGridColumns": 2,
+    "productCardRects": [
+      {
+        "top": -2358,
+        "height": 384
+      },
+      {
+        "top": -2330,
+        "height": 425
+      },
+      {
+        "top": -1893,
+        "height": 349
+      },
+      {
+        "top": -1865,
+        "height": 390
+      },
+      {
+        "top": -1464,
+        "height": 349
+      },
+      {
+        "top": -1436,
+        "height": 390
+      },
+      {
+        "top": -1034,
+        "height": 349
+      },
+      {
+        "top": -1006,
+        "height": 425
+      },
+      {
+        "top": -570,
+        "height": 384
+      },
+      {
+        "top": -542,
+        "height": 425
+      },
+      {
+        "top": -105,
+        "height": 384
+      },
+      {
+        "top": -77,
+        "height": 410
+      },
+      {
+        "top": 344,
+        "height": 384
+      }
+    ],
+    "productCatalogueVisibilityState": {
+      "mainUsesSectionRevealTarget": false,
+      "cards": [
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        },
+        {
+          "opacity": "1",
+          "visibility": "visible",
+          "display": "block"
+        }
+      ]
+    },
+    "selectedPnpVariantState": {
+      "price": "HK$2,110",
+      "model": "TZ009"
+    },
+    "productDiscussSetupActionsAbsent": true,
+    "productCartSummary": "QUOTE CART\n\n1 item type · 1 unit\n\nSelect quantities below. We will confirm final availability and pricing with you.\n\nAsk for pricing",
+    "productAskPricingEnabled": true,
+    "floatingProductCartState": {
+      "count": 1,
+      "enabled": true,
+      "unitCount": "2",
+      "styles": {
+        "position": "fixed",
+        "bottom": "96px",
+        "right": "16px"
+      }
+    },
+    "restoredCartState": {
+      "summary": "QUOTE CART\n\n1 item type · 2 units\n\nSelect quantities below. We will confirm final availability and pricing with you.\n\nAsk for pricing",
+      "unitCount": "2",
+      "storageValue": "{\"26\":2}"
+    },
+    "floatingCartPanelState": {
+      "itemCount": 1,
+      "initialQuantity": "2"
+    },
+    "floatingCartQuantityAfterDecrease": "1",
+    "floatingCartQuantityAfterIncrease": "2",
+    "emptyCartAfterRemoval": {
+      "panelVisible": true,
+      "storageCleared": true,
+      "askPricingDisabled": true
+    },
+    "productDetailDialogState": {
+      "open": true,
+      "title": "TOPS Shield 205",
+      "variantCount": 2,
+      "defaultPrice": "HK$3,330",
+      "addActionPresent": true
+    },
+    "cartPricingDialogState": {
+      "open": true,
+      "cartSummary": "YOUR CART\n\n1 item type · 2 units\n\n2 × TOPS Shield 205 PNP\nHK$2,110",
+      "productQuantityIncluded": true
+    },
+    "cartPricingDeliveryAddressState": {
+      "present": true,
+      "required": true,
+      "payloadIncluded": true
+    },
+    "ownerDashboardPublicState": {
+      "signInRequired": true,
+      "enquiryContentHidden": true
+    },
+    "serviceBannerTitles": [
+      "Drone Repair Service",
+      "PID tuning service",
+      "Drone Building Course",
+      "Advanced drone course for adults"
+    ],
+    "serviceBannerCtaCount": 4,
+    "serviceBannerHeights": [
+      609,
+      529,
+      545,
+      586
+    ],
+    "serviceHeroHeight": 307,
+    "serviceGuidanceCount": 4,
+    "durationGuidanceCount": 4,
+    "pricingGuidanceCount": 4,
+    "serviceEnquiryDialogOpen": true,
+    "preselectedService": "Drone Repair Service",
+    "repairMailInGuidance": "Mail-in assessment and quotation\n\nPlease describe the issue first. We will provide mail-in instructions, assess the drone, and send a repair solution and quotation before work begins. Delivery fees can be waived if the proposed repair is accepted and completed.",
+    "repairDialogDescription": "Tell us about the repair issue and we will reply with mail-in instructions for assessment and quotation.",
+    "repairIntakeChecklistState": {
+      "present": true,
+      "requiredFieldsPresent": true,
+      "photoConfirmationPresent": true
+    },
+    "serviceOrganizationSelectClass": "h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white",
+    "serviceOrganizationOptionStyles": [
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      },
+      {
+        "background": "rgb(28, 29, 32)",
+        "color": "rgb(255, 255, 255)"
+      }
+    ],
+    "serviceThumbnailSources": [
+      "/manus-storage/vli-service-repair_13ee3faf.png",
+      "/manus-storage/vli-service-pid-tuning_e541b71d.png",
+      "/manus-storage/vli-service-building-skills_c32759ba.png",
+      "/manus-storage/vli-service-advanced-course_d14dd579.png"
+    ],
+    "serviceThumbnailWidths": [
+      341,
+      341,
+      341,
+      341
+    ],
+    "serviceImageFadeStyles": [
+      "linear-gradient(oklab(0.230936 0.000130229 -0.00594801 / 0.1) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.2) 50%, rgb(28, 29, 32) 100%)",
+      "linear-gradient(oklab(0.230936 0.000130229 -0.00594801 / 0.1) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.2) 50%, rgb(28, 29, 32) 100%)",
+      "linear-gradient(oklab(0.230936 0.000130229 -0.00594801 / 0.1) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.2) 50%, rgb(28, 29, 32) 100%)",
+      "linear-gradient(oklab(0.230936 0.000130229 -0.00594801 / 0.1) 0%, oklab(0.230936 0.000130229 -0.00594801 / 0.2) 50%, rgb(28, 29, 32) 100%)"
+    ],
+    "serviceImagePanelRatios": [
+      {
+        "width": 0.99,
+        "height": 0.41
+      },
+      {
+        "width": 0.99,
+        "height": 0.47
+      },
+      {
+        "width": 0.99,
+        "height": 0.46
+      },
+      {
+        "width": 0.99,
+        "height": 0.41
+      }
+    ],
+    "serviceThumbnailStates": [
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      },
+      {
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1440
+      }
+    ]
+  }
+]
+{
+  "reducedMotionRevealState": [
+    {
+      "route": "/dronesportsreferee",
+      "count": 34,
+      "allVisible": true,
+      "controlsVisible": true
+    },
+    {
+      "route": "/services",
+      "count": 10,
+      "allVisible": true,
+      "controlsVisible": true
+    },
+    {
+      "route": "/people",
+      "count": 7,
+      "allVisible": true,
+      "controlsVisible": true
+    },
+    {
+      "route": "/contact",
+      "count": 5,
+      "allVisible": true,
+      "controlsVisible": true
+    }
+  ]
+}

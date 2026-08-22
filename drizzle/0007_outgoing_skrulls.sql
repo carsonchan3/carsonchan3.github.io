@@ -1,0 +1,20 @@
+CREATE TABLE `mediaAssets` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`assetKey` varchar(160) NOT NULL,
+	`displayName` varchar(255) NOT NULL,
+	`pageKey` varchar(80) NOT NULL,
+	`pageLabel` varchar(120) NOT NULL,
+	`placementKey` varchar(120) NOT NULL,
+	`placementLabel` varchar(255) NOT NULL,
+	`assetType` enum('image','video','logo') NOT NULL,
+	`storageUrl` varchar(500) NOT NULL,
+	`altText` varchar(500),
+	`sourceType` varchar(80) NOT NULL,
+	`sourceReference` varchar(160),
+	`displayOrder` int NOT NULL DEFAULT 0,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `mediaAssets_id` PRIMARY KEY(`id`),
+	CONSTRAINT `mediaAssets_assetKey_unique` UNIQUE(`assetKey`),
+	CONSTRAINT `mediaAssets_storageUrl_unique` UNIQUE(`storageUrl`)
+);
