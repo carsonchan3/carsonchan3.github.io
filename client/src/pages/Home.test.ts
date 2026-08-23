@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collaborators, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio } from "./Home";
+import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio } from "./Home";
 
 describe("homepage supporting organisations", () => {
   it("identifies the HKSTP logo as the Ideation Programme", () => {
@@ -15,7 +15,8 @@ describe("homepage mobile offering presentation", () => {
     expect(mobileOfferingCardAspectRatio).toBe("21:9");
   });
 
-  it("uses a compact 1:1 presentation for the mobile hero video", () => {
-    expect(mobileHomeHeroVideoAspectRatio).toBe("1:1");
+  it("uses a readable mobile hero ratio and a cinematic 21:9 desktop video treatment", () => {
+    expect(mobileHomeHeroVideoAspectRatio).toBe("4:5");
+    expect(desktopHomeHeroVideoAspectRatio).toBe("21:9");
   });
 });

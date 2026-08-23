@@ -38,7 +38,7 @@ describe("Smart Referee marker and precision panels", () => {
     expect(smartRefereeFeaturePanels.precision.eyebrow).toBe("Industry-Leading Precision");
     expect(smartRefereeFeaturePanels.precision.image).toBe(smartRefereeMedia.precision);
     expect(smartRefereeFeaturePanels.precision.description).toBe(
-      "Our 3D precision is the best in the business, outperforming even the highest-resolution competition."
+      "High-fidelity 3D tracking provides a consistent spatial reference for scoring review, event reporting, and repeatable system setup across competition days."
     );
   });
 });

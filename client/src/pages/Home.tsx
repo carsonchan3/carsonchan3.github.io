@@ -6,7 +6,7 @@ import { siteNavigation } from "@/lib/siteNavigation";
 import { staticSitePath } from "@/lib/staticPreview";
 import SiteFooter from "@/components/SiteFooter";
 import { offeringCards } from "@/lib/offeringRoutes";
-import { homepageHeroVideoSrc } from "@/lib/heroMedia";
+import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 import { getRevealTransitionDelay } from "@/lib/revealMotion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -18,7 +18,8 @@ export const collaborators = [
 ];
 
 export const mobileOfferingCardAspectRatio = "21:9";
-export const mobileHomeHeroVideoAspectRatio = "1:1";
+export const mobileHomeHeroVideoAspectRatio = "4:5";
+export const desktopHomeHeroVideoAspectRatio = "21:9";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -60,23 +61,24 @@ export default function Home() {
       </header>
 
       <main data-reveal-page>
-        <section id="hero" data-mobile-video-aspect-ratio={mobileHomeHeroVideoAspectRatio} className="vli-home-hero relative isolate flex aspect-square min-h-0 items-end overflow-hidden pt-16 sm:min-h-[44rem] sm:aspect-auto sm:pt-20 md:min-h-[46rem] lg:min-h-0 lg:aspect-[21/9]">
-          <video src={homepageHeroVideoSrc} aria-hidden="true" autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
-          <div className="absolute inset-0 -z-10 bg-[#051018]/25" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#051018]/95 via-[#051018]/70 to-[#051018]/20" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-2/5 bg-gradient-to-t from-[#051018]/90 to-transparent" />
+        <section id="hero" data-mobile-video-aspect-ratio={mobileHomeHeroVideoAspectRatio} data-desktop-video-aspect-ratio={desktopHomeHeroVideoAspectRatio} className="vli-home-hero relative isolate flex aspect-[4/5] min-h-[31rem] items-end overflow-hidden pt-16 sm:min-h-[34rem] sm:aspect-video sm:pt-20 lg:min-h-0 lg:aspect-[21/9]">
+          <img src={homepageHeroVideoPosterSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-center" />
+          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+          <div className="absolute inset-0 -z-10 bg-[#051018]/12" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#051018]/78 via-[#051018]/34 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#051018]/72 to-transparent" />
 
-          <div className="container relative z-10 w-full pb-6 sm:pb-16 md:pb-20 lg:pb-24">
-            <div data-reveal className="reveal-up max-w-4xl">
+          <div className="relative z-10 w-full pb-6 pl-5 pr-5 sm:pb-12 sm:pl-8 sm:pr-8 lg:pb-16 lg:pl-12 xl:pl-20">
+            <div data-reveal className="reveal-up max-w-2xl bg-[#051018]/52 p-4 backdrop-blur-[2px] sm:p-6">
               <p className="vli-home-kicker mb-3 sm:mb-6">Precision drone sports systems</p>
               <h1 className="vli-home-title mb-4 text-white sm:mb-9">Every Frame Matters.<br /><span className="text-accent">Every Call Counts.</span></h1>
-              <div className="grid max-w-3xl gap-3 sm:gap-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+              <div className="grid max-w-2xl gap-3 sm:gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
                 <p className="text-sm leading-5 text-[var(--mist)] sm:text-base sm:leading-7 md:text-lg">Precision-driven drone sports refereeing powered by OptiTrack motion capture. Fair play, engineered. Real-time decisions backed by data.</p>
-                <p className="max-w-xs text-xs leading-4 text-[var(--mist)] sm:text-sm sm:leading-6">Choose the system, equipment, or technical support that moves your next drone-sports programme forward.</p>
+                <p className="max-w-xs text-xs leading-4 text-[var(--mist)] sm:text-sm sm:leading-6">Build a more reliable event programme with integrated decision support, equipment, and technical delivery.</p>
               </div>
               <div className="mt-4 flex flex-col gap-2 sm:mt-8 sm:gap-4 sm:flex-row">
                 <button onClick={() => scrollToSection("offerings")} className="flex items-center justify-center gap-2 bg-accent px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-[#7ff2e6] sm:px-6 sm:py-3 sm:text-base">Explore offerings <ArrowRight size={17} className="sm:size-5" /></button>
-                <a href={staticSitePath("/contact")} className="border border-white/45 px-4 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[#051018] sm:px-6 sm:py-3 sm:text-base">Talk to the team</a>
+                <a href={staticSitePath("/contact")} className="border border-white/45 px-4 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[#051018] sm:px-6 sm:py-3 sm:text-base">Plan an event</a>
               </div>
             </div>
           </div>
