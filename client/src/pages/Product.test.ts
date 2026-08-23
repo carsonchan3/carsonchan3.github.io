@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, proofPoints, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserPainPanels, proofPoints, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningRuleQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -83,6 +83,16 @@ describe("Smart Referee dispute-reduction support", () => {
     expect(smartRefereeMedia.dispute).toBe("/manus-storage/dispute_6f42a381.webp");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
     expect(smartRefereeMedia.trackingPoster).toBe("/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg");
+  });
+
+  it("leads with the supplied scoring-rule quote and clearly marks the dispute window as illustrative", () => {
+    expect(smartRefereeOpeningRuleQuote.text).toContain("entire drone ball has passed through");
+    expect(smartRefereeOpeningRuleQuote.attribution).toContain("F9.A.8.4");
+    expect(organiserPainPanels[0]).toMatchObject({ value: "13:04", label: "Illustrative dispute window" });
+  });
+
+  it("adds individual organiser adoption panels without unsupported outcome claims", () => {
+    expect(organiserAdoptionPanels.map((panel) => panel.title)).toEqual(["Venue-ready scope", "Rule-to-evidence workflow", "Event-day delivery plan"]);
   });
 });
 

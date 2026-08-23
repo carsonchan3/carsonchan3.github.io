@@ -23,6 +23,21 @@ export const smartRefereeHeroVideoPresentation = {
   loop: true,
 } as const;
 export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "proof-points", "decision-support", "event-delivery-options"] as const;
+export const smartRefereeOpeningRuleQuote = {
+  eyebrow: "The rule is clear. The moment is not always.",
+  text: "A team scores a goal when the drone ball of the Striker crosses the goal ring of the opponent's team, and when the entire drone ball has passed through the entire opponent's goal ring.",
+  attribution: "FAI Drone Soccer Rules · F9.A.8.4 · Scoring",
+} as const;
+export const organiserPainPanels = [
+  { value: "13:04", label: "Illustrative dispute window", detail: "A prolonged scoring review can consume the buffer that protects the rest of the programme." },
+  { value: "01", label: "Contested scoring call", detail: "One unresolved moment can hold the next match slot while an event team searches for a defensible answer." },
+  { value: "03", label: "Groups pulled into review", detail: "Officials, team representatives, and venue operations can all be drawn away from the next scheduled task." },
+] as const;
+export const organiserAdoptionPanels = [
+  { number: "01", title: "Venue-ready scope", detail: "Define cage count, technical prerequisites, and the delivery boundaries before match day." },
+  { number: "02", title: "Rule-to-evidence workflow", detail: "Align tracked position, scoring conditions, and the review path around your competition rules." },
+  { number: "03", title: "Event-day delivery plan", detail: "Set the support, officials, escalation, and fallback responsibilities inside one proposed operating model." },
+] as const;
 export const disputeTimerPolicy = {
   initialSeconds: 13 * 60 + 4,
   activeScrollMillisecondsPerSecond: 10_000,
@@ -114,25 +129,21 @@ export default function Product() {
             <div data-reveal className="reveal-up relative z-10 max-w-xl">
               <div className="mb-4 h-1 w-12 bg-accent" />
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Smart Referee for event organisers</p>
-              <h1 className="velocity-headline mb-4 text-white">Run decisive competition on <span className="text-accent">shared evidence.</span></h1>
-              <p className="leading-7 text-white/75">
-                Plan a defensible decision workflow before match day. Smart Referee combines calibrated tracking, rules-aware review, and event delivery support to help organisers protect the run sheet and give every stakeholder a clearer account of the call.
-              </p>
+              <blockquote className="border-l-2 border-accent pl-4 text-lg font-medium leading-7 text-white sm:text-xl sm:leading-8">“{smartRefereeOpeningRuleQuote.text}”</blockquote>
+              <cite className="mt-3 block text-xs not-italic font-semibold uppercase tracking-[0.15em] text-white/50">{smartRefereeOpeningRuleQuote.attribution}</cite>
+              <h1 className="velocity-headline mb-4 mt-6 text-white">Turn the rule into a <span className="text-accent">reviewable decision.</span></h1>
+              <p className="leading-7 text-white/75">Smart Referee combines calibrated tracking, rules-aware review, and event delivery support to help organisers protect the run sheet and give every stakeholder a clearer account of the call.</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request event proposal <ArrowRight size={18} /></a>
                 <a href="#system-video" className="inline-flex items-center justify-center gap-2 self-start rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">See the system in action <ArrowRight size={18} /></a>
               </div>
             </div>
             <div data-reveal className="reveal-up grid gap-3 sm:grid-cols-3" style={{ transitionDelay: "90ms" }}>
-              {[
-                ["01", "Evidence-led calls", "A reviewable record for rule-defined scoring moments."],
-                ["02", "Event-flow protection", "Keep difficult decisions from consuming the run sheet."],
-                ["03", "Per-cage delivery", "Scope equipment, officials, and support around your venue."],
-              ].map(([number, title, detail]) => (
-                <div key={number} className="border border-white/10 bg-black/30 p-4 sm:min-h-44">
-                  <p className="text-xs font-semibold tracking-[0.18em] text-accent">{number}</p>
-                  <h2 className="mt-6 text-lg font-semibold text-white">{title}</h2>
-                  <p className="mt-2 text-sm leading-6 text-white/65">{detail}</p>
+              {organiserPainPanels.map((panel) => (
+                <div key={panel.label} className="border border-white/10 bg-black/30 p-4 sm:min-h-52">
+                  <p className="font-mono text-5xl font-semibold leading-none tracking-tight text-accent sm:text-6xl">{panel.value}</p>
+                  <h2 className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-white">{panel.label}</h2>
+                  <p className="mt-2 text-sm leading-6 text-white/65">{panel.detail}</p>
                 </div>
               ))}
             </div>
@@ -232,17 +243,10 @@ export default function Product() {
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Lowering disputes</p>
               <h2 className="velocity-headline mb-5 text-white">Protect the run sheet—and the cost of delivery.</h2>
               <p className="max-w-2xl text-sm leading-7 text-white/70">A reviewable evidence layer helps organisers resolve contested moments with greater confidence, so officials, team representatives, and operations staff can return to the next scheduled match instead of an extended debate.</p>
-              <div className="mt-6 grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
-                <div className="rounded-lg border border-accent/30 bg-accent/10 p-4">
-                  <div className="flex items-center gap-2 text-accent"><Clock3 size={18} /><p className="text-[10px] font-semibold uppercase tracking-[0.15em]">Dispute-time scenario</p></div>
-                  <time data-testid="dispute-time-counter" className="mt-3 block font-mono text-4xl font-semibold tracking-tight text-white" aria-label={`${disputeTimerLabel} on the dispute time counter`}>{disputeTimerLabel}</time>
-                  <p className="mt-2 text-xs leading-5 text-white/60">Each unresolved call can hold the run sheet, consume the schedule buffer, and delay the next match for every team, official, and venue resource waiting to proceed.</p>
-                </div>
-                <div className="rounded-lg border border-white/10 bg-black/25 p-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/50">Event delivery impact</p>
-                  <p className="mt-3 text-sm font-semibold leading-6 text-white">Every unresolved call draws in officials, team representatives, venue staff, and the schedule buffer that keeps an event on track.</p>
-                  <p className="mt-2 text-sm leading-6 text-white/65">Clearer evidence protects staff capacity, slot-time predictability, audience confidence, and the operating margin behind every competition day.</p>
-                </div>
+              <div className="mt-6 rounded-xl border border-accent/30 bg-accent/10 p-5 sm:p-7">
+                <div className="flex items-center gap-2 text-accent"><Clock3 size={18} /><p className="text-[10px] font-semibold uppercase tracking-[0.15em]">Illustrative dispute-time scenario</p></div>
+                <time data-testid="dispute-time-counter" className="mt-4 block font-mono text-6xl font-semibold leading-none tracking-tight text-white sm:text-8xl" aria-label={`${disputeTimerLabel} on the dispute time counter`}>{disputeTimerLabel}</time>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/70">This visual scenario is not a measured event outcome. It makes the practical point: every unresolved scoring call can hold the run sheet, consume schedule buffer, and delay the next match for teams, officials, and venue operations.</p>
               </div>
             </div>
           </div>
@@ -289,6 +293,24 @@ export default function Product() {
                 <img src={smartRefereeFeaturePanels.precision.image} alt={smartRefereeFeaturePanels.precision.imageAlt} className="h-full w-full object-cover" />
                 <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_20%,rgba(12,13,15,0.28)_100%)]" />
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section data-testid="organiser-adoption-panels" className="velocity-section border-y border-white/10 bg-black">
+          <div className="container">
+            <div data-reveal className="reveal-up mb-9 grid gap-5 lg:grid-cols-[28%_1fr] lg:items-end">
+              <p className="vli-section-label">Plan with confidence</p>
+              <div><h2 className="velocity-headline mb-4 text-white">Make adoption as deliberate as the <span className="text-accent">decision.</span></h2><p className="max-w-2xl leading-7 text-white/70">A proposal should reduce delivery uncertainty before an organiser commits. Smart Referee scopes the physical setup, the decision workflow, and the event-day responsibilities around your competition.</p></div>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {organiserAdoptionPanels.map((panel, index) => (
+                <article key={panel.number} data-reveal className="reveal-up border border-white/10 bg-[#171C1D] p-6" style={{ transitionDelay: `${index * 80}ms` }}>
+                  <p className="font-mono text-5xl font-semibold leading-none text-accent">{panel.number}</p>
+                  <h3 className="mt-8 text-xl font-semibold text-white">{panel.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/65">{panel.detail}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
