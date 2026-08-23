@@ -6,7 +6,7 @@ import RefereePricingConfigurator from "@/components/RefereePricingConfigurator"
 
 export const proofPoints = [
   { value: "OptiTrack", label: "industry leading motion capture technology" },
-  { value: "Unity", label: "match operations interface" },
+  { value: "Unity", label: "event operations interface" },
   { value: "±0.20 mm", label: "3D accuracy" },
   { value: "10 ms", label: "decision making end to end" },
 ];
@@ -42,21 +42,21 @@ export const smartRefereeMedia = {
 
 export const smartRefereeFeaturePanels = {
   passiveMarkers: {
-    eyebrow: "Passive competition markers",
-    title: "Simple marker stickers. Practical deployment.",
-    description: "Low-cost passive marker stickers give teams a fast, lightweight way to prepare competition drones for a tracked volume—without bulky active hardware or a powered marker module.",
+    eyebrow: "Standardised competition markers",
+    title: "Standardise setup without adding hardware cost.",
+    description: "Low-cost passive marker stickers help organisers standardise tracked-drone preparation across teams, without adding powered marker hardware to the event inventory.",
     image: smartRefereeMedia.stickers,
     imageAlt: "Circular passive marker stickers for competition drones",
     benefits: [
-      "Lightweight sticker layout for competition drones",
-      "Low-cost preparation for repeat events",
-      "Passive design without a powered marker module",
+      "Fast, repeatable pre-event setup",
+      "Low-cost consumables for recurring events",
+      "No powered marker kit to deploy or maintain",
     ],
   },
   precision: {
     eyebrow: "Industry-Leading Precision",
-    title: "A spatial reference your event team can trust.",
-    description: "High-fidelity 3D tracking provides a consistent spatial reference for scoring review, event reporting, and repeatable system setup across competition days.",
+    title: "Decision-grade spatial evidence at event scale.",
+    description: "High-fidelity 3D tracking provides a consistent spatial reference for scoring review, operational reporting, and repeatable system setup across competition days.",
     image: smartRefereeMedia.precision,
     imageAlt: "OptiTrack Flex 13 camera positioned at a drone-sports arena",
   },
@@ -143,9 +143,9 @@ export default function Product() {
             <div data-reveal className="reveal-up mx-auto mb-8 max-w-3xl text-center">
               <div className="mx-auto mb-4 h-1 w-12 bg-accent" />
               <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">A shared experience</p>
-              <h2 className="velocity-headline text-white">A decisive moment should feel shared—not subjective.</h2>
+              <h2 className="velocity-headline text-white">Every scoring call should be explainable across the event team.</h2>
               <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/70">
-                Officials remain central to the game. Smart Referee gives them a shared evidence layer for timely, explainable decisions when fast drone play makes a scoring moment difficult to see or review.
+                Officials remain central to the game. Smart Referee gives them a shared evidence layer that supports faster review, consistent decisions, and transparent communication when a fast scoring moment is difficult to see.
               </p>
             </div>
 
@@ -153,8 +153,8 @@ export default function Product() {
               <article data-testid="traditional-officiating-panel" data-reveal className="reveal-up rounded-lg border border-white/10 bg-black/25 p-5 sm:p-6">
                 <div className="mb-5 flex items-start justify-between gap-5">
                   <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/45">Human officiating</p>
-                    <h3 className="velocity-subheading mt-3 text-white">Judgement matters. So do sightlines.</h3>
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/45">Human-led judgement</p>
+                    <h3 className="velocity-subheading mt-3 text-white">A single sightline can leave room for challenge.</h3>
                   </div>
                   <span className="mt-1 shrink-0 font-mono text-sm text-white/30">01</span>
                 </div>
@@ -165,14 +165,14 @@ export default function Product() {
                   <p className="absolute bottom-3 left-4 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">One angle, real-time pressure</p>
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/65">No official should be expected to provide 100% positional certainty from a single, partially obscured view. When a drone ball is pressed around the goal ring, it can be difficult to establish whether the entire ball crossed in the required direction before play moves on.</p>
+                <p className="mt-4 text-sm leading-6 text-white/65">No official should be expected to establish absolute positional certainty from one partially obscured view. When a drone ball is pressed around the goal ring, it can be difficult to confirm whether the full ball crossed in the required direction before the next match moment unfolds.</p>
               </article>
 
               <article data-testid="smart-referee-support-panel" data-reveal className="reveal-up rounded-lg border border-accent/25 bg-accent/10 p-5 sm:p-6" style={{ transitionDelay: "90ms" }}>
                 <div className="mb-5 flex items-start justify-between gap-5">
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Smart Referee decision support</p>
-                    <h3 className="velocity-subheading mt-3 text-white">One shared reference for the final call.</h3>
+                    <h3 className="velocity-subheading mt-3 text-white">Shared evidence for a faster, defensible call.</h3>
                   </div>
                   <span className="mt-1 shrink-0 font-mono text-sm text-accent/65">02</span>
                 </div>
@@ -186,7 +186,7 @@ export default function Product() {
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/75">Calibrated spatial data gives officials a practical evidence layer against rule-defined scoring conditions—supporting a clearer, more consistent decision without removing human authority.</p>
+                <p className="mt-4 text-sm leading-6 text-white/75">Calibrated spatial data gives officials a reviewable record against rule-defined scoring conditions—supporting a faster, more consistent decision without removing human authority.</p>
               </article>
             </div>
 
@@ -206,8 +206,8 @@ export default function Product() {
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
               <div className="mb-5 h-1 w-12 bg-accent" />
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Lowering disputes</p>
-              <h2 className="velocity-headline mb-5 text-white">Protect match momentum—and your event economics.</h2>
-              <p className="max-w-2xl text-sm leading-7 text-white/70">A reviewable evidence layer helps organisers resolve contested moments with greater confidence, so referees, team representatives, and operations staff can focus on the next match instead of an extended debate.</p>
+              <h2 className="velocity-headline mb-5 text-white">Protect the run sheet—and the cost of delivery.</h2>
+              <p className="max-w-2xl text-sm leading-7 text-white/70">A reviewable evidence layer helps organisers resolve contested moments with greater confidence, so officials, team representatives, and operations staff can return to the next scheduled match instead of an extended debate.</p>
               <div className="mt-6 grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
                 <div className="rounded-lg border border-accent/30 bg-accent/10 p-4">
                   <div className="flex items-center gap-2 text-accent"><Clock3 size={18} /><p className="text-[10px] font-semibold uppercase tracking-[0.15em]">Dispute-time scenario</p></div>
@@ -215,9 +215,9 @@ export default function Product() {
                   <p className="mt-2 text-xs leading-5 text-white/60">Each unresolved call can hold the run sheet, consume the schedule buffer, and delay the next match for every team, official, and venue resource waiting to proceed.</p>
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/25 p-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/50">Human cost</p>
-                  <p className="mt-3 text-sm font-semibold leading-6 text-white">Every unresolved call can absorb officials, captains, venue time, and the schedule buffer that keeps an event on track.</p>
-                  <p className="mt-2 text-sm leading-6 text-white/65">Clearer evidence helps protect staffing capacity, audience confidence, and the operating margin behind every competition day.</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/50">Event delivery impact</p>
+                  <p className="mt-3 text-sm font-semibold leading-6 text-white">Every unresolved call draws in officials, team representatives, venue staff, and the schedule buffer that keeps an event on track.</p>
+                  <p className="mt-2 text-sm leading-6 text-white/65">Clearer evidence protects staff capacity, slot-time predictability, audience confidence, and the operating margin behind every competition day.</p>
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ describe("pricing configuration", () => {
   it("provides the approved Hong Kong dollar starting prices for each service tier", () => {
     expect(pricingTiers.map((tier) => tier.name)).toEqual(["Assist", "Managed", "Evidence Pro"]);
     expect(pricingTiers.map((tier) => tier.price)).toEqual(["From HK$6,800", "From HK$11,800", "From HK$16,800"]);
-    expect(pricingTiers.every((tier) => tier.priceUnit === "package dependent")).toBe(true);
+    expect(pricingTiers.every((tier) => tier.priceUnit === "per event cage")).toBe(true);
   });
 
   it("makes the requested support durations clear across the three packages", () => {

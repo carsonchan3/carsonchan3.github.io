@@ -100,9 +100,9 @@ export default function PricingRequestDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent data-testid="pricing-request-dialog" className="max-h-[88vh] overflow-y-auto border-white/10 bg-[#1C1D20] text-white [&>button]:text-white/65 [&>button:hover]:text-white sm:max-w-2xl">
         <DialogHeader>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Pricing request</p>
-          <DialogTitle className="text-2xl text-white">Get pricing for your setup</DialogTitle>
-          <DialogDescription className="text-white/65">Confirm the event package, then tell us about your event. The selected package is included with your request.</DialogDescription>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Event proposal request</p>
+          <DialogTitle className="text-2xl text-white">Plan delivery for your event</DialogTitle>
+          <DialogDescription className="text-white/65">Confirm the delivery model, then share the venue, number of cages, format, and timeline. Your selected model is included with the request.</DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="mt-2 space-y-5">
@@ -111,7 +111,7 @@ export default function PricingRequestDialog({
             <p className="mb-3 text-sm font-semibold text-white">Selected package</p>
             <div>
               <label className="grid gap-2 text-sm font-medium text-white/75">
-                Event package
+                Event delivery model
                 <select name="pricingTier" value={tierId} onChange={(event) => onTierChange(event.target.value as PricingTierId)} className="h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white">
                   {pricingTiers.map((tier) => <option key={tier.id} value={tier.id}>{tier.name}</option>)}
                 </select>
@@ -141,7 +141,7 @@ export default function PricingRequestDialog({
           </div>
 
           <label className="grid gap-2 text-sm font-medium text-white/75">
-            Sport or use case
+            Competition format or use case
             <select name="sport" value={formData.sport} onChange={handleFormChange} className="h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white">
               <option value="">Select one</option>
               <option value="Drone soccer">Drone soccer</option>
@@ -151,12 +151,12 @@ export default function PricingRequestDialog({
             </select>
           </label>
 
-          <label className="grid gap-2 text-sm font-medium text-white/75">Tell us about your venue, event timeline, and what you need to review *<Textarea name="message" value={formData.message} onChange={handleFormChange} required className="min-h-28 border-white/15 bg-black/20 text-white placeholder:text-white/45" /></label>
+          <label className="grid gap-2 text-sm font-medium text-white/75">Tell us about your venue, number of cages, event date, programme timeline, and decision-support requirements *<Textarea name="message" value={formData.message} onChange={handleFormChange} required className="min-h-28 border-white/15 bg-black/20 text-white placeholder:text-white/45" /></label>
 
           {usesStaticEnquiries ? <TurnstileField resetKey={turnstileResetKey} onToken={setTurnstileToken} onError={() => toast.error("Spam protection could not load. Please refresh and try again.")} /> : null}
 
           <Button type="submit" disabled={isSubmitting} className="w-full bg-accent font-semibold text-black hover:opacity-90">
-            {isSubmitting ? <><Loader2 className="mr-2 size-4 animate-spin" /> Sending request</> : "Get Pricing"}
+            {isSubmitting ? <><Loader2 className="mr-2 size-4 animate-spin" /> Sending request</> : "Request event proposal"}
           </Button>
         </form>
       </DialogContent>

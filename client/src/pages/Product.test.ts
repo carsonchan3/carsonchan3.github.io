@@ -26,19 +26,19 @@ describe("Smart Referee marker and precision panels", () => {
     expect(smartRefereeFeaturePanels).not.toHaveProperty("infrared");
   });
 
-  it("gives passive markers their own competition-focused panel with the supplied sticker image", () => {
-    expect(smartRefereeFeaturePanels.passiveMarkers.eyebrow).toBe("Passive competition markers");
+  it("gives passive markers their own event-operations panel with the supplied sticker image", () => {
+    expect(smartRefereeFeaturePanels.passiveMarkers.eyebrow).toBe("Standardised competition markers");
     expect(smartRefereeFeaturePanels.passiveMarkers.image).toBe(smartRefereeMedia.stickers);
-    expect(smartRefereeFeaturePanels.passiveMarkers.title).toBe("Simple marker stickers. Practical deployment.");
-    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Lightweight sticker layout for competition drones");
-    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Low-cost preparation for repeat events");
+    expect(smartRefereeFeaturePanels.passiveMarkers.title).toBe("Standardise setup without adding hardware cost.");
+    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Fast, repeatable pre-event setup");
+    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Low-cost consumables for recurring events");
   });
 
   it("uses the requested industry-leading precision message and Flex 13 media", () => {
     expect(smartRefereeFeaturePanels.precision.eyebrow).toBe("Industry-Leading Precision");
     expect(smartRefereeFeaturePanels.precision.image).toBe(smartRefereeMedia.precision);
     expect(smartRefereeFeaturePanels.precision.description).toBe(
-      "High-fidelity 3D tracking provides a consistent spatial reference for scoring review, event reporting, and repeatable system setup across competition days."
+      "High-fidelity 3D tracking provides a consistent spatial reference for scoring review, operational reporting, and repeatable system setup across competition days."
     );
   });
 });

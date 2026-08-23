@@ -6,8 +6,8 @@ export const pricingTiers = [
     name: "Assist",
     eyebrow: "Software + configuration",
     price: "From HK$6,800",
-    priceUnit: "package dependent",
-    description: "A low-friction entry package for organisers who supply the core event infrastructure and want to experience the Smart Referee workflow.",
+    priceUnit: "per event cage",
+    description: "An entry delivery model for organisers who supply core infrastructure and want a scoped Smart Referee workflow for a defined competition programme.",
     features: ["Rule configuration and event workflow", "Scoring and review software", "Four hours of technical support"],
     details: [
       { included: true, title: "Core match workflow", text: "Rule configuration with scoring and review software." },
@@ -21,9 +21,9 @@ export const pricingTiers = [
     name: "Managed",
     eyebrow: "Full Class 20 service",
     price: "From HK$11,800",
-    priceUnit: "package dependent",
+    priceUnit: "per event cage",
     recommended: true,
-    description: "The recommended event-day package for organisers who need a calibrated system, an included jury and referee, and live decision support.",
+    description: "A managed event-day delivery model for organisers who need a calibrated system, supplied officiating support, and live decision coverage.",
     features: ["Jury and referee included", "Class 20 cage included", "Six hours of technical support", "Live decision support and basic replay handover"],
     details: [
       { included: true, title: "Class 20 event setup", text: "Cage, on-site calibration, jury and referee included." },
@@ -37,8 +37,8 @@ export const pricingTiers = [
     name: "Evidence Pro",
     eyebrow: "Premium event package",
     price: "From HK$16,800",
-    priceUnit: "package dependent",
-    description: "An all-inclusive event package for important competitions and sponsor-ready experiences, with priority decision support and expanded review.",
+    priceUnit: "per event cage",
+    description: "A premium delivery model for marquee or sponsor-facing competitions that require priority decision support and expanded review evidence.",
     features: ["All-inclusive service", "Class 20 cage included", "Expanded review workflow and priority replay evidence", "Eight hours of technical support"],
     details: [
       { included: true, title: "All-inclusive event setup", text: "Class 20 cage, calibration, jury and referee included." },

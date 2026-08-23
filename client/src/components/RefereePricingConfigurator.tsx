@@ -19,14 +19,14 @@ export default function RefereePricingConfigurator() {
       <div className="container">
         <div data-reveal className="reveal-up mx-auto mb-8 max-w-3xl text-center">
           <div className="mb-4 flex justify-center"><div className="h-1 w-12 bg-accent" /></div>
-          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">System options</p>
-          <h2 className="velocity-headline mb-4 text-white">Choose the service level that fits <span className="text-accent">your event.</span></h2>
-          <p className="leading-7 text-white/75">Start with a package built around your event needs, then request a tailored quote for your venue, format, and timeline.</p>
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Event delivery options</p>
+          <h2 className="velocity-headline mb-4 text-white">Choose the operating model that fits <span className="text-accent">your event.</span></h2>
+          <p className="leading-7 text-white/75">Select a delivery model, then request an event proposal for your venue, number of cages, competition format, and timeline.</p>
         </div>
 
         <div data-reveal className="reveal-up mb-7 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div className="max-w-2xl"><p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">1. Select an event package</p><h3 className="velocity-headline text-white">Choose your starting point.</h3></div>
-          <button type="button" onClick={() => openPricingRequest()} className="inline-flex items-center justify-center gap-2 rounded-full border border-accent/60 px-5 py-3 font-semibold text-accent transition-colors hover:bg-accent hover:text-black">Get pricing <ArrowRight size={18} /></button>
+          <div className="max-w-2xl"><p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">1. Select an event delivery model</p><h3 className="velocity-headline text-white">Choose your operating starting point.</h3></div>
+          <button type="button" onClick={() => openPricingRequest()} className="inline-flex items-center justify-center gap-2 rounded-full border border-accent/60 px-5 py-3 font-semibold text-accent transition-colors hover:bg-accent hover:text-black">Request event proposal <ArrowRight size={18} /></button>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-3">
@@ -55,8 +55,8 @@ export default function RefereePricingConfigurator() {
         </div>
 
         <div data-reveal className="reveal-up mt-8 grid gap-5 rounded-lg bg-white p-5 text-black lg:grid-cols-[1fr_auto] lg:items-center md:p-7">
-          <div><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-black/55">Selected starting point</p><h3 className="velocity-headline mb-4 text-black">{selectionLabel}</h3><p className="max-w-2xl text-lg leading-8 text-black/65">You are starting with {selectedTierDetails.name}. Request pricing to discuss your venue, event timeline, and the decision-support scope behind the package.</p></div>
-          <button type="button" onClick={openPricingRequest} className="inline-flex items-center justify-center gap-2 rounded-full bg-black px-5 py-3 font-semibold text-white transition-colors hover:bg-accent hover:text-black">Get Pricing <ArrowRight size={18} /></button>
+          <div><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-black/55">Selected delivery model</p><h3 className="velocity-headline mb-4 text-black">{selectionLabel}</h3><p className="max-w-2xl text-lg leading-8 text-black/65">You are reviewing {selectedTierDetails.name}. Request an event proposal to align the package with your venue, number of cages, programme timeline, and decision-support requirements.</p></div>
+          <button type="button" onClick={openPricingRequest} className="inline-flex items-center justify-center gap-2 rounded-full bg-black px-5 py-3 font-semibold text-white transition-colors hover:bg-accent hover:text-black">Request event proposal <ArrowRight size={18} /></button>
         </div>
       </div>
       <PricingRequestDialog open={dialogOpen} onOpenChange={setDialogOpen} tierId={selectedTier} onTierChange={setSelectedTier} />
