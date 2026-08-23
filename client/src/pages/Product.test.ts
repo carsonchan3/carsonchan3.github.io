@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, modules, proofPoints, smartRefereeFeaturePanels, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, proofPoints, smartRefereeFeaturePanels, smartRefereeMedia, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -21,23 +21,22 @@ describe("Smart Referee proof points", () => {
   });
 });
 
-describe("Smart Referee infrared and precision panels", () => {
-  it("highlights unobtrusive IR LED tracking and passive competition markers", () => {
-    expect(smartRefereeFeaturePanels.infrared.eyebrow).toBe("Unobtrusive IR LED tracking");
-    expect(smartRefereeFeaturePanels.infrared.description).toContain("850 nm IR LEDs");
-    expect(smartRefereeFeaturePanels.infrared.description).not.toContain("passive markers");
-    expect(smartRefereeFeaturePanels.infrared.steps).toContain("Built to blend into the match environment");
+describe("Smart Referee marker and precision panels", () => {
+  it("removes the unobtrusive infrared panel from the page configuration", () => {
+    expect(smartRefereeFeaturePanels).not.toHaveProperty("infrared");
   });
 
-  it("gives passive markers their own competition-focused technology panel", () => {
+  it("gives passive markers their own competition-focused panel with the supplied sticker image", () => {
     expect(smartRefereeFeaturePanels.passiveMarkers.eyebrow).toBe("Passive competition markers");
-    expect(smartRefereeFeaturePanels.passiveMarkers.title).toBe("Lightweight markers. Lower cost of entry.");
-    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Lightweight marker layout for competition drones");
-    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Low-cost hardware approach for repeat events");
+    expect(smartRefereeFeaturePanels.passiveMarkers.image).toBe(smartRefereeMedia.stickers);
+    expect(smartRefereeFeaturePanels.passiveMarkers.title).toBe("Simple marker stickers. Practical deployment.");
+    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Lightweight sticker layout for competition drones");
+    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Low-cost preparation for repeat events");
   });
 
-  it("uses the requested industry-leading precision message", () => {
+  it("uses the requested industry-leading precision message and Flex 13 media", () => {
     expect(smartRefereeFeaturePanels.precision.eyebrow).toBe("Industry-Leading Precision");
+    expect(smartRefereeFeaturePanels.precision.image).toBe(smartRefereeMedia.precision);
     expect(smartRefereeFeaturePanels.precision.description).toBe(
       "Our 3D precision is the best in the business, outperforming even the highest-resolution competition."
     );
@@ -52,14 +51,20 @@ describe("Smart Referee technical presentation", () => {
   });
 });
 
-describe("Smart Referee evidence-led review capability", () => {
-  it("explains that decisions can be reviewed against replay-ready match context", () => {
-    expect(modules).toContainEqual(
-      expect.objectContaining({
-        title: "Evidence for every decision",
-        text: expect.stringContaining("replay-ready match context"),
-      })
-    );
+describe("Smart Referee dispute-reduction support", () => {
+  it("starts the illustrative dispute counter at 13:04 and advances it per ten seconds of active scrolling", () => {
+    expect(disputeTimerPolicy.initialSeconds).toBe(13 * 60 + 4);
+    expect(disputeTimerPolicy.activeScrollMillisecondsPerSecond).toBe(10_000);
+    expect(getDisputeTimeIncrements(9_999)).toBe(0);
+    expect(getDisputeTimeIncrements(10_000)).toBe(1);
+    expect(getDisputeTimeIncrements(30_000)).toBe(3);
+  });
+
+  it("maps the supplied human-officiating, rulebook, dispute, and tracking media", () => {
+    expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
+    expect(smartRefereeMedia.rulebook).toBe("/manus-storage/FAI-rulebook_f63443a8.jpg");
+    expect(smartRefereeMedia.dispute).toBe("/manus-storage/dispute_6f42a381.webp");
+    expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
   });
 });
 
@@ -72,7 +77,7 @@ describe("Smart Referee mobile presentation", () => {
     expect(mobileSmartRefereeCardAspectRatio).toBe("21:9");
   });
 
-  it("consolidates passive-marker benefits into one integrated card while preserving every benefit", () => {
+  it("keeps the marker-benefit card concise for mobile while preserving every benefit", () => {
     expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toHaveLength(3);
   });
 });

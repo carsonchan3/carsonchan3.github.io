@@ -1,1 +1,1 @@
-export const homepageHeroImageSrc = "/manus-storage/vli-hero-flightline_df77848d.webp";
+export const homepageHeroVideoSrc = "/manus-storage/vli-hero-video_21-9_acdcc551.mp4";

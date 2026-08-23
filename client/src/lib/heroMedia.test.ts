@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { homepageHeroImageSrc } from "./heroMedia";
+import { homepageHeroVideoSrc } from "./heroMedia";
 
 describe("homepage hero media", () => {
-  it("uses the supplied drone-flight image instead of a hero video", () => {
-    expect(homepageHeroImageSrc).toBe("/manus-storage/vli-hero-flightline_df77848d.webp");
+  it("uses the supplied VLI hero video", () => {
+    expect(homepageHeroVideoSrc).toBe("/manus-storage/vli-hero-video_21-9_acdcc551.mp4");
   });
 });

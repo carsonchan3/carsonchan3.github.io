@@ -1,5 +1,5 @@
-import { ArrowRight, CalendarDays, Camera, CircleCheck, Gauge, GraduationCap, SlidersHorizontal, UsersRound, Video } from "lucide-react";
-import React from "react";
+import { ArrowRight, CalendarDays, CircleCheck, Clock3, Gauge, GraduationCap, UsersRound } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
@@ -14,27 +14,33 @@ export const proofPoints = [
 export const mobileSmartRefereeRevealPolicy = "always-visible";
 export const mobileSmartRefereeCardAspectRatio = "21:9";
 export const technicalSpecificationPresentation = "proof-points-only";
+export const disputeTimerPolicy = {
+  initialSeconds: 13 * 60 + 4,
+  activeScrollMillisecondsPerSecond: 10_000,
+};
+
+export const getDisputeTimeIncrements = (activeScrollMilliseconds: number) =>
+  Math.floor(activeScrollMilliseconds / disputeTimerPolicy.activeScrollMillisecondsPerSecond);
+
+export const smartRefereeMedia = {
+  humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
+  rulebook: "/manus-storage/FAI-rulebook_f63443a8.jpg",
+  dispute: "/manus-storage/dispute_6f42a381.webp",
+  stickers: "/manus-storage/cheapstickers_6b71bf1e.jpg",
+  precision: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
+  trackingVideo: "/manus-storage/vli-tracking-test-video_f82aa6d7.mp4",
+} as const;
 
 export const smartRefereeFeaturePanels = {
-  infrared: {
-    eyebrow: "Unobtrusive IR LED tracking",
-    title: "Tracking that stays out of the way.",
-    description: "Our tracking cameras use 850 nm IR LEDs that are nearly invisible, delivering unobtrusive illumination without the vision fatigue or unwanted attention that visible-spectrum light can create during competition.",
-    image: "/manus-storage/smart-referee-unobtrusive-infrared-light_85c32f18.png",
-    imageAlt: "Drone-sports arena with discreet infrared motion-capture tracking",
-    steps: [
-      "850 nm IR LED tracking coverage",
-      "No visible-light disruption to play",
-      "Built to blend into the match environment",
-    ],
-  },
   passiveMarkers: {
     eyebrow: "Passive competition markers",
-    title: "Lightweight markers. Lower cost of entry.",
-    description: "Lightweight, low-cost passive markers give teams a practical way to prepare drones for a tracked competition volume without adding a bulky active device to the airframe.",
+    title: "Simple marker stickers. Practical deployment.",
+    description: "Low-cost passive marker stickers give teams a fast, lightweight way to prepare competition drones for a tracked volume—without bulky active hardware or a powered marker module.",
+    image: smartRefereeMedia.stickers,
+    imageAlt: "Circular passive marker stickers for competition drones",
     benefits: [
-      "Lightweight marker layout for competition drones",
-      "Low-cost hardware approach for repeat events",
+      "Lightweight sticker layout for competition drones",
+      "Low-cost preparation for repeat events",
       "Passive design without a powered marker module",
     ],
   },
@@ -42,28 +48,10 @@ export const smartRefereeFeaturePanels = {
     eyebrow: "Industry-Leading Precision",
     title: "Precision that holds up under pressure.",
     description: "Our 3D precision is the best in the business, outperforming even the highest-resolution competition.",
-    image: "/manus-storage/smart-referee-industry-leading-precision_3b70bc45.png",
-    imageAlt: "Technical visualization of precise three-dimensional motion tracking",
+    image: smartRefereeMedia.precision,
+    imageAlt: "OptiTrack Flex 13 camera positioned at a drone-sports arena",
   },
 } as const;
-
-export const modules = [
-  {
-    icon: <Camera size={22} />,
-    title: "Live spatial tracking",
-    text: "Follow motion events inside a calibrated competition volume and turn position data into a shared view of play.",
-  },
-  {
-    icon: <SlidersHorizontal size={22} />,
-    title: "Configurable match logic",
-    text: "Translate the rules that matter to your format into a clear event model, from boundaries to scoring conditions.",
-  },
-  {
-    icon: <Video size={22} />,
-    title: "Evidence for every decision",
-    text: "Return to the data behind a call through replay-ready match context, supporting timely review, technical analysis, and athlete learning.",
-  },
-];
 
 const ecosystemAudiences = [
   {
@@ -90,6 +78,47 @@ const ecosystemAudiences = [
 ];
 
 export default function Product() {
+  const [disputeSeconds, setDisputeSeconds] = useState(disputeTimerPolicy.initialSeconds);
+  const activeScrollMilliseconds = useRef(0);
+  const scrollingRef = useRef(false);
+  const lastFrameRef = useRef(0);
+
+  useEffect(() => {
+    let idleTimer: number | undefined;
+    let animationFrame: number;
+
+    const markScrollActive = () => {
+      scrollingRef.current = true;
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        scrollingRef.current = false;
+      }, 550);
+    };
+
+    const tick = (timestamp: number) => {
+      if (lastFrameRef.current && scrollingRef.current) {
+        activeScrollMilliseconds.current += timestamp - lastFrameRef.current;
+        const increments = getDisputeTimeIncrements(activeScrollMilliseconds.current);
+        if (increments > 0) {
+          activeScrollMilliseconds.current -= increments * disputeTimerPolicy.activeScrollMillisecondsPerSecond;
+          setDisputeSeconds((seconds) => seconds + increments);
+        }
+      }
+      lastFrameRef.current = timestamp;
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("scroll", markScrollActive, { passive: true });
+    animationFrame = window.requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener("scroll", markScrollActive);
+      window.clearTimeout(idleTimer);
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  const disputeTimerLabel = `${Math.floor(disputeSeconds / 60).toString().padStart(2, "0")}:${(disputeSeconds % 60).toString().padStart(2, "0")}`;
+
   return (
     <div className="smart-referee-page min-h-screen bg-black text-white" data-mobile-reveal-policy={mobileSmartRefereeRevealPolicy}>
       <SiteHeader active="referee" />
@@ -136,10 +165,10 @@ export default function Product() {
           <div className="container">
             <div data-reveal className="reveal-up mx-auto mb-8 max-w-3xl text-center">
               <div className="mx-auto mb-4 h-1 w-12 bg-accent" />
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">A shared reference</p>
-              <h2 className="velocity-headline text-white">A decisive moment should not rest on a single viewpoint.</h2>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">A shared experience</p>
+              <h2 className="velocity-headline text-white">A decisive moment should feel shared—not subjective.</h2>
               <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/70">
-                Officials remain central to the game. Smart Referee gives them a common evidence layer to support timely, explainable decisions when fast drone play makes a moment difficult to see or review.
+                Officials remain central to the game. Smart Referee gives them a shared evidence layer for timely, explainable decisions when fast drone play makes a scoring moment difficult to see or review.
               </p>
             </div>
 
@@ -147,38 +176,19 @@ export default function Product() {
               <article data-testid="traditional-officiating-panel" data-reveal className="reveal-up rounded-lg border border-white/10 bg-black/25 p-5 sm:p-6">
                 <div className="mb-5 flex items-start justify-between gap-5">
                   <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/45">Human-only officiating</p>
-                    <h3 className="velocity-subheading mt-3 text-white">One fast moment. One finite view.</h3>
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/45">Human officiating</p>
+                    <h3 className="velocity-subheading mt-3 text-white">Judgement matters. So do sightlines.</h3>
                   </div>
                   <span className="mt-1 shrink-0 font-mono text-sm text-white/30">01</span>
                 </div>
 
-                <div data-testid="traditional-officiating-flow" className="relative overflow-hidden rounded-md border border-white/10 bg-[#161719] p-4">
-                  <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:24px_24px]" />
-                  <svg aria-hidden="true" viewBox="0 0 560 210" className="relative h-36 w-full sm:h-40" preserveAspectRatio="xMidYMid meet">
-                    <path d="M80 156 L255 44" stroke="rgba(255,255,255,0.22)" strokeWidth="2" strokeDasharray="7 7" />
-                    <path d="M80 156 L250 108" stroke="rgba(255,255,255,0.11)" strokeWidth="2" strokeDasharray="7 7" />
-                    <path d="M80 156 L240 174" stroke="rgba(255,255,255,0.11)" strokeWidth="2" strokeDasharray="7 7" />
-                    <circle cx="80" cy="156" r="22" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.5)" strokeWidth="2" />
-                    <circle cx="80" cy="156" r="6" fill="white" />
-                    <circle cx="315" cy="74" r="11" fill="rgba(255,255,255,0.82)" />
-                    <circle cx="370" cy="136" r="11" fill="rgba(255,255,255,0.42)" />
-                    <circle cx="323" cy="176" r="11" fill="rgba(255,255,255,0.23)" />
-                    <path d="M438 74h66" stroke="rgba(255,255,255,0.28)" strokeWidth="2" />
-                    <path d="M438 136h66" stroke="rgba(255,255,255,0.22)" strokeWidth="2" />
-                    <path d="M438 176h66" stroke="rgba(255,255,255,0.16)" strokeWidth="2" />
-                    <text x="452" y="68" fill="rgba(255,255,255,0.6)" fontSize="12" fontFamily="sans-serif">possible view</text>
-                    <text x="452" y="130" fill="rgba(255,255,255,0.46)" fontSize="12" fontFamily="sans-serif">blind spot</text>
-                    <text x="452" y="170" fill="rgba(255,255,255,0.34)" fontSize="12" fontFamily="sans-serif">uncertain</text>
-                  </svg>
-                  <div className="relative mt-2 grid grid-cols-3 gap-2 border-t border-white/10 pt-3 text-center">
-                    <div data-testid="traditional-flow-step" className="min-w-0"><span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/55">01 · One sightline</span></div>
-                    <div data-testid="traditional-flow-step" className="min-w-0"><span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/55">02 · Interpretation</span></div>
-                    <div data-testid="traditional-flow-step" className="min-w-0"><span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/55">03 · Disputed call</span></div>
-                  </div>
+                <div data-testid="traditional-officiating-flow" className="relative overflow-hidden rounded-md border border-white/10 bg-[#161719]">
+                  <img src={smartRefereeMedia.humanReferee} alt="Scoring officials viewing a drone-sports goal through the arena net" className="aspect-[21/9] w-full object-cover sm:aspect-[16/9]" />
+                  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#161719] via-[#161719]/20 to-transparent" />
+                  <p className="absolute bottom-3 left-4 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">One angle, real-time pressure</p>
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/65">Limited angles and different strict-versus-loose thresholds can make a close call difficult to explain or revisit.</p>
+                <p className="mt-4 text-sm leading-6 text-white/65">No official should be expected to provide 100% positional certainty from a single, partially obscured view. When a drone ball is pressed around the goal ring, it can be difficult to establish whether the entire ball crossed in the required direction before play moves on.</p>
               </article>
 
               <article data-testid="smart-referee-support-panel" data-reveal className="reveal-up rounded-lg border border-accent/25 bg-accent/10 p-5 sm:p-6" style={{ transitionDelay: "90ms" }}>
@@ -190,30 +200,16 @@ export default function Product() {
                   <span className="mt-1 shrink-0 font-mono text-sm text-accent/65">02</span>
                 </div>
 
-                <div data-testid="smart-referee-support-flow" className="relative overflow-hidden rounded-md border border-accent/25 bg-[#171C1D] p-4 shadow-[inset_0_0_50px_rgba(64,224,208,0.06)]">
-                  <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(64,224,208,0.16),transparent_0_56%),linear-gradient(rgba(64,224,208,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(64,224,208,0.055)_1px,transparent_1px)] bg-[size:auto,24px_24px,24px_24px]" />
-                  <svg aria-hidden="true" viewBox="0 0 560 210" className="relative h-36 w-full sm:h-40" preserveAspectRatio="xMidYMid meet">
-                    <path d="M95 58 C180 58 190 105 280 105 S380 150 470 150" stroke="rgba(64,224,208,0.72)" strokeWidth="3" fill="none" />
-                    <path d="M95 150 C180 150 192 105 280 105 S382 58 470 58" stroke="rgba(64,224,208,0.36)" strokeWidth="3" fill="none" />
-                    <circle cx="95" cy="58" r="13" fill="#40E0D0" /><circle cx="95" cy="150" r="13" fill="#40E0D0" opacity="0.65" />
-                    <circle cx="280" cy="105" r="38" fill="rgba(64,224,208,0.08)" stroke="#40E0D0" strokeWidth="2" />
-                    <circle cx="280" cy="105" r="16" fill="#40E0D0" opacity="0.92" />
-                    <path d="M270 105h20M280 95v20" stroke="#111416" strokeWidth="2" />
-                    <circle cx="470" cy="58" r="13" fill="#40E0D0" opacity="0.65" /><circle cx="470" cy="150" r="13" fill="#40E0D0" />
-                    <rect x="432" y="81" width="76" height="48" rx="10" fill="rgba(64,224,208,0.18)" stroke="#40E0D0" strokeWidth="2" />
-                    <path d="M451 105l11 11 24-26" stroke="#40E0D0" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                    <text x="57" y="188" fill="#40E0D0" fontSize="12" fontFamily="sans-serif">tracked views</text>
-                    <text x="237" y="188" fill="#40E0D0" fontSize="12" fontFamily="sans-serif">rule reference</text>
-                    <text x="436" y="188" fill="#40E0D0" fontSize="12" fontFamily="sans-serif">reviewable call</text>
-                  </svg>
-                  <div className="relative mt-2 grid grid-cols-3 gap-2 border-t border-accent/20 pt-3 text-center">
-                    <div data-testid="smart-referee-flow-step" className="min-w-0"><span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">01 · Capture</span></div>
-                    <div data-testid="smart-referee-flow-step" className="min-w-0"><span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">02 · Rule reference</span></div>
-                    <div data-testid="smart-referee-flow-step" className="min-w-0"><span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">03 · Clear call</span></div>
+                <div data-testid="smart-referee-support-flow" className="overflow-hidden rounded-md border border-accent/25 bg-[#171C1D] shadow-[inset_0_0_50px_rgba(64,224,208,0.06)]">
+                  <img src={smartRefereeMedia.rulebook} alt="Drone-sport scoring rule excerpt specifying the entire drone ball must cross the opposing goal ring" className="aspect-[21/9] w-full object-cover object-left sm:aspect-[16/9]" />
+                  <div className="grid gap-2 border-t border-accent/20 p-4 sm:grid-cols-3">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">01 · Tracked position</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">02 · Rule condition</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">03 · Reviewable call</span>
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/75">Calibrated data and configurable event logic give officials useful evidence for a clearer, more consistent decision.</p>
+                <p className="mt-4 text-sm leading-6 text-white/75">Calibrated spatial data gives officials a practical evidence layer against rule-defined scoring conditions—supporting a clearer, more consistent decision without removing human authority.</p>
               </article>
             </div>
 
@@ -223,46 +219,29 @@ export default function Product() {
           </div>
         </section>
 
-        <section className="velocity-section bg-[#27282B]">
-          <div className="container">
-            <div data-reveal className="reveal-up mx-auto mb-8 max-w-2xl text-center">
-              <div className="mx-auto mb-4 h-1 w-12 bg-accent" />
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Core modules</p>
-              <h2 className="velocity-headline text-white">A system shaped around the way events actually run.</h2>
+        <section data-testid="dispute-reduction-section" className="velocity-section bg-black">
+          <div className="container grid items-center gap-7 lg:grid-cols-[0.92fr_1.08fr]">
+            <div data-reveal data-mobile-aspect-ratio={mobileSmartRefereeCardAspectRatio} className="reveal-up relative overflow-hidden rounded-lg border border-white/10 bg-[#171C1D] shadow-2xl">
+              <img src={smartRefereeMedia.dispute} alt="Officials reviewing a drone-sports match from outside the competition cage" className="aspect-[21/9] w-full object-cover sm:aspect-[4/3]" />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#111416]/90 via-transparent to-transparent" />
+              <p className="absolute bottom-4 left-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Keep the event moving</p>
             </div>
-            <div className="grid gap-5 md:grid-cols-3">
-            {modules.map((module, index) => (
-                <article data-reveal data-mobile-aspect-ratio={mobileSmartRefereeCardAspectRatio} key={module.title} className="reveal-up aspect-[21/9] min-h-0 overflow-hidden rounded-lg border border-white/10 bg-black/20 p-4 sm:aspect-auto sm:p-5" style={{ transitionDelay: `${index * 80}ms` }}>
-                  <div className="mb-2 text-accent sm:mb-4">{module.icon}</div>
-                  <h3 className="mb-1 text-lg font-semibold leading-tight text-white sm:velocity-subheading sm:mb-2">{module.title}</h3>
-                  <p className="line-clamp-2 text-sm leading-5 text-white/70 sm:line-clamp-none sm:leading-6">{module.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="velocity-section bg-black">
-          <div className="container grid items-center gap-7 lg:grid-cols-[1fr_0.85fr]">
-            <div data-reveal className="reveal-up">
+            <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
               <div className="mb-5 h-1 w-12 bg-accent" />
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{smartRefereeFeaturePanels.infrared.eyebrow}</p>
-              <h2 className="velocity-headline mb-5 text-white">{smartRefereeFeaturePanels.infrared.title}</h2>
-              <p className="max-w-2xl text-sm leading-6 text-white/70">{smartRefereeFeaturePanels.infrared.description}</p>
-            </div>
-            <div data-reveal data-mobile-aspect-ratio={mobileSmartRefereeCardAspectRatio} className="reveal-up overflow-hidden rounded-lg border border-accent/25 bg-accent/10" style={{ transitionDelay: "90ms" }}>
-              <div className="relative aspect-[21/9] overflow-hidden border-b border-accent/20 bg-[#171C1D] sm:aspect-[4/3]">
-                <img src={smartRefereeFeaturePanels.infrared.image} alt={smartRefereeFeaturePanels.infrared.imageAlt} className="h-full w-full object-cover" />
-                <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(12,13,15,0.75)_100%)]" />
-                <p className="absolute bottom-4 left-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Infrared tracking layer</p>
-              </div>
-              <div className="p-5">
-              {smartRefereeFeaturePanels.infrared.steps.map((step) => (
-                <div key={step} className="flex gap-3 border-b border-accent/15 py-3 last:border-0 last:pb-0 first:pt-0">
-                  <CircleCheck className="mt-0.5 shrink-0 text-accent" size={19} />
-                  <p className="text-white/80">{step}</p>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Lowering disputes</p>
+              <h2 className="velocity-headline mb-5 text-white">Protect match momentum—and your event economics.</h2>
+              <p className="max-w-2xl text-sm leading-7 text-white/70">A reviewable evidence layer helps organisers resolve contested moments with greater confidence, so referees, team representatives, and operations staff can focus on the next match instead of an extended debate.</p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
+                <div className="rounded-lg border border-accent/30 bg-accent/10 p-4">
+                  <div className="flex items-center gap-2 text-accent"><Clock3 size={18} /><p className="text-[10px] font-semibold uppercase tracking-[0.15em]">Average time wasted on a dispute</p></div>
+                  <time data-testid="dispute-time-counter" className="mt-3 block font-mono text-4xl font-semibold tracking-tight text-white" aria-label={`${disputeTimerLabel} on the dispute time counter`}>{disputeTimerLabel}</time>
+                  <p className="mt-2 text-xs leading-5 text-white/60">Illustrative event-flow counter: it advances by one second for every ten seconds of active scrolling.</p>
                 </div>
-              ))}
+                <div className="rounded-lg border border-white/10 bg-black/25 p-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/50">Human cost</p>
+                  <p className="mt-3 text-sm font-semibold leading-6 text-white">Every unresolved call can absorb officials, captains, venue time, and the schedule buffer that keeps an event on track.</p>
+                  <p className="mt-2 text-sm leading-6 text-white/65">Clearer evidence helps protect staffing capacity, audience confidence, and the operating margin behind every competition day.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -271,14 +250,10 @@ export default function Product() {
         <section data-testid="passive-marker-panel" className="velocity-section bg-[#27282B]">
           <div className="container grid items-center gap-7 lg:grid-cols-[0.85fr_1fr]">
             <div data-reveal data-mobile-aspect-ratio={mobileSmartRefereeCardAspectRatio} className="reveal-up overflow-hidden rounded-lg border border-accent/25 bg-[#171C1D] shadow-2xl">
-              <div className="relative aspect-[21/9] overflow-hidden bg-[radial-gradient(circle_at_30%_24%,rgba(64,224,208,0.25),transparent_0_16%),radial-gradient(circle_at_72%_70%,rgba(64,224,208,0.16),transparent_0_20%),linear-gradient(135deg,#0E1214,#1C282A)] sm:aspect-[4/3]">
-                <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(rgba(64,224,208,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(64,224,208,0.08)_1px,transparent_1px)] bg-[size:28px_28px]" />
-                <div aria-hidden="true" className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-xl border border-accent/55 bg-accent/10 shadow-[0_0_32px_rgba(64,224,208,0.18)]" />
-                <span aria-hidden="true" className="absolute left-[28%] top-[27%] h-5 w-5 rounded-full border-2 border-accent bg-[#171C1D] shadow-[0_0_18px_rgba(64,224,208,0.45)]" />
-                <span aria-hidden="true" className="absolute right-[25%] top-[30%] h-5 w-5 rounded-full border-2 border-accent bg-[#171C1D] shadow-[0_0_18px_rgba(64,224,208,0.45)]" />
-                <span aria-hidden="true" className="absolute bottom-[25%] left-[31%] h-5 w-5 rounded-full border-2 border-accent bg-[#171C1D] shadow-[0_0_18px_rgba(64,224,208,0.45)]" />
-                <span aria-hidden="true" className="absolute bottom-[27%] right-[29%] h-5 w-5 rounded-full border-2 border-accent bg-[#171C1D] shadow-[0_0_18px_rgba(64,224,208,0.45)]" />
-                <div className="absolute bottom-5 left-5 rounded-full border border-accent/30 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Passive marker layout</div>
+              <div className="relative aspect-[21/9] overflow-hidden sm:aspect-[4/3]">
+                <img src={smartRefereeFeaturePanels.passiveMarkers.image} alt={smartRefereeFeaturePanels.passiveMarkers.imageAlt} className="h-full w-full object-cover" />
+                <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#171C1D]/80 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 rounded-full border border-accent/30 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Low-cost marker stickers</div>
               </div>
             </div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
@@ -323,18 +298,10 @@ export default function Product() {
               <div className="mb-5 h-1 w-12 bg-accent" />
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">See the system in action</p>
               <h2 className="velocity-headline mb-5 text-white">Bring the decision layer to the match.</h2>
-              <p className="max-w-xl text-lg leading-8 text-white/70">See how motion capture can become a practical reference for competition, review, and technical learning.</p>
+              <p className="max-w-xl text-lg leading-8 text-white/70">See how live tracking can become a practical reference for competition, review, and technical learning.</p>
             </div>
             <div data-reveal className="reveal-up aspect-video overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl" style={{ transitionDelay: "90ms" }}>
-              <iframe
-                className="h-full w-full"
-                src="https://www.youtube.com/embed/fvWfJNlV5S8"
-                title="Velocity Lab Innovation OptiTrack demo"
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <video className="h-full w-full object-cover" src={smartRefereeMedia.trackingVideo} controls playsInline preload="metadata">Your browser does not support embedded video.</video>
             </div>
           </div>
         </section>

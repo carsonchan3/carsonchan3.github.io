@@ -6,7 +6,7 @@ import { siteNavigation } from "@/lib/siteNavigation";
 import { staticSitePath } from "@/lib/staticPreview";
 import SiteFooter from "@/components/SiteFooter";
 import { offeringCards } from "@/lib/offeringRoutes";
-import { homepageHeroImageSrc } from "@/lib/heroMedia";
+import { homepageHeroVideoSrc } from "@/lib/heroMedia";
 import { getRevealTransitionDelay } from "@/lib/revealMotion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -61,9 +61,9 @@ export default function Home() {
 
       <main data-reveal-page>
         <section id="hero" data-mobile-video-aspect-ratio={mobileHomeHeroVideoAspectRatio} className="vli-home-hero relative isolate flex aspect-square min-h-0 items-end overflow-hidden pt-16 sm:min-h-[44rem] sm:aspect-auto sm:pt-20 md:min-h-[46rem] lg:min-h-0 lg:aspect-[21/9]">
-          <img src={homepageHeroImageSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
-          <div className="absolute inset-0 -z-10 bg-[#051018]/15" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#051018]/95 via-[#051018]/68 to-[#051018]/15" />
+          <video src={homepageHeroVideoSrc} aria-hidden="true" autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+          <div className="absolute inset-0 -z-10 bg-[#051018]/25" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#051018]/95 via-[#051018]/70 to-[#051018]/20" />
           <div className="absolute inset-x-0 bottom-0 -z-10 h-2/5 bg-gradient-to-t from-[#051018]/90 to-transparent" />
 
           <div className="container relative z-10 w-full pb-6 sm:pb-16 md:pb-20 lg:pb-24">
