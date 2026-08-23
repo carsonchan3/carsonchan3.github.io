@@ -52,11 +52,14 @@ describe("Smart Referee technical presentation", () => {
 });
 
 describe("Smart Referee system video presentation", () => {
-  it("preserves the full system video with a 16:9 contain treatment and controls", () => {
+  it("preserves the full system video as a seamless muted autoplay loop", () => {
     expect(smartRefereeHeroVideoPresentation).toEqual({
       aspectRatio: "16:9",
       objectFit: "contain",
-      controls: true,
+      controls: false,
+      autoPlay: true,
+      muted: true,
+      loop: true,
     });
   });
 });

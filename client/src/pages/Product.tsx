@@ -17,7 +17,10 @@ export const technicalSpecificationPresentation = "proof-points-only";
 export const smartRefereeHeroVideoPresentation = {
   aspectRatio: "16:9",
   objectFit: "contain",
-  controls: true,
+  controls: false,
+  autoPlay: true,
+  muted: true,
+  loop: true,
 } as const;
 export const disputeTimerPolicy = {
   initialSeconds: 13 * 60 + 4,
@@ -119,7 +122,7 @@ export default function Product() {
               </div>
             </div>
             <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/15 bg-black shadow-2xl" style={{ transitionDelay: "90ms" }}>
-              <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="aspect-video h-full w-full bg-black object-contain">Your browser does not support embedded video.</video>
+              <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} autoPlay={smartRefereeHeroVideoPresentation.autoPlay} muted={smartRefereeHeroVideoPresentation.muted} loop={smartRefereeHeroVideoPresentation.loop} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="aspect-video h-full w-full bg-black object-contain">Your browser does not support embedded video.</video>
             </div>
           </div>
         </section>
