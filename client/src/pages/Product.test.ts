@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, proofPoints, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, proofPoints, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -61,6 +61,10 @@ describe("Smart Referee system video presentation", () => {
       muted: true,
       loop: true,
     });
+  });
+
+  it("places the system video directly after the B2B introduction", () => {
+    expect(smartRefereePageHierarchy.slice(0, 2)).toEqual(["b2b-introduction", "system-video"]);
   });
 });
 

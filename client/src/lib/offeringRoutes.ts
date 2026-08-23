@@ -5,7 +5,7 @@ export const offeringCards = [
     description: "Bring calibrated motion capture, configurable rules, and review-ready evidence to every match-day decision.",
     cta: "Explore the referee system",
     href: "/dronesportsreferee",
-    image: "/manus-storage/drone_referee_action_ff9fa49b.png",
+    image: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
   },
   {
     eyebrow: "02 · Ready-to-deploy hardware",

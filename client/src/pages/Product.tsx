@@ -22,6 +22,7 @@ export const smartRefereeHeroVideoPresentation = {
   muted: true,
   loop: true,
 } as const;
+export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "proof-points", "decision-support", "event-delivery-options"] as const;
 export const disputeTimerPolicy = {
   initialSeconds: 13 * 60 + 4,
   activeScrollMillisecondsPerSecond: 10_000,
@@ -109,19 +110,42 @@ export default function Product() {
       <SiteHeader active="referee" />
       <main data-reveal-page className="pt-16">
         <section data-testid="smart-referee-hero" className="border-b border-white/10 bg-[#111416]">
-          <div className="container grid items-center gap-7 py-10 lg:grid-cols-[0.74fr_1.26fr] lg:py-12">
+          <div className="container grid items-center gap-8 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
             <div data-reveal className="reveal-up relative z-10 max-w-xl">
               <div className="mb-4 h-1 w-12 bg-accent" />
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">See the system in action</p>
-              <h1 className="velocity-headline mb-4 text-white">Bring decision assurance to the <span className="text-accent">event floor.</span></h1>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Smart Referee for event organisers</p>
+              <h1 className="velocity-headline mb-4 text-white">Run decisive competition on <span className="text-accent">shared evidence.</span></h1>
               <p className="leading-7 text-white/75">
-                Smart Referee turns calibrated tracking into reviewable match evidence—helping organisers protect event flow, standardise call quality, and demonstrate credible operations to teams and partners.
+                Plan a defensible decision workflow before match day. Smart Referee combines calibrated tracking, rules-aware review, and event delivery support to help organisers protect the run sheet and give every stakeholder a clearer account of the call.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request event proposal <ArrowRight size={18} /></a>
+                <a href="#system-video" className="inline-flex items-center justify-center gap-2 self-start rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">See the system in action <ArrowRight size={18} /></a>
               </div>
             </div>
-            <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/15 bg-black shadow-2xl" style={{ transitionDelay: "90ms" }}>
+            <div data-reveal className="reveal-up grid gap-3 sm:grid-cols-3" style={{ transitionDelay: "90ms" }}>
+              {[
+                ["01", "Evidence-led calls", "A reviewable record for rule-defined scoring moments."],
+                ["02", "Event-flow protection", "Keep difficult decisions from consuming the run sheet."],
+                ["03", "Per-cage delivery", "Scope equipment, officials, and support around your venue."],
+              ].map(([number, title, detail]) => (
+                <div key={number} className="border border-white/10 bg-black/30 p-4 sm:min-h-44">
+                  <p className="text-xs font-semibold tracking-[0.18em] text-accent">{number}</p>
+                  <h2 className="mt-6 text-lg font-semibold text-white">{title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-white/65">{detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="system-video" data-testid="smart-referee-system-video" className="border-b border-white/10 bg-black py-12 md:py-16">
+          <div className="container">
+            <div data-reveal className="reveal-up mb-7 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl"><p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">See the system in action</p><h2 className="velocity-headline text-white">A full view of the <span className="text-accent">decision layer.</span></h2></div>
+              <p className="max-w-sm text-sm leading-6 text-white/65">The same calibrated evidence layer that supports officials can be planned into your event delivery model.</p>
+            </div>
+            <div data-reveal className="reveal-up mx-auto max-w-6xl overflow-hidden rounded-xl border border-white/15 bg-black shadow-2xl" style={{ transitionDelay: "90ms" }}>
               <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} autoPlay={smartRefereeHeroVideoPresentation.autoPlay} muted={smartRefereeHeroVideoPresentation.muted} loop={smartRefereeHeroVideoPresentation.loop} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="aspect-video h-full w-full bg-black object-contain">Your browser does not support embedded video.</video>
             </div>
           </div>
