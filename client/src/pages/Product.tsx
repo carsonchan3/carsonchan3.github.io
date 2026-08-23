@@ -14,6 +14,11 @@ export const proofPoints = [
 export const mobileSmartRefereeRevealPolicy = "always-visible";
 export const mobileSmartRefereeCardAspectRatio = "21:9";
 export const technicalSpecificationPresentation = "proof-points-only";
+export const smartRefereeHeroVideoPresentation = {
+  aspectRatio: "16:9",
+  objectFit: "contain",
+  controls: true,
+} as const;
 export const disputeTimerPolicy = {
   initialSeconds: 13 * 60 + 4,
   activeScrollMillisecondsPerSecond: 10_000,
@@ -99,11 +104,8 @@ export default function Product() {
     <div className="smart-referee-page min-h-screen bg-black text-white" data-mobile-reveal-policy={mobileSmartRefereeRevealPolicy}>
       <SiteHeader active="referee" />
       <main data-reveal-page className="pt-16">
-        <section data-testid="smart-referee-hero" className="relative isolate overflow-hidden border-b border-white/10 bg-[#111416]">
-          <video src={smartRefereeMedia.trackingVideo} aria-hidden="true" autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover opacity-65" />
-          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#111416] via-[#111416]/72 to-[#111416]/18" />
-          <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-[#111416]/92 to-transparent" />
-          <div className="container grid min-h-[calc(66svh-4rem)] items-center gap-7 py-10 lg:min-h-[calc(66vh-4rem)] lg:grid-cols-[0.94fr_1.06fr] lg:py-12">
+        <section data-testid="smart-referee-hero" className="border-b border-white/10 bg-[#111416]">
+          <div className="container grid items-center gap-7 py-10 lg:grid-cols-[0.74fr_1.26fr] lg:py-12">
             <div data-reveal className="reveal-up relative z-10 max-w-xl">
               <div className="mb-4 h-1 w-12 bg-accent" />
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">See the system in action</p>
@@ -114,6 +116,9 @@ export default function Product() {
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request event proposal <ArrowRight size={18} /></a>
               </div>
+            </div>
+            <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/15 bg-black shadow-2xl" style={{ transitionDelay: "90ms" }}>
+              <video src={smartRefereeMedia.trackingVideo} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="aspect-video h-full w-full bg-black object-contain">Your browser does not support embedded video.</video>
             </div>
           </div>
         </section>

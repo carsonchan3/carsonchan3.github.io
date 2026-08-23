@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, proofPoints, smartRefereeFeaturePanels, smartRefereeMedia, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, proofPoints, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -48,6 +48,16 @@ describe("Smart Referee technical presentation", () => {
     expect(technicalSpecificationPresentation).toBe("proof-points-only");
     expect(proofPoints).toContainEqual({ value: "±0.20 mm", label: "3D accuracy" });
     expect(proofPoints).toContainEqual({ value: "10 ms", label: "decision making end to end" });
+  });
+});
+
+describe("Smart Referee system video presentation", () => {
+  it("preserves the full system video with a 16:9 contain treatment and controls", () => {
+    expect(smartRefereeHeroVideoPresentation).toEqual({
+      aspectRatio: "16:9",
+      objectFit: "contain",
+      controls: true,
+    });
   });
 });
 

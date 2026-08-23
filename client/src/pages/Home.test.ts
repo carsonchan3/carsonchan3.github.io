@@ -15,8 +15,8 @@ describe("homepage mobile offering presentation", () => {
     expect(mobileOfferingCardAspectRatio).toBe("21:9");
   });
 
-  it("uses a readable mobile hero ratio and a cinematic 21:9 desktop video treatment", () => {
+  it("uses a readable mobile hero ratio and an OptiTrack-inspired 32:9 desktop video treatment", () => {
     expect(mobileHomeHeroVideoAspectRatio).toBe("4:5");
-    expect(desktopHomeHeroVideoAspectRatio).toBe("21:9");
+    expect(desktopHomeHeroVideoAspectRatio).toBe("32:9");
   });
 });
