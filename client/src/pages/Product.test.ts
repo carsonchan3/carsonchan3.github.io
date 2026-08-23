@@ -75,6 +75,7 @@ describe("Smart Referee dispute-reduction support", () => {
     expect(smartRefereeMedia.rulebook).toBe("/manus-storage/FAI-rulebook_f63443a8.jpg");
     expect(smartRefereeMedia.dispute).toBe("/manus-storage/dispute_6f42a381.webp");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
+    expect(smartRefereeMedia.trackingPoster).toBe("/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg");
   });
 });
 

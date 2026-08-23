@@ -34,6 +34,7 @@ export const smartRefereeMedia = {
   stickers: "/manus-storage/cheapstickers_6b71bf1e.jpg",
   precision: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
   trackingVideo: "/manus-storage/vli-tracking-test-video_f82aa6d7.mp4",
+  trackingPoster: "/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg",
 } as const;
 
 export const smartRefereeFeaturePanels = {
@@ -118,7 +119,7 @@ export default function Product() {
               </div>
             </div>
             <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/15 bg-black shadow-2xl" style={{ transitionDelay: "90ms" }}>
-              <video src={smartRefereeMedia.trackingVideo} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="aspect-video h-full w-full bg-black object-contain">Your browser does not support embedded video.</video>
+              <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="aspect-video h-full w-full bg-black object-contain">Your browser does not support embedded video.</video>
             </div>
           </div>
         </section>
