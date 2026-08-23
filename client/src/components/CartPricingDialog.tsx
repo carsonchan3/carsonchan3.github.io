@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { TurnstileField } from "@/components/TurnstileField";
+import { isStaticEnquiryHost, submitStaticEnquiry } from "@/lib/staticEnquiry";
 
 export type CartPricingSelection = {
   sourceId: string;
@@ -36,11 +38,18 @@ const initialFormData = {
 export default function CartPricingDialog({ items, open, onOpenChange, onSubmitted }: CartPricingDialogProps) {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const contactMutation = trpc.contact.submit.useMutation();
   const totalUnits = items.reduce((sum, item) => sum + item.quantity, 0);
+  const usesStaticEnquiries = isStaticEnquiryHost();
 
   useEffect(() => {
-    if (open) setFormData(initialFormData);
+    if (open) {
+      setFormData(initialFormData);
+      setTurnstileToken("");
+      setTurnstileResetKey((key) => key + 1);
+    }
   }, [open]);
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -54,28 +63,50 @@ export default function CartPricingDialog({ items, open, onOpenChange, onSubmitt
       toast.error("Add at least one item and complete your name, email, delivery address, and quote notes.");
       return;
     }
+    if (usesStaticEnquiries && !turnstileToken) {
+      toast.error("Please complete the spam-protection check.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
-      await contactMutation.mutateAsync({
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || undefined,
-        sport: "Research / technology",
-        organizationType: formData.organizationType || undefined,
-        deliveryAddress: formData.deliveryAddress,
-        message: formData.message,
-        website: formData.website || undefined,
-        cartItems: items.map((item) => ({
-          sourceId: item.sourceId,
-          name: item.name,
-          model: item.model,
-          price: item.price,
-          quantity: item.quantity,
-        })),
-      });
+      const cartItems = items.map((item) => ({
+        sourceId: item.sourceId,
+        name: item.name,
+        model: item.model,
+        category: item.category,
+        price: item.price,
+        quantity: item.quantity,
+      }));
+      if (usesStaticEnquiries) {
+        await submitStaticEnquiry({
+          kind: "product-pricing",
+          name: formData.name,
+          email: formData.email,
+          organisation: formData.company || undefined,
+          organisationType: formData.organizationType || undefined,
+          message: `${formData.message}\n\nDelivery address:\n${formData.deliveryAddress}`,
+          website: formData.website || undefined,
+          payload: { cartItems, deliveryAddress: formData.deliveryAddress },
+          turnstileToken,
+        });
+      } else {
+        await contactMutation.mutateAsync({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || undefined,
+          sport: "Research / technology",
+          organizationType: formData.organizationType || undefined,
+          deliveryAddress: formData.deliveryAddress,
+          message: formData.message,
+          website: formData.website || undefined,
+          cartItems,
+        });
+      }
       toast.success("Pricing request received. Our team will review your cart and reply within one business day.");
       setFormData(initialFormData);
+      setTurnstileToken("");
+      setTurnstileResetKey((key) => key + 1);
       onSubmitted();
       onOpenChange(false);
     } catch {
@@ -110,6 +141,7 @@ export default function CartPricingDialog({ items, open, onOpenChange, onSubmitt
           </div>
           <label className="grid gap-2 text-sm font-medium text-white/75">Delivery address *<Textarea data-testid="cart-pricing-delivery-address" name="deliveryAddress" value={formData.deliveryAddress} onChange={handleFormChange} required placeholder="Street, district, city, and postal code" className="min-h-20 border-white/15 bg-black/20 text-white" /></label>
           <label className="grid gap-2 text-sm font-medium text-white/75">Quote notes, programme needs, and delivery timeframe *<Textarea name="message" value={formData.message} onChange={handleFormChange} required className="min-h-28 border-white/15 bg-black/20 text-white" /></label>
+          {usesStaticEnquiries ? <TurnstileField resetKey={turnstileResetKey} onToken={setTurnstileToken} onError={() => toast.error("Spam protection could not load. Please refresh and try again.")} /> : null}
           <Button type="submit" disabled={isSubmitting || items.length === 0} className="w-full bg-accent font-semibold text-black hover:opacity-90">{isSubmitting ? <><Loader2 className="mr-2 size-4 animate-spin" />Sending request</> : "Ask for pricing"}</Button>
         </form>
       </DialogContent>

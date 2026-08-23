@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { TurnstileField } from "@/components/TurnstileField";
+import { isStaticEnquiryHost, submitStaticEnquiry } from "@/lib/staticEnquiry";
 
 type ServiceEnquiryDialogProps = {
   service: string | null;
@@ -29,12 +31,19 @@ const initialFormData = {
 export default function ServiceEnquiryDialog({ service, onOpenChange }: ServiceEnquiryDialogProps) {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const contactMutation = trpc.contact.submit.useMutation();
   const isOpen = Boolean(service);
   const isRepairService = service === "Drone Repair Service";
+  const usesStaticEnquiries = isStaticEnquiryHost();
 
   useEffect(() => {
-    if (service) setFormData(initialFormData);
+    if (service) {
+      setFormData(initialFormData);
+      setTurnstileToken("");
+      setTurnstileResetKey((key) => key + 1);
+    }
   }, [service]);
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -50,27 +59,50 @@ export default function ServiceEnquiryDialog({ service, onOpenChange }: ServiceE
       toast.error(isRepairService ? "Please complete the repair intake checklist." : "Please fill in your name, email, and message.");
       return;
     }
+    if (usesStaticEnquiries && !turnstileToken) {
+      toast.error("Please complete the spam-protection check.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
-      await contactMutation.mutateAsync({
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || undefined,
-        selectedService: service,
-        organizationType: formData.organizationType || undefined,
-        message: isRepairService ? [`Repair intake checklist`, `Drone model: ${formData.droneModel}`, `Fault symptoms: ${formData.faultSymptoms}`, `Previous repairs: ${formData.priorRepairs}`, `Power state: ${formData.powerState}`, `Photos available: ${formData.hasPhotos ? "Yes" : "No"}`, formData.message ? `Additional notes: ${formData.message}` : ""].filter(Boolean).join("\n") : formData.message,
-        repairIntake: isRepairService ? {
-          droneModel: formData.droneModel,
-          faultSymptoms: formData.faultSymptoms,
-          priorRepairs: formData.priorRepairs,
-          powerState: formData.powerState,
-          hasPhotos: formData.hasPhotos,
-        } : undefined,
-        website: formData.website || undefined,
-      });
+      const repairIntake = isRepairService ? {
+        droneModel: formData.droneModel,
+        faultSymptoms: formData.faultSymptoms,
+        priorRepairs: formData.priorRepairs,
+        powerState: formData.powerState,
+        hasPhotos: formData.hasPhotos,
+      } : undefined;
+      const message = isRepairService ? [`Repair intake checklist`, `Drone model: ${formData.droneModel}`, `Fault symptoms: ${formData.faultSymptoms}`, `Previous repairs: ${formData.priorRepairs}`, `Power state: ${formData.powerState}`, `Photos available: ${formData.hasPhotos ? "Yes" : "No"}`, formData.message ? `Additional notes: ${formData.message}` : ""].filter(Boolean).join("\n") : formData.message;
+      if (usesStaticEnquiries) {
+        await submitStaticEnquiry({
+          kind: isRepairService ? "repair" : "service",
+          name: formData.name,
+          email: formData.email,
+          organisation: formData.company || undefined,
+          organisationType: formData.organizationType || undefined,
+          selectedService: service,
+          message,
+          website: formData.website || undefined,
+          payload: repairIntake ? { repairIntake } : undefined,
+          turnstileToken,
+        });
+      } else {
+        await contactMutation.mutateAsync({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || undefined,
+          selectedService: service,
+          organizationType: formData.organizationType || undefined,
+          message,
+          repairIntake,
+          website: formData.website || undefined,
+        });
+      }
       toast.success("Service enquiry received. Our team will follow up with the next steps.");
       setFormData(initialFormData);
+      setTurnstileToken("");
+      setTurnstileResetKey((key) => key + 1);
       onOpenChange(false);
     } catch {
       toast.error("We could not send the enquiry. Please try again.");
@@ -100,6 +132,7 @@ export default function ServiceEnquiryDialog({ service, onOpenChange }: ServiceE
           </div>
           {isRepairService ? <fieldset data-testid="repair-intake-checklist" className="space-y-4 rounded-lg border border-accent/25 bg-accent/5 p-4"><legend className="px-1 text-sm font-semibold text-white">Repair intake checklist</legend><div className="grid gap-4 sm:grid-cols-2"><label className="grid gap-2 text-sm font-medium text-white/75">Drone model *<Input name="droneModel" value={formData.droneModel} onChange={handleFormChange} required className="border-white/15 bg-black/20 text-white" /></label><label className="grid gap-2 text-sm font-medium text-white/75">Previous repairs *<select name="priorRepairs" value={formData.priorRepairs} onChange={handleFormChange} required className="h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white"><option value="">Select one</option><option>No previous repairs</option><option>Previously repaired</option><option>Unknown</option></select></label><label className="grid gap-2 text-sm font-medium text-white/75 sm:col-span-2">Fault symptoms *<Textarea name="faultSymptoms" value={formData.faultSymptoms} onChange={handleFormChange} required className="min-h-24 border-white/15 bg-black/20 text-white" /></label><label className="grid gap-2 text-sm font-medium text-white/75">Power-up state *<select name="powerState" value={formData.powerState} onChange={handleFormChange} required className="h-10 rounded-md border border-white/15 bg-black/20 px-3 text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white"><option value="">Select one</option><option>Powers on</option><option>Does not power on</option><option>Intermittent or unsure</option></select></label><label className="flex items-center gap-3 self-end rounded-md border border-white/10 bg-black/15 px-3 py-2.5 text-sm text-white/80"><input name="hasPhotos" type="checkbox" checked={formData.hasPhotos} onChange={handleFormChange} className="size-4 accent-[#40E0D0]" />I have photos available to share</label></div></fieldset> : null}
           <label className="grid gap-2 text-sm font-medium text-white/75">{isRepairService ? "Additional repair notes, flight history, or preferred outcome" : "Tell us what you need, your timeframe, and any relevant drone details *"}<Textarea name="message" value={formData.message} onChange={handleFormChange} required={!isRepairService} className="min-h-28 border-white/15 bg-black/20 text-white" /></label>
+          {usesStaticEnquiries ? <TurnstileField resetKey={turnstileResetKey} onToken={setTurnstileToken} onError={() => toast.error("Spam protection could not load. Please refresh and try again.")} /> : null}
           <Button type="submit" disabled={isSubmitting} className="w-full bg-accent font-semibold text-black hover:opacity-90">{isSubmitting ? <><Loader2 className="mr-2 size-4 animate-spin" />Sending enquiry</> : "Send service enquiry"}</Button>
         </form>
       </DialogContent>

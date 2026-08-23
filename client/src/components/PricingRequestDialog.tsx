@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { TurnstileField } from "@/components/TurnstileField";
+import { isStaticEnquiryHost, submitStaticEnquiry } from "@/lib/staticEnquiry";
 
 type PricingRequestDialogProps = {
   open: boolean;
@@ -33,8 +35,11 @@ export default function PricingRequestDialog({
 }: PricingRequestDialogProps) {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const contactMutation = trpc.contact.submit.useMutation();
   const selectedOption = getPricingSelectionLabel(tierId);
+  const usesStaticEnquiries = isStaticEnquiryHost();
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -47,20 +52,42 @@ export default function PricingRequestDialog({
       toast.error("Please fill in your name, email, and message.");
       return;
     }
+    if (usesStaticEnquiries && !turnstileToken) {
+      toast.error("Please complete the spam-protection check.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
-      await contactMutation.mutateAsync({
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || undefined,
-        sport: formData.sport || undefined,
-        organizationType: formData.organizationType || undefined,
-        message: buildPricingRequestMessage(tierId, formData.message),
-        website: formData.website || undefined,
-      });
+      const message = buildPricingRequestMessage(tierId, formData.message);
+      if (usesStaticEnquiries) {
+        await submitStaticEnquiry({
+          kind: "smart-referee-pricing",
+          name: formData.name,
+          email: formData.email,
+          organisation: formData.company || undefined,
+          organisationType: formData.organizationType || undefined,
+          selectedPackage: selectedOption,
+          message,
+          website: formData.website || undefined,
+          payload: { tierId, sport: formData.sport || undefined },
+          turnstileToken,
+        });
+      } else {
+        await contactMutation.mutateAsync({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || undefined,
+          sport: formData.sport || undefined,
+          organizationType: formData.organizationType || undefined,
+          message,
+          website: formData.website || undefined,
+        });
+      }
       toast.success("Pricing request received. Our team will follow up with a tailored quote.");
       setFormData(initialFormData);
+      setTurnstileToken("");
+      setTurnstileResetKey((key) => key + 1);
       onOpenChange(false);
     } catch {
       toast.error("We could not send the pricing request. Please try again.");
@@ -125,6 +152,8 @@ export default function PricingRequestDialog({
           </label>
 
           <label className="grid gap-2 text-sm font-medium text-white/75">Tell us about your venue, event timeline, and what you need to review *<Textarea name="message" value={formData.message} onChange={handleFormChange} required className="min-h-28 border-white/15 bg-black/20 text-white placeholder:text-white/45" /></label>
+
+          {usesStaticEnquiries ? <TurnstileField resetKey={turnstileResetKey} onToken={setTurnstileToken} onError={() => toast.error("Spam protection could not load. Please refresh and try again.")} /> : null}
 
           <Button type="submit" disabled={isSubmitting} className="w-full bg-accent font-semibold text-black hover:opacity-90">
             {isSubmitting ? <><Loader2 className="mr-2 size-4 animate-spin" /> Sending request</> : "Get Pricing"}

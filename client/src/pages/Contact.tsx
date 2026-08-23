@@ -6,8 +6,10 @@ import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { TurnstileField } from "@/components/TurnstileField";
 import { trpc } from "@/lib/trpc";
 import { publicContactEmail, publicContactEmailHref } from "@/lib/contactDetails";
+import { isStaticEnquiryHost, submitStaticEnquiry } from "@/lib/staticEnquiry";
 
 const initialFormData = {
   name: "",
@@ -22,7 +24,10 @@ const initialFormData = {
 export default function Contact() {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const contactMutation = trpc.contact.submit.useMutation();
+  const usesStaticEnquiries = isStaticEnquiryHost();
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -35,20 +40,40 @@ export default function Contact() {
       toast.error("Please fill in all required fields.");
       return;
     }
+    if (usesStaticEnquiries && !turnstileToken) {
+      toast.error("Please complete the spam-protection check.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
-      const result = await contactMutation.mutateAsync({
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || undefined,
-        sport: formData.sport || undefined,
-        organizationType: formData.organizationType || undefined,
-        message: formData.message,
-        website: formData.website || undefined,
-      });
-      toast.success(result.notificationSent ? "Enquiry received. Our team will contact you within one business day." : "Enquiry saved. Our team can review your submission.");
+      if (usesStaticEnquiries) {
+        await submitStaticEnquiry({
+          kind: "general",
+          name: formData.name,
+          email: formData.email,
+          organisation: formData.company || undefined,
+          organisationType: formData.organizationType || undefined,
+          message: formData.message,
+          website: formData.website || undefined,
+          payload: { areaOfInterest: formData.sport || undefined },
+          turnstileToken,
+        });
+      } else {
+        await contactMutation.mutateAsync({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || undefined,
+          sport: formData.sport || undefined,
+          organizationType: formData.organizationType || undefined,
+          message: formData.message,
+          website: formData.website || undefined,
+        });
+      }
+      toast.success("Enquiry received. Our team will contact you within one business day.");
       setFormData(initialFormData);
+      setTurnstileToken("");
+      setTurnstileResetKey((key) => key + 1);
     } catch (error) {
       console.error("Contact form submission error:", error);
       toast.error("Failed to send enquiry. Please try again.");
@@ -86,6 +111,7 @@ export default function Contact() {
                 <Input type="text" name="company" placeholder="Company (Optional)" value={formData.company} onChange={handleFormChange} className="border-white/20 bg-black/20 text-white placeholder:text-white/50" />
                 <div className="grid gap-4 md:grid-cols-2"><select name="sport" value={formData.sport} onChange={handleFormChange} aria-label="Area of interest" className="h-10 w-full rounded-md border border-white/20 bg-black/20 px-3 text-sm text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white"><option value="">Area of interest (Optional)</option><option value="Drone sports">Drone sports referee</option><option value="Research / technology">Drone equipment</option><option value="Other sports">Technical services</option><option value="Other">Other</option></select><select name="organizationType" value={formData.organizationType} onChange={handleFormChange} aria-label="Organization type" className="h-10 w-full rounded-md border border-white/20 bg-black/20 px-3 text-sm text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white"><option value="">Organization type (Optional)</option><option value="Sports league or association">Sports league or association</option><option value="Event organizer">Event organizer</option><option value="Technology company">Technology company</option><option value="School or university">School or university</option><option value="Other organization">Other organization</option></select></div>
                 <Textarea name="message" placeholder="Tell us about your needs..." value={formData.message} onChange={handleFormChange} className="min-h-36 border-white/20 bg-black/20 text-white placeholder:text-white/50" required />
+                {usesStaticEnquiries ? <TurnstileField resetKey={turnstileResetKey} onToken={setTurnstileToken} onError={() => toast.error("Spam protection could not load. Please refresh and try again.")} /> : null}
                 <p className="text-sm text-white/55">Our team will review your details and reply within one business day.</p>
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-accent font-semibold text-black hover:opacity-90">{isSubmitting ? "Sending..." : "Send enquiry"}</Button>
               </div>

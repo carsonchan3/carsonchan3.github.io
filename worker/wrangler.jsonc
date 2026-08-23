@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "vli-enquiry-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-23",
+  "d1_databases": [
+    {
+      "binding": "ENQUIRIES_DB",
+      "database_name": "vli-enquiries",
+      "database_id": "d0d2641e-a000-47b9-93a8-7a3f1c521465"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGIN": "https://velocity-lab.com"
+  }
+}
