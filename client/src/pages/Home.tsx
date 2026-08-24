@@ -29,6 +29,11 @@ export const mobileHeroScrollCue = {
   target: "offerings",
   label: "Explore offerings below",
 } as const;
+export const partnerHeadingPresentation = {
+  labelPosition: "top-left",
+  headingAlignment: "center",
+  descriptionAlignment: "center",
+} as const;
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -121,7 +126,7 @@ export default function Home() {
 
         <section id="partners" className="vli-partner-band velocity-section border-y">
           <div className="container"><div className="mx-auto max-w-6xl">
-            <div data-reveal className="reveal-up mb-12 grid gap-6 lg:grid-cols-[28%_1fr] lg:items-end"><p className="vli-section-label">Supporting network</p><div><h2 className="velocity-headline mb-5 text-white">Partners &amp; Supporting Organizations</h2><p className="velocity-body max-w-2xl">Together, we are advancing fair, data-driven competition and growing the future of drone sports.</p></div></div>
+            <div data-reveal data-presentation={`${partnerHeadingPresentation.labelPosition}-${partnerHeadingPresentation.headingAlignment}`} className="reveal-up relative mb-12"><p className="vli-section-label mb-6 lg:absolute lg:left-0 lg:top-0 lg:mb-0">Supporting network</p><div className="mx-auto max-w-4xl text-center"><h2 className="velocity-headline mb-5 text-white">Partners &amp; Supporting Organizations</h2><p className="velocity-body mx-auto max-w-2xl">Together, we are advancing fair, data-driven competition and growing the future of drone sports.</p></div></div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "100ms" }}><LogoCarousel logos={collaborators} compact /></div>
           </div></div>
         </section>

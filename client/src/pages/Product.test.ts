@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, formatDisputeTimer, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -99,7 +100,7 @@ describe("Smart Referee dispute-reduction support", () => {
     });
     expect(organiserPainPanelPresentation).toBe("narrow-separated");
     expect(organiserPainPanels).toEqual([
-      expect.objectContaining({ value: "13:04", label: "Review delay" }),
+      expect.objectContaining({ value: "4+ minutes", label: "per review delay" }),
       expect.objectContaining({ value: "01 slot", label: "Next start held" }),
       expect.objectContaining({ value: "04 roles", label: "Delivery focus diverted" }),
     ]);
@@ -118,10 +119,15 @@ describe("Smart Referee dispute-reduction support", () => {
   it("keeps the separately supplied organiser-impact values concise and distinct from the live timer model", () => {
     expect(organiserImpactMetricPresentation).toBe("proof-point-band");
     expect(organiserImpactMetrics).toEqual([
-      { value: 20, label: "Wasted time on dispute", suffix: " hrs+", formatter: "plain", rolling: true },
+      { value: 40, label: "Wasted time on dispute per event", prefix: "over ", zhPrefix: "超過 ", suffix: "+ minutes", zhSuffix: "+ 分鐘", formatter: "plain", rolling: true },
       { value: 27_000, label: "Extra cost related to all parties", suffix: "", formatter: "hkd-compact", rolling: true },
       { value: 4, label: "Staff needed per officiating venue", suffix: "+", formatter: "plain", rolling: false },
     ]);
+    expect(formatOrganiserImpactMetric(organiserImpactMetrics[0], 40, "en")).toBe("over 40+ minutes");
+    expect(formatOrganiserImpactMetric(organiserImpactMetrics[0], 40, "zh-Hant")).toBe("超過 40+ 分鐘");
+    expect(traditionalChineseTranslations["4+ minutes"]).toBe("4 分鐘以上");
+    expect(traditionalChineseTranslations["per review delay"]).toBe("每次審核延誤");
+    expect(traditionalChineseTranslations["Wasted time on dispute per event"]).toBe("每場活動因爭議而耗費的時間");
   });
 
   it("uses viewport-triggered rolling motion for time and money values while respecting reduced motion", () => {

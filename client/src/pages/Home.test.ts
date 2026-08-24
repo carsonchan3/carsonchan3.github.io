@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHeroScrollCue, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio } from "./Home";
+import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHeroScrollCue, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio, partnerHeadingPresentation } from "./Home";
+import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("homepage supporting organisations", () => {
   it("identifies the HKSTP logo as the Ideation Programme", () => {
@@ -7,6 +8,18 @@ describe("homepage supporting organisations", () => {
       name: "Hong Kong Science and Technology Parks Ideation Programme",
       logo: "/manus-storage/HKSTP_6e2bc852.png",
     }));
+  });
+
+  it("keeps the Supporting network label at the upper left while centring the partner heading and copy", () => {
+    expect(partnerHeadingPresentation).toEqual({
+      labelPosition: "top-left",
+      headingAlignment: "center",
+      descriptionAlignment: "center",
+    });
+  });
+
+  it("uses the requested bilingual HKSTP Ideation Programme name", () => {
+    expect(traditionalChineseTranslations["Hong Kong Science and Technology Parks Ideation Programme"]).toBe("香港科技園 ideation programme");
   });
 });
 

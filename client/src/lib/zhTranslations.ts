@@ -1,6 +1,10 @@
 // Generated from the user-reviewed Traditional Chinese translation workbook.
 // Do not edit individual values here; update the review workbook and regenerate.
 export const traditionalChineseTranslations: Record<string, string> = {
+  "4+ minutes": "4 分鐘以上",
+  "per review delay": "每次審核延誤",
+  "Wasted time on dispute per event": "每場活動因爭議而耗費的時間",
+  "over 40+ minutes Wasted time on dispute per event": "超過 40+ 分鐘 每場活動因爭議而耗費的時間",
   "(prefers-reduced-motion: reduce)": "(prefers-reduced-motion: reduce)",
   ". Request an event proposal to align the package with your venue, number of cages, programme timeline, and decision-support requirements.": ". 請索取活動提案以便將套裝與您的場地、防護籠數量、活動時間表及決策支援需求對齊。",
   "01 slot": "1x 時段",
@@ -270,7 +274,7 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "High-fidelity 3D tracking provides a consistent spatial reference for scoring review, operational reporting, and repeatable system setup across competition days.": "高保真 3D 追蹤為計分審核、運營報告，以及跨賽事日可重複的系統設置提供一致的空間參考。",
   "Higher-output 200 mm ball drone platform with 3S–4S capability.": "高輸出 200 mm 球形無人機平台，支援 3S–4S 電池配置。",
   "Hong Kong Drone Sports Association": "中國香港無人機運動總會",
-  "Hong Kong Science and Technology Parks Ideation Programme": "香港科技園",
+  "Hong Kong Science and Technology Parks Ideation Programme": "香港科技園 ideation programme",
   "Hong Kong · Drone sports systems": "香港 · 無人機運動系統",
   "Hong Kong, China": "中國香港",
   "Human sightline": "人員視線",

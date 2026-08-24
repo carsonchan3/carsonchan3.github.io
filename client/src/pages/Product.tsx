@@ -37,7 +37,7 @@ export const smartRefereeOpeningQuoteFitPolicy = {
 } as const;
 export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
-  { value: "13:04", label: "Review delay", detail: "An illustrative scoring review can consume the schedule buffer intended to protect the run sheet." },
+  { value: "4+ minutes", label: "per review delay", detail: "An illustrative scoring review can consume the schedule buffer intended to protect the run sheet." },
   { value: "01 slot", label: "Next start held", detail: "One unresolved call can keep the next match from starting while an answer is sought." },
   { value: "04 roles", label: "Delivery focus diverted", detail: "Officials, team representatives, venue operations, and production coordination can be pulled into the same moment." },
 ] as const;
@@ -80,8 +80,19 @@ export const illustrativeDisputeCostScenario = {
   ],
 } as const;
 
-export const organiserImpactMetrics = [
-  { value: 20, label: "Wasted time on dispute", suffix: " hrs+", formatter: "plain", rolling: true },
+type OrganiserImpactMetric = {
+  value: number;
+  label: string;
+  suffix: string;
+  formatter: "plain" | "hkd-compact";
+  rolling: boolean;
+  prefix?: string;
+  zhPrefix?: string;
+  zhSuffix?: string;
+};
+
+export const organiserImpactMetrics: readonly OrganiserImpactMetric[] = [
+  { value: 40, label: "Wasted time on dispute per event", prefix: "over ", zhPrefix: "超過 ", suffix: "+ minutes", zhSuffix: "+ 分鐘", formatter: "plain", rolling: true },
   { value: 27_000, label: "Extra cost related to all parties", suffix: "", formatter: "hkd-compact", rolling: true },
   { value: 4, label: "Staff needed per officiating venue", suffix: "+", formatter: "plain", rolling: false },
 ] as const;
@@ -91,6 +102,13 @@ export const rollingMetricPolicy = {
   durationMilliseconds: 900,
   respectsReducedMotion: true,
 } as const;
+
+export const formatOrganiserImpactMetric = (metric: OrganiserImpactMetric, value: number, language: "en" | "zh-Hant") => {
+  if (metric.formatter === "hkd-compact") return `HK$${Math.round(value / 1_000)}k`;
+  const prefix = language === "zh-Hant" ? (metric.zhPrefix ?? metric.prefix ?? "") : (metric.prefix ?? "");
+  const suffix = language === "zh-Hant" ? (metric.zhSuffix ?? metric.suffix) : metric.suffix;
+  return `${prefix}${value}${suffix}`;
+};
 
 export const getDisputeTimeIncrements = (activeScrollMilliseconds: number) =>
   Math.floor(activeScrollMilliseconds / disputeTimerPolicy.activeScrollMillisecondsPerSecond);
@@ -295,7 +313,7 @@ export default function Product() {
               {organiserImpactMetrics.map((metric, index) => (
                 <div data-reveal key={metric.label} className="reveal-up" style={{ transitionDelay: `${index * 70}ms` }}>
                   {metric.rolling ? (
-                    <RollingMetric value={metric.value} formatter={metric.formatter === "hkd-compact" ? (value) => `HK$${Math.round(value / 1_000)}k` : (value, language) => `${value}${language === "zh-Hant" ? " 小時+" : metric.suffix}`} ariaLabel={`${metric.formatter === "hkd-compact" ? "HK$27k" : `${metric.value}${metric.suffix}`} ${metric.label}`} className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl" />
+                    <RollingMetric value={metric.value} formatter={(value, language) => formatOrganiserImpactMetric(metric, value, language)} ariaLabel={`${formatOrganiserImpactMetric(metric, metric.value, "en")} ${metric.label}`} className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl" />
                   ) : (
                     <div className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl">{metric.value}{metric.suffix}</div>
                   )}
