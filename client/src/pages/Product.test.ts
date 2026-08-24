@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { eventScaleEvidencePanelPresentation, eventScaleFeatureStories, eventWorkflowSteps, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { eventScaleEvidencePanelPresentation, eventWorkflowSteps, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -33,9 +33,7 @@ describe("Smart Referee organiser-first journey", () => {
   it("keeps technical evidence visible after the organiser value narrative", () => {
     expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
     expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
-    expect(eventScaleEvidencePanelPresentation).toBe("image-led-feature-stories");
-    expect(eventScaleFeatureStories).toHaveLength(4);
-    expect(eventScaleFeatureStories.map((story) => story.title)).toEqual(["A replay built for the room.", "Low cost passive markers", "A shared standard for every call.", "Precision with a place at the venue."]);
+    expect(eventScaleEvidencePanelPresentation).toBe("quiet-product-moments");
     expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(technicalConfidence.markerTitle).toBe("Low cost passive markers");
     expect(technicalConfidence.markerDescription).toContain("Lightweight, low-cost stickers");
@@ -47,7 +45,6 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
     expect(smartRefereeMedia.stickers).toBe("/manus-storage/cheapstickers_6b71bf1e.jpg");
     expect(smartRefereeMedia.precision).toBe("/manus-storage/flex13camerasys_aa73a4e5.jpg");
-    expect(smartRefereeMedia.eventVenue).toBe("/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
     expect(smartRefereeMedia.ruleSupportLogos).toHaveLength(3);
   });
@@ -61,7 +58,7 @@ describe("Smart Referee organiser-first journey", () => {
 
   it("maps the revised organiser promise, outcomes, workflow, and visible evidence into Traditional Chinese", () => {
     [
-      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "01 · Event operations view", "A replay built for the room.", "Bring the relevant scoring moment into one calibrated view so officials can review it together and return their attention to the match.", "02 · Drone preparation", "Low cost passive markers", "Lightweight, low-cost stickers give organisers a consistent way to prepare drones for tracking without powered hardware.", "03 · Active rule context", "A shared standard for every call.", "Set the rule context for your format, then keep officials working from the same event standard when the call is close.", "04 · Optical position reference", "Precision with a place at the venue.", "Flex 13 camera coverage supports the position evidence behind difficult scoring reviews.", "Compare all service inclusions",
+      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Low cost passive markers", "Lightweight, low-cost stickers give organisers a consistent way to prepare drones for tracking without powered hardware.", "Compare all service inclusions",
     ].forEach((key) => expect(traditionalChineseTranslations[key]).toBeTruthy());
     expect(traditionalChinesePromisePresentation).toBe("two-intentional-lines");
   });
