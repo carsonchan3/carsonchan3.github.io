@@ -171,8 +171,8 @@ export const smartRefereeMedia = {
 export const technicalConfidence = {
   title: "Technical confidence, when your team needs it.",
   description: "The Smart Referee system is designed to turn high-speed position data into a shared reference that can be prepared consistently for an event.",
-  markerTitle: "Repeatable team preparation",
-  markerDescription: "Low-cost passive marker stickers help organisers standardise tracked-drone preparation across teams without adding powered marker hardware to the event inventory.",
+  markerTitle: "Low cost passive markers",
+  markerDescription: "Lightweight, low-cost stickers give organisers a consistent way to prepare drones for tracking without powered hardware.",
   referenceCaption: "Supplied rule and federation references are shown for event-context discussion only; their display does not indicate endorsement.",
 } as const;
 
