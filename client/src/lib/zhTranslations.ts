@@ -1,7 +1,10 @@
 // Generated from the user-reviewed Traditional Chinese translation workbook.
 // Do not edit individual values here; update the review workbook and regenerate.
 export const traditionalChineseTranslations: Record<string, string> = {
-  "Drone Services": "無人機影像服務",
+  "Drone Photo / Cinematography": "無人機攝影／航拍製作",
+  "Aerial storytelling": "航拍敘事",
+  "Plan professional aerial photography and cinematography for events, facilities, campaigns, and technical storytelling.": "為活動、場地、宣傳企劃及技術敘事規劃專業航拍攝影與電影級影像製作。",
+  "Explore cinematography": "探索航拍製作",
   "Plan and capture professional drone photography and video for events, facilities, campaigns, and technical storytelling.": "為活動、場地、宣傳企劃及技術敘事規劃與拍攝專業無人機照片及影片。",
   "Define the filming objective, location, required permissions, capture plan, and delivery format around your event or communications brief.": "根據您的活動或傳訊需求，釐定拍攝目標、地點、所需許可、拍攝計劃與交付格式。",
   "Scoped by the filming plan, event schedule, locations, and requested delivery format.": "按拍攝計劃、活動時間表、地點及所需交付格式界定。",
@@ -175,7 +178,9 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "Discuss this service": "討論此服務",
   "Discuss your use case": "討論您的使用案例",
   "Does not power on": "無法開機",
-  "Drone Building Course": "無人機組裝課程",
+  "Drone Building Course / Coaching Sessions": "無人機組裝課程／指導課程",
+  "Learners piloting a drone during a coaching session in a workshop": "學員在工作坊指導課程中操控無人機",
+  "Drone cinematography equipment prepared for a waterfront filming setup": "為海濱拍攝準備的無人機航拍設備",
   "Drone Equipment": "無人機設備",
   "Drone Repair Service": "無人機維修服務",
   "Drone club": "無人機俱樂部",

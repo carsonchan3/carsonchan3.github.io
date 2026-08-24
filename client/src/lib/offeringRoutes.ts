@@ -13,15 +13,15 @@ export const offeringCards = [
     description: "Source the drones, tracking-ready components, and field hardware needed for a dependable setup.",
     cta: "View equipment",
     href: "/product",
-    image: "/manus-storage/vli-equipment-offering_bb273cf2.png",
+    image: "/manus-storage/Droneequipment_2ab6c2b7.jpg",
   },
   {
-    eyebrow: "03 · From pilot to event day",
-    title: "Services",
-    description: "Plan, deploy, and improve drone-sports programmes with practical technical and event support.",
-    cta: "Explore services",
+    eyebrow: "03 · Aerial storytelling",
+    title: "Drone Photo / Cinematography",
+    description: "Plan professional aerial photography and cinematography for events, facilities, campaigns, and technical storytelling.",
+    cta: "Explore cinematography",
     href: "/services",
-    image: "/manus-storage/vli-services-offering_b4c06bb0.png",
+    image: "/manus-storage/dronecinematography_894d41bd.jpeg",
   },
 ] as const;
 

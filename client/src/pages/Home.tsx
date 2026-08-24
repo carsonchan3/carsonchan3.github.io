@@ -114,7 +114,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/72 to-black/10 transition-colors duration-300 group-hover:from-black/95 group-hover:via-black/62" />
                   <div className="relative z-10 mt-auto">
                     <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent sm:mb-4 sm:text-xs">{offering.eyebrow}</p>
-                    <h3 className="mb-2 line-clamp-1 text-xl font-semibold leading-tight text-white sm:mb-3 sm:text-3xl">{offering.title}</h3>
+                    <h3 className="mb-2 line-clamp-2 text-xl font-semibold leading-tight text-white sm:mb-3 sm:text-3xl">{offering.title}</h3>
                     <p className="sr-only max-w-sm leading-7 text-white/75 sm:not-sr-only sm:mb-7">{offering.description}</p>
                     <span className="inline-flex items-center gap-2 border border-white/30 px-3 py-1.5 text-xs font-semibold text-white transition-all duration-200 group-hover:border-accent group-hover:text-accent sm:px-4 sm:py-2.5 sm:text-sm">{offering.cta}<ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1 sm:size-[17px]" /></span>
                   </div>

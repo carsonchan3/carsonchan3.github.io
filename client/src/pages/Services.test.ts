@@ -12,15 +12,17 @@ describe("Services thumbnail data", () => {
     expect(traditionalChineseTranslations["Build skill."]).toBe("培養技能，");
     expect(traditionalChineseTranslations["Fly with purpose."]).toBe("自由翱翔前往您的目標。");
     expect(traditionalChineseTranslations["Not sure which service is right?"]).toBe("需要定制服務？");
+    expect(traditionalChineseTranslations["Drone Building Course / Coaching Sessions"]).toBe("無人機組裝課程／指導課程");
+    expect(traditionalChineseTranslations["Drone Photo / Cinematography"]).toBe("無人機攝影／航拍製作");
   });
 
   it("maps every service option to the supplied real-world media", () => {
     expect(serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }))).toEqual([
       { title: "Drone Repair Service", thumbnail: "/manus-storage/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "PID tuning service", thumbnail: "/manus-storage/pidtuningthumb_fcb394b2.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "Drone Building Course", thumbnail: "/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Drone Building Course / Coaching Sessions", thumbnail: "/manus-storage/service_214ca02f.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Advanced drone course for adults", thumbnail: "/manus-storage/advancedronecourseforadultthumb_193b4cb1.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "Drone Services", thumbnail: "/manus-storage/referee-angle_083e0bbc.webp", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Drone Photo / Cinematography", thumbnail: "/manus-storage/dronecinematography_894d41bd.jpeg", mediaSource: "user-supplied-real-world-photo" },
     ]);
   });
 
@@ -43,16 +45,16 @@ describe("Services thumbnail data", () => {
     expect(serviceBanners.map((service) => service.title)).toEqual([
       "Drone Repair Service",
       "PID tuning service",
-      "Drone Building Course",
+      "Drone Building Course / Coaching Sessions",
       "Advanced drone course for adults",
-      "Drone Services",
+      "Drone Photo / Cinematography",
     ]);
   });
 
-  it("restores Drone Services with the supplied photography and video scope", () => {
-    const droneServices = serviceBanners.find((service) => service.title === "Drone Services");
+  it("uses the supplied photo for the Drone Photo / Cinematography scope", () => {
+    const droneServices = serviceBanners.find((service) => service.title === "Drone Photo / Cinematography");
     expect(droneServices?.description).toBe("Plan and capture professional drone photography and video for events, facilities, campaigns, and technical storytelling.");
-    expect(droneServices?.thumbnail).toBe("/manus-storage/referee-angle_083e0bbc.webp");
+    expect(droneServices?.thumbnail).toBe("/manus-storage/dronecinematography_894d41bd.jpeg");
   });
 
   it("prioritizes a mail-in repair assessment and conditional delivery-fee waiver", () => {
