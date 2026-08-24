@@ -17,7 +17,7 @@ export const mobileSmartRefereeRevealPolicy = "always-visible";
 export const mobileSmartRefereeCardAspectRatio = "21:9";
 export const technicalSpecificationPresentation = "visible-evidence-panel";
 export const traditionalChinesePromisePresentation = "two-intentional-lines";
-export const eventScaleEvidencePanelPresentation = "individual-panels-beneath-title";
+export const eventScaleEvidencePanelPresentation = "quiet-product-moments";
 export const smartRefereeHeroVideoPresentation = {
   aspectRatio: "16:9",
   objectFit: "contain",
@@ -269,33 +269,37 @@ export default function Product() {
 
         <section id="technical-confidence" data-testid="technical-confidence" className="velocity-section border-b border-white/10 bg-[#171C1D]">
           <div className="container">
-            <div data-reveal className="reveal-up max-w-2xl">
+            <div data-reveal className="reveal-up mx-auto max-w-3xl text-center">
               <div className="mb-5 h-1 w-12 bg-accent" />
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Built for event scale</p>
-              <h2 className="velocity-headline max-w-xl text-white">{technicalConfidence.title}</h2>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
+              <h2 className="velocity-headline mx-auto max-w-2xl text-white">{technicalConfidence.title}</h2>
+              <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
             </div>
-            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} className="mt-12 space-y-7 md:mt-14 md:space-y-10">
+              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-5">
               {proofPoints.map((point, index) => (
-                <article data-event-scale-panel data-reveal key={point.value} className="reveal-up min-h-36 rounded-lg border border-white/10 bg-black/20 p-5" style={{ transitionDelay: `${index * 60}ms` }}>
-                  <p className="text-2xl font-semibold tracking-tight text-white">{point.value}</p>
-                  <p className="mt-3 text-xs leading-5 text-white/60">{point.label}</p>
+                <article data-event-scale-panel data-reveal key={point.value} className="reveal-up flex min-h-52 flex-col justify-between rounded-xl border border-white/10 bg-white/[0.035] p-6 md:p-7" style={{ transitionDelay: `${index * 60}ms` }}>
+                  <p className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-4xl">{point.value}</p>
+                  <p className="max-w-40 text-xs leading-5 text-white/60">{point.label}</p>
                 </article>
               ))}
-              <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20 sm:col-span-2 xl:col-span-2" style={{ transitionDelay: "240ms" }}>
-                <div className="grid h-full gap-5 p-5 sm:grid-cols-[0.72fr_1.28fr] sm:items-center">
-                  <img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="aspect-[21/9] h-full w-full rounded-md object-cover sm:aspect-[4/3]" />
-                  <div><h3 className="font-semibold text-white">{technicalConfidence.markerTitle}</h3><p className="mt-2 text-sm leading-6 text-white/65">{technicalConfidence.markerDescription}</p></div>
-                </div>
-              </article>
-              <article data-event-scale-panel data-reveal className="reveal-up rounded-lg border border-white/10 bg-black/20 p-5 sm:col-span-2 xl:col-span-2" style={{ transitionDelay: "300ms" }}>
-                <div className="flex min-h-32 items-center justify-center gap-3 rounded-md bg-white p-4 sm:gap-5">
-                  {smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-14 min-w-0 max-w-[29%] flex-1 object-contain sm:h-16" />)}
-                </div>
-                <p className="mt-5 text-xs leading-6 text-white/50">{technicalConfidence.referenceCaption}</p>
-              </article>
-              <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20 p-5 sm:col-span-2 xl:col-span-4" style={{ transitionDelay: "360ms" }}>
-                <img src={smartRefereeMedia.precision} alt="OptiTrack Flex 13 camera positioned at a drone-sports arena" loading="lazy" className="aspect-[21/9] w-full rounded-md object-cover sm:aspect-[16/7]" />
+              </div>
+              <div className="grid gap-7 lg:grid-cols-2 lg:gap-10">
+                <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-5 md:p-7" style={{ transitionDelay: "240ms" }}>
+                  <div className="grid h-full gap-6 sm:grid-cols-[0.78fr_1.22fr] sm:items-center">
+                    <img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="aspect-[4/3] h-full w-full rounded-lg object-cover" />
+                    <div><h3 className="text-xl font-semibold tracking-tight text-white">{technicalConfidence.markerTitle}</h3><p className="mt-3 text-sm leading-7 text-white/65">{technicalConfidence.markerDescription}</p></div>
+                  </div>
+                </article>
+                <article data-event-scale-panel data-reveal className="reveal-up rounded-xl border border-white/10 bg-black/20 p-5 md:p-7" style={{ transitionDelay: "300ms" }}>
+                  <div className="flex min-h-44 items-center justify-center gap-4 rounded-lg bg-white p-5 sm:gap-7">
+                    {smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-16 min-w-0 max-w-[28%] flex-1 object-contain sm:h-20" />)}
+                  </div>
+                  <p className="mt-5 max-w-lg text-xs leading-6 text-white/50">{technicalConfidence.referenceCaption}</p>
+                </article>
+              </div>
+              <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-2 md:p-3" style={{ transitionDelay: "360ms" }}>
+                <img src={smartRefereeMedia.precision} alt="OptiTrack Flex 13 camera positioned at a drone-sports arena" loading="lazy" className="aspect-[16/8] w-full rounded-lg object-cover md:aspect-[16/7]" />
               </article>
             </div>
           </div>

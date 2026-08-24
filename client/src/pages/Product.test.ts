@@ -33,7 +33,7 @@ describe("Smart Referee organiser-first journey", () => {
   it("keeps technical evidence visible after the organiser value narrative", () => {
     expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
     expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
-    expect(eventScaleEvidencePanelPresentation).toBe("individual-panels-beneath-title");
+    expect(eventScaleEvidencePanelPresentation).toBe("quiet-product-moments");
     expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(technicalConfidence.markerTitle).toBe("Low cost passive markers");
     expect(technicalConfidence.markerDescription).toContain("Lightweight, low-cost stickers");
