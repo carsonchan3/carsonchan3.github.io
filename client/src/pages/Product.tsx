@@ -29,7 +29,12 @@ export const smartRefereeOpeningQuote = {
   text: "You may delay, but time will not.",
   attribution: "Benjamin Franklin",
 } as const;
-export const smartRefereeOpeningQuotePresentation = "centered";
+export const smartRefereeOpeningQuotePresentation = "centered-single-line";
+export const smartRefereeOpeningQuoteFitPolicy = {
+  wrap: "never",
+  fontSize: "clamp(0.95rem,2.35vw,2.05rem)",
+  tracking: "tight",
+} as const;
 export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
   { value: "13:04", label: "Review delay", detail: "An illustrative scoring review can consume the schedule buffer intended to protect the run sheet." },
@@ -248,7 +253,7 @@ export default function Product() {
           <div className="container grid items-center gap-8 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
             <div data-reveal className="reveal-up relative z-10 mx-auto flex max-w-xl flex-col items-center text-center">
               <div className="mb-4 h-1 w-12 bg-accent" />
-              <blockquote className="max-w-2xl text-3xl font-semibold leading-[0.96] tracking-[-0.055em] text-white sm:text-4xl md:text-5xl">“{smartRefereeOpeningQuote.text}”</blockquote>
+              <blockquote data-quote-fit={smartRefereeOpeningQuoteFitPolicy.wrap} className="max-w-full whitespace-nowrap text-[clamp(0.95rem,2.35vw,2.05rem)] font-semibold leading-none tracking-[-0.045em] text-white">“{smartRefereeOpeningQuote.text}”</blockquote>
               <cite className="mt-4 block text-xs not-italic font-semibold uppercase tracking-[0.18em] text-accent">— {smartRefereeOpeningQuote.attribution}</cite>
               <h1 className="velocity-headline mb-4 mt-8 text-white">Turn the rule into a <span className="text-accent">reviewable decision.</span></h1>
               <p className="leading-7 text-white/75">Smart Referee combines calibrated tracking, rules-aware review, and event delivery support to help organisers protect the run sheet and give every stakeholder a clearer account of the call.</p>

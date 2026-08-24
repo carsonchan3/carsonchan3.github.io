@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, formatDisputeTimer, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, formatDisputeTimer, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -91,7 +91,12 @@ describe("Smart Referee dispute-reduction support", () => {
       text: "You may delay, but time will not.",
       attribution: "Benjamin Franklin",
     });
-    expect(smartRefereeOpeningQuotePresentation).toBe("centered");
+    expect(smartRefereeOpeningQuotePresentation).toBe("centered-single-line");
+    expect(smartRefereeOpeningQuoteFitPolicy).toEqual({
+      wrap: "never",
+      fontSize: "clamp(0.95rem,2.35vw,2.05rem)",
+      tracking: "tight",
+    });
     expect(organiserPainPanelPresentation).toBe("narrow-separated");
     expect(organiserPainPanels).toEqual([
       expect.objectContaining({ value: "13:04", label: "Review delay" }),
