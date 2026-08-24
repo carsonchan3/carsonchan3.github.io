@@ -103,11 +103,13 @@ describe("Smart Referee shared-experience accessibility", () => {
       expect.objectContaining({
         id: "human-led-officiating",
         testId: "human-led-officiating-section",
+        linkLabel: "Human sightline",
         eyebrow: "A shared experience",
       }),
       expect.objectContaining({
         id: "evidence-based-decision-support",
         testId: "evidence-based-decision-support-section",
+        linkLabel: "Shared evidence",
         eyebrow: "Decision support",
       }),
     ]);

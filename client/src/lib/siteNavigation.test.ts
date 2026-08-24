@@ -22,4 +22,13 @@ describe("site navigation", () => {
     expect(labels).not.toContain("Pricing");
     expect(siteNavigation).toEqual(expect.arrayContaining([expect.objectContaining({ label: "Contact", href: "/contact", key: "contact" })]));
   });
+
+  it("uses the offering taxonomy in the mobile menu without changing desktop and footer Products terminology", () => {
+    const productNavigation = siteNavigation.find((item) => item.key === "product");
+    expect(productNavigation).toMatchObject({
+      label: "Products",
+      mobileLabel: "Drone Equipment",
+      href: "/product",
+    });
+  });
 });

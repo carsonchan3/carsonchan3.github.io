@@ -58,7 +58,7 @@ export default function SiteHeader({ active }: { active?: PageKey }) {
                 data-active={active === item.key}
                 aria-current={active === item.key ? "page" : undefined}
               >
-                {item.label}
+                {item.mobileLabel ?? item.label}
               </a>
             ))}
             <div className="mt-3 px-4"><LanguageToggle /></div>

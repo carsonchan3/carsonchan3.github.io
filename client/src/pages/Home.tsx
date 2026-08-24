@@ -25,6 +25,10 @@ export const mobileHomeHeroContentPolicy = {
   secondaryDescription: "hidden",
   actionLayout: "two-column",
 } as const;
+export const mobileHeroScrollCue = {
+  target: "offerings",
+  label: "Explore offerings below",
+} as const;
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -58,7 +62,7 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="vli-mobile-menu border-t lg:hidden">
             <nav className="container space-y-1 py-4" aria-label="Mobile navigation">
-              {siteNavigation.map((item) => <a key={item.href} href={staticSitePath(item.href)} onClick={() => setMobileMenuOpen(false)} className="vli-nav-link block px-4 py-2.5 font-medium transition-colors hover:bg-white/5">{item.label}</a>)}
+              {siteNavigation.map((item) => <a key={item.href} href={staticSitePath(item.href)} onClick={() => setMobileMenuOpen(false)} className="vli-nav-link block px-4 py-2.5 font-medium transition-colors hover:bg-white/5">{item.mobileLabel ?? item.label}</a>)}
               <div className="mt-3 px-4"><LanguageToggle /></div>
             </nav>
           </div>
@@ -88,9 +92,10 @@ export default function Home() {
             </div>
           </div>
           <a href="#offerings" className="absolute bottom-7 right-8 z-10 hidden items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--mist)] transition-colors hover:text-accent lg:flex" aria-label="Scroll to offerings"><span className="h-px w-8 bg-accent" />Scroll to explore<span className="text-accent">↓</span></a>
+          <a data-testid="mobile-hero-scroll-cue" href={`#${mobileHeroScrollCue.target}`} className="absolute bottom-2 right-4 z-10 inline-flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-[var(--mist)] transition-colors hover:text-accent sm:hidden" aria-label="Scroll to offerings"><span className="h-px w-5 bg-accent" />{mobileHeroScrollCue.label}<span className="text-accent" aria-hidden="true">↓</span></a>
         </section>
 
-        <section id="offerings" className="velocity-section bg-[var(--ink)]">
+        <section id="offerings" className="velocity-section scroll-mt-16 bg-[var(--ink)]">
           <div className="container">
             <div data-reveal className="reveal-up mb-14 grid gap-6 lg:grid-cols-[28%_1fr] lg:items-end">
               <p className="vli-section-label">VLI offerings</p>

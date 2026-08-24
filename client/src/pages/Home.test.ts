@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio } from "./Home";
+import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHeroScrollCue, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio } from "./Home";
 
 describe("homepage supporting organisations", () => {
   it("identifies the HKSTP logo as the Ideation Programme", () => {
@@ -25,6 +25,13 @@ describe("homepage mobile offering presentation", () => {
       presentation: "compact-overlay",
       secondaryDescription: "hidden",
       actionLayout: "two-column",
+    });
+  });
+
+  it("provides a concise mobile cue that moves visitors from the hero to the offering choices", () => {
+    expect(mobileHeroScrollCue).toEqual({
+      target: "offerings",
+      label: "Explore offerings below",
     });
   });
 });

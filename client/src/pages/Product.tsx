@@ -42,6 +42,7 @@ export const sharedExperienceSections = [
   {
     id: "human-led-officiating",
     testId: "human-led-officiating-section",
+    linkLabel: "Human sightline",
     eyebrow: "A shared experience",
     title: "A clear sightline is the starting point for a shared call.",
     summary: "Officials remain central to the game. A fast scoring moment can still be difficult to resolve when the goal area is obscured and the next match moment is already unfolding.",
@@ -49,6 +50,7 @@ export const sharedExperienceSections = [
   {
     id: "evidence-based-decision-support",
     testId: "evidence-based-decision-support-section",
+    linkLabel: "Shared evidence",
     eyebrow: "Decision support",
     title: "Turn the rule into a shared, reviewable reference.",
     summary: "Smart Referee links calibrated position data to the rule condition so officials, team representatives, and event operations can work from the same decision context.",
@@ -189,13 +191,26 @@ export default function Product() {
           </div>
         </section>
 
+        <nav data-testid="smart-referee-section-jump-links" aria-label="Smart Referee decision-support sections" className="border-b border-white/10 bg-black py-4">
+          <div className="container flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/50">Decision-support overview</p>
+            <div className="flex flex-wrap gap-2">
+              {sharedExperienceSections.map((section, index) => (
+                <a key={section.id} href={`#${section.id}`} className="inline-flex items-center gap-2 border border-white/20 px-3 py-2 text-xs font-semibold text-white transition-colors hover:border-accent hover:text-accent">
+                  <span className="font-mono text-[10px] text-accent">0{index + 1}</span>{section.linkLabel}<span aria-hidden="true">↓</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </nav>
+
         <div data-testid="officiating-comparison">
-          <section data-testid={sharedExperienceSections[0].testId} aria-labelledby={sharedExperienceSections[0].id} className="velocity-section border-b border-white/10 bg-[#27282B]">
+          <section id={sharedExperienceSections[0].id} data-testid={sharedExperienceSections[0].testId} aria-labelledby={`${sharedExperienceSections[0].id}-heading`} className="velocity-section scroll-mt-16 border-b border-white/10 bg-[#27282B]">
             <div className="container grid items-center gap-7 lg:grid-cols-[0.92fr_1.08fr]">
               <div data-reveal className="reveal-up">
                 <div className="mb-5 h-1 w-12 bg-accent" />
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{sharedExperienceSections[0].eyebrow}</p>
-                <h2 id={sharedExperienceSections[0].id} className="velocity-headline text-white">{sharedExperienceSections[0].title}</h2>
+                <h2 id={`${sharedExperienceSections[0].id}-heading`} className="velocity-headline text-white">{sharedExperienceSections[0].title}</h2>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{sharedExperienceSections[0].summary}</p>
                 <p className="mt-5 max-w-xl text-sm leading-6 text-white/65">No official should be expected to establish absolute positional certainty from one partially obscured view. When a drone ball is pressed around the goal ring, it can be difficult to confirm whether the full ball crossed in the required direction before the next match moment unfolds.</p>
               </div>
@@ -213,7 +228,7 @@ export default function Product() {
             </div>
           </section>
 
-          <section data-testid={sharedExperienceSections[1].testId} aria-labelledby={sharedExperienceSections[1].id} className="velocity-section bg-[var(--ink-soft)]">
+          <section id={sharedExperienceSections[1].id} data-testid={sharedExperienceSections[1].testId} aria-labelledby={`${sharedExperienceSections[1].id}-heading`} className="velocity-section scroll-mt-16 bg-[var(--ink-soft)]">
             <div className="container grid items-center gap-7 lg:grid-cols-[1.08fr_0.92fr]">
               <article data-testid="smart-referee-support-panel" data-reveal className="reveal-up overflow-hidden rounded-lg border border-accent/25 bg-accent/10 p-4 sm:p-5">
                 <div className="mb-4 flex items-center justify-between gap-5">
@@ -232,7 +247,7 @@ export default function Product() {
               <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
                 <div className="mb-5 h-1 w-12 bg-accent" />
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{sharedExperienceSections[1].eyebrow}</p>
-                <h2 id={sharedExperienceSections[1].id} className="velocity-headline text-white">{sharedExperienceSections[1].title}</h2>
+                <h2 id={`${sharedExperienceSections[1].id}-heading`} className="velocity-headline text-white">{sharedExperienceSections[1].title}</h2>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{sharedExperienceSections[1].summary}</p>
                 <p className="mt-5 max-w-xl text-sm leading-6 text-white/75">Calibrated spatial data gives officials a reviewable record against rule-defined scoring conditions—supporting a faster, more consistent decision without removing human authority.</p>
                 <p className="mt-6 max-w-xl text-sm leading-6 text-white/55">Smart Referee is designed to support—not replace—official judgement. It gives referees stronger shared context so the game can remain transparent, consistent, and fair.</p>
