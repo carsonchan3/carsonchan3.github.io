@@ -24,7 +24,7 @@ describe("Smart Referee organiser-first journey", () => {
     expect(organiserImpactDetail.metrics).toHaveLength(3);
     expect(organiserImpactDetail.qualification).toContain("validate against your own staffing");
     expect(organiserImpactDetail.description).toContain("not measured outcomes or guaranteed savings");
-    expect(organiserImpactMetricAnimation).toEqual({ trigger: "when-visible", durationMilliseconds: 900, respectsReducedMotion: true });
+    expect(organiserImpactMetricAnimation).toEqual({ trigger: "when-visible", durationMilliseconds: 1800, respectsReducedMotion: true });
     expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[0], 4, "en")).toBe("4+ minutes");
     expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[1], 40, "zh-Hant")).toBe("超過 40+ 分鐘");
     expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[2], 27_000, "en")).toBe("HK$27k");

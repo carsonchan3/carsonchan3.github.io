@@ -95,7 +95,7 @@ export const organiserImpactDetail = {
 
 export const organiserImpactMetricAnimation = {
   trigger: "when-visible",
-  durationMilliseconds: 900,
+  durationMilliseconds: 1800,
   respectsReducedMotion: true,
 } as const;
 
