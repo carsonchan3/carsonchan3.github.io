@@ -1,224 +1,58 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostCopy, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, ruleSupportLogoGroupPresentation, ruleSupportPanelLayout, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { eventWorkflowSteps, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserOutcomeCards, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
-describe("Smart Referee proof points", () => {
-  it("uses the supplied OptiTrack motion-capture description", () => {
-    expect(proofPoints).toContainEqual({
-      value: "OptiTrack",
-      label: "industry leading motion capture technology",
-    });
+describe("Smart Referee organiser-first journey", () => {
+  it("leads with one organiser promise followed by three tangible outcomes", () => {
+    expect(smartRefereePageHierarchy.slice(0, 3)).toEqual(["organiser-promise", "organiser-outcomes", "system-replay"]);
+    expect(organiserOutcomeCards).toEqual([
+      expect.objectContaining({ title: "Resolve close calls" }),
+      expect.objectContaining({ title: "Keep the next match moving" }),
+      expect.objectContaining({ title: "Align officiating standards" }),
+    ]);
   });
 
-  it("shows the supplied accuracy and end-to-end decision-making specifications", () => {
+  it("shows the replay before the event workflow and keeps human authority explicit", () => {
+    expect(smartRefereePageHierarchy.indexOf("system-replay")).toBeLessThan(smartRefereePageHierarchy.indexOf("event-workflow"));
+    expect(eventWorkflowSteps).toHaveLength(3);
+    expect(eventWorkflowSteps.map((step) => step.title)).toEqual(["Set the event rule", "Review the tracked moment", "Make the call together"]);
+    expect(eventWorkflowSteps[2].detail).toContain("Officials keep their authority");
+  });
+
+  it("uses progressive disclosure for the only organiser-impact scenario and preserves its planning qualification", () => {
+    expect(smartRefereePageHierarchy).toContain("organiser-impact-detail");
+    expect(organiserImpactDetail.summary).toBe("View an illustrative event-delay scenario");
+    expect(organiserImpactDetail.metrics).toHaveLength(3);
+    expect(organiserImpactDetail.qualification).toContain("validate against your own staffing");
+    expect(organiserImpactDetail.description).toContain("not measured outcomes or guaranteed savings");
+  });
+
+  it("keeps technical evidence after organiser value and behind a concise details control", () => {
+    expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
+    expect(technicalSpecificationPresentation).toBe("progressive-disclosure");
+    expect(technicalConfidence.summary).toBe("View tracking, setup, and rule-support details");
     expect(proofPoints).toContainEqual({ value: "±0.20 mm", label: "3D accuracy" });
     expect(proofPoints).toContainEqual({ value: "10 ms", label: "decision making end to end" });
   });
 
-  it("does not retain the replaced Replay or Rules proof points", () => {
-    expect(proofPoints.map((point) => point.value)).not.toContain("Replay");
-    expect(proofPoints.map((point) => point.value)).not.toContain("Rules");
-    expect(proofPoints.map((point) => point.value)).not.toContain("120 FPS");
-  });
-});
-
-describe("Smart Referee marker and precision panels", () => {
-  it("removes the unobtrusive infrared panel from the page configuration", () => {
-    expect(smartRefereeFeaturePanels).not.toHaveProperty("infrared");
-  });
-
-  it("gives passive markers their own event-operations panel with the supplied sticker image", () => {
-    expect(smartRefereeFeaturePanels.passiveMarkers.eyebrow).toBe("Standardised competition markers");
-    expect(smartRefereeFeaturePanels.passiveMarkers.image).toBe(smartRefereeMedia.stickers);
-    expect(smartRefereeFeaturePanels.passiveMarkers.title).toBe("Standardise setup without adding hardware cost.");
-    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Fast, repeatable pre-event setup");
-    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toContain("Low-cost consumables for recurring events");
-  });
-
-  it("uses the requested industry-leading precision message and Flex 13 media", () => {
-    expect(smartRefereeFeaturePanels.precision.eyebrow).toBe("Industry-Leading Precision");
-    expect(smartRefereeFeaturePanels.precision.image).toBe(smartRefereeMedia.precision);
-    expect(smartRefereeFeaturePanels.precision.description).toBe(
-      "High-fidelity 3D tracking provides a consistent spatial reference for scoring review, operational reporting, and repeatable system setup across competition days."
-    );
-  });
-});
-
-describe("Smart Referee technical presentation", () => {
-  it("keeps technical information concise by using proof points without a dropdown menu", () => {
-    expect(technicalSpecificationPresentation).toBe("proof-points-only");
-    expect(proofPoints).toContainEqual({ value: "±0.20 mm", label: "3D accuracy" });
-    expect(proofPoints).toContainEqual({ value: "10 ms", label: "decision making end to end" });
-  });
-});
-
-describe("Smart Referee system video presentation", () => {
-  it("preserves the full system video as a seamless muted autoplay loop", () => {
-    expect(smartRefereeHeroVideoPresentation).toEqual({
-      aspectRatio: "16:9",
-      objectFit: "contain",
-      controls: false,
-      autoPlay: true,
-      muted: true,
-      loop: true,
-      containerTreatment: "borderless-integrated",
-    });
-    expect(smartRefereeHeroBackgroundPresentation).toEqual({
-      source: "homepage-hero-video",
-      treatment: "dark-overlay-background",
-      autoPlay: true,
-      muted: true,
-      loop: true,
-    });
-  });
-
-  it("places the system video directly after the B2B introduction", () => {
-    expect(smartRefereePageHierarchy.slice(0, 2)).toEqual(["b2b-introduction", "system-video"]);
-  });
-});
-
-describe("Smart Referee dispute-reduction support", () => {
-  it("starts the illustrative dispute counter at 13:04 and advances it per ten seconds of active scrolling", () => {
-    expect(disputeTimerPolicy.initialSeconds).toBe(13 * 60 + 4);
-    expect(disputeTimerPolicy.activeScrollMillisecondsPerSecond).toBe(10_000);
-    expect(getDisputeTimeIncrements(9_999)).toBe(0);
-    expect(getDisputeTimeIncrements(10_000)).toBe(1);
-    expect(getDisputeTimeIncrements(30_000)).toBe(3);
-  });
-
-  it("maps the supplied human-officiating, rule-support logos, dispute, and tracking media", () => {
+  it("preserves the supplied tracking, human-officiating, marker, precision, and reference media", () => {
     expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
-    expect(smartRefereeMedia.ruleSupportLogos).toEqual([
-      { id: "afa", src: "/manus-storage/AFA-logo_0b746387.png", alt: "AFA logo" },
-      { id: "fida", src: "/manus-storage/fida-logo_98f84f21.jpg", alt: "FIDA logo" },
-      { id: "fai", src: "/manus-storage/fai-logo_375508e2.svg", alt: "FAI logo" },
-    ]);
-    expect(smartRefereeMedia.dispute).toBe("/manus-storage/dispute_6f42a381.webp");
+    expect(smartRefereeMedia.stickers).toBe("/manus-storage/cheapstickers_6b71bf1e.jpg");
+    expect(smartRefereeMedia.precision).toBe("/manus-storage/flex13camerasys_aa73a4e5.jpg");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
-    expect(smartRefereeMedia.trackingPoster).toBe("/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg");
-    expect(ruleSupportLogoGroupPresentation).toEqual({ layout: "frameless-together", individualFrames: false });
-    expect(ruleSupportPanelLayout).toEqual({ desktopColumns: "0.72fr_1.28fr", mobile: "stacked" });
+    expect(smartRefereeMedia.ruleSupportLogos).toHaveLength(3);
   });
 
-  it("leads with the supplied time-focused opening quote and frames organiser pain points as narrow operational impacts", () => {
-    expect(smartRefereeOpeningQuote).toEqual({
-      text: "You may delay, but time will not.",
-      attribution: "Benjamin Franklin",
-    });
-    expect(smartRefereeOpeningQuotePresentation).toBe("centered-single-line");
-    expect(smartRefereeOpeningQuoteFitPolicy).toEqual({
-      wrap: "never",
-      fontSize: "clamp(0.95rem,2.35vw,2.05rem)",
-      tracking: "tight",
-    });
-    expect(organiserPainPanelPresentation).toBe("narrow-separated");
-    expect(organiserPainPanels).toEqual([
-      expect.objectContaining({ value: "4+ minutes", label: "per review delay" }),
-      expect.objectContaining({ value: "01 slot", label: "Next start held" }),
-      expect.objectContaining({ value: "04 roles", label: "Delivery focus diverted" }),
-    ]);
-  });
-
-  it("uses a transparent illustrative active-time model rather than claiming a measured dispute loss", () => {
-    expect(illustrativeDisputeCostScenario).toMatchObject({
-      currency: "HK$",
-      label: "Illustrative active event-time cost",
-      qualification: expect.stringContaining("Scenario only"),
-    });
-    expect(illustrativeDisputeCostScenario.assumptions).toHaveLength(3);
-    expect(getIllustrativeDisputeCost(13 * 60 + 4)).toBe(500);
-    expect(illustrativeDisputeCostCopy).not.toContain("Replace these assumptions");
-    expect(traditionalChineseTranslations[illustrativeDisputeCostCopy]).toBe("此示意情境假設兩位裁判或評審團成員的費率為 HK$250/小時、兩位活動或場地運營人員為 HK$300/小時，以及一位比賽時段即時協調的費率為 HK$1,200/小時。");
-  });
-
-  it("keeps the separately supplied organiser-impact values concise and distinct from the live timer model", () => {
-    expect(organiserImpactMetricPresentation).toBe("proof-point-band");
-    expect(organiserImpactMetrics).toEqual([
-      { value: 40, label: "Wasted time on dispute per event", prefix: "over ", zhPrefix: "超過 ", suffix: "+ minutes", zhSuffix: "+ 分鐘", formatter: "plain", rolling: true },
-      { value: 27_000, label: "Extra cost related to all parties", suffix: "", formatter: "hkd-compact", rolling: true },
-      { value: 4, label: "Staff needed per officiating venue", suffix: "+", formatter: "plain", rolling: false },
-    ]);
-    expect(formatOrganiserImpactMetric(organiserImpactMetrics[0], 40, "en")).toBe("over 40+ minutes");
-    expect(formatOrganiserImpactMetric(organiserImpactMetrics[0], 40, "zh-Hant")).toBe("超過 40+ 分鐘");
-    expect(traditionalChineseTranslations["4+ minutes"]).toBe("4 分鐘以上");
-    expect(traditionalChineseTranslations["per review delay"]).toBe("每次審核延誤");
-    expect(traditionalChineseTranslations["Wasted time on dispute per event"]).toBe("每場活動因爭議而耗費的時間");
-  });
-
-  it("uses viewport-triggered rolling motion for time and money values while respecting reduced motion", () => {
-    expect(rollingMetricPolicy).toEqual({
-      trigger: "when-visible",
-      durationMilliseconds: 900,
-      respectsReducedMotion: true,
-    });
-    expect(formatDisputeTimer(13 * 60 + 4)).toBe("13:04");
-  });
-
-  it("removes the organiser adoption panel and keeps Multiple Rule Support to a quick read", () => {
-    expect(smartRefereePageHierarchy).not.toContain("event-delivery-options");
-    const ruleSupport = sharedExperienceSections.find((section) => section.id === "multiple-rule-support");
-    expect(ruleSupport?.summary).toBe("Regional rule sets can vary. Smart Referee applies the active rule set to calibrated position data, giving every official the same reviewable reference for a more consistent call.");
-    expect(ruleSupport?.summary.split(/\s+/).length).toBeLessThanOrEqual(30);
-    expect(traditionalChineseTranslations[ruleSupport?.summary ?? ""]).toBe("地區規則體系可能不同。Smart Referee 將啟用中的規則體系套用至經校準的位置資料，讓每位裁判取得相同且可覆核的依據，作出更一致的判決。");
-  });
-});
-
-describe("Smart Referee shared-experience accessibility", () => {
-  it("keeps the requested Chinese Smart Referee headings on one responsive line and allows safe wrapping elsewhere", () => {
-    expect(smartRefereeChineseHeadingFitPolicy).toEqual({
-      targets: ["hero-decision", "human-sightline"],
-      fontSize: "clamp(0.9rem,5.2vw,2rem)",
-      wrap: "never",
-      fallbackWrap: "pretty-anywhere",
-    });
-    expect(traditionalChineseTranslations["Turn the rule into a"]).toBe("把規則轉化為");
-    expect(traditionalChineseTranslations["reviewable decision."]).toBe("可審核的裁決。");
-    expect(traditionalChineseTranslations["A clear sightline is the starting point for a shared call."]).toBe("清晰的視線是達成共識判決的起點。");
-  });
-
-  it("splits sightline challenge and multiple-rule support into independently labelled sections", () => {
-    expect(sharedExperienceSections).toHaveLength(2);
-    expect(sharedExperienceSections).toEqual([
-      expect.objectContaining({
-        id: "human-led-officiating",
-        testId: "human-led-officiating-section",
-        linkLabel: "Human sightline",
-        eyebrow: "A shared experience",
-      }),
-      expect.objectContaining({
-        id: "multiple-rule-support",
-        testId: "multiple-rule-support-section",
-        linkLabel: "Rule consistency",
-        eyebrow: "Multiple Rule Support",
-        title: "One objective reference across rule sets.",
-      }),
-    ]);
-    expect(traditionalChineseTranslations["Multiple Rule Support"]).toBe("多重規則支援");
-    expect(traditionalChineseTranslations["Rule consistency"]).toBe("規則一致性");
-    expect(traditionalChineseTranslations["One objective reference across rule sets."]).toBe("跨規則體系的一致客觀依據。");
-  });
-
-  it("keeps both comparison topics in the documented page hierarchy", () => {
-    expect(smartRefereePageHierarchy).toContain("human-led-officiating");
-    expect(smartRefereePageHierarchy).toContain("multiple-rule-support");
-  });
-
-  it("positions organiser metrics before Shared Experience and proof points before Industry-Leading Precision", () => {
-    expect(smartRefereePageHierarchy.indexOf("organiser-impact-metrics")).toBeLessThan(smartRefereePageHierarchy.indexOf("human-led-officiating"));
-    expect(smartRefereePageHierarchy.indexOf("proof-points")).toBeLessThan(smartRefereePageHierarchy.indexOf("precision"));
-  });
-});
-
-describe("Smart Referee mobile presentation", () => {
-  it("keeps the complete page independent of scroll-reveal visibility on mobile", () => {
+  it("preserves seamless autoplay video treatment and the mobile visibility policy", () => {
+    expect(smartRefereeHeroVideoPresentation).toEqual({ aspectRatio: "16:9", objectFit: "contain", controls: false, autoPlay: true, muted: true, loop: true, containerTreatment: "borderless-integrated" });
+    expect(smartRefereeHeroBackgroundPresentation).toEqual({ source: "homepage-hero-video", treatment: "dark-overlay-background", autoPlay: true, muted: true, loop: true });
     expect(mobileSmartRefereeRevealPolicy).toBe("always-visible");
-  });
-
-  it("uses a compact 21:9 treatment for Smart Referee cards on mobile", () => {
     expect(mobileSmartRefereeCardAspectRatio).toBe("21:9");
   });
 
-  it("keeps the marker-benefit card concise for mobile while preserving every benefit", () => {
-    expect(smartRefereeFeaturePanels.passiveMarkers.benefits).toHaveLength(3);
+  it("maps the revised organiser promise, outcomes, workflow, and details controls into Traditional Chinese", () => {
+    [
+      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Compare all service inclusions",
+    ].forEach((key) => expect(traditionalChineseTranslations[key]).toBeTruthy());
   });
 });
