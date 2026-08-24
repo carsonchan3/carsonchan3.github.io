@@ -318,7 +318,7 @@
 
 @media (max-width: 639px) {
   .vli-site-header .vli-mobile-logo-scale-90 { transform: scale(.9); transform-origin: left center; }
-  .vli-home-hero .vli-home-title { font-size: clamp(2.05rem, 9vw, 2.5rem); }
+  .vli-home-hero .vli-home-title { font-size: clamp(1.8rem, 8vw, 2.2rem); }
   .vli-home-hero .vli-home-kicker { font-size: .52rem; letter-spacing: .13em; }
   .vli-home-hero .vli-home-kicker::before { width: 20px; margin-right: 8px; }
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserPainPanels, proofPoints, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningRuleQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserPainPanels, proofPoints, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningRuleQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -93,6 +93,29 @@ describe("Smart Referee dispute-reduction support", () => {
 
   it("adds individual organiser adoption panels without unsupported outcome claims", () => {
     expect(organiserAdoptionPanels.map((panel) => panel.title)).toEqual(["Venue-ready scope", "Rule-to-evidence workflow", "Event-day delivery plan"]);
+  });
+});
+
+describe("Smart Referee shared-experience accessibility", () => {
+  it("splits sightline challenge and decision support into independently labelled sections", () => {
+    expect(sharedExperienceSections).toHaveLength(2);
+    expect(sharedExperienceSections).toEqual([
+      expect.objectContaining({
+        id: "human-led-officiating",
+        testId: "human-led-officiating-section",
+        eyebrow: "A shared experience",
+      }),
+      expect.objectContaining({
+        id: "evidence-based-decision-support",
+        testId: "evidence-based-decision-support-section",
+        eyebrow: "Decision support",
+      }),
+    ]);
+  });
+
+  it("keeps both comparison topics in the documented page hierarchy", () => {
+    expect(smartRefereePageHierarchy).toContain("human-led-officiating");
+    expect(smartRefereePageHierarchy).toContain("evidence-based-decision-support");
   });
 });
 

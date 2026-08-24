@@ -6,7 +6,7 @@ describe("site navigation", () => {
     expect(siteNavigation).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ label: "Smart Referee", href: "/dronesportsreferee" }),
-        expect.objectContaining({ label: "Product", href: "/product" }),
+        expect.objectContaining({ label: "Products", href: "/product" }),
         expect.objectContaining({ label: "Services", href: "/services" }),
       ]),
     );

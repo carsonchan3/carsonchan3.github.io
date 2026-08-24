@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio } from "./Home";
+import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio } from "./Home";
 
 describe("homepage supporting organisations", () => {
   it("identifies the HKSTP logo as the Ideation Programme", () => {
@@ -18,5 +18,13 @@ describe("homepage mobile offering presentation", () => {
   it("uses a readable mobile hero ratio and an OptiTrack-inspired 32:9 desktop video treatment", () => {
     expect(mobileHomeHeroVideoAspectRatio).toBe("4:5");
     expect(desktopHomeHeroVideoAspectRatio).toBe("32:9");
+  });
+
+  it("keeps mobile hero copy compact so the primary video remains visible above the fold", () => {
+    expect(mobileHomeHeroContentPolicy).toEqual({
+      presentation: "compact-overlay",
+      secondaryDescription: "hidden",
+      actionLayout: "two-column",
+    });
   });
 });

@@ -22,7 +22,7 @@ export const smartRefereeHeroVideoPresentation = {
   muted: true,
   loop: true,
 } as const;
-export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "proof-points", "decision-support", "event-delivery-options"] as const;
+export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "proof-points", "human-led-officiating", "evidence-based-decision-support", "event-delivery-options"] as const;
 export const smartRefereeOpeningRuleQuote = {
   eyebrow: "The rule is clear. The moment is not always.",
   text: "A team scores a goal when the drone ball of the Striker crosses the goal ring of the opponent's team, and when the entire drone ball has passed through the entire opponent's goal ring.",
@@ -37,6 +37,22 @@ export const organiserAdoptionPanels = [
   { number: "01", title: "Venue-ready scope", detail: "Define cage count, technical prerequisites, and the delivery boundaries before match day." },
   { number: "02", title: "Rule-to-evidence workflow", detail: "Align tracked position, scoring conditions, and the review path around your competition rules." },
   { number: "03", title: "Event-day delivery plan", detail: "Set the support, officials, escalation, and fallback responsibilities inside one proposed operating model." },
+] as const;
+export const sharedExperienceSections = [
+  {
+    id: "human-led-officiating",
+    testId: "human-led-officiating-section",
+    eyebrow: "A shared experience",
+    title: "A clear sightline is the starting point for a shared call.",
+    summary: "Officials remain central to the game. A fast scoring moment can still be difficult to resolve when the goal area is obscured and the next match moment is already unfolding.",
+  },
+  {
+    id: "evidence-based-decision-support",
+    testId: "evidence-based-decision-support-section",
+    eyebrow: "Decision support",
+    title: "Turn the rule into a shared, reviewable reference.",
+    summary: "Smart Referee links calibrated position data to the rule condition so officials, team representatives, and event operations can work from the same decision context.",
+  },
 ] as const;
 export const disputeTimerPolicy = {
   initialSeconds: 13 * 60 + 4,
@@ -173,45 +189,37 @@ export default function Product() {
           </div>
         </section>
 
-        <section data-testid="officiating-comparison" className="velocity-section bg-[#27282B]">
-          <div className="container">
-            <div data-reveal className="reveal-up mx-auto mb-8 max-w-3xl text-center">
-              <div className="mx-auto mb-4 h-1 w-12 bg-accent" />
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">A shared experience</p>
-              <h2 className="velocity-headline text-white">Every scoring call should be explainable across the event team.</h2>
-              <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/70">
-                Officials remain central to the game. Smart Referee gives them a shared evidence layer that supports faster review, consistent decisions, and transparent communication when a fast scoring moment is difficult to see.
-              </p>
-            </div>
-
-            <div className="grid gap-5 lg:grid-cols-2">
-              <article data-testid="traditional-officiating-panel" data-reveal className="reveal-up rounded-lg border border-white/10 bg-black/25 p-5 sm:p-6">
-                <div className="mb-5 flex items-start justify-between gap-5">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/45">Human-led judgement</p>
-                    <h3 className="velocity-subheading mt-3 text-white">A single sightline can leave room for challenge.</h3>
-                  </div>
-                  <span className="mt-1 shrink-0 font-mono text-sm text-white/30">01</span>
+        <div data-testid="officiating-comparison">
+          <section data-testid={sharedExperienceSections[0].testId} aria-labelledby={sharedExperienceSections[0].id} className="velocity-section border-b border-white/10 bg-[#27282B]">
+            <div className="container grid items-center gap-7 lg:grid-cols-[0.92fr_1.08fr]">
+              <div data-reveal className="reveal-up">
+                <div className="mb-5 h-1 w-12 bg-accent" />
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{sharedExperienceSections[0].eyebrow}</p>
+                <h2 id={sharedExperienceSections[0].id} className="velocity-headline text-white">{sharedExperienceSections[0].title}</h2>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{sharedExperienceSections[0].summary}</p>
+                <p className="mt-5 max-w-xl text-sm leading-6 text-white/65">No official should be expected to establish absolute positional certainty from one partially obscured view. When a drone ball is pressed around the goal ring, it can be difficult to confirm whether the full ball crossed in the required direction before the next match moment unfolds.</p>
+              </div>
+              <article data-testid="traditional-officiating-panel" data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/25 p-4 sm:p-5" style={{ transitionDelay: "90ms" }}>
+                <div className="mb-4 flex items-center justify-between gap-5">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/45">Human-led judgement</p>
+                  <span className="shrink-0 font-mono text-sm text-white/30">01</span>
                 </div>
-
                 <div data-testid="traditional-officiating-flow" className="relative overflow-hidden rounded-md border border-white/10 bg-[#161719]">
                   <img src={smartRefereeMedia.humanReferee} alt="Scoring officials viewing a drone-sports goal through the arena net" className="aspect-[21/9] w-full object-cover sm:aspect-[16/9]" />
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#161719] via-[#161719]/20 to-transparent" />
                   <p className="absolute bottom-3 left-4 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">One angle, real-time pressure</p>
                 </div>
-
-                <p className="mt-4 text-sm leading-6 text-white/65">No official should be expected to establish absolute positional certainty from one partially obscured view. When a drone ball is pressed around the goal ring, it can be difficult to confirm whether the full ball crossed in the required direction before the next match moment unfolds.</p>
               </article>
+            </div>
+          </section>
 
-              <article data-testid="smart-referee-support-panel" data-reveal className="reveal-up rounded-lg border border-accent/25 bg-accent/10 p-5 sm:p-6" style={{ transitionDelay: "90ms" }}>
-                <div className="mb-5 flex items-start justify-between gap-5">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Smart Referee decision support</p>
-                    <h3 className="velocity-subheading mt-3 text-white">Shared evidence for a faster, defensible call.</h3>
-                  </div>
-                  <span className="mt-1 shrink-0 font-mono text-sm text-accent/65">02</span>
+          <section data-testid={sharedExperienceSections[1].testId} aria-labelledby={sharedExperienceSections[1].id} className="velocity-section bg-[var(--ink-soft)]">
+            <div className="container grid items-center gap-7 lg:grid-cols-[1.08fr_0.92fr]">
+              <article data-testid="smart-referee-support-panel" data-reveal className="reveal-up overflow-hidden rounded-lg border border-accent/25 bg-accent/10 p-4 sm:p-5">
+                <div className="mb-4 flex items-center justify-between gap-5">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Smart Referee decision support</p>
+                  <span className="shrink-0 font-mono text-sm text-accent/65">02</span>
                 </div>
-
                 <div data-testid="smart-referee-support-flow" className="overflow-hidden rounded-md border border-accent/25 bg-[#171C1D] shadow-[inset_0_0_50px_rgba(64,224,208,0.06)]">
                   <img src={smartRefereeMedia.rulebook} alt="Drone-sport scoring rule excerpt specifying the entire drone ball must cross the opposing goal ring" className="aspect-[21/9] w-full object-cover object-left sm:aspect-[16/9]" />
                   <div className="grid gap-2 border-t border-accent/20 p-4 sm:grid-cols-3">
@@ -220,16 +228,18 @@ export default function Product() {
                     <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">03 · Reviewable call</span>
                   </div>
                 </div>
-
-                <p className="mt-4 text-sm leading-6 text-white/75">Calibrated spatial data gives officials a reviewable record against rule-defined scoring conditions—supporting a faster, more consistent decision without removing human authority.</p>
               </article>
+              <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
+                <div className="mb-5 h-1 w-12 bg-accent" />
+                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{sharedExperienceSections[1].eyebrow}</p>
+                <h2 id={sharedExperienceSections[1].id} className="velocity-headline text-white">{sharedExperienceSections[1].title}</h2>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{sharedExperienceSections[1].summary}</p>
+                <p className="mt-5 max-w-xl text-sm leading-6 text-white/75">Calibrated spatial data gives officials a reviewable record against rule-defined scoring conditions—supporting a faster, more consistent decision without removing human authority.</p>
+                <p className="mt-6 max-w-xl text-sm leading-6 text-white/55">Smart Referee is designed to support—not replace—official judgement. It gives referees stronger shared context so the game can remain transparent, consistent, and fair.</p>
+              </div>
             </div>
-
-            <p data-reveal className="reveal-up mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-white/55" style={{ transitionDelay: "150ms" }}>
-              Smart Referee is designed to support—not replace—official judgement. It gives referees stronger shared context so the game can remain transparent, consistent, and fair.
-            </p>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <section data-testid="dispute-reduction-section" className="velocity-section bg-black">
           <div className="container grid items-center gap-7 lg:grid-cols-[0.92fr_1.08fr]">
