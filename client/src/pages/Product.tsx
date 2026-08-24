@@ -34,6 +34,22 @@ export const smartRefereeHeroBackgroundPresentation = {
   muted: true,
   loop: true,
 } as const;
+export const flex13SystemVideoPresentation = {
+  autoPlay: true,
+  muted: true,
+  loop: true,
+  controls: false,
+  playsInline: true,
+  preload: "metadata",
+} as const;
+export const continuousCalibrationVideoPresentation = {
+  autoPlay: true,
+  muted: true,
+  loop: true,
+  controls: false,
+  playsInline: true,
+  preload: "metadata",
+} as const;
 export const smartRefereePageHierarchy = [
   "organiser-promise",
   "organiser-outcomes",
@@ -43,6 +59,11 @@ export const smartRefereePageHierarchy = [
   "technical-confidence",
   "event-delivery-options",
 ] as const;
+
+export const organiserOutcomesIntroduction = {
+  heading: "What is Drone Sports Referee?",
+  description: "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.",
+} as const;
 
 export const organiserOutcomeCards = [
   {
@@ -163,7 +184,9 @@ export const smartRefereeMedia = {
     { id: "fai", src: "/manus-storage/fai-logo_375508e2.svg", alt: "FAI logo" },
   ],
   stickers: "/manus-storage/cheapstickers_6b71bf1e.jpg",
-  precision: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
+  precisionPoster: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
+  precisionVideo: "/manus-storage/v2fulluncompressed_1dc97341.mp4",
+  continuousCalibrationVideo: "/manus-storage/cont-calibration_a6322d41.mp4",
   trackingVideo: "/manus-storage/vli-tracking-test-video_f82aa6d7.mp4",
   trackingPoster: "/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg",
 } as const;
@@ -171,8 +194,12 @@ export const smartRefereeMedia = {
 export const technicalConfidence = {
   title: "Technical confidence, when your team needs it.",
   description: "The Smart Referee system is designed to turn high-speed position data into a shared reference that can be prepared consistently for an event.",
-  markerTitle: "Low cost passive markers",
-  markerDescription: "Lightweight, low-cost stickers give organisers a consistent way to prepare drones for tracking without powered hardware.",
+  markerTitle: "Passive Tracking",
+  markerDescription: "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.",
+  continuousCalibrationTitle: "Zero Drift. Pure Precision.",
+  continuousCalibrationDescription: "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.",
+  infraredTitle: "Unobtrusive infrared light",
+  infraredDescription: "Flex 13 cameras emit 850nm IR light, which is nearly invisible, for inconspicuous illumination that prevents the vision fatigue and unwanted attention to your capture rig caused by cameras that emit visible spectrum light.",
   referenceCaption: "Supplied rule and federation references are shown for event-context discussion only; their display does not indicate endorsement.",
 } as const;
 
@@ -200,14 +227,21 @@ export default function Product() {
         </section>
 
         <section id="organiser-outcomes" data-testid="organiser-outcomes" className="border-b border-white/10 bg-[#0B1419] py-5 md:py-7">
-          <div className="container grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
-            {organiserOutcomeCards.map((outcome, index) => (
-              <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] p-5 md:p-6" style={{ transitionDelay: `${index * 70}ms` }}>
-                <p className="font-mono text-sm font-semibold text-accent">{outcome.number}</p>
-                <h2 className="mt-5 text-xl font-semibold tracking-tight text-white">{outcome.title}</h2>
-                <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
-              </article>
-            ))}
+          <div className="container">
+            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up max-w-4xl py-8 md:py-10">
+              <div className="mb-5 h-1 w-12 bg-accent" />
+              <h2 className="velocity-headline max-w-3xl text-[clamp(2.5rem,5vw,5.25rem)] leading-[0.96] text-white">{organiserOutcomesIntroduction.heading}</h2>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-white/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
+            </div>
+            <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
+              {organiserOutcomeCards.map((outcome, index) => (
+                <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] p-5 md:p-6" style={{ transitionDelay: `${index * 70}ms` }}>
+                  <p className="font-mono text-sm font-semibold text-accent">{outcome.number}</p>
+                  <h2 className="mt-5 text-xl font-semibold tracking-tight text-white">{outcome.title}</h2>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -299,8 +333,20 @@ export default function Product() {
                 </article>
               </div>
               <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-2 md:p-3" style={{ transitionDelay: "360ms" }}>
-                <img src={smartRefereeMedia.precision} alt="OptiTrack Flex 13 camera positioned at a drone-sports arena" loading="lazy" className="aspect-[16/8] w-full rounded-lg object-cover md:aspect-[16/7]" />
+                <video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="OptiTrack Flex 13 camera positioned at a drone-sports arena" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} className="aspect-[16/8] w-full rounded-lg object-cover md:aspect-[16/7]">Your browser does not support embedded video.</video>
               </article>
+              <div data-testid="technical-evidence-panels" className="grid gap-7 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10">
+                <article data-technical-evidence-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-3 md:p-5" style={{ transitionDelay: "420ms" }}>
+                  <div className="grid h-full gap-6 lg:grid-cols-[1fr_0.96fr] lg:items-center">
+                    <video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="aspect-video h-full w-full rounded-lg bg-black object-contain">Your browser does not support embedded video.</video>
+                    <div className="p-2 md:p-3"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Continuous calibration</p><h3 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-4 text-sm leading-7 text-white/65">{technicalConfidence.continuousCalibrationDescription}</p></div>
+                  </div>
+                </article>
+                <article data-technical-evidence-panel data-reveal className="reveal-up flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.035] p-6 md:p-7" style={{ transitionDelay: "480ms" }}>
+                  <div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Flex 13 illumination</p><h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">{technicalConfidence.infraredTitle}</h3></div>
+                  <p className="mt-6 text-sm leading-7 text-white/65">{technicalConfidence.infraredDescription}</p>
+                </article>
+              </div>
             </div>
           </div>
         </section>
