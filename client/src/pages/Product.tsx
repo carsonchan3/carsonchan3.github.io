@@ -35,6 +35,12 @@ export const smartRefereeOpeningQuoteFitPolicy = {
   fontSize: "clamp(0.95rem,2.35vw,2.05rem)",
   tracking: "tight",
 } as const;
+export const smartRefereeChineseHeadingFitPolicy = {
+  targets: ["hero-decision", "human-sightline"],
+  fontSize: "clamp(0.9rem,5.2vw,2rem)",
+  wrap: "never",
+  fallbackWrap: "pretty-anywhere",
+} as const;
 export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
   { value: "4+ minutes", label: "per review delay", detail: "An illustrative scoring review can consume the schedule buffer intended to protect the run sheet." },
@@ -273,7 +279,7 @@ export default function Product() {
               <div className="mb-4 h-1 w-12 bg-accent" />
               <blockquote data-quote-fit={smartRefereeOpeningQuoteFitPolicy.wrap} className="max-w-full whitespace-nowrap text-[clamp(0.95rem,2.35vw,2.05rem)] font-semibold leading-none tracking-[-0.045em] text-white">“{smartRefereeOpeningQuote.text}”</blockquote>
               <cite className="mt-4 block text-xs not-italic font-semibold uppercase tracking-[0.18em] text-accent">— {smartRefereeOpeningQuote.attribution}</cite>
-              <h1 className="velocity-headline mb-4 mt-8 text-white">Turn the rule into a <span className="text-accent">reviewable decision.</span></h1>
+              <h1 data-testid="smart-referee-hero-decision-heading" data-chinese-heading-fit={smartRefereeChineseHeadingFitPolicy.targets[0]} className="velocity-headline smart-referee-heading-fit mb-4 mt-8 text-white">Turn the rule into a <span className="text-accent">reviewable decision.</span></h1>
               <p className="leading-7 text-white/75">Smart Referee combines calibrated tracking, rules-aware review, and event delivery support to help organisers protect the run sheet and give every stakeholder a clearer account of the call.</p>
               <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request event proposal <ArrowRight size={18} /></a>
@@ -344,7 +350,7 @@ export default function Product() {
               <div data-reveal className="reveal-up">
                 <div className="mb-5 h-1 w-12 bg-accent" />
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{sharedExperienceSections[0].eyebrow}</p>
-                <h2 id={`${sharedExperienceSections[0].id}-heading`} className="velocity-headline text-white">{sharedExperienceSections[0].title}</h2>
+                <h2 id={`${sharedExperienceSections[0].id}-heading`} data-testid="human-sightline-heading" data-chinese-heading-fit={smartRefereeChineseHeadingFitPolicy.targets[1]} className="velocity-headline smart-referee-heading-fit text-white">{sharedExperienceSections[0].title}</h2>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{sharedExperienceSections[0].summary}</p>
                 <p className="mt-5 max-w-xl text-sm leading-6 text-white/65">No official should be expected to establish absolute positional certainty from one partially obscured view. When a drone ball is pressed around the goal ring, it can be difficult to confirm whether the full ball crossed in the required direction before the next match moment unfolds.</p>
               </div>

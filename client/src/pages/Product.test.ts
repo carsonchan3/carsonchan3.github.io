@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee proof points", () => {
@@ -145,6 +145,18 @@ describe("Smart Referee dispute-reduction support", () => {
 });
 
 describe("Smart Referee shared-experience accessibility", () => {
+  it("keeps the requested Chinese Smart Referee headings on one responsive line and allows safe wrapping elsewhere", () => {
+    expect(smartRefereeChineseHeadingFitPolicy).toEqual({
+      targets: ["hero-decision", "human-sightline"],
+      fontSize: "clamp(0.9rem,5.2vw,2rem)",
+      wrap: "never",
+      fallbackWrap: "pretty-anywhere",
+    });
+    expect(traditionalChineseTranslations["Turn the rule into a"]).toBe("把規則轉化為");
+    expect(traditionalChineseTranslations["reviewable decision."]).toBe("可審核的裁決。");
+    expect(traditionalChineseTranslations["A clear sightline is the starting point for a shared call."]).toBe("清晰的視線是達成共識判決的起點。");
+  });
+
   it("splits sightline challenge and decision support into independently labelled sections", () => {
     expect(sharedExperienceSections).toHaveLength(2);
     expect(sharedExperienceSections).toEqual([

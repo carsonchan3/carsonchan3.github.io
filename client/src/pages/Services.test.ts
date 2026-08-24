@@ -1,22 +1,24 @@
 import { describe, expect, it } from "vitest";
-import { mobileServiceCardAspectRatio, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName } from "./Services";
+import { mobileServiceCardAspectRatio, publicServiceCatalogueSource, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName } from "./Services";
 
 describe("Services thumbnail data", () => {
-  it("maps every service option to its intended managed thumbnail", () => {
-    expect(serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail }))).toEqual([
-      { title: "Drone Repair Service", thumbnail: "/manus-storage/vli-service-repair_13ee3faf.png" },
-      { title: "PID tuning service", thumbnail: "/manus-storage/vli-service-pid-tuning_e541b71d.png" },
-      { title: "Drone Building Course", thumbnail: "/manus-storage/vli-service-building-skills_c32759ba.png" },
-      { title: "Advanced drone course for adults", thumbnail: "/manus-storage/vli-service-advanced-course_d14dd579.png" },
+  it("maps every service option to the supplied real-world media", () => {
+    expect(serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }))).toEqual([
+      { title: "Drone Repair Service", thumbnail: "/manus-storage/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "PID tuning service", thumbnail: "/manus-storage/pidtuningthumb_fcb394b2.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Drone Building Course", thumbnail: "/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Advanced drone course for adults", thumbnail: "/manus-storage/advancedronecourseforadultthumb_193b4cb1.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Drone Services", thumbnail: "/manus-storage/referee-angle_083e0bbc.webp", mediaSource: "user-supplied-real-world-photo" },
     ]);
   });
 
   it("keeps exactly one distinct visual thumbnail for each service", () => {
     const thumbnails = serviceBanners.map((service) => service.thumbnail);
 
-    expect(thumbnails).toHaveLength(4);
-    expect(new Set(thumbnails).size).toBe(4);
+    expect(thumbnails).toHaveLength(5);
+    expect(new Set(thumbnails).size).toBe(5);
     expect(thumbnails.every((thumbnail) => thumbnail.startsWith("/manus-storage/"))).toBe(true);
+    expect(serviceBanners.every((service) => service.mediaSource === "user-supplied-real-world-photo" && service.imageAlt.length > 20)).toBe(true);
   });
 
   it("provides duration and scope-based pricing guidance for every service", () => {
@@ -31,7 +33,14 @@ describe("Services thumbnail data", () => {
       "PID tuning service",
       "Drone Building Course",
       "Advanced drone course for adults",
+      "Drone Services",
     ]);
+  });
+
+  it("restores Drone Services with the supplied photography and video scope", () => {
+    const droneServices = serviceBanners.find((service) => service.title === "Drone Services");
+    expect(droneServices?.description).toBe("Plan and capture professional drone photography and video for events, facilities, campaigns, and technical storytelling.");
+    expect(droneServices?.thumbnail).toBe("/manus-storage/referee-angle_083e0bbc.webp");
   });
 
   it("prioritizes a mail-in repair assessment and conditional delivery-fee waiver", () => {
@@ -56,6 +65,7 @@ describe("Services thumbnail data", () => {
   });
 
   it("keeps asynchronously loaded service records visible after desktop reveal setup", () => {
-    expect(resolvedServiceCatalogueRevealPolicy).toBe("show-database-results-immediately");
+    expect(publicServiceCatalogueSource).toBe("versioned-static-catalogue");
+    expect(resolvedServiceCatalogueRevealPolicy).toBe("show-static-results-immediately");
   });
 });

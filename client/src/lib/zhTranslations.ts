@@ -1,6 +1,11 @@
 // Generated from the user-reviewed Traditional Chinese translation workbook.
 // Do not edit individual values here; update the review workbook and regenerate.
 export const traditionalChineseTranslations: Record<string, string> = {
+  "Drone Services": "無人機影像服務",
+  "Plan and capture professional drone photography and video for events, facilities, campaigns, and technical storytelling.": "為活動、場地、宣傳企劃及技術敘事規劃與拍攝專業無人機照片及影片。",
+  "Define the filming objective, location, required permissions, capture plan, and delivery format around your event or communications brief.": "根據您的活動或傳訊需求，釐定拍攝目標、地點、所需許可、拍攝計劃與交付格式。",
+  "Scoped by the filming plan, event schedule, locations, and requested delivery format.": "按拍攝計劃、活動時間表、地點及所需交付格式界定。",
+  "Quoted by the required crew, filming time, locations, deliverables, and usage scope.": "按所需團隊、拍攝時數、地點、交付內容及使用範圍報價。",
   "4+ minutes": "4 分鐘以上",
   "per review delay": "每次審核延誤",
   "Wasted time on dispute per event": "每場活動因爭議而耗費的時間",

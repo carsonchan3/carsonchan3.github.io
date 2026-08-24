@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import ServiceEnquiryDialog from "@/components/ServiceEnquiryDialog";
-import { trpc } from "@/lib/trpc";
-import { ArrowRight, GraduationCap, SlidersHorizontal, Wrench } from "lucide-react";
+import { ArrowRight, Camera, GraduationCap, SlidersHorizontal, Wrench } from "lucide-react";
 
 export const serviceBanners = [
   {
@@ -13,7 +12,9 @@ export const serviceBanners = [
     detail: "We will reply with mail-in instructions, assess the issue, and provide a repair solution and quotation before proceeding. Delivery fees can be waived if the proposed repair is accepted and completed.",
     icon: <Wrench size={34} />,
     visual: "bg-[radial-gradient(circle_at_24%_30%,rgba(64,224,208,0.25),transparent_0_26%),linear-gradient(115deg,#303136,#161719)]",
-    thumbnail: "/manus-storage/vli-service-repair_13ee3faf.png",
+    thumbnail: "/manus-storage/dronerepairthumb_ad988635.jpeg",
+    imageAlt: "Drone flight controller being inspected during a repair assessment",
+    mediaSource: "user-supplied-real-world-photo",
     duration: "Mail-in assessment followed by quotation; repair timing depends on diagnosis and parts availability.",
     pricing: "Repair solution and quotation are provided first; delivery fees can be waived if the proposal is accepted and the repair is completed. Parts are separate.",
   },
@@ -24,7 +25,9 @@ export const serviceBanners = [
     detail: "Bring an existing build or a technical brief, then define a practical tuning and test path.",
     icon: <SlidersHorizontal size={34} />,
     visual: "bg-[radial-gradient(circle_at_78%_30%,rgba(64,224,208,0.28),transparent_0_24%),linear-gradient(115deg,#151619,#27282B)]",
-    thumbnail: "/manus-storage/vli-service-pid-tuning_e541b71d.png",
+    thumbnail: "/manus-storage/pidtuningthumb_fcb394b2.jpeg",
+    imageAlt: "Betaflight Blackbox Viewer traces used during a PID tuning review",
+    mediaSource: "user-supplied-real-world-photo",
     duration: "2–4 hours, including setup and test flight.",
     pricing: "Quoted after a build review; parts or venue costs are separate.",
   },
@@ -35,7 +38,9 @@ export const serviceBanners = [
     detail: "Designed for learners who want to understand what sits behind a dependable drone build.",
     icon: <Wrench size={34} />,
     visual: "bg-[radial-gradient(circle_at_24%_72%,rgba(64,224,208,0.24),transparent_0_28%),linear-gradient(115deg,#27282B,#161719)]",
-    thumbnail: "/manus-storage/vli-service-building-skills_c32759ba.png",
+    thumbnail: "/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg",
+    imageAlt: "Competition-ready drone-sports field with ball drones prepared for play",
+    mediaSource: "user-supplied-real-world-photo",
     duration: "Half-day workshop; multi-session formats are available.",
     pricing: "Quoted by group size, required parts, and workshop format.",
   },
@@ -46,42 +51,46 @@ export const serviceBanners = [
     detail: "Course structure and prerequisites can be shaped around the group’s existing experience and objectives.",
     icon: <GraduationCap size={34} />,
     visual: "bg-[radial-gradient(circle_at_78%_62%,rgba(64,224,208,0.26),transparent_0_27%),linear-gradient(115deg,#161719,#303136)]",
-    thumbnail: "/manus-storage/vli-service-advanced-course_d14dd579.png",
+    thumbnail: "/manus-storage/advancedronecourseforadultthumb_193b4cb1.jpeg",
+    imageAlt: "Adult learners practising drone flight in a workshop setting",
+    mediaSource: "user-supplied-real-world-photo",
     duration: "One full day or a multi-session course, depending on objectives.",
     pricing: "Quoted by group size, venue, and selected training modules.",
+  },
+  {
+    number: "05",
+    title: "Drone Services",
+    description: "Plan and capture professional drone photography and video for events, facilities, campaigns, and technical storytelling.",
+    detail: "Define the filming objective, location, required permissions, capture plan, and delivery format around your event or communications brief.",
+    icon: <Camera size={34} />,
+    visual: "bg-[radial-gradient(circle_at_24%_52%,rgba(64,224,208,0.24),transparent_0_28%),linear-gradient(115deg,#151619,#27282B)]",
+    thumbnail: "/manus-storage/referee-angle_083e0bbc.webp",
+    imageAlt: "Drone-sports event and competition cage photographed during live play",
+    mediaSource: "user-supplied-real-world-photo",
+    duration: "Scoped by the filming plan, event schedule, locations, and requested delivery format.",
+    pricing: "Quoted by the required crew, filming time, locations, deliverables, and usage scope.",
   },
 ];
 
 export const mobileServiceCardAspectRatio = "1:1";
 export const serviceImagePanelClassName = "absolute inset-0 h-full overflow-hidden sm:relative sm:h-72 lg:h-full";
 export const serviceImageClassName = "h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105";
-export const resolvedServiceCatalogueRevealPolicy = "show-database-results-immediately";
+export const publicServiceCatalogueSource = "versioned-static-catalogue";
+export const resolvedServiceCatalogueRevealPolicy = "show-static-results-immediately";
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
-  const servicesQuery = trpc.services.list.useQuery();
-  const hasResolvedServiceCatalogue = Boolean(servicesQuery.data?.length);
+  const hasResolvedServiceCatalogue = true;
 
   const openServiceEnquiry = (serviceTitle: string) => setSelectedService(serviceTitle);
 
-  const banners = servicesQuery.data && servicesQuery.data.length > 0
-    ? servicesQuery.data.map((s, idx) => ({
-        number: String(idx + 1).padStart(2, "0"),
-        title: s.title,
-        description: s.description,
-        detail: s.details,
-        icon: idx === 0 ? <Wrench size={34} /> : idx === 1 ? <SlidersHorizontal size={34} /> : idx === 2 ? <Wrench size={34} /> : <GraduationCap size={34} />,
-        thumbnail: s.imageUrl || serviceBanners[idx % serviceBanners.length].thumbnail,
-        duration: s.duration,
-        pricing: s.pricingText,
-      }))
-    : serviceBanners;
+  const banners = serviceBanners;
 
   return (
     <div className="min-h-screen bg-black text-white">
       <SiteHeader active="services" />
       <main data-reveal-page className="pt-16">
-        <section data-testid="services-page-hero" className="border-b border-white/10 bg-[radial-gradient(circle_at_28%_20%,rgba(64,224,208,0.17),transparent_0_28%),linear-gradient(135deg,#1C1D20,#27282B_60%,#1C1D20)] py-8"><div className="container"><div data-reveal className="reveal-up max-w-3xl"><div className="mb-3 h-1 w-12 bg-accent" /><p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">VLI services</p><h1 className="velocity-headline mb-3 !text-4xl text-white md:!text-5xl">Build skill.<br /><span className="text-accent">Fly with purpose.</span></h1><p className="max-w-2xl text-base leading-6 text-white/75 md:text-lg md:leading-8">Start with a practical mail-in repair assessment, then explore technical tuning and drone-building support for more confident flying outcomes.</p></div></div></section>
+        <section data-testid="services-page-hero" className="border-b border-white/10 bg-[radial-gradient(circle_at_28%_20%,rgba(64,224,208,0.17),transparent_0_28%),linear-gradient(135deg,#1C1D20,#27282B_60%,#1C1D20)] py-8"><div className="container"><div data-reveal className="reveal-up max-w-3xl"><div className="mb-3 h-1 w-12 bg-accent" /><p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">VLI services</p><h1 className="velocity-headline mb-3 !text-4xl text-white md:!text-5xl">Build skill.<br /><span className="text-accent">Fly with purpose.</span></h1><p className="max-w-2xl text-base leading-6 text-white/75 md:text-lg md:leading-8">Start with a practical mail-in repair assessment, then explore technical tuning, drone-building support, and credible event photography and video.</p></div></div></section>
 
         <section className="velocity-section bg-black">
           <div className="container">
@@ -94,7 +103,7 @@ export default function Services() {
                 <article data-reveal data-revealed={hasResolvedServiceCatalogue ? "" : undefined} key={service.title} data-testid={`service-card-${service.number}`} data-mobile-aspect-ratio={mobileServiceCardAspectRatio} tabIndex={0} onClick={() => openServiceEnquiry(service.title)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openServiceEnquiry(service.title); } }} className="group reveal-up relative aspect-square min-h-0 cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-[#1C1D20] transition-all duration-300 hover:border-accent/60 hover:shadow-[0_18px_48px_rgba(64,224,208,0.1)] focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 sm:aspect-auto sm:min-h-[30rem] lg:min-h-[20rem]" style={{ transitionDelay: `${index * 70}ms` }}>
                   <div className="grid h-full lg:h-[20rem] lg:grid-cols-2 lg:items-stretch">
                     <div data-testid="service-image-panel" className={`${serviceImagePanelClassName} ${index % 2 === 1 ? "lg:order-2" : ""}`}>
-                      <img src={service.thumbnail} alt="" loading="lazy" decoding="async" className={serviceImageClassName} />
+                      <img src={service.thumbnail} alt={service.imageAlt} loading="lazy" decoding="async" className={serviceImageClassName} />
                       <div data-testid="service-image-fade" className={`absolute inset-0 ${index % 2 === 1 ? "bg-gradient-to-b from-black/10 via-[#1C1D20]/20 to-[#1C1D20] lg:bg-gradient-to-l lg:from-transparent lg:via-[#1C1D20]/25 lg:to-[#1C1D20]" : "bg-gradient-to-b from-black/10 via-[#1C1D20]/20 to-[#1C1D20] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1C1D20]/25 lg:to-[#1C1D20]"}`} />
                       <div className="absolute inset-0 bg-black/10" />
                       <div className="absolute left-4 top-4 inline-flex rounded-full border border-accent/40 bg-black/70 p-2 text-accent shadow-lg shadow-black/20">{service.icon}</div>
