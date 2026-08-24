@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { mobileServiceCardAspectRatio, publicServiceCatalogueSource, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName } from "./Services";
+import { mobileServiceCardAspectRatio, publicServiceCatalogueSource, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName, servicesHeroPresentation } from "./Services";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Services thumbnail data", () => {
+  it("keeps the Services hero focused by removing the introductory paragraph", () => {
+    expect(servicesHeroPresentation).toEqual({ introductoryParagraph: "removed" });
+  });
+
   it("uses the supplied Traditional Chinese service headings", () => {
     expect(traditionalChineseTranslations["Choose the support that fits your next step."]).toBe("選擇您的服務。");
     expect(traditionalChineseTranslations["Build skill."]).toBe("培養技能，");

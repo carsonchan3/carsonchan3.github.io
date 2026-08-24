@@ -86,6 +86,8 @@ export const illustrativeDisputeCostScenario = {
   ],
 } as const;
 
+export const illustrativeDisputeCostCopy = "This transparent scenario assumes two officials or jury members at HK$250/hour, two event or venue operations staff at HK$300/hour, and one active match-slot coordination cost at HK$1,200/hour.";
+
 type OrganiserImpactMetric = {
   value: number;
   label: string;
@@ -421,7 +423,7 @@ export default function Product() {
                     <p className="mt-2 text-xs leading-5 text-white/70">{illustrativeDisputeCostScenario.qualification}</p>
                   </div>
                 </div>
-                <p className="mt-5 max-w-xl text-sm leading-6 text-white/70">This transparent scenario assumes two officials or jury members at HK$250/hour, two event or venue operations staff at HK$300/hour, and one active match-slot coordination cost at HK$1,200/hour. Replace these assumptions with your actual staffing, venue, and programme inputs.</p>
+                <p className="mt-5 max-w-xl text-sm leading-6 text-white/70">{illustrativeDisputeCostCopy}</p>
               </div>
             </div>
           </div>

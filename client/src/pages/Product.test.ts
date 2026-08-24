@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostCopy, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee proof points", () => {
@@ -114,6 +114,8 @@ describe("Smart Referee dispute-reduction support", () => {
     });
     expect(illustrativeDisputeCostScenario.assumptions).toHaveLength(3);
     expect(getIllustrativeDisputeCost(13 * 60 + 4)).toBe(500);
+    expect(illustrativeDisputeCostCopy).not.toContain("Replace these assumptions");
+    expect(traditionalChineseTranslations[illustrativeDisputeCostCopy]).toBe("此示意情境假設兩位裁判或評審團成員的費率為 HK$250/小時、兩位活動或場地運營人員為 HK$300/小時，以及一位比賽時段即時協調的費率為 HK$1,200/小時。");
   });
 
   it("keeps the separately supplied organiser-impact values concise and distinct from the live timer model", () => {

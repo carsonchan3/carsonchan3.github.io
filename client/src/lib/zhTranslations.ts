@@ -537,7 +537,7 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "The same calibrated evidence layer that supports officials can be planned into your event delivery model.": "支援裁判的相同經校準證據層，可納入您的活動執行模式規劃中。",
   "The system adapts to the rules, space, and evidence you need.": "系統會依您的規則、場地與所需證據進行調整。",
   "This route is outside the": "此航線位於",
-  "This transparent scenario assumes two officials or jury members at HK$250/hour, two event or venue operations staff at HK$300/hour, and one active match-slot coordination cost at HK$1,200/hour. Replace these assumptions with your actual staffing, venue, and programme inputs.": "此示意情境假設兩位裁判或評審團成員的費率為 HK$250/小時、兩位活動或場地運營人員為 HK$300/小時，以及一位比賽時段即時協調的費率為 HK$1,200/小時。請以您的實際人手、場地及賽程資料取代這些假設。",
+  "This transparent scenario assumes two officials or jury members at HK$250/hour, two event or venue operations staff at HK$300/hour, and one active match-slot coordination cost at HK$1,200/hour.": "此示意情境假設兩位裁判或評審團成員的費率為 HK$250/小時、兩位活動或場地運營人員為 HK$300/小時，以及一位比賽時段即時協調的費率為 HK$1,200/小時。",
   "Together, we are advancing fair, data-driven competition and growing the future of drone sports.": "我們共同推動以數據為本的公平競賽，並培育無人機運動的未來。",
   "Track relevant in-play movement": "追蹤比賽中相關移動",
   "Track the moments that decide the match.": "追蹤決定比賽勝負的關鍵時刻。",

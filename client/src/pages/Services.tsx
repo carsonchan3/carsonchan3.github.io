@@ -77,6 +77,9 @@ export const serviceImagePanelClassName = "absolute inset-0 h-full overflow-hidd
 export const serviceImageClassName = "h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105";
 export const publicServiceCatalogueSource = "versioned-static-catalogue";
 export const resolvedServiceCatalogueRevealPolicy = "show-static-results-immediately";
+export const servicesHeroPresentation = {
+  introductoryParagraph: "removed",
+} as const;
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -90,7 +93,7 @@ export default function Services() {
     <div className="min-h-screen bg-black text-white">
       <SiteHeader active="services" />
       <main data-reveal-page className="pt-16">
-        <section data-testid="services-page-hero" className="border-b border-white/10 bg-[radial-gradient(circle_at_28%_20%,rgba(64,224,208,0.17),transparent_0_28%),linear-gradient(135deg,#1C1D20,#27282B_60%,#1C1D20)] py-8"><div className="container"><div data-reveal className="reveal-up max-w-3xl"><div className="mb-3 h-1 w-12 bg-accent" /><p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">VLI services</p><h1 className="velocity-headline mb-3 !text-4xl text-white md:!text-5xl">Build skill.<br /><span className="text-accent">Fly with purpose.</span></h1><p className="max-w-2xl text-base leading-6 text-white/75 md:text-lg md:leading-8">Start with a practical mail-in repair assessment, then explore technical tuning, drone-building support, and credible event photography and video.</p></div></div></section>
+        <section data-testid="services-page-hero" className="border-b border-white/10 bg-[radial-gradient(circle_at_28%_20%,rgba(64,224,208,0.17),transparent_0_28%),linear-gradient(135deg,#1C1D20,#27282B_60%,#1C1D20)] py-8"><div className="container"><div data-reveal className="reveal-up max-w-3xl"><div className="mb-3 h-1 w-12 bg-accent" /><p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-accent">VLI services</p><h1 className="velocity-headline !text-4xl text-white md:!text-5xl">Build skill.<br /><span className="text-accent">Fly with purpose.</span></h1></div></div></section>
 
         <section className="velocity-section bg-black">
           <div className="container">
