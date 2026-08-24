@@ -5,6 +5,8 @@ import NotFound from "@/pages/NotFound";
 import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import WebsiteTranslationObserver from "./components/WebsiteTranslationObserver";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import People from "./pages/People";
@@ -47,19 +49,22 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="dark"
-      >
-        <TooltipProvider>
-          <WouterRouter base={staticRouterBase()}>
-            <div className={flightDeckTheme.rootClass} data-visual-system={flightDeckTheme.name}>
-              <Toaster />
-              <RevealMotionController />
-              <Router />
-            </div>
-          </WouterRouter>
-        </TooltipProvider>
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider
+          defaultTheme="dark"
+        >
+          <TooltipProvider>
+            <WouterRouter base={staticRouterBase()}>
+              <div className={flightDeckTheme.rootClass} data-visual-system={flightDeckTheme.name}>
+                <Toaster />
+                <RevealMotionController />
+                <Router />
+                <WebsiteTranslationObserver />
+              </div>
+            </WouterRouter>
+          </TooltipProvider>
+        </ThemeProvider>
+      </LanguageProvider>
     </ErrorBoundary>
   );
 }

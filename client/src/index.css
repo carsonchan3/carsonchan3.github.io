@@ -97,6 +97,26 @@
     @apply bg-background text-foreground;
   }
 
+  html[lang='zh-Hant'] body,
+  html[lang='zh-Hant'] button,
+  html[lang='zh-Hant'] input,
+  html[lang='zh-Hant'] select,
+  html[lang='zh-Hant'] textarea {
+    font-family: 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+  }
+
+  html[lang='zh-Hant'] h1,
+  html[lang='zh-Hant'] h2,
+  html[lang='zh-Hant'] h3,
+  html[lang='zh-Hant'] h4,
+  html[lang='zh-Hant'] .font-display,
+  html[lang='zh-Hant'] .vli-site-header .vli-nav-link,
+  html[lang='zh-Hant'] .vli-footer .vli-footer-title,
+  html[lang='zh-Hant'] .vli-home-hero .vli-home-title {
+    font-family: 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
   h1, h2, h3, h4, .font-display { font-family: 'Space Grotesk', 'DM Sans', sans-serif; }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
