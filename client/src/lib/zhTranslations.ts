@@ -599,5 +599,15 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "vli-nav-link font-medium transition-colors": "vli-nav-link font-medium transition-colors",
   "your event.": "您的活動。",
   "© 2026 Velocity Lab Innovation. All rights reserved.": "© 2026 Velocity Lab Innovation。版權所有。",
-  "±0.20 mm": "±0.20 mm"
+  "±0.20 mm": "±0.20 mm",
+  "Multiple Rule Support": "多重規則支援",
+  "Rule consistency": "規則一致性",
+  "One objective reference across rule sets.": "跨規則體系的一致客觀依據。",
+  "Different federations and regional programmes can apply distinct scoring definitions, timing thresholds, or review requirements. Smart Referee can be configured to reflect the selected rule set, giving every official the same calibrated, reviewable evidence during the event.": "不同協會與地區賽事可能採用不同的計分定義、時間門檻或審核要求。Smart Referee 可按所選規則體系設定，讓每位裁判在賽事中取得相同、經校準且可覆核的依據。",
+  "Smart Referee multiple rule support": "Smart Referee 多重規則支援",
+  "Examples of supplied rule and federation references for event-context discussion.": "用於賽事情境討論的已提供規則與協會參考標誌範例。",
+  "01 · Active rule set": "01 · 啟用中的規則體系",
+  "02 · Calibrated position": "02 · 經校準的位置資料",
+  "03 · Consistent call": "03 · 一致的判決",
+  "When regional formats or federation requirements differ, small interpretation differences can create uneven officiating standards. A rule-configured objective reference helps align calls to the active event standard without removing human authority.": "當地區賽制或協會要求不同時，細微的詮釋差異可能造成不一致的裁判標準。按規則設定的客觀依據有助於讓判決對齊當前賽事標準，同時保留人員裁判的權責。",
 };

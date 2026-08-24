@@ -24,7 +24,7 @@ export const smartRefereeHeroVideoPresentation = {
   loop: true,
   containerTreatment: "borderless-integrated",
 } as const;
-export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "organiser-impact-metrics", "human-led-officiating", "evidence-based-decision-support", "dispute-reduction", "passive-markers", "proof-points", "precision", "event-delivery-options"] as const;
+export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "organiser-impact-metrics", "human-led-officiating", "multiple-rule-support", "dispute-reduction", "passive-markers", "proof-points", "precision", "event-delivery-options"] as const;
 export const smartRefereeOpeningQuote = {
   text: "You may delay, but time will not.",
   attribution: "Benjamin Franklin",
@@ -62,12 +62,12 @@ export const sharedExperienceSections = [
     summary: "Officials remain central to the game. A fast scoring moment can still be difficult to resolve when the goal area is obscured and the next match moment is already unfolding.",
   },
   {
-    id: "evidence-based-decision-support",
-    testId: "evidence-based-decision-support-section",
-    linkLabel: "Shared evidence",
-    eyebrow: "Decision support",
-    title: "Turn the rule into a shared, reviewable reference.",
-    summary: "Smart Referee links calibrated position data to the rule condition so officials, team representatives, and event operations can work from the same decision context.",
+    id: "multiple-rule-support",
+    testId: "multiple-rule-support-section",
+    linkLabel: "Rule consistency",
+    eyebrow: "Multiple Rule Support",
+    title: "One objective reference across rule sets.",
+    summary: "Different federations and regional programmes can apply distinct scoring definitions, timing thresholds, or review requirements. Smart Referee can be configured to reflect the selected rule set, giving every official the same calibrated, reviewable evidence during the event.",
   },
 ] as const;
 export const disputeTimerPolicy = {
@@ -198,7 +198,11 @@ function RollingMetric({
 
 export const smartRefereeMedia = {
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
-  rulebook: "/manus-storage/FAI-rulebook_f63443a8.jpg",
+  ruleSupportLogos: [
+    { id: "afa", src: "/manus-storage/AFA-logo_0b746387.png", alt: "AFA logo" },
+    { id: "fida", src: "/manus-storage/fida-logo_98f84f21.jpg", alt: "FIDA logo" },
+    { id: "fai", src: "/manus-storage/fai-logo_375508e2.svg", alt: "FAI logo" },
+  ],
   dispute: "/manus-storage/dispute_6f42a381.webp",
   stickers: "/manus-storage/cheapstickers_6b71bf1e.jpg",
   precision: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
@@ -374,15 +378,22 @@ export default function Product() {
             <div className="container grid items-center gap-7 lg:grid-cols-[1.08fr_0.92fr]">
               <article data-testid="smart-referee-support-panel" data-reveal className="reveal-up overflow-hidden rounded-lg border border-accent/25 bg-accent/10 p-4 sm:p-5">
                 <div className="mb-4 flex items-center justify-between gap-5">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Smart Referee decision support</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Smart Referee multiple rule support</p>
                   <span className="shrink-0 font-mono text-sm text-accent/65">02</span>
                 </div>
                 <div data-testid="smart-referee-support-flow" className="overflow-hidden rounded-md border border-accent/25 bg-[#171C1D] shadow-[inset_0_0_50px_rgba(64,224,208,0.06)]">
-                  <img src={smartRefereeMedia.rulebook} alt="Drone-sport scoring rule excerpt specifying the entire drone ball must cross the opposing goal ring" className="aspect-[21/9] w-full object-cover object-left sm:aspect-[16/9]" />
+                  <div data-testid="smart-referee-rule-logo-group" aria-label="Supplied rule and federation reference logos" className="grid grid-cols-3 gap-3 p-4 sm:gap-4 sm:p-5">
+                    {smartRefereeMedia.ruleSupportLogos.map((logo) => (
+                      <div key={logo.id} className="flex h-24 items-center justify-center rounded-md border border-white/15 bg-white p-3 sm:h-28">
+                        <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-full max-h-20 w-full object-contain sm:max-h-24" />
+                      </div>
+                    ))}
+                  </div>
+                  <p className="border-t border-accent/20 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent sm:px-5">Examples of supplied rule and federation references for event-context discussion.</p>
                   <div className="grid gap-2 border-t border-accent/20 p-4 sm:grid-cols-3">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">01 · Tracked position</span>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">02 · Rule condition</span>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">03 · Reviewable call</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">01 · Active rule set</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">02 · Calibrated position</span>
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">03 · Consistent call</span>
                   </div>
                 </div>
               </article>
@@ -391,7 +402,7 @@ export default function Product() {
                 <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{sharedExperienceSections[1].eyebrow}</p>
                 <h2 id={`${sharedExperienceSections[1].id}-heading`} className="velocity-headline text-white">{sharedExperienceSections[1].title}</h2>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{sharedExperienceSections[1].summary}</p>
-                <p className="mt-5 max-w-xl text-sm leading-6 text-white/75">Calibrated spatial data gives officials a reviewable record against rule-defined scoring conditions—supporting a faster, more consistent decision without removing human authority.</p>
+                <p className="mt-5 max-w-xl text-sm leading-6 text-white/75">When regional formats or federation requirements differ, small interpretation differences can create uneven officiating standards. A rule-configured objective reference helps align calls to the active event standard without removing human authority.</p>
                 <p className="mt-6 max-w-xl text-sm leading-6 text-white/55">Smart Referee is designed to support—not replace—official judgement. It gives referees stronger shared context so the game can remain transparent, consistent, and fair.</p>
               </div>
             </div>

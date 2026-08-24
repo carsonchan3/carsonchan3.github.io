@@ -79,9 +79,13 @@ describe("Smart Referee dispute-reduction support", () => {
     expect(getDisputeTimeIncrements(30_000)).toBe(3);
   });
 
-  it("maps the supplied human-officiating, rulebook, dispute, and tracking media", () => {
+  it("maps the supplied human-officiating, rule-support logos, dispute, and tracking media", () => {
     expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
-    expect(smartRefereeMedia.rulebook).toBe("/manus-storage/FAI-rulebook_f63443a8.jpg");
+    expect(smartRefereeMedia.ruleSupportLogos).toEqual([
+      { id: "afa", src: "/manus-storage/AFA-logo_0b746387.png", alt: "AFA logo" },
+      { id: "fida", src: "/manus-storage/fida-logo_98f84f21.jpg", alt: "FIDA logo" },
+      { id: "fai", src: "/manus-storage/fai-logo_375508e2.svg", alt: "FAI logo" },
+    ]);
     expect(smartRefereeMedia.dispute).toBe("/manus-storage/dispute_6f42a381.webp");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
     expect(smartRefereeMedia.trackingPoster).toBe("/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg");
@@ -159,7 +163,7 @@ describe("Smart Referee shared-experience accessibility", () => {
     expect(traditionalChineseTranslations["A clear sightline is the starting point for a shared call."]).toBe("清晰的視線是達成共識判決的起點。");
   });
 
-  it("splits sightline challenge and decision support into independently labelled sections", () => {
+  it("splits sightline challenge and multiple-rule support into independently labelled sections", () => {
     expect(sharedExperienceSections).toHaveLength(2);
     expect(sharedExperienceSections).toEqual([
       expect.objectContaining({
@@ -169,17 +173,21 @@ describe("Smart Referee shared-experience accessibility", () => {
         eyebrow: "A shared experience",
       }),
       expect.objectContaining({
-        id: "evidence-based-decision-support",
-        testId: "evidence-based-decision-support-section",
-        linkLabel: "Shared evidence",
-        eyebrow: "Decision support",
+        id: "multiple-rule-support",
+        testId: "multiple-rule-support-section",
+        linkLabel: "Rule consistency",
+        eyebrow: "Multiple Rule Support",
+        title: "One objective reference across rule sets.",
       }),
     ]);
+    expect(traditionalChineseTranslations["Multiple Rule Support"]).toBe("多重規則支援");
+    expect(traditionalChineseTranslations["Rule consistency"]).toBe("規則一致性");
+    expect(traditionalChineseTranslations["One objective reference across rule sets."]).toBe("跨規則體系的一致客觀依據。");
   });
 
   it("keeps both comparison topics in the documented page hierarchy", () => {
     expect(smartRefereePageHierarchy).toContain("human-led-officiating");
-    expect(smartRefereePageHierarchy).toContain("evidence-based-decision-support");
+    expect(smartRefereePageHierarchy).toContain("multiple-rule-support");
   });
 
   it("positions organiser metrics before Shared Experience and proof points before Industry-Leading Precision", () => {
