@@ -35,12 +35,16 @@ export const smartRefereeHeroBackgroundPresentation = {
   loop: true,
 } as const;
 export const flex13SystemVideoPresentation = {
-  autoPlay: true,
-  muted: true,
-  loop: true,
-  controls: false,
+  title: "Drone Sports Referee Pitch",
+  aspectRatio: "16:9",
+  autoPlay: false,
+  muted: false,
+  loop: false,
+  controls: true,
   playsInline: true,
   preload: "metadata",
+  controlsList: "nodownload noremoteplayback",
+  disablePictureInPicture: true,
 } as const;
 export const continuousCalibrationVideoPresentation = {
   autoPlay: true,
@@ -200,6 +204,7 @@ export const technicalConfidence = {
   continuousCalibrationDescription: "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.",
   infraredTitle: "Unobtrusive infrared light",
   infraredDescription: "Flex 13 cameras emit 850nm IR light, which is nearly invisible, for inconspicuous illumination that prevents the vision fatigue and unwanted attention to your capture rig caused by cameras that emit visible spectrum light.",
+  pitchVideoTitle: "Drone Sports Referee Pitch",
   referenceCaption: "Supplied rule and federation references are shown for event-context discussion only; their display does not indicate endorsement.",
 } as const;
 
@@ -332,9 +337,6 @@ export default function Product() {
                   <p className="mt-5 max-w-lg text-xs leading-6 text-white/50">{technicalConfidence.referenceCaption}</p>
                 </article>
               </div>
-              <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-2 md:p-3" style={{ transitionDelay: "360ms" }}>
-                <video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="OptiTrack Flex 13 camera positioned at a drone-sports arena" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} className="aspect-[16/8] w-full rounded-lg object-cover md:aspect-[16/7]">Your browser does not support embedded video.</video>
-              </article>
               <div data-testid="technical-evidence-panels" className="grid gap-7 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10">
                 <article data-technical-evidence-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-3 md:p-5" style={{ transitionDelay: "420ms" }}>
                   <div className="grid h-full gap-6 lg:grid-cols-[1fr_0.96fr] lg:items-center">
@@ -347,6 +349,10 @@ export default function Product() {
                   <p className="mt-6 text-sm leading-7 text-white/65">{technicalConfidence.infraredDescription}</p>
                 </article>
               </div>
+              <article data-event-scale-panel data-pitch-video-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-4 md:p-5" style={{ transitionDelay: "540ms" }}>
+                <div className="mb-4 flex items-center gap-3"><span aria-hidden="true" className="h-px w-8 bg-accent" /><h3 className="text-xl font-semibold tracking-tight text-white md:text-2xl">{technicalConfidence.pitchVideoTitle}</h3></div>
+                <video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full rounded-lg bg-black object-contain">Your browser does not support embedded video.</video>
+              </article>
             </div>
           </div>
         </section>

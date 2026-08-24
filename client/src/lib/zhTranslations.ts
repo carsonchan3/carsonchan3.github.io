@@ -2,6 +2,7 @@
 // Do not edit individual values here; update the review workbook and regenerate.
 export const traditionalChineseTranslations: Record<string, string> = {
   "Drone Photo / Cinematography": "無人機攝影／航拍製作",
+  "Drone Sports Referee Pitch": "無人機運動裁判簡介影片",
   "Aerial storytelling": "航拍敘事",
   "Plan professional aerial photography and cinematography for events, facilities, campaigns, and technical storytelling.": "為活動、場地、宣傳企劃及技術敘事規劃專業航拍攝影與電影級影像製作。",
   "Explore cinematography": "探索航拍製作",

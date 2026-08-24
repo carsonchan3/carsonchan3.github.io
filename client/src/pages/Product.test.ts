@@ -45,6 +45,7 @@ describe("Smart Referee organiser-first journey", () => {
     expect(technicalConfidence.continuousCalibrationDescription).toContain("automatically and continuously");
     expect(technicalConfidence.infraredTitle).toBe("Unobtrusive infrared light");
     expect(technicalConfidence.infraredDescription).toContain("850nm IR light");
+    expect(technicalConfidence.pitchVideoTitle).toBe("Drone Sports Referee Pitch");
     expect(proofPoints).toContainEqual({ value: "±0.20 mm", label: "3D accuracy" });
     expect(proofPoints).toContainEqual({ value: "10 ms", label: "decision making end to end" });
   });
@@ -59,10 +60,10 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeMedia.ruleSupportLogos).toHaveLength(3);
   });
 
-  it("preserves seamless autoplay video treatment and the mobile visibility policy", () => {
+  it("preserves the pitch-video controls and the mobile visibility policy", () => {
     expect(smartRefereeHeroVideoPresentation).toEqual({ aspectRatio: "16:9", objectFit: "contain", controls: false, autoPlay: true, muted: true, loop: true, containerTreatment: "borderless-integrated" });
     expect(smartRefereeHeroBackgroundPresentation).toEqual({ source: "homepage-hero-video", treatment: "dark-overlay-background", autoPlay: true, muted: true, loop: true });
-    expect(flex13SystemVideoPresentation).toEqual({ autoPlay: true, muted: true, loop: true, controls: false, playsInline: true, preload: "metadata" });
+    expect(flex13SystemVideoPresentation).toEqual({ title: "Drone Sports Referee Pitch", aspectRatio: "16:9", autoPlay: false, muted: false, loop: false, controls: true, playsInline: true, preload: "metadata", controlsList: "nodownload noremoteplayback", disablePictureInPicture: true });
     expect(continuousCalibrationVideoPresentation).toEqual({ autoPlay: true, muted: true, loop: true, controls: false, playsInline: true, preload: "metadata" });
     expect(mobileSmartRefereeRevealPolicy).toBe("always-visible");
     expect(mobileSmartRefereeCardAspectRatio).toBe("21:9");
@@ -70,7 +71,7 @@ describe("Smart Referee organiser-first journey", () => {
 
   it("maps the revised organiser promise, outcomes, workflow, and visible evidence into Traditional Chinese", () => {
     [
-      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Unobtrusive infrared light", "Flex 13 cameras emit 850nm IR light, which is nearly invisible, for inconspicuous illumination that prevents the vision fatigue and unwanted attention to your capture rig caused by cameras that emit visible spectrum light.", "Compare all service inclusions",
+      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Unobtrusive infrared light", "Flex 13 cameras emit 850nm IR light, which is nearly invisible, for inconspicuous illumination that prevents the vision fatigue and unwanted attention to your capture rig caused by cameras that emit visible spectrum light.", "Drone Sports Referee Pitch", "Compare all service inclusions",
     ].forEach((key) => expect(traditionalChineseTranslations[key]).toBeTruthy());
     expect(traditionalChinesePromisePresentation).toBe("two-intentional-lines");
   });
