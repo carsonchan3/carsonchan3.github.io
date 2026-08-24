@@ -41,6 +41,10 @@ export const smartRefereeChineseHeadingFitPolicy = {
   wrap: "never",
   fallbackWrap: "pretty-anywhere",
 } as const;
+export const ruleSupportLogoGroupPresentation = {
+  layout: "frameless-together",
+  individualFrames: false,
+} as const;
 export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
   { value: "4+ minutes", label: "per review delay", detail: "An illustrative scoring review can consume the schedule buffer intended to protect the run sheet." },
@@ -377,11 +381,9 @@ export default function Product() {
                   <span className="shrink-0 font-mono text-sm text-accent/65">02</span>
                 </div>
                 <div data-testid="smart-referee-support-flow" className="overflow-hidden rounded-md border border-accent/25 bg-[#171C1D] shadow-[inset_0_0_50px_rgba(64,224,208,0.06)]">
-                  <div data-testid="smart-referee-rule-logo-group" aria-label="Supplied rule and federation reference logos" className="grid grid-cols-3 gap-3 p-4 sm:gap-4 sm:p-5">
+                  <div data-testid="smart-referee-rule-logo-group" data-logo-presentation={ruleSupportLogoGroupPresentation.layout} aria-label="Supplied rule and federation reference logos" className="flex items-center justify-center gap-4 px-4 py-5 sm:gap-7 sm:px-6 sm:py-6">
                     {smartRefereeMedia.ruleSupportLogos.map((logo) => (
-                      <div key={logo.id} className="flex h-24 items-center justify-center rounded-md border border-white/15 bg-white p-3 sm:h-28">
-                        <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-full max-h-20 w-full object-contain sm:max-h-24" />
-                      </div>
+                      <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-20 min-w-0 max-w-[29%] flex-1 object-contain sm:h-24" />
                     ))}
                   </div>
                   <p className="border-t border-accent/20 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent sm:px-5">Examples of supplied rule and federation references for event-context discussion.</p>
