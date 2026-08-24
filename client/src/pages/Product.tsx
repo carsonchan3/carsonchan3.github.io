@@ -4,6 +4,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
+import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 
 export const proofPoints = [
   { value: "OptiTrack", label: "industry leading motion capture technology" },
@@ -23,6 +24,13 @@ export const smartRefereeHeroVideoPresentation = {
   muted: true,
   loop: true,
   containerTreatment: "borderless-integrated",
+} as const;
+export const smartRefereeHeroBackgroundPresentation = {
+  source: "homepage-hero-video",
+  treatment: "dark-overlay-background",
+  autoPlay: true,
+  muted: true,
+  loop: true,
 } as const;
 export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "organiser-impact-metrics", "human-led-officiating", "multiple-rule-support", "dispute-reduction", "passive-markers", "proof-points", "precision"] as const;
 export const smartRefereeOpeningQuote = {
@@ -44,6 +52,10 @@ export const smartRefereeChineseHeadingFitPolicy = {
 export const ruleSupportLogoGroupPresentation = {
   layout: "frameless-together",
   individualFrames: false,
+} as const;
+export const ruleSupportPanelLayout = {
+  desktopColumns: "0.72fr_1.28fr",
+  mobile: "stacked",
 } as const;
 export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
@@ -278,8 +290,11 @@ export default function Product() {
     <div className="smart-referee-page min-h-screen bg-black text-white" data-mobile-reveal-policy={mobileSmartRefereeRevealPolicy}>
       <SiteHeader active="referee" />
       <main data-reveal-page className="pt-16">
-        <section data-testid="smart-referee-hero" className="border-b border-white/10 bg-[#111416]">
-          <div className="container grid items-center gap-8 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
+        <section data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} className="relative isolate overflow-hidden border-b border-white/10 bg-[#071117]">
+          <img src={homepageHeroVideoPosterSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-center" />
+          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.96)_0%,rgba(7,17,23,0.84)_47%,rgba(7,17,23,0.72)_100%)]" />
+          <div className="container relative z-10 grid items-center gap-8 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
             <div data-reveal className="reveal-up relative z-10 mx-auto flex max-w-xl flex-col items-center text-center">
               <div className="mb-4 h-1 w-12 bg-accent" />
               <blockquote data-quote-fit={smartRefereeOpeningQuoteFitPolicy.wrap} className="max-w-full whitespace-nowrap text-[clamp(0.95rem,2.35vw,2.05rem)] font-semibold leading-none tracking-[-0.045em] text-white">“{smartRefereeOpeningQuote.text}”</blockquote>
@@ -374,7 +389,7 @@ export default function Product() {
           </section>
 
           <section id={sharedExperienceSections[1].id} data-testid={sharedExperienceSections[1].testId} aria-labelledby={`${sharedExperienceSections[1].id}-heading`} className="velocity-section scroll-mt-16 bg-[var(--ink-soft)]">
-            <div className="container grid items-center gap-7 lg:grid-cols-[1.08fr_0.92fr]">
+            <div data-rule-logo-panel-columns={ruleSupportPanelLayout.desktopColumns} className="container grid items-center gap-7 lg:grid-cols-[0.72fr_1.28fr]">
               <article data-testid="smart-referee-support-panel" data-reveal className="reveal-up overflow-hidden rounded-lg border border-accent/25 bg-accent/10 p-4 sm:p-5">
                 <div className="mb-4 flex items-center justify-between gap-5">
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Smart Referee multiple rule support</p>

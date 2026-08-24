@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostCopy, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, ruleSupportLogoGroupPresentation, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostCopy, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, ruleSupportLogoGroupPresentation, ruleSupportPanelLayout, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee proof points", () => {
@@ -63,6 +63,13 @@ describe("Smart Referee system video presentation", () => {
       loop: true,
       containerTreatment: "borderless-integrated",
     });
+    expect(smartRefereeHeroBackgroundPresentation).toEqual({
+      source: "homepage-hero-video",
+      treatment: "dark-overlay-background",
+      autoPlay: true,
+      muted: true,
+      loop: true,
+    });
   });
 
   it("places the system video directly after the B2B introduction", () => {
@@ -90,6 +97,7 @@ describe("Smart Referee dispute-reduction support", () => {
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
     expect(smartRefereeMedia.trackingPoster).toBe("/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg");
     expect(ruleSupportLogoGroupPresentation).toEqual({ layout: "frameless-together", individualFrames: false });
+    expect(ruleSupportPanelLayout).toEqual({ desktopColumns: "0.72fr_1.28fr", mobile: "stacked" });
   });
 
   it("leads with the supplied time-focused opening quote and frames organiser pain points as narrow operational impacts", () => {
