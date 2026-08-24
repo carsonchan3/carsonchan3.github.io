@@ -1,7 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { mobileServiceCardAspectRatio, publicServiceCatalogueSource, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName } from "./Services";
+import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Services thumbnail data", () => {
+  it("uses the supplied Traditional Chinese service headings", () => {
+    expect(traditionalChineseTranslations["Choose the support that fits your next step."]).toBe("選擇您的服務。");
+    expect(traditionalChineseTranslations["Build skill."]).toBe("培養技能，");
+    expect(traditionalChineseTranslations["Fly with purpose."]).toBe("自由翱翔前往您的目標。");
+    expect(traditionalChineseTranslations["Not sure which service is right?"]).toBe("需要定制服務？");
+  });
+
   it("maps every service option to the supplied real-world media", () => {
     expect(serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }))).toEqual([
       { title: "Drone Repair Service", thumbnail: "/manus-storage/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
