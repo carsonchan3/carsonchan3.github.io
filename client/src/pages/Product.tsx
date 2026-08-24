@@ -17,7 +17,12 @@ export const mobileSmartRefereeRevealPolicy = "always-visible";
 export const mobileSmartRefereeCardAspectRatio = "21:9";
 export const technicalSpecificationPresentation = "visible-evidence-panel";
 export const traditionalChinesePromisePresentation = "two-intentional-lines";
-export const eventScaleEvidencePanelPresentation = "quiet-product-moments";
+export const eventScaleEvidencePanelPresentation = "vertical-scroll-led-product-features";
+export const eventScaleFeatureScrollPresentation = {
+  orientation: "vertical",
+  interaction: "reader-scroll",
+  focus: "one-feature-at-a-time",
+} as const;
 export const smartRefereeHeroVideoPresentation = {
   aspectRatio: "16:9",
   objectFit: "contain",
@@ -314,44 +319,35 @@ export default function Product() {
               <h2 className="velocity-headline mx-auto max-w-2xl text-white">{technicalConfidence.title}</h2>
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
             </div>
-            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} className="mt-12 space-y-7 md:mt-14 md:space-y-10">
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-5">
+            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-scroll-orientation={eventScaleFeatureScrollPresentation.orientation} data-scroll-interaction={eventScaleFeatureScrollPresentation.interaction} className="mt-12 space-y-8 md:mt-16 md:space-y-12">
               {proofPoints.map((point, index) => (
-                <article data-event-scale-panel data-reveal key={point.value} className="reveal-up flex min-h-52 flex-col justify-between rounded-xl border border-white/10 bg-white/[0.035] p-6 md:p-7" style={{ transitionDelay: `${index * 60}ms` }}>
-                  <p className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-4xl">{point.value}</p>
-                  <p className="max-w-40 text-xs leading-5 text-white/60">{point.label}</p>
+                <article data-event-scale-panel data-scroll-feature data-feature-index={index + 1} data-reveal key={point.value} className={`reveal-up scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 p-7 md:p-10 lg:min-h-[26rem] lg:p-14 ${index % 2 === 0 ? "bg-[radial-gradient(circle_at_76%_28%,rgba(64,224,208,0.16),transparent_0_30%),#0B1419]" : "bg-[linear-gradient(125deg,#171C1D,#0B1419)]"}`} style={{ transitionDelay: `${index * 70}ms` }}>
+                  <div className="grid h-full gap-8 lg:grid-cols-[0.36fr_1fr] lg:items-end lg:gap-16">
+                    <p aria-hidden="true" className="text-sm font-semibold tracking-[0.24em] text-accent">0{index + 1}</p>
+                    <div className="max-w-3xl"><p className="text-[clamp(3.25rem,9vw,8.25rem)] font-semibold leading-none tracking-[-0.07em] text-white">{point.value}</p><p className="mt-5 max-w-md text-lg leading-7 text-white/65 md:text-2xl md:leading-9">{point.label}</p></div>
+                  </div>
                 </article>
               ))}
-              </div>
-              <div className="grid gap-7 lg:grid-cols-2 lg:gap-10">
-                <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-5 md:p-7" style={{ transitionDelay: "240ms" }}>
-                  <div className="grid h-full gap-6 sm:grid-cols-[0.78fr_1.22fr] sm:items-center">
-                    <img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="aspect-[4/3] h-full w-full rounded-lg object-cover" />
-                    <div><h3 className="text-xl font-semibold tracking-tight text-white">{technicalConfidence.markerTitle}</h3><p className="mt-3 text-sm leading-7 text-white/65">{technicalConfidence.markerDescription}</p></div>
-                  </div>
+              <article data-event-scale-panel data-scroll-feature data-feature-index="05" data-reveal className="reveal-up scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1419] p-5 md:p-8 lg:min-h-[30rem] lg:p-12" style={{ transitionDelay: "280ms" }}>
+                <div className="grid h-full gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16">
+                  <img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="aspect-[4/3] h-full w-full rounded-xl object-cover" />
+                  <div><p className="text-sm font-semibold tracking-[0.24em] text-accent">05</p><h3 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">{technicalConfidence.markerTitle}</h3><p className="mt-6 max-w-xl text-base leading-8 text-white/65 md:text-lg">{technicalConfidence.markerDescription}</p></div>
+                </div>
+              </article>
+              <article data-event-scale-panel data-scroll-feature data-feature-index="06" data-reveal className="reveal-up scroll-mt-24 rounded-2xl border border-white/10 bg-[linear-gradient(130deg,#171C1D,#0B1419)] p-7 md:p-10 lg:min-h-[27rem] lg:p-14" style={{ transitionDelay: "350ms" }}>
+                <div className="grid h-full gap-8 lg:grid-cols-[0.36fr_1fr] lg:items-center lg:gap-16"><p aria-hidden="true" className="text-sm font-semibold tracking-[0.24em] text-accent">06</p><div><div className="flex min-h-52 items-center justify-center gap-5 rounded-xl bg-white p-6 sm:gap-9">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-20 min-w-0 max-w-[28%] flex-1 object-contain sm:h-24" />)}</div><p className="mt-6 max-w-2xl text-sm leading-7 text-white/55">{technicalConfidence.referenceCaption}</p></div></div>
+              </article>
+              <div data-testid="technical-evidence-panels" className="space-y-8 md:space-y-12">
+                <article data-technical-evidence-panel data-scroll-feature data-feature-index="07" data-reveal className="reveal-up scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 bg-[#0B1419] p-4 md:p-8 lg:min-h-[32rem] lg:p-12" style={{ transitionDelay: "420ms" }}>
+                  <div className="grid h-full gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="aspect-video h-full w-full rounded-xl bg-black object-contain">Your browser does not support embedded video.</video><div><p className="text-sm font-semibold tracking-[0.24em] text-accent">07 · Continuous calibration</p><h3 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-6 text-base leading-8 text-white/65 md:text-lg">{technicalConfidence.continuousCalibrationDescription}</p></div></div>
                 </article>
-                <article data-event-scale-panel data-reveal className="reveal-up rounded-xl border border-white/10 bg-black/20 p-5 md:p-7" style={{ transitionDelay: "300ms" }}>
-                  <div className="flex min-h-44 items-center justify-center gap-4 rounded-lg bg-white p-5 sm:gap-7">
-                    {smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-16 min-w-0 max-w-[28%] flex-1 object-contain sm:h-20" />)}
-                  </div>
-                  <p className="mt-5 max-w-lg text-xs leading-6 text-white/50">{technicalConfidence.referenceCaption}</p>
-                </article>
-              </div>
-              <div data-testid="technical-evidence-panels" className="grid gap-7 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10">
-                <article data-technical-evidence-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-3 md:p-5" style={{ transitionDelay: "420ms" }}>
-                  <div className="grid h-full gap-6 lg:grid-cols-[1fr_0.96fr] lg:items-center">
-                    <video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="aspect-video h-full w-full rounded-lg bg-black object-contain">Your browser does not support embedded video.</video>
-                    <div className="p-2 md:p-3"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Continuous calibration</p><h3 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-4 text-sm leading-7 text-white/65">{technicalConfidence.continuousCalibrationDescription}</p></div>
-                  </div>
-                </article>
-                <article data-technical-evidence-panel data-reveal className="reveal-up flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.035] p-6 md:p-7" style={{ transitionDelay: "480ms" }}>
-                  <div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Flex 13 illumination</p><h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">{technicalConfidence.infraredTitle}</h3></div>
-                  <p className="mt-6 text-sm leading-7 text-white/65">{technicalConfidence.infraredDescription}</p>
+                <article data-technical-evidence-panel data-scroll-feature data-feature-index="08" data-reveal className="reveal-up scroll-mt-24 rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_76%_32%,rgba(64,224,208,0.15),transparent_0_28%),#171C1D] p-7 md:p-10 lg:min-h-[26rem] lg:p-14" style={{ transitionDelay: "490ms" }}>
+                  <div className="grid h-full gap-8 lg:grid-cols-[0.36fr_1fr] lg:items-end lg:gap-16"><p aria-hidden="true" className="text-sm font-semibold tracking-[0.24em] text-accent">08</p><div><p className="text-sm font-semibold tracking-[0.24em] text-accent">Flex 13 illumination</p><h3 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">{technicalConfidence.infraredTitle}</h3><p className="mt-6 max-w-3xl text-base leading-8 text-white/65 md:text-lg">{technicalConfidence.infraredDescription}</p></div></div>
                 </article>
               </div>
-              <article data-event-scale-panel data-pitch-video-panel data-reveal className="reveal-up overflow-hidden rounded-xl border border-white/10 bg-black/20 p-4 md:p-5" style={{ transitionDelay: "540ms" }}>
-                <div className="mb-4 flex items-center gap-3"><span aria-hidden="true" className="h-px w-8 bg-accent" /><h3 className="text-xl font-semibold tracking-tight text-white md:text-2xl">{technicalConfidence.pitchVideoTitle}</h3></div>
-                <video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full rounded-lg bg-black object-contain">Your browser does not support embedded video.</video>
+              <article data-event-scale-panel data-pitch-video-panel data-scroll-feature data-feature-index="09" data-reveal className="reveal-up scroll-mt-24 overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-5 md:p-8 lg:p-12" style={{ transitionDelay: "560ms" }}>
+                <div className="mb-6 flex items-center gap-4"><span aria-hidden="true" className="h-px w-10 bg-accent" /><h3 className="text-2xl font-semibold tracking-[-0.03em] text-white md:text-4xl">{technicalConfidence.pitchVideoTitle}</h3></div>
+                <video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full rounded-xl bg-black object-contain">Your browser does not support embedded video.</video>
               </article>
             </div>
           </div>
