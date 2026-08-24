@@ -21,6 +21,7 @@ export const smartRefereeHeroVideoPresentation = {
   autoPlay: true,
   muted: true,
   loop: true,
+  containerTreatment: "borderless-integrated",
 } as const;
 export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "proof-points", "human-led-officiating", "evidence-based-decision-support", "event-delivery-options"] as const;
 export const smartRefereeOpeningRuleQuote = {
@@ -28,10 +29,11 @@ export const smartRefereeOpeningRuleQuote = {
   text: "A team scores a goal when the drone ball of the Striker crosses the goal ring of the opponent's team, and when the entire drone ball has passed through the entire opponent's goal ring.",
   attribution: "FAI Drone Soccer Rules · F9.A.8.4 · Scoring",
 } as const;
+export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
-  { value: "13:04", label: "Illustrative dispute window", detail: "A prolonged scoring review can consume the buffer that protects the rest of the programme." },
-  { value: "01", label: "Contested scoring call", detail: "One unresolved moment can hold the next match slot while an event team searches for a defensible answer." },
-  { value: "03", label: "Groups pulled into review", detail: "Officials, team representatives, and venue operations can all be drawn away from the next scheduled task." },
+  { value: "13:04", label: "Review delay", detail: "An illustrative scoring review can consume the schedule buffer intended to protect the run sheet." },
+  { value: "01 slot", label: "Next start held", detail: "One unresolved call can keep the next match from starting while an answer is sought." },
+  { value: "04 roles", label: "Delivery focus diverted", detail: "Officials, team representatives, venue operations, and production coordination can be pulled into the same moment." },
 ] as const;
 export const organiserAdoptionPanels = [
   { number: "01", title: "Venue-ready scope", detail: "Define cage count, technical prerequisites, and the delivery boundaries before match day." },
@@ -61,8 +63,27 @@ export const disputeTimerPolicy = {
   activeScrollMillisecondsPerSecond: 10_000,
 };
 
+export const illustrativeDisputeCostScenario = {
+  currency: "HK$",
+  label: "Illustrative active event-time cost",
+  qualification: "Scenario only — not a quoted rate, measured loss, or guaranteed saving.",
+  assumptions: [
+    { role: "Officials and jury", people: 2, hourlyRate: 250 },
+    { role: "Event and venue operations", people: 2, hourlyRate: 300 },
+    { role: "Active match-slot coordination", people: 1, hourlyRate: 1_200 },
+  ],
+} as const;
+
 export const getDisputeTimeIncrements = (activeScrollMilliseconds: number) =>
   Math.floor(activeScrollMilliseconds / disputeTimerPolicy.activeScrollMillisecondsPerSecond);
+
+export const getIllustrativeDisputeCost = (disputeSeconds: number) => {
+  const hourlyOperatingCost = illustrativeDisputeCostScenario.assumptions.reduce(
+    (total, assumption) => total + assumption.people * assumption.hourlyRate,
+    0,
+  );
+  return Math.round((hourlyOperatingCost * disputeSeconds) / 3600 / 10) * 10;
+};
 
 export const smartRefereeMedia = {
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
@@ -137,6 +158,7 @@ export default function Product() {
   }, []);
 
   const disputeTimerLabel = `${Math.floor(disputeSeconds / 60).toString().padStart(2, "0")}:${(disputeSeconds % 60).toString().padStart(2, "0")}`;
+  const illustrativeDisputeCost = getIllustrativeDisputeCost(disputeSeconds);
 
   return (
     <div className="smart-referee-page min-h-screen bg-black text-white" data-mobile-reveal-policy={mobileSmartRefereeRevealPolicy}>
@@ -156,26 +178,28 @@ export default function Product() {
                 <a href="#system-video" className="inline-flex items-center justify-center gap-2 self-start rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">See the system in action <ArrowRight size={18} /></a>
               </div>
             </div>
-            <div data-reveal className="reveal-up grid gap-3 sm:grid-cols-3" style={{ transitionDelay: "90ms" }}>
+            <div data-reveal className="reveal-up grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-3" data-presentation={organiserPainPanelPresentation} style={{ transitionDelay: "90ms" }}>
               {organiserPainPanels.map((panel) => (
-                <div key={panel.label} className="border border-white/10 bg-black/30 p-4 sm:min-h-52">
-                  <p className="font-mono text-5xl font-semibold leading-none tracking-tight text-accent sm:text-6xl">{panel.value}</p>
-                  <h2 className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-white">{panel.label}</h2>
-                  <p className="mt-2 text-sm leading-6 text-white/65">{panel.detail}</p>
+                <div key={panel.label} className="bg-[#0B1419]/95 p-4 sm:min-h-44 sm:p-5">
+                  <p className="font-mono text-3xl font-semibold leading-none tracking-tight text-accent sm:text-4xl">{panel.value}</p>
+                  <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">{panel.label}</p>
+                  <p className="mt-2 text-xs leading-5 text-white/65">{panel.detail}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="system-video" data-testid="smart-referee-system-video" className="border-b border-white/10 bg-black py-12 md:py-16">
+        <section id="system-video" data-testid="smart-referee-system-video" className="border-b border-white/10 bg-[#071117] py-12 md:py-16">
           <div className="container">
             <div data-reveal className="reveal-up mb-7 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl"><p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-accent">See the system in action</p><h2 className="velocity-headline text-white">A full view of the <span className="text-accent">decision layer.</span></h2></div>
               <p className="max-w-sm text-sm leading-6 text-white/65">The same calibrated evidence layer that supports officials can be planned into your event delivery model.</p>
             </div>
-            <div data-reveal className="reveal-up mx-auto max-w-6xl overflow-hidden rounded-xl border border-white/15 bg-black shadow-2xl" style={{ transitionDelay: "90ms" }}>
-              <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} autoPlay={smartRefereeHeroVideoPresentation.autoPlay} muted={smartRefereeHeroVideoPresentation.muted} loop={smartRefereeHeroVideoPresentation.loop} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="aspect-video h-full w-full bg-black object-contain">Your browser does not support embedded video.</video>
+            <div data-reveal data-presentation={smartRefereeHeroVideoPresentation.containerTreatment} className="reveal-up relative -mx-4 mt-7 overflow-hidden bg-[#071117] sm:-mx-6 lg:-mx-8" style={{ transitionDelay: "90ms" }}>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(64,224,208,0.08),transparent_58%)]" />
+              <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} autoPlay={smartRefereeHeroVideoPresentation.autoPlay} muted={smartRefereeHeroVideoPresentation.muted} loop={smartRefereeHeroVideoPresentation.loop} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="relative z-10 mx-auto aspect-video h-full w-full max-w-7xl bg-transparent object-contain">Your browser does not support embedded video.</video>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1/4 bg-gradient-to-t from-[#071117] to-transparent" />
             </div>
           </div>
         </section>
@@ -270,8 +294,18 @@ export default function Product() {
               <p className="max-w-2xl text-sm leading-7 text-white/70">A reviewable evidence layer helps organisers resolve contested moments with greater confidence, so officials, team representatives, and operations staff can return to the next scheduled match instead of an extended debate.</p>
               <div className="mt-6 rounded-xl border border-accent/30 bg-accent/10 p-5 sm:p-7">
                 <div className="flex items-center gap-2 text-accent"><Clock3 size={18} /><p className="text-[10px] font-semibold uppercase tracking-[0.15em]">Illustrative dispute-time scenario</p></div>
-                <time data-testid="dispute-time-counter" className="mt-4 block font-mono text-6xl font-semibold leading-none tracking-tight text-white sm:text-8xl" aria-label={`${disputeTimerLabel} on the dispute time counter`}>{disputeTimerLabel}</time>
-                <p className="mt-4 max-w-xl text-sm leading-6 text-white/70">This visual scenario is not a measured event outcome. It makes the practical point: every unresolved scoring call can hold the run sheet, consume schedule buffer, and delay the next match for teams, officials, and venue operations.</p>
+                <div className="mt-4 grid gap-5 sm:grid-cols-[1fr_0.9fr] sm:items-end">
+                  <div>
+                    <time data-testid="dispute-time-counter" className="block font-mono text-6xl font-semibold leading-none tracking-tight text-white sm:text-8xl" aria-label={`${disputeTimerLabel} on the dispute time counter`}>{disputeTimerLabel}</time>
+                    <p className="mt-3 text-xs leading-5 text-white/65">Elapsed review time consuming the margin between scheduled match starts.</p>
+                  </div>
+                  <div data-testid="illustrative-dispute-cost" className="border-l border-accent/35 pl-4 sm:pl-5">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-accent">{illustrativeDisputeCostScenario.label}</p>
+                    <p className="mt-2 font-mono text-4xl font-semibold leading-none tracking-tight text-white">{illustrativeDisputeCostScenario.currency}{illustrativeDisputeCost.toLocaleString()}</p>
+                    <p className="mt-2 text-xs leading-5 text-white/70">{illustrativeDisputeCostScenario.qualification}</p>
+                  </div>
+                </div>
+                <p className="mt-5 max-w-xl text-sm leading-6 text-white/70">This transparent scenario assumes two officials or jury members at HK$250/hour, two event or venue operations staff at HK$300/hour, and one active match-slot coordination cost at HK$1,200/hour. Replace these assumptions with your actual staffing, venue, and programme inputs.</p>
               </div>
             </div>
           </div>

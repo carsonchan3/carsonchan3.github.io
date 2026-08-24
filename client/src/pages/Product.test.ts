@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, getDisputeTimeIncrements, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserPainPanels, proofPoints, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningRuleQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserPainPanelPresentation, organiserPainPanels, proofPoints, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningRuleQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -60,6 +60,7 @@ describe("Smart Referee system video presentation", () => {
       autoPlay: true,
       muted: true,
       loop: true,
+      containerTreatment: "borderless-integrated",
     });
   });
 
@@ -85,10 +86,25 @@ describe("Smart Referee dispute-reduction support", () => {
     expect(smartRefereeMedia.trackingPoster).toBe("/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg");
   });
 
-  it("leads with the supplied scoring-rule quote and clearly marks the dispute window as illustrative", () => {
+  it("leads with the supplied scoring-rule quote and frames organiser pain points as narrow operational impacts", () => {
     expect(smartRefereeOpeningRuleQuote.text).toContain("entire drone ball has passed through");
     expect(smartRefereeOpeningRuleQuote.attribution).toContain("F9.A.8.4");
-    expect(organiserPainPanels[0]).toMatchObject({ value: "13:04", label: "Illustrative dispute window" });
+    expect(organiserPainPanelPresentation).toBe("narrow-separated");
+    expect(organiserPainPanels).toEqual([
+      expect.objectContaining({ value: "13:04", label: "Review delay" }),
+      expect.objectContaining({ value: "01 slot", label: "Next start held" }),
+      expect.objectContaining({ value: "04 roles", label: "Delivery focus diverted" }),
+    ]);
+  });
+
+  it("uses a transparent illustrative active-time model rather than claiming a measured dispute loss", () => {
+    expect(illustrativeDisputeCostScenario).toMatchObject({
+      currency: "HK$",
+      label: "Illustrative active event-time cost",
+      qualification: expect.stringContaining("Scenario only"),
+    });
+    expect(illustrativeDisputeCostScenario.assumptions).toHaveLength(3);
+    expect(getIllustrativeDisputeCost(13 * 60 + 4)).toBe(500);
   });
 
   it("adds individual organiser adoption panels without unsupported outcome claims", () => {
