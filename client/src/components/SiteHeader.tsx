@@ -4,9 +4,12 @@ import LanguageToggle from "@/components/LanguageToggle";
 import { headerLogoSrc, mobileHeaderLogoScaleClass } from "@/lib/brandAssets";
 import { siteNavigation, type PageKey } from "@/lib/siteNavigation";
 import { staticSitePath } from "@/lib/staticPreview";
+import { localizedPath } from "@/lib/seo";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 
 export default function SiteHeader({ active }: { active?: PageKey }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language } = useWebsiteLanguage();
 
   const linkClass = (key?: string) => "vli-nav-link font-medium transition-colors";
 
@@ -14,7 +17,7 @@ export default function SiteHeader({ active }: { active?: PageKey }) {
     <>
       <header className="vli-site-header fixed inset-x-0 top-0 z-50 border-b">
       <div className="container flex h-16 items-center justify-between">
-        <a href={staticSitePath("/")} className="flex items-center transition-opacity hover:opacity-75" aria-label="Velocity Lab Innovation home">
+        <a href={staticSitePath(localizedPath("/", language))} className="flex items-center transition-opacity hover:opacity-75" aria-label="Velocity Lab Innovation home">
           <img
             src={headerLogoSrc}
             alt="Velocity Lab Innovation"
@@ -24,7 +27,7 @@ export default function SiteHeader({ active }: { active?: PageKey }) {
 
         <nav className="hidden items-center gap-5 xl:gap-6 lg:flex" aria-label="Primary navigation">
           {siteNavigation.map((item) => (
-            <a key={item.label} href={staticSitePath(item.href)} className={linkClass(item.key)} data-active={active === item.key} aria-current={active === item.key ? "page" : undefined}>
+            <a key={item.label} href={staticSitePath(localizedPath(item.href, language))} className={linkClass(item.key)} data-active={active === item.key} aria-current={active === item.key ? "page" : undefined}>
               {item.label}
             </a>
           ))}
@@ -52,7 +55,7 @@ export default function SiteHeader({ active }: { active?: PageKey }) {
             {siteNavigation.map((item) => (
               <a
                 key={item.label}
-                href={staticSitePath(item.href)}
+                href={staticSitePath(localizedPath(item.href, language))}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block px-4 py-2.5 ${linkClass(item.key)} ${active === item.key ? "bg-accent/10" : "hover:bg-white/5"}`}
                 data-active={active === item.key}

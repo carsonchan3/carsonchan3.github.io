@@ -4,6 +4,8 @@ import CartPricingDialog, { type CartPricingSelection } from "@/components/CartP
 import ProductDetailDialog, { type ProductDetail, type ProductVariant } from "@/components/ProductDetailDialog";
 import { PRODUCT_CART_STORAGE_KEY, sanitizeProductCart, type ProductCart } from "@/lib/productCart";
 import { trpc } from "@/lib/trpc";
+import { localizedPath } from "@/lib/seo";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import React, { useEffect, useMemo, useState } from "react";
 import { ArrowRight, BatteryCharging, Cpu, Eye, Minus, Package, Plus, Radio, ShoppingCart, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
@@ -391,6 +393,7 @@ function readSavedCart(): ProductCart {
 }
 
 export default function Equipment() {
+  const { language } = useWebsiteLanguage();
   const dbProductsQuery = trpc.products.list.useQuery();
   const [cart, setCart] = useState<ProductCart>(readSavedCart);
   const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
@@ -454,7 +457,7 @@ export default function Equipment() {
                   <h2 className="velocity-subheading mb-3 text-white sm:text-3xl">Start with a custom equipment request.</h2>
                   <p className="max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">Share your preferred equipment, event format, technical constraints, and quantities. We will scope the right configuration before you compare standard catalogue items.</p>
                 </div>
-                <a href="/contact" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 font-semibold text-black transition-opacity hover:opacity-90">Request custom quote <ArrowRight size={18} /></a>
+                <a href={localizedPath("/contact", language)} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 font-semibold text-black transition-opacity hover:opacity-90">Request custom quote <ArrowRight size={18} /></a>
               </div>
             </article>
             <div data-testid="product-cart-summary" className="mb-8 flex flex-col gap-4 rounded-lg border border-white/10 bg-[#27282B] p-5 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:p-6">

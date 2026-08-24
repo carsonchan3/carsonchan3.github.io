@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import ServiceEnquiryDialog from "@/components/ServiceEnquiryDialog";
+import { localizedPath } from "@/lib/seo";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, Camera, GraduationCap, SlidersHorizontal, Wrench } from "lucide-react";
 
 export const serviceBanners = [
@@ -82,6 +84,7 @@ export const servicesHeroPresentation = {
 } as const;
 
 export default function Services() {
+  const { language } = useWebsiteLanguage();
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const hasResolvedServiceCatalogue = true;
 
@@ -129,7 +132,7 @@ export default function Services() {
           </div>
         </section>
 
-        <section className="border-y border-white/10 bg-[#27282B] py-16 md:py-24"><div data-reveal className="container reveal-up flex flex-col items-start justify-between gap-8 md:flex-row md:items-end"><div className="max-w-2xl"><div className="mb-4 h-1 w-12 bg-accent" /><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Start a conversation</p><h2 className="velocity-headline mb-4 text-white">Not sure which service is right?</h2><p className="text-lg leading-8 text-white/70">Tell us where you are now and what you want to improve. We can help shape the next practical step.</p></div><a href="/contact" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Talk to the team <ArrowRight size={18} /></a></div></section>
+        <section className="border-y border-white/10 bg-[#27282B] py-16 md:py-24"><div data-reveal className="container reveal-up flex flex-col items-start justify-between gap-8 md:flex-row md:items-end"><div className="max-w-2xl"><div className="mb-4 h-1 w-12 bg-accent" /><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Start a conversation</p><h2 className="velocity-headline mb-4 text-white">Not sure which service is right?</h2><p className="text-lg leading-8 text-white/70">Tell us where you are now and what you want to improve. We can help shape the next practical step.</p></div><a href={localizedPath("/contact", language)} className="inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Talk to the team <ArrowRight size={18} /></a></div></section>
       </main>
       <ServiceEnquiryDialog service={selectedService} onOpenChange={(open) => { if (!open) setSelectedService(null); }} />
       <SiteFooter />

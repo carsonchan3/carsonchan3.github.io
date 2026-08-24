@@ -1,7 +1,10 @@
 import { publicContactEmail, publicContactEmailHref } from "@/lib/contactDetails";
 import { staticSitePath } from "@/lib/staticPreview";
+import { localizedPath } from "@/lib/seo";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 
 export default function SiteFooter() {
+  const { language } = useWebsiteLanguage();
   return (
     <footer className="vli-footer border-t py-14 text-white md:py-16">
       <div className="container">
@@ -9,16 +12,16 @@ export default function SiteFooter() {
           <div>
             <p className="vli-footer-label mb-4">Offerings</p>
             <ul className="space-y-2 text-white/70">
-              <li><a href={staticSitePath("/dronesportsreferee")} className="transition-colors hover:text-accent">Smart Referee</a></li>
-              <li><a href={staticSitePath("/product")} className="transition-colors hover:text-accent">Drone Equipment</a></li>
-              <li><a href={staticSitePath("/services")} className="transition-colors hover:text-accent">Services</a></li>
+              <li><a href={staticSitePath(localizedPath("/dronesportsreferee", language))} className="transition-colors hover:text-accent">Smart Referee</a></li>
+              <li><a href={staticSitePath(localizedPath("/product", language))} className="transition-colors hover:text-accent">Drone Equipment</a></li>
+              <li><a href={staticSitePath(localizedPath("/services", language))} className="transition-colors hover:text-accent">Services</a></li>
             </ul>
           </div>
           <div>
             <p className="vli-footer-label mb-4">Explore</p>
             <ul className="space-y-2 text-white/70">
-              <li><a href={staticSitePath("/dronesportsreferee#pricing")} className="transition-colors hover:text-accent">Pricing &amp; configuration</a></li>
-              <li><a href={staticSitePath("/#partners")} className="transition-colors hover:text-accent">Partners</a></li>
+              <li><a href={staticSitePath(localizedPath("/dronesportsreferee#pricing", language))} className="transition-colors hover:text-accent">Pricing &amp; configuration</a></li>
+              <li><a href={staticSitePath(localizedPath("/#partners", language))} className="transition-colors hover:text-accent">Partners</a></li>
             </ul>
           </div>
           <div>
@@ -32,7 +35,7 @@ export default function SiteFooter() {
           <div>
             <p className="vli-footer-label mb-4">Next step</p>
             <p className="mb-4 text-[var(--mist)]">Discuss the right setup for your competition, venue, or technical programme.</p>
-            <a href={staticSitePath("/contact")} className="inline-flex bg-accent px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-[#7ff2e6]">Request a Demo</a>
+            <a href={staticSitePath(localizedPath("/contact", language))} className="inline-flex bg-accent px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-[#7ff2e6]">Request a Demo</a>
           </div>
         </div>
 

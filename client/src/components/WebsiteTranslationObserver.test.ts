@@ -18,6 +18,13 @@ describe("reviewed Traditional Chinese copy layer", () => {
     expect(translateReviewedCopy("Every Frame Matters.", "en")).toBe("Every Frame Matters.");
   });
 
+  it("translates adjacent reviewed fragments without translating unreviewed material", () => {
+    const rules = "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.";
+    const reference = "Supplied rule and federation references are shown for event-context discussion only; their display does not indicate endorsement.";
+    expect(translateReviewedCopy(`${rules} ${reference}`, "zh-Hant")).toContain("Smart Referee 可依據組織採用中的規則集");
+    expect(translateReviewedCopy(`${rules} ${reference}`, "zh-Hant")).toContain("其展示不代表任何背書");
+  });
+
   it("leaves unreviewed copy unchanged instead of inventing a runtime translation", () => {
     expect(translateReviewedCopy("Unreviewed source", "zh-Hant")).toBe("Unreviewed source");
   });

@@ -11,7 +11,13 @@ export function translateReviewedCopy(source: string, language: WebsiteLanguage)
   const match = source.match(/^(\s*)([\s\S]*?)(\s*)$/);
   if (!match) return source;
   const [, prefix, core, suffix] = match;
-  return `${prefix}${traditionalChineseTranslations[core] ?? core}${suffix}`;
+  const exactTranslation = traditionalChineseTranslations[core];
+  if (exactTranslation) return `${prefix}${exactTranslation}${suffix}`;
+  const translatedFragments = Object.entries(traditionalChineseTranslations)
+    .filter(([original]) => original.length > 16 && core.includes(original))
+    .sort(([left], [right]) => right.length - left.length)
+    .reduce((translated, [original, reviewedTranslation]) => translated.replaceAll(original, reviewedTranslation), core);
+  return `${prefix}${translatedFragments}${suffix}`;
 }
 
 function shouldSkipTextNode(node: Text) {

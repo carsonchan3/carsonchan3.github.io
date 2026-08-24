@@ -4,6 +4,7 @@ export const toStaticBasePath = (basePath: string, path: string) => {
   return `${normalizedBase}${normalizedPath}` || "/";
 };
 
-export const staticSitePath = (path: string) => toStaticBasePath(import.meta.env.BASE_URL, path);
+const staticBaseUrl = () => import.meta.env?.BASE_URL ?? "/";
 
-export const staticRouterBase = () => import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+export const staticSitePath = (path: string) => toStaticBasePath(staticBaseUrl(), path);
+export const staticRouterBase = () => staticBaseUrl() === "/" ? "" : staticBaseUrl().replace(/\/$/, "");

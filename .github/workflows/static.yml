@@ -36,8 +36,6 @@ jobs:
       - name: Preserve managed media from the live site
         run: |
           find dist/public -type f \( -name '*.html' -o -name '*.js' -o -name '*.css' \) -exec sed -i 's|/manus-storage/|https://velolab-gkpolzge.manus.space/manus-storage/|g' {} +
-      - name: Add SPA fallback
-        run: cp dist/public/index.html dist/public/404.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:

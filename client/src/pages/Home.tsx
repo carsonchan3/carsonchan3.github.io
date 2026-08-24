@@ -4,6 +4,8 @@ import LanguageToggle from "@/components/LanguageToggle";
 import { headerLogoSrc, mobileHeaderLogoScaleClass } from "@/lib/brandAssets";
 import { siteNavigation } from "@/lib/siteNavigation";
 import { staticSitePath } from "@/lib/staticPreview";
+import { localizedPath } from "@/lib/seo";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import SiteFooter from "@/components/SiteFooter";
 import { offeringCards } from "@/lib/offeringRoutes";
 import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
@@ -36,6 +38,7 @@ export const partnerHeadingPresentation = {
 } as const;
 
 export default function Home() {
+  const { language } = useWebsiteLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -51,7 +54,7 @@ export default function Home() {
           </button>
 
           <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
-            {siteNavigation.map((item) => <a key={item.href} href={staticSitePath(item.href)} className="vli-nav-link font-medium transition-colors">{item.label}</a>)}
+            {siteNavigation.map((item) => <a key={item.href} href={staticSitePath(localizedPath(item.href, language))} className="vli-nav-link font-medium transition-colors">{item.label}</a>)}
           </nav>
 
           <LanguageToggle placement="desktop" />
@@ -67,7 +70,7 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="vli-mobile-menu border-t lg:hidden">
             <nav className="container space-y-1 py-4" aria-label="Mobile navigation">
-              {siteNavigation.map((item) => <a key={item.href} href={staticSitePath(item.href)} onClick={() => setMobileMenuOpen(false)} className="vli-nav-link block px-4 py-2.5 font-medium transition-colors hover:bg-white/5">{item.mobileLabel ?? item.label}</a>)}
+              {siteNavigation.map((item) => <a key={item.href} href={staticSitePath(localizedPath(item.href, language))} onClick={() => setMobileMenuOpen(false)} className="vli-nav-link block px-4 py-2.5 font-medium transition-colors hover:bg-white/5">{item.mobileLabel ?? item.label}</a>)}
               <div className="mt-3 px-4"><LanguageToggle /></div>
             </nav>
           </div>
@@ -92,7 +95,7 @@ export default function Home() {
               </div>
               <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-8 sm:flex sm:gap-4 lg:mt-4">
                 <button onClick={() => scrollToSection("offerings")} className="flex items-center justify-center gap-1.5 bg-accent px-3 py-2 text-xs font-semibold text-black transition-colors hover:bg-[#7ff2e6] sm:gap-2 sm:px-6 sm:py-3 sm:text-base">Explore offerings <ArrowRight size={15} className="sm:size-5" /></button>
-                <a href={staticSitePath("/contact")} className="border border-white/45 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[#051018] sm:px-6 sm:py-3 sm:text-base">Plan an event</a>
+                <a href={staticSitePath(localizedPath("/contact", language))} className="border border-white/45 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[#051018] sm:px-6 sm:py-3 sm:text-base">Plan an event</a>
               </div>
             </div>
           </div>
@@ -109,7 +112,7 @@ export default function Home() {
 
             <div className="grid gap-5 lg:grid-cols-3">
               {offeringCards.map((offering, index) => (
-                <a key={offering.href} href={staticSitePath(offering.href)} data-reveal data-mobile-aspect-ratio={mobileOfferingCardAspectRatio} className="vli-offering-card group reveal-up relative flex aspect-[21/9] min-h-0 overflow-hidden border p-5 transition-all duration-300 sm:aspect-auto sm:min-h-[29rem] sm:p-7" style={{ transitionDelay: getRevealTransitionDelay(index) }}>
+                <a key={offering.href} href={staticSitePath(localizedPath(offering.href, language))} data-reveal data-mobile-aspect-ratio={mobileOfferingCardAspectRatio} className="vli-offering-card group reveal-up relative flex aspect-[21/9] min-h-0 overflow-hidden border p-5 transition-all duration-300 sm:aspect-auto sm:min-h-[29rem] sm:p-7" style={{ transitionDelay: getRevealTransitionDelay(index) }}>
                   <img src={offering.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-500 group-hover:scale-110 group-hover:opacity-85" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/72 to-black/10 transition-colors duration-300 group-hover:from-black/95 group-hover:via-black/62" />
                   <div className="relative z-10 mt-auto">

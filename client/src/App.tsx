@@ -18,6 +18,9 @@ import UseCases from "./pages/UseCases";
 import OwnerEnquiries from "./pages/OwnerEnquiries";
 import { flightDeckTheme } from "./lib/flightDeckTheme";
 import { staticRouterBase } from "./lib/staticPreview";
+import { chineseLocalePrefix } from "./lib/seo";
+import SeoHead from "./components/SeoHead";
+import type { WebsiteLanguage } from "./contexts/LanguageContext";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -46,20 +49,28 @@ function Router() {
 //   to keep consistent foreground/background color across components
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
-function App() {
+function activeRouterBase() {
+  const buildBase = staticRouterBase();
+  if (typeof window === "undefined") return buildBase;
+  const localeBase = window.location.pathname === chineseLocalePrefix || window.location.pathname.startsWith(`${chineseLocalePrefix}/`) ? chineseLocalePrefix : "";
+  return `${buildBase}${localeBase}` || "";
+}
+
+function App({ initialLanguage, ssrPath }: { initialLanguage?: WebsiteLanguage; ssrPath?: string }) {
   return (
     <ErrorBoundary>
-      <LanguageProvider>
+      <LanguageProvider initialLanguage={initialLanguage}>
         <ThemeProvider
           defaultTheme="dark"
         >
           <TooltipProvider>
-            <WouterRouter base={staticRouterBase()}>
+            <WouterRouter base={activeRouterBase()} ssrPath={ssrPath}>
               <div className={flightDeckTheme.rootClass} data-visual-system={flightDeckTheme.name}>
                 <Toaster />
                 <RevealMotionController />
                 <Router />
                 <WebsiteTranslationObserver />
+                <SeoHead />
               </div>
             </WouterRouter>
           </TooltipProvider>
