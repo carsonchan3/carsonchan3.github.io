@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { eventWorkflowSteps, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { eventScaleEvidencePanelPresentation, eventWorkflowSteps, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -33,6 +33,7 @@ describe("Smart Referee organiser-first journey", () => {
   it("keeps technical evidence visible after the organiser value narrative", () => {
     expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
     expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
+    expect(eventScaleEvidencePanelPresentation).toBe("individual-panels-beneath-title");
     expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(proofPoints).toContainEqual({ value: "±0.20 mm", label: "3D accuracy" });
     expect(proofPoints).toContainEqual({ value: "10 ms", label: "decision making end to end" });

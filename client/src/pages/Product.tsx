@@ -17,6 +17,7 @@ export const mobileSmartRefereeRevealPolicy = "always-visible";
 export const mobileSmartRefereeCardAspectRatio = "21:9";
 export const technicalSpecificationPresentation = "visible-evidence-panel";
 export const traditionalChinesePromisePresentation = "two-intentional-lines";
+export const eventScaleEvidencePanelPresentation = "individual-panels-beneath-title";
 export const smartRefereeHeroVideoPresentation = {
   aspectRatio: "16:9",
   objectFit: "contain",
@@ -267,28 +268,35 @@ export default function Product() {
         </section>
 
         <section id="technical-confidence" data-testid="technical-confidence" className="velocity-section border-b border-white/10 bg-[#171C1D]">
-          <div className="container grid items-start gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <div data-reveal className="reveal-up">
+          <div className="container">
+            <div data-reveal className="reveal-up max-w-2xl">
               <div className="mb-5 h-1 w-12 bg-accent" />
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Built for event scale</p>
               <h2 className="velocity-headline max-w-xl text-white">{technicalConfidence.title}</h2>
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
             </div>
-            <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20 p-5" style={{ transitionDelay: "90ms" }}>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {proofPoints.map((point) => <div key={point.value} className="border-l border-accent/40 pl-4"><p className="text-xl font-semibold text-white">{point.value}</p><p className="mt-1 text-xs leading-5 text-white/60">{point.label}</p></div>)}
-                </div>
-                <div className="mt-6 grid gap-5 border-t border-white/10 pt-6 sm:grid-cols-[0.72fr_1.28fr]">
+            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {proofPoints.map((point, index) => (
+                <article data-event-scale-panel data-reveal key={point.value} className="reveal-up min-h-36 rounded-lg border border-white/10 bg-black/20 p-5" style={{ transitionDelay: `${index * 60}ms` }}>
+                  <p className="text-2xl font-semibold tracking-tight text-white">{point.value}</p>
+                  <p className="mt-3 text-xs leading-5 text-white/60">{point.label}</p>
+                </article>
+              ))}
+              <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20 sm:col-span-2 xl:col-span-2" style={{ transitionDelay: "240ms" }}>
+                <div className="grid h-full gap-5 p-5 sm:grid-cols-[0.72fr_1.28fr] sm:items-center">
                   <img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="aspect-[21/9] h-full w-full rounded-md object-cover sm:aspect-[4/3]" />
                   <div><h3 className="font-semibold text-white">{technicalConfidence.markerTitle}</h3><p className="mt-2 text-sm leading-6 text-white/65">{technicalConfidence.markerDescription}</p></div>
                 </div>
-                <div className="mt-6 grid gap-5 border-t border-white/10 pt-6 sm:grid-cols-[0.72fr_1.28fr]">
-                  <div className="flex items-center justify-center gap-3 rounded-md bg-white p-4 sm:gap-5">
-                    {smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-14 min-w-0 max-w-[29%] flex-1 object-contain sm:h-16" />)}
-                  </div>
-                  <p className="text-xs leading-6 text-white/50">{technicalConfidence.referenceCaption}</p>
+              </article>
+              <article data-event-scale-panel data-reveal className="reveal-up rounded-lg border border-white/10 bg-black/20 p-5 sm:col-span-2 xl:col-span-2" style={{ transitionDelay: "300ms" }}>
+                <div className="flex min-h-32 items-center justify-center gap-3 rounded-md bg-white p-4 sm:gap-5">
+                  {smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-14 min-w-0 max-w-[29%] flex-1 object-contain sm:h-16" />)}
                 </div>
-                <img src={smartRefereeMedia.precision} alt="OptiTrack Flex 13 camera positioned at a drone-sports arena" loading="lazy" className="mt-6 aspect-[21/9] w-full rounded-md object-cover sm:aspect-[16/7]" />
+                <p className="mt-5 text-xs leading-6 text-white/50">{technicalConfidence.referenceCaption}</p>
+              </article>
+              <article data-event-scale-panel data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20 p-5 sm:col-span-2 xl:col-span-4" style={{ transitionDelay: "360ms" }}>
+                <img src={smartRefereeMedia.precision} alt="OptiTrack Flex 13 camera positioned at a drone-sports arena" loading="lazy" className="aspect-[21/9] w-full rounded-md object-cover sm:aspect-[16/7]" />
+              </article>
             </div>
           </div>
         </section>
