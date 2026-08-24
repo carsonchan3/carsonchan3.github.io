@@ -8,6 +8,9 @@ describe("reviewed Traditional Chinese copy layer", () => {
     expect(translateReviewedCopy("Hong Kong, China", "zh-Hant")).toBe("中國香港");
     expect(translateReviewedCopy("01 slot", "zh-Hant")).toBe("1x 時段");
     expect(translateReviewedCopy("04 roles", "zh-Hant")).toBe("4 個負責人");
+    expect(translateReviewedCopy("Choose your operating starting point.", "zh-Hant")).toBe("選擇您所需的起點");
+    expect(translateReviewedCopy("Assist", "zh-Hant")).toBe("Assist");
+    expect(translateReviewedCopy("Managed", "zh-Hant")).toBe("Managed");
   });
 
   it("restores the original English source and preserves surrounding whitespace", () => {

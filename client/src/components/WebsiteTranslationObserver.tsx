@@ -16,7 +16,7 @@ export function translateReviewedCopy(source: string, language: WebsiteLanguage)
 
 function shouldSkipTextNode(node: Text) {
   const parent = node.parentElement;
-  return !parent || ["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA"].includes(parent.tagName) || Boolean(parent.closest(".vli-language-toggle"));
+  return !parent || ["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA"].includes(parent.tagName) || Boolean(parent.closest(".vli-language-toggle, [data-live-metric]"));
 }
 
 function translateTextNode(node: Text, language: WebsiteLanguage) {
@@ -28,7 +28,7 @@ function translateTextNode(node: Text, language: WebsiteLanguage) {
 }
 
 function translateElementAttributes(element: Element, language: WebsiteLanguage) {
-  if (element.closest(".vli-language-toggle")) return;
+  if (element.closest(".vli-language-toggle, [data-live-metric]")) return;
   const originals = attributeOriginals.get(element) ?? new Map<string, string>();
   attributeOriginals.set(element, originals);
   for (const attribute of translatableAttributes) {

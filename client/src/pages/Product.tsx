@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 
 export const proofPoints = [
   { value: "OptiTrack", label: "industry leading motion capture technology" },
@@ -102,15 +103,16 @@ export const formatDisputeTimer = (seconds: number) =>
 
 function RollingMetric({
   value,
-  formatter = (nextValue) => nextValue.toLocaleString("en-HK"),
+  formatter = (nextValue, language) => nextValue.toLocaleString(language === "zh-Hant" ? "zh-HK" : "en-HK"),
   ariaLabel,
   className,
 }: {
   value: number;
-  formatter?: (value: number) => string;
+  formatter?: (value: number, language: "en" | "zh-Hant") => string;
   ariaLabel: string;
   className: string;
 }) {
+  const { language } = useWebsiteLanguage();
   const metricRef = useRef<HTMLSpanElement>(null);
   const [displayValue, setDisplayValue] = useState(value);
   const hasEnteredView = useRef(false);
@@ -160,7 +162,7 @@ function RollingMetric({
     };
   }, [value]);
 
-  return <span ref={metricRef} aria-label={ariaLabel} className={className}>{formatter(displayValue)}</span>;
+  return <span ref={metricRef} data-live-metric aria-label={ariaLabel} className={className}>{formatter(displayValue, language)}</span>;
 }
 
 export const smartRefereeMedia = {
@@ -288,7 +290,7 @@ export default function Product() {
               {organiserImpactMetrics.map((metric, index) => (
                 <div data-reveal key={metric.label} className="reveal-up" style={{ transitionDelay: `${index * 70}ms` }}>
                   {metric.rolling ? (
-                    <RollingMetric value={metric.value} formatter={metric.formatter === "hkd-compact" ? (value) => `HK$${Math.round(value / 1_000)}k` : (value) => `${value}${metric.suffix}`} ariaLabel={`${metric.formatter === "hkd-compact" ? "HK$27k" : `${metric.value}${metric.suffix}`} ${metric.label}`} className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl" />
+                    <RollingMetric value={metric.value} formatter={metric.formatter === "hkd-compact" ? (value) => `HK$${Math.round(value / 1_000)}k` : (value, language) => `${value}${language === "zh-Hant" ? " 小時+" : metric.suffix}`} ariaLabel={`${metric.formatter === "hkd-compact" ? "HK$27k" : `${metric.value}${metric.suffix}`} ${metric.label}`} className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl" />
                   ) : (
                     <div className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl">{metric.value}{metric.suffix}</div>
                   )}
@@ -386,7 +388,7 @@ export default function Product() {
                   </div>
                   <div data-testid="illustrative-dispute-cost" className="border-l border-accent/35 pl-4 sm:pl-5">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-accent">{illustrativeDisputeCostScenario.label}</p>
-                    <RollingMetric value={illustrativeDisputeCost} formatter={(value) => `${illustrativeDisputeCostScenario.currency}${value.toLocaleString("en-HK")}`} ariaLabel={`${illustrativeDisputeCostScenario.currency}${illustrativeDisputeCost.toLocaleString("en-HK")} illustrative active event-time cost`} className="mt-2 block font-mono text-4xl font-semibold leading-none tracking-tight text-white" />
+                    <RollingMetric value={illustrativeDisputeCost} formatter={(value, language) => `${illustrativeDisputeCostScenario.currency}${value.toLocaleString(language === "zh-Hant" ? "zh-HK" : "en-HK")}`} ariaLabel={`${illustrativeDisputeCostScenario.currency}${illustrativeDisputeCost.toLocaleString("en-HK")} illustrative active event-time cost`} className="mt-2 block font-mono text-4xl font-semibold leading-none tracking-tight text-white" />
                     <p className="mt-2 text-xs leading-5 text-white/70">{illustrativeDisputeCostScenario.qualification}</p>
                   </div>
                 </div>
