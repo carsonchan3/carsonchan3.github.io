@@ -20,7 +20,7 @@ describe("Services thumbnail data", () => {
     expect(serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }))).toEqual([
       { title: "Drone Repair Service", thumbnail: "/manus-storage/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "PID tuning service", thumbnail: "/manus-storage/pidtuningthumb_fcb394b2.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "Drone Building Course / Coaching Sessions", thumbnail: "/manus-storage/service_214ca02f.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Drone Building Course / Coaching Sessions", thumbnail: "/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Advanced drone course for adults", thumbnail: "/manus-storage/advancedronecourseforadultthumb_193b4cb1.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Drone Photo / Cinematography", thumbnail: "/manus-storage/dronecinematography_894d41bd.jpeg", mediaSource: "user-supplied-real-world-photo" },
     ]);
