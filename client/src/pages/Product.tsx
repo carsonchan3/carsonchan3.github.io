@@ -27,7 +27,7 @@ export const eventScaleFeatureTilePresentation = {
 export const eventScaleTileDetailInteraction = {
   hover: "reveals-description",
   click: "toggles-description",
-  pitchPlacement: "separate-tile-below-grid",
+  pitchPlacement: "standalone-panel-after-event-scale",
 } as const;
 export const smartRefereeHeroVideoPresentation = {
   aspectRatio: "16:9",
@@ -72,6 +72,7 @@ export const smartRefereePageHierarchy = [
   "event-workflow",
   "organiser-impact-detail",
   "technical-confidence",
+  "drone-sports-referee-pitch",
   "event-delivery-options",
 ] as const;
 
@@ -213,9 +214,10 @@ export const technicalConfidence = {
   markerDescription: "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.",
   continuousCalibrationTitle: "Zero Drift. Pure Precision.",
   continuousCalibrationDescription: "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.",
-  infraredTitle: "Unobtrusive infrared light",
-  infraredDescription: "Flex 13 cameras emit 850nm IR light, which is nearly invisible, for inconspicuous illumination that prevents the vision fatigue and unwanted attention to your capture rig caused by cameras that emit visible spectrum light.",
+  rulesTitle: "Configurable competition rules",
+  rulesDescription: "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.",
   pitchVideoTitle: "Drone Sports Referee Pitch",
+  pitchVideoDescription: "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.",
   referenceCaption: "Supplied rule and federation references are shown for event-context discussion only; their display does not indicate endorsement.",
 } as const;
 
@@ -341,10 +343,15 @@ export default function Product() {
               <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="bg-[#0B1419]"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">02 · TRACKING SETUP</p><h3 className="mt-auto text-lg font-semibold tracking-tight text-white sm:text-2xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 hidden text-[10px] leading-4 text-white/70 sm:block">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
               <div data-testid="technical-evidence-panels" className="contents">
                 <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="bg-black"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-lg font-semibold tracking-tight text-white sm:text-2xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 hidden text-[10px] leading-4 text-white/70 sm:block">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
-                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.infraredTitle} detail={`${technicalConfidence.infraredDescription} ${technicalConfidence.referenceCaption}`} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="bg-[#0B1419]"><div className="p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">04 · FLEX 13 ILLUMINATION</p><h3 className="mt-2 text-sm font-semibold tracking-tight text-white sm:text-lg">{technicalConfidence.infraredTitle}</h3><div data-rule-reference-logos className="mt-4 flex items-center gap-2 border-t border-white/10 pt-3">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-7 min-w-0 flex-1 object-contain sm:h-9" />)}</div></div></EventScaleTile>
+                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={`${technicalConfidence.rulesDescription} ${technicalConfidence.referenceCaption}`} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="bg-[#0B1419]"><div className="p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">04 · CONFIGURABLE RULES</p><h3 className="mt-2 text-sm font-semibold tracking-tight text-white sm:text-lg">{technicalConfidence.rulesTitle}</h3><div data-rule-reference-logos className="mt-4 flex items-center gap-2 border-t border-white/10 pt-3">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-7 min-w-0 flex-1 object-contain sm:h-9" />)}</div></div></EventScaleTile>
               </div>
             </div>
-            <article data-pitch-video-panel data-pitch-video-tile data-reveal className="reveal-up mx-auto mt-4 aspect-square w-full max-w-sm overflow-hidden rounded-xl border border-white/10 bg-black/20 p-4 sm:mt-5 sm:p-5"><div className="flex h-full flex-col"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">DRONE SPORTS REFEREE</p><h3 className="mt-2 text-lg font-semibold tracking-tight text-white sm:text-xl">{technicalConfidence.pitchVideoTitle}</h3><video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="mt-auto aspect-video w-full rounded-lg bg-black object-contain">Your browser does not support embedded video.</video></div></article>
+          </div>
+        </section>
+
+        <section id="drone-sports-referee-pitch" data-testid="drone-sports-referee-pitch" data-pitch-video-panel className="velocity-section border-b border-white/10 bg-[#0B1419]">
+          <div data-reveal className="container reveal-up">
+            <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-4 sm:p-6 md:p-8"><div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Drone Sports Referee</p><h2 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-4xl">{technicalConfidence.pitchVideoTitle}</h2></div><p className="max-w-md text-sm leading-6 text-white/65">{technicalConfidence.pitchVideoDescription}</p></div><video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full rounded-xl bg-black object-contain">Your browser does not support embedded video.</video></div>
           </div>
         </section>
 
