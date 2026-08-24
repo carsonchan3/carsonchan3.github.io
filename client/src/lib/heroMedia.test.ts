@@ -3,7 +3,7 @@ import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "./heroMedia";
 
 describe("homepage hero media", () => {
   it("uses the supplied VLI hero video", () => {
-    expect(homepageHeroVideoSrc).toBe("/manus-storage/vli-hero-video_21-9_acdcc551.mp4");
+    expect(homepageHeroVideoSrc).toBe("/manus-storage/vli-hero-video_21-9SHORT_a09002e3.mp4");
   });
 
   it("uses the first video frame as the hero loading poster", () => {
