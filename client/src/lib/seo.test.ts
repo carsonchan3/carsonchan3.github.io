@@ -17,7 +17,7 @@ describe("SEO route registry", () => {
     expect(localizedPath("/services", "zh-Hant")).toBe("/zh-hant/services");
     expect(localizedPath("/#partners", "zh-Hant")).toBe("/zh-hant#partners");
     expect(trimLocalePrefix("/zh-hant/dronesportsreferee")).toBe("/dronesportsreferee");
-    expect(absoluteUrl("/contact", "zh-Hant")).toBe("https://velocity-lab.com/zh-hant/contact");
+    expect(absoluteUrl("/contact", "zh-Hant")).toBe("https://velocity-lab.com/zh-hant/contact/");
   });
 
   it("builds only truthful published schema inputs for applicable pages", () => {

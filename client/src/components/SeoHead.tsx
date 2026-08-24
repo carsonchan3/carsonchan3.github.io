@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { absoluteUrl, buildStructuredData, getSeoPage, isPrivateOrNonIndexablePath, localizedPath, siteOrigin } from "@/lib/seo";
+import { absoluteUrl, buildStructuredData, getSeoPage, isPrivateOrNonIndexablePath, localizedPath } from "@/lib/seo";
 
 type HeadElementTag = "meta" | "link" | "script";
 
@@ -38,7 +38,7 @@ export default function SeoHead() {
     ensureHeadElement("link", 'link[rel="canonical"]', { rel: "canonical", href: canonical });
     ensureHeadElement("link", 'link[rel="alternate"][hreflang="en"]', { rel: "alternate", hreflang: "en", href: absoluteUrl(page.path, "en") });
     ensureHeadElement("link", 'link[rel="alternate"][hreflang="zh-Hant"]', { rel: "alternate", hreflang: "zh-Hant", href: absoluteUrl(page.path, "zh-Hant") });
-    ensureHeadElement("link", 'link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: new URL(page.path, siteOrigin).toString() });
+    ensureHeadElement("link", 'link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: absoluteUrl(page.path, "en") });
     ensureHeadElement("meta", 'meta[property="og:type"]', { property: "og:type", content: "website" });
     ensureHeadElement("meta", 'meta[property="og:site_name"]', { property: "og:site_name", content: "Velocity Lab Innovation" });
     ensureHeadElement("meta", 'meta[property="og:locale"]', { property: "og:locale", content: language === "zh-Hant" ? "zh_HK" : "en_US" });

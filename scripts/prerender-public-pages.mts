@@ -10,7 +10,7 @@ import superjson from "superjson";
 import App from "../client/src/App";
 import { translateReviewedCopy } from "../client/src/components/WebsiteTranslationObserver";
 import type { WebsiteLanguage } from "../client/src/contexts/LanguageContext";
-import { absoluteUrl, buildStructuredData, getSeoPage, localizedPath, publicSeoPages, siteOrigin } from "../client/src/lib/seo";
+import { absoluteUrl, buildStructuredData, getSeoPage, localizedPath, publicSeoPages } from "../client/src/lib/seo";
 import { trpc } from "../client/src/lib/trpc";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -97,7 +97,7 @@ function applySeoHead(document: Document, route: string, language: WebsiteLangua
   setLink(document, 'link[rel="canonical"]', { rel: "canonical", href: canonical });
   setLink(document, 'link[rel="alternate"][hreflang="en"]', { rel: "alternate", hreflang: "en", href: absoluteUrl(page.path, "en") });
   setLink(document, 'link[rel="alternate"][hreflang="zh-Hant"]', { rel: "alternate", hreflang: "zh-Hant", href: absoluteUrl(page.path, "zh-Hant") });
-  setLink(document, 'link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: new URL(page.path, siteOrigin).toString() });
+  setLink(document, 'link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: absoluteUrl(page.path, "en") });
   setMeta(document, 'meta[property="og:type"]', { property: "og:type", content: "website" });
   setMeta(document, 'meta[property="og:site_name"]', { property: "og:site_name", content: "Velocity Lab Innovation" });
   setMeta(document, 'meta[property="og:locale"]', { property: "og:locale", content: language === "zh-Hant" ? "zh_HK" : "en_US" });
@@ -129,7 +129,7 @@ function buildSitemap() {
     const variants: WebsiteLanguage[] = ["en", "zh-Hant"];
     return variants.map((language) => {
       const alternateLinks = variants.map((alternateLanguage) => `    <xhtml:link rel="alternate" hreflang="${alternateLanguage}" href="${absoluteUrl(page.path, alternateLanguage)}" />`).join("\n");
-      return `  <url>\n    <loc>${absoluteUrl(page.path, language)}</loc>\n${alternateLinks}\n    <xhtml:link rel="alternate" hreflang="x-default" href="${new URL(page.path, siteOrigin).toString()}" />\n  </url>`;
+      return `  <url>\n    <loc>${absoluteUrl(page.path, language)}</loc>\n${alternateLinks}\n    <xhtml:link rel="alternate" hreflang="x-default" href="${absoluteUrl(page.path, "en")}" />\n  </url>`;
     });
   });
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urlEntries.join("\n")}\n</urlset>\n`;

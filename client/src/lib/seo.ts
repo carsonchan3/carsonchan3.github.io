@@ -125,7 +125,10 @@ export function localizedPath(path: string, language: WebsiteLanguage) {
 }
 
 export function absoluteUrl(path: string, language: WebsiteLanguage = "en") {
-  return new URL(localizedPath(path, language), siteOrigin).toString();
+  const localized = localizedPath(path, language);
+  const [pathname, hash = ""] = localized.split("#", 2);
+  const documentPath = pathname === "/" ? "/" : `${pathname.replace(/\/$/, "")}/`;
+  return new URL(`${documentPath}${hash ? `#${hash}` : ""}`, siteOrigin).toString();
 }
 
 export function getSeoPage(path: string) {
