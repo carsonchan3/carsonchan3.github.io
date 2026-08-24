@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { absoluteUrl, buildStructuredData, getSeoPage, isPrivateOrNonIndexablePath, localizedPath } from "@/lib/seo";
+import { absoluteUrl, buildStructuredData, getSeoPage, isPrivateOrNonIndexablePath } from "@/lib/seo";
 
 type HeadElementTag = "meta" | "link" | "script";
 
@@ -52,10 +52,6 @@ export default function SeoHead() {
     ensureHeadElement("meta", 'meta[name="twitter:image"]', { name: "twitter:image", content: page.socialImage });
     ensureHeadElement("script", 'script[data-seo-schema="true"]', { type: "application/ld+json", "data-seo-schema": "true" }, JSON.stringify({ "@context": "https://schema.org", "@graph": buildStructuredData(page, language) }));
 
-    const managedPaths = Array.from(document.head.querySelectorAll('[data-seo-managed="true"]'));
-    managedPaths.forEach((element) => element.remove());
-    const currentLanguageTarget = localizedPath(page.path, language);
-    if (currentLanguageTarget !== location) window.history.replaceState({}, "", currentLanguageTarget);
   }, [language, location]);
 
   return null;

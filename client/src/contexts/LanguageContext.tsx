@@ -13,7 +13,7 @@ const LanguageContext = createContext<LanguageContextValue>({ language: "en", se
 function initialLanguage(): WebsiteLanguage {
   if (typeof window === "undefined") return "en";
   if (window.location.pathname === "/zh-hant" || window.location.pathname.startsWith("/zh-hant/")) return "zh-Hant";
-  return window.localStorage.getItem(storageKey) === "zh-Hant" ? "zh-Hant" : "en";
+  return "en";
 }
 
 export function LanguageProvider({ children, initialLanguage: preferredLanguage }: { children: ReactNode; initialLanguage?: WebsiteLanguage }) {
