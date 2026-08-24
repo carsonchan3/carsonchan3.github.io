@@ -211,6 +211,12 @@
     text-wrap: nowrap;
   }
 
+  /* The Smart Referee organiser promise is deliberately two lines in Traditional Chinese. */
+  html[lang='zh-Hant'] [data-smart-referee-zh-line-break] {
+    display: block;
+    margin-top: 0.08em;
+  }
+
   .velocity-dark-section {
     @apply bg-[var(--ink-deep)] text-[var(--paper)];
   }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { eventWorkflowSteps, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserOutcomeCards, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation } from "./Product";
+import { eventWorkflowSteps, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -19,18 +19,21 @@ describe("Smart Referee organiser-first journey", () => {
     expect(eventWorkflowSteps[2].detail).toContain("Officials keep their authority");
   });
 
-  it("uses progressive disclosure for the only organiser-impact scenario and preserves its planning qualification", () => {
+  it("keeps the organiser-impact scenario visible, animated, and qualified as a planning discussion", () => {
     expect(smartRefereePageHierarchy).toContain("organiser-impact-detail");
-    expect(organiserImpactDetail.summary).toBe("View an illustrative event-delay scenario");
     expect(organiserImpactDetail.metrics).toHaveLength(3);
     expect(organiserImpactDetail.qualification).toContain("validate against your own staffing");
     expect(organiserImpactDetail.description).toContain("not measured outcomes or guaranteed savings");
+    expect(organiserImpactMetricAnimation).toEqual({ trigger: "when-visible", durationMilliseconds: 900, respectsReducedMotion: true });
+    expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[0], 4, "en")).toBe("4+ minutes");
+    expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[1], 40, "zh-Hant")).toBe("超過 40+ 分鐘");
+    expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[2], 27_000, "en")).toBe("HK$27k");
   });
 
-  it("keeps technical evidence after organiser value and behind a concise details control", () => {
+  it("keeps technical evidence visible after the organiser value narrative", () => {
     expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
-    expect(technicalSpecificationPresentation).toBe("progressive-disclosure");
-    expect(technicalConfidence.summary).toBe("View tracking, setup, and rule-support details");
+    expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
+    expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(proofPoints).toContainEqual({ value: "±0.20 mm", label: "3D accuracy" });
     expect(proofPoints).toContainEqual({ value: "10 ms", label: "decision making end to end" });
   });
@@ -50,9 +53,10 @@ describe("Smart Referee organiser-first journey", () => {
     expect(mobileSmartRefereeCardAspectRatio).toBe("21:9");
   });
 
-  it("maps the revised organiser promise, outcomes, workflow, and details controls into Traditional Chinese", () => {
+  it("maps the revised organiser promise, outcomes, workflow, and visible evidence into Traditional Chinese", () => {
     [
       "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Compare all service inclusions",
     ].forEach((key) => expect(traditionalChineseTranslations[key]).toBeTruthy());
+    expect(traditionalChinesePromisePresentation).toBe("two-intentional-lines");
   });
 });

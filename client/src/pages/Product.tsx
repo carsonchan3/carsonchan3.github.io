@@ -1,7 +1,9 @@
-import { ArrowRight, CircleCheck, ChevronDown } from "lucide-react";
+import { ArrowRight, CircleCheck } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 
 export const proofPoints = [
@@ -13,7 +15,8 @@ export const proofPoints = [
 
 export const mobileSmartRefereeRevealPolicy = "always-visible";
 export const mobileSmartRefereeCardAspectRatio = "21:9";
-export const technicalSpecificationPresentation = "progressive-disclosure";
+export const technicalSpecificationPresentation = "visible-evidence-panel";
+export const traditionalChinesePromisePresentation = "two-intentional-lines";
 export const smartRefereeHeroVideoPresentation = {
   aspectRatio: "16:9",
   objectFit: "contain",
@@ -80,16 +83,76 @@ export const eventWorkflowSteps = [
 ] as const;
 
 export const organiserImpactDetail = {
-  summary: "View an illustrative event-delay scenario",
   title: "One held call can affect more than the moment.",
   description: "A scoring review can use the schedule buffer intended to protect the next match. The planning values below are discussion inputs, not measured outcomes or guaranteed savings.",
   metrics: [
-    { value: "4+ minutes", label: "per review delay" },
-    { value: "over 40+ minutes", label: "Wasted time on dispute per event" },
-    { value: "HK$27k", label: "Extra cost related to all parties" },
+    { value: 4, label: "per review delay", formatter: "review-delay" },
+    { value: 40, label: "Wasted time on dispute per event", formatter: "dispute-time" },
+    { value: 27_000, label: "Extra cost related to all parties", formatter: "hkd-compact" },
   ],
   qualification: "Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.",
 } as const;
+
+export const organiserImpactMetricAnimation = {
+  trigger: "when-visible",
+  durationMilliseconds: 900,
+  respectsReducedMotion: true,
+} as const;
+
+type OrganiserImpactMetric = (typeof organiserImpactDetail.metrics)[number];
+
+export const formatOrganiserImpactMetric = (metric: OrganiserImpactMetric, value: number, language: "en" | "zh-Hant") => {
+  if (metric.formatter === "hkd-compact") return `HK$${Math.round(value / 1_000)}k`;
+  if (metric.formatter === "review-delay") return language === "zh-Hant" ? `${value} 分鐘以上` : `${value}+ minutes`;
+  return language === "zh-Hant" ? `超過 ${value}+ 分鐘` : `over ${value}+ minutes`;
+};
+
+function RollingImpactMetric({ metric }: { metric: OrganiserImpactMetric }) {
+  const { language } = useWebsiteLanguage();
+  const valueRef = useRef<HTMLSpanElement>(null);
+  const [displayValue, setDisplayValue] = useState<number>(metric.value);
+  const hasEnteredView = useRef(false);
+
+  useEffect(() => {
+    const element = valueRef.current;
+    if (!element) return;
+
+    let animationFrame = 0;
+    const animate = (instant = false) => {
+      if (instant || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setDisplayValue(metric.value);
+        return;
+      }
+      const startedAt = window.performance.now();
+      const tick = (timestamp: number) => {
+        const progress = Math.min((timestamp - startedAt) / organiserImpactMetricAnimation.durationMilliseconds, 1);
+        setDisplayValue(Math.round(metric.value * (1 - Math.pow(1 - progress, 3))));
+        if (progress < 1) animationFrame = window.requestAnimationFrame(tick);
+      };
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      animate();
+      return () => window.cancelAnimationFrame(animationFrame);
+    }
+
+    const observer = new window.IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting || hasEnteredView.current) return;
+      hasEnteredView.current = true;
+      setDisplayValue(0);
+      animate();
+      observer.disconnect();
+    }, { threshold: 0.35 });
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [metric]);
+
+  return <span ref={valueRef} data-live-metric className="font-mono text-3xl font-semibold leading-none tracking-tight text-accent sm:text-4xl">{formatOrganiserImpactMetric(metric, displayValue, language)}</span>;
+}
 
 export const smartRefereeMedia = {
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
@@ -106,7 +169,6 @@ export const smartRefereeMedia = {
 
 export const technicalConfidence = {
   title: "Technical confidence, when your team needs it.",
-  summary: "View tracking, setup, and rule-support details",
   description: "The Smart Referee system is designed to turn high-speed position data into a shared reference that can be prepared consistently for an event.",
   markerTitle: "Repeatable team preparation",
   markerDescription: "Low-cost passive marker stickers help organisers standardise tracked-drone preparation across teams without adding powered marker hardware to the event inventory.",
@@ -126,7 +188,7 @@ export default function Product() {
             <div data-reveal className="reveal-up max-w-3xl">
               <div className="mb-5 h-1 w-12 bg-accent" />
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Smart Referee for event organisers</p>
-              <h1 data-testid="smart-referee-hero-decision-heading" className="velocity-headline max-w-3xl text-[clamp(2.7rem,7vw,6.6rem)] leading-[0.92] text-white">Fair calls. A <span className="text-accent">protected schedule.</span></h1>
+              <h1 data-testid="smart-referee-hero-decision-heading" className="velocity-headline max-w-3xl text-[clamp(2.7rem,7vw,6.6rem)] leading-[0.92] text-white"><span>Fair calls. A</span><span data-smart-referee-zh-line-break className="text-accent"> protected schedule.</span></h1>
               <p className="mt-7 max-w-2xl text-base leading-8 text-white/80 md:text-lg">When a scoring moment is hard to see, Smart Referee gives officials a shared reviewable view—so your competition can move on with confidence.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={18} /></a>
@@ -190,19 +252,17 @@ export default function Product() {
 
         <section id="organiser-impact-detail" data-testid="organiser-impact-detail" className="border-b border-white/10 bg-black py-10 md:py-12">
           <div className="container max-w-4xl">
-            <details data-reveal className="reveal-up group rounded-lg border border-accent/25 bg-accent/5 p-5 sm:p-7">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-left"><span><span className="block text-xs font-semibold uppercase tracking-[0.2em] text-accent">Organiser impact</span><span className="mt-2 block text-xl font-semibold text-white">{organiserImpactDetail.summary}</span></span><ChevronDown aria-hidden="true" className="shrink-0 text-accent transition-transform duration-200 group-open:rotate-180" /></summary>
-              <div className="mt-7 border-t border-accent/20 pt-6">
-                <h2 className="velocity-headline max-w-2xl text-white">{organiserImpactDetail.title}</h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">{organiserImpactDetail.description}</p>
-                <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                  {organiserImpactDetail.metrics.map((metric) => (
-                    <div key={metric.label} className="border-l border-accent/40 pl-4"><p className="font-mono text-2xl font-semibold text-accent">{metric.value}</p><p className="mt-2 text-xs leading-5 text-white/65">{metric.label}</p></div>
-                  ))}
-                </div>
-                <p className="mt-6 text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
+            <div data-reveal className="reveal-up rounded-lg border border-accent/25 bg-accent/5 p-5 sm:p-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Organiser impact</p>
+              <h2 className="velocity-headline mt-3 max-w-2xl text-white">{organiserImpactDetail.title}</h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">{organiserImpactDetail.description}</p>
+              <div className="mt-7 grid gap-px overflow-hidden border border-accent/20 bg-accent/20 sm:grid-cols-3">
+                {organiserImpactDetail.metrics.map((metric, index) => (
+                  <div key={metric.label} data-reveal className="reveal-up bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
+                ))}
               </div>
-            </details>
+              <p className="mt-6 text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
+            </div>
           </div>
         </section>
 
@@ -214,9 +274,7 @@ export default function Product() {
               <h2 className="velocity-headline max-w-xl text-white">{technicalConfidence.title}</h2>
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
             </div>
-            <details data-reveal className="reveal-up group overflow-hidden rounded-lg border border-white/10 bg-black/20" style={{ transitionDelay: "90ms" }}>
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 p-5 text-left"><span className="font-semibold text-white">{technicalConfidence.summary}</span><ChevronDown aria-hidden="true" className="shrink-0 text-accent transition-transform duration-200 group-open:rotate-180" /></summary>
-              <div className="border-t border-white/10 p-5">
+            <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20 p-5" style={{ transitionDelay: "90ms" }}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {proofPoints.map((point) => <div key={point.value} className="border-l border-accent/40 pl-4"><p className="text-xl font-semibold text-white">{point.value}</p><p className="mt-1 text-xs leading-5 text-white/60">{point.label}</p></div>)}
                 </div>
@@ -231,8 +289,7 @@ export default function Product() {
                   <p className="text-xs leading-6 text-white/50">{technicalConfidence.referenceCaption}</p>
                 </div>
                 <img src={smartRefereeMedia.precision} alt="OptiTrack Flex 13 camera positioned at a drone-sports arena" loading="lazy" className="mt-6 aspect-[21/9] w-full rounded-md object-cover sm:aspect-[16/7]" />
-              </div>
-            </details>
+            </div>
           </div>
         </section>
 
