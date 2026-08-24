@@ -156,6 +156,11 @@ describe("Smart Referee shared-experience accessibility", () => {
     expect(smartRefereePageHierarchy).toContain("human-led-officiating");
     expect(smartRefereePageHierarchy).toContain("evidence-based-decision-support");
   });
+
+  it("positions organiser metrics before Shared Experience and proof points before Industry-Leading Precision", () => {
+    expect(smartRefereePageHierarchy.indexOf("organiser-impact-metrics")).toBeLessThan(smartRefereePageHierarchy.indexOf("human-led-officiating"));
+    expect(smartRefereePageHierarchy.indexOf("proof-points")).toBeLessThan(smartRefereePageHierarchy.indexOf("precision"));
+  });
 });
 
 describe("Smart Referee mobile presentation", () => {

@@ -23,7 +23,7 @@ export const smartRefereeHeroVideoPresentation = {
   loop: true,
   containerTreatment: "borderless-integrated",
 } as const;
-export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "proof-points", "human-led-officiating", "evidence-based-decision-support", "event-delivery-options"] as const;
+export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "organiser-impact-metrics", "human-led-officiating", "evidence-based-decision-support", "dispute-reduction", "passive-markers", "proof-points", "precision", "event-delivery-options"] as const;
 export const smartRefereeOpeningQuote = {
   text: "You may delay, but time will not.",
   attribution: "Benjamin Franklin",
@@ -112,7 +112,7 @@ function RollingMetric({
   className: string;
 }) {
   const metricRef = useRef<HTMLSpanElement>(null);
-  const [displayValue, setDisplayValue] = useState(0);
+  const [displayValue, setDisplayValue] = useState(value);
   const hasEnteredView = useRef(false);
 
   useEffect(() => {
@@ -149,6 +149,7 @@ function RollingMetric({
     const observer = new window.IntersectionObserver(([entry]) => {
       if (!entry?.isIntersecting || hasEnteredView.current) return;
       hasEnteredView.current = true;
+      setDisplayValue(0);
       animateToValue();
       observer.disconnect();
     }, { threshold: 0.45 });
@@ -280,14 +281,22 @@ export default function Product() {
           </div>
         </section>
 
-        <section className="border-y border-white/10 bg-[var(--ink-soft)] py-6 text-[var(--paper)] md:py-8">
-          <div className="container grid gap-5 text-center sm:grid-cols-2 lg:grid-cols-4">
-            {proofPoints.map((point, index) => (
-              <div data-reveal key={point.value} className="reveal-up" style={{ transitionDelay: `${index * 70}ms` }}>
-                <div className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl">{point.value}</div>
-                <p className="mt-2 text-sm text-[var(--mist)]">{point.label}</p>
-              </div>
-            ))}
+        <section data-testid="organiser-impact-metrics" data-presentation={organiserImpactMetricPresentation} className="border-y border-white/10 bg-[var(--ink-soft)] py-6 text-[var(--paper)] md:py-8">
+          <div className="container">
+            <h2 className="sr-only">Illustrative organiser impact metrics</h2>
+            <div className="grid gap-5 text-center sm:grid-cols-3">
+              {organiserImpactMetrics.map((metric, index) => (
+                <div data-reveal key={metric.label} className="reveal-up" style={{ transitionDelay: `${index * 70}ms` }}>
+                  {metric.rolling ? (
+                    <RollingMetric value={metric.value} formatter={metric.formatter === "hkd-compact" ? (value) => `HK$${Math.round(value / 1_000)}k` : (value) => `${value}${metric.suffix}`} ariaLabel={`${metric.formatter === "hkd-compact" ? "HK$27k" : `${metric.value}${metric.suffix}`} ${metric.label}`} className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl" />
+                  ) : (
+                    <div className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl">{metric.value}{metric.suffix}</div>
+                  )}
+                  <p className="mt-2 text-sm text-[var(--mist)]">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-center text-[10px] leading-5 text-[var(--mist)]">Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.</p>
           </div>
         </section>
 
@@ -387,25 +396,6 @@ export default function Product() {
           </div>
         </section>
 
-        <section data-testid="organiser-impact-metrics" data-presentation={organiserImpactMetricPresentation} className="border-y border-white/10 bg-[var(--ink-soft)] py-6 text-[var(--paper)] md:py-8">
-          <div className="container">
-            <h2 className="sr-only">Illustrative organiser impact metrics</h2>
-            <div className="grid gap-5 text-center sm:grid-cols-3">
-              {organiserImpactMetrics.map((metric, index) => (
-                <div data-reveal key={metric.label} className="reveal-up" style={{ transitionDelay: `${index * 70}ms` }}>
-                  {metric.rolling ? (
-                    <RollingMetric value={metric.value} formatter={metric.formatter === "hkd-compact" ? (value) => `HK$${Math.round(value / 1_000)}k` : (value) => `${value}${metric.suffix}`} ariaLabel={`${metric.formatter === "hkd-compact" ? "HK$27k" : `${metric.value}${metric.suffix}`} ${metric.label}`} className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl" />
-                  ) : (
-                    <div className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl">{metric.value}{metric.suffix}</div>
-                  )}
-                  <p className="mt-2 text-sm text-[var(--mist)]">{metric.label}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-4 text-center text-[10px] leading-5 text-[var(--mist)]">Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.</p>
-          </div>
-        </section>
-
         <section data-testid="passive-marker-panel" className="velocity-section bg-[#27282B]">
           <div className="container grid items-center gap-7 lg:grid-cols-[0.85fr_1fr]">
             <div data-reveal data-mobile-aspect-ratio={mobileSmartRefereeCardAspectRatio} className="reveal-up overflow-hidden rounded-lg border border-accent/25 bg-[#171C1D] shadow-2xl">
@@ -434,7 +424,18 @@ export default function Product() {
           </div>
         </section>
 
-        <section className="velocity-section bg-[#27282B]">
+        <section data-testid="smart-referee-proof-points" className="border-y border-white/10 bg-[var(--ink-soft)] py-6 text-[var(--paper)] md:py-8">
+          <div className="container grid gap-5 text-center sm:grid-cols-2 lg:grid-cols-4">
+            {proofPoints.map((point, index) => (
+              <div data-reveal key={point.value} className="reveal-up" style={{ transitionDelay: `${index * 70}ms` }}>
+                <div className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl">{point.value}</div>
+                <p className="mt-2 text-sm text-[var(--mist)]">{point.label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section data-testid="industry-leading-precision" className="velocity-section bg-[#27282B]">
           <div className="container grid items-center gap-7 lg:grid-cols-[1fr_0.85fr]">
             <div data-reveal className="reveal-up">
               <div className="mb-5 h-1 w-12 bg-accent" />
