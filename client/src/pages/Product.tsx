@@ -24,7 +24,7 @@ export const smartRefereeHeroVideoPresentation = {
   loop: true,
   containerTreatment: "borderless-integrated",
 } as const;
-export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "organiser-impact-metrics", "human-led-officiating", "multiple-rule-support", "dispute-reduction", "passive-markers", "proof-points", "precision", "event-delivery-options"] as const;
+export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "organiser-impact-metrics", "human-led-officiating", "multiple-rule-support", "dispute-reduction", "passive-markers", "proof-points", "precision"] as const;
 export const smartRefereeOpeningQuote = {
   text: "You may delay, but time will not.",
   attribution: "Benjamin Franklin",
@@ -47,11 +47,6 @@ export const organiserPainPanels = [
   { value: "01 slot", label: "Next start held", detail: "One unresolved call can keep the next match from starting while an answer is sought." },
   { value: "04 roles", label: "Delivery focus diverted", detail: "Officials, team representatives, venue operations, and production coordination can be pulled into the same moment." },
 ] as const;
-export const organiserAdoptionPanels = [
-  { number: "01", title: "Venue-ready scope", detail: "Define cage count, technical prerequisites, and the delivery boundaries before match day." },
-  { number: "02", title: "Rule-to-evidence workflow", detail: "Align tracked position, scoring conditions, and the review path around your competition rules." },
-  { number: "03", title: "Event-day delivery plan", detail: "Set the support, officials, escalation, and fallback responsibilities inside one proposed operating model." },
-] as const;
 export const sharedExperienceSections = [
   {
     id: "human-led-officiating",
@@ -67,7 +62,7 @@ export const sharedExperienceSections = [
     linkLabel: "Rule consistency",
     eyebrow: "Multiple Rule Support",
     title: "One objective reference across rule sets.",
-    summary: "Different federations and regional programmes can apply distinct scoring definitions, timing thresholds, or review requirements. Smart Referee can be configured to reflect the selected rule set, giving every official the same calibrated, reviewable evidence during the event.",
+    summary: "Regional rule sets can vary. Smart Referee applies the active rule set to calibrated position data, giving every official the same reviewable reference for a more consistent call.",
   },
 ] as const;
 export const disputeTimerPolicy = {
@@ -492,24 +487,6 @@ export default function Product() {
                 <img src={smartRefereeFeaturePanels.precision.image} alt={smartRefereeFeaturePanels.precision.imageAlt} className="h-full w-full object-cover" />
                 <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_20%,rgba(12,13,15,0.28)_100%)]" />
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section data-testid="organiser-adoption-panels" className="velocity-section border-y border-white/10 bg-black">
-          <div className="container">
-            <div data-reveal className="reveal-up mb-9 grid gap-5 lg:grid-cols-[28%_1fr] lg:items-end">
-              <p className="vli-section-label">Plan with confidence</p>
-              <div><h2 className="velocity-headline mb-4 text-white">Make adoption as deliberate as the <span className="text-accent">decision.</span></h2><p className="max-w-2xl leading-7 text-white/70">A proposal should reduce delivery uncertainty before an organiser commits. Smart Referee scopes the physical setup, the decision workflow, and the event-day responsibilities around your competition.</p></div>
-            </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              {organiserAdoptionPanels.map((panel, index) => (
-                <article key={panel.number} data-reveal className="reveal-up border border-white/10 bg-[#171C1D] p-6" style={{ transitionDelay: `${index * 80}ms` }}>
-                  <p className="font-mono text-5xl font-semibold leading-none text-accent">{panel.number}</p>
-                  <h3 className="mt-8 text-xl font-semibold text-white">{panel.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/65">{panel.detail}</p>
-                </article>
-              ))}
             </div>
           </div>
         </section>

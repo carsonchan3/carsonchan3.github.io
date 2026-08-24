@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostCopy, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, formatDisputeTimer, formatOrganiserImpactMetric, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostCopy, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeChineseHeadingFitPolicy, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuoteFitPolicy, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee proof points", () => {
@@ -145,8 +145,12 @@ describe("Smart Referee dispute-reduction support", () => {
     expect(formatDisputeTimer(13 * 60 + 4)).toBe("13:04");
   });
 
-  it("adds individual organiser adoption panels without unsupported outcome claims", () => {
-    expect(organiserAdoptionPanels.map((panel) => panel.title)).toEqual(["Venue-ready scope", "Rule-to-evidence workflow", "Event-day delivery plan"]);
+  it("removes the organiser adoption panel and keeps Multiple Rule Support to a quick read", () => {
+    expect(smartRefereePageHierarchy).not.toContain("event-delivery-options");
+    const ruleSupport = sharedExperienceSections.find((section) => section.id === "multiple-rule-support");
+    expect(ruleSupport?.summary).toBe("Regional rule sets can vary. Smart Referee applies the active rule set to calibrated position data, giving every official the same reviewable reference for a more consistent call.");
+    expect(ruleSupport?.summary.split(/\s+/).length).toBeLessThanOrEqual(30);
+    expect(traditionalChineseTranslations[ruleSupport?.summary ?? ""]).toBe("地區規則體系可能不同。Smart Referee 將啟用中的規則體系套用至經校準的位置資料，讓每位裁判取得相同且可覆核的依據，作出更一致的判決。");
   });
 });
 
