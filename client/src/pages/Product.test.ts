@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserPainPanelPresentation, organiserPainPanels, proofPoints, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningRuleQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -86,9 +86,11 @@ describe("Smart Referee dispute-reduction support", () => {
     expect(smartRefereeMedia.trackingPoster).toBe("/manus-storage/vli-tracking-test-first-frame_2dca2577.jpg");
   });
 
-  it("leads with the supplied scoring-rule quote and frames organiser pain points as narrow operational impacts", () => {
-    expect(smartRefereeOpeningRuleQuote.text).toContain("entire drone ball has passed through");
-    expect(smartRefereeOpeningRuleQuote.attribution).toContain("F9.A.8.4");
+  it("leads with the supplied time-focused opening quote and frames organiser pain points as narrow operational impacts", () => {
+    expect(smartRefereeOpeningQuote).toEqual({
+      text: "You may delay, but time will not.",
+      attribution: "Benjamin Franklin",
+    });
     expect(organiserPainPanelPresentation).toBe("narrow-separated");
     expect(organiserPainPanels).toEqual([
       expect.objectContaining({ value: "13:04", label: "Review delay" }),
@@ -105,6 +107,14 @@ describe("Smart Referee dispute-reduction support", () => {
     });
     expect(illustrativeDisputeCostScenario.assumptions).toHaveLength(3);
     expect(getIllustrativeDisputeCost(13 * 60 + 4)).toBe(500);
+  });
+
+  it("keeps the separately supplied organiser-impact values concise and distinct from the live timer model", () => {
+    expect(organiserImpactMetrics).toEqual([
+      { value: "20 hrs+", label: "Wasted time on dispute" },
+      { value: "HK$27k", label: "Extra cost related to all parties" },
+      { value: "4+", label: "Staff needed per officiating venue" },
+    ]);
   });
 
   it("adds individual organiser adoption panels without unsupported outcome claims", () => {

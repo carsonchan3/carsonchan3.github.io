@@ -24,10 +24,9 @@ export const smartRefereeHeroVideoPresentation = {
   containerTreatment: "borderless-integrated",
 } as const;
 export const smartRefereePageHierarchy = ["b2b-introduction", "system-video", "proof-points", "human-led-officiating", "evidence-based-decision-support", "event-delivery-options"] as const;
-export const smartRefereeOpeningRuleQuote = {
-  eyebrow: "The rule is clear. The moment is not always.",
-  text: "A team scores a goal when the drone ball of the Striker crosses the goal ring of the opponent's team, and when the entire drone ball has passed through the entire opponent's goal ring.",
-  attribution: "FAI Drone Soccer Rules · F9.A.8.4 · Scoring",
+export const smartRefereeOpeningQuote = {
+  text: "You may delay, but time will not.",
+  attribution: "Benjamin Franklin",
 } as const;
 export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
@@ -73,6 +72,12 @@ export const illustrativeDisputeCostScenario = {
     { role: "Active match-slot coordination", people: 1, hourlyRate: 1_200 },
   ],
 } as const;
+
+export const organiserImpactMetrics = [
+  { value: "20 hrs+", label: "Wasted time on dispute" },
+  { value: "HK$27k", label: "Extra cost related to all parties" },
+  { value: "4+", label: "Staff needed per officiating venue" },
+] as const;
 
 export const getDisputeTimeIncrements = (activeScrollMilliseconds: number) =>
   Math.floor(activeScrollMilliseconds / disputeTimerPolicy.activeScrollMillisecondsPerSecond);
@@ -168,10 +173,9 @@ export default function Product() {
           <div className="container grid items-center gap-8 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
             <div data-reveal className="reveal-up relative z-10 max-w-xl">
               <div className="mb-4 h-1 w-12 bg-accent" />
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">Smart Referee for event organisers</p>
-              <blockquote className="border-l-2 border-accent pl-4 text-lg font-medium leading-7 text-white sm:text-xl sm:leading-8">“{smartRefereeOpeningRuleQuote.text}”</blockquote>
-              <cite className="mt-3 block text-xs not-italic font-semibold uppercase tracking-[0.15em] text-white/50">{smartRefereeOpeningRuleQuote.attribution}</cite>
-              <h1 className="velocity-headline mb-4 mt-6 text-white">Turn the rule into a <span className="text-accent">reviewable decision.</span></h1>
+              <blockquote className="max-w-2xl text-3xl font-semibold leading-[0.96] tracking-[-0.055em] text-white sm:text-4xl md:text-5xl">“{smartRefereeOpeningQuote.text}”</blockquote>
+              <cite className="mt-4 block text-xs not-italic font-semibold uppercase tracking-[0.18em] text-accent">— {smartRefereeOpeningQuote.attribution}</cite>
+              <h1 className="velocity-headline mb-4 mt-8 text-white">Turn the rule into a <span className="text-accent">reviewable decision.</span></h1>
               <p className="leading-7 text-white/75">Smart Referee combines calibrated tracking, rules-aware review, and event delivery support to help organisers protect the run sheet and give every stakeholder a clearer account of the call.</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request event proposal <ArrowRight size={18} /></a>
@@ -307,6 +311,23 @@ export default function Product() {
                 </div>
                 <p className="mt-5 max-w-xl text-sm leading-6 text-white/70">This transparent scenario assumes two officials or jury members at HK$250/hour, two event or venue operations staff at HK$300/hour, and one active match-slot coordination cost at HK$1,200/hour. Replace these assumptions with your actual staffing, venue, and programme inputs.</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section data-testid="organiser-impact-metrics" className="border-b border-white/10 bg-[#071117] py-5 sm:py-6">
+          <div className="container">
+            <div data-reveal className="reveal-up mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">Illustrative organiser impact metrics</p>
+              <p className="max-w-xl text-xs leading-5 text-white/55">Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.</p>
+            </div>
+            <div data-reveal className="reveal-up grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-3" style={{ transitionDelay: "90ms" }}>
+              {organiserImpactMetrics.map((metric) => (
+                <div key={metric.label} className="bg-[#0B1419]/95 px-4 py-4 sm:px-5">
+                  <p className="font-mono text-3xl font-semibold leading-none tracking-tight text-accent sm:text-4xl">{metric.value}</p>
+                  <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">{metric.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
