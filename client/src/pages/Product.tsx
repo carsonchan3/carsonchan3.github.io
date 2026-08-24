@@ -28,6 +28,7 @@ export const smartRefereeOpeningQuote = {
   text: "You may delay, but time will not.",
   attribution: "Benjamin Franklin",
 } as const;
+export const smartRefereeOpeningQuotePresentation = "centered";
 export const organiserPainPanelPresentation = "narrow-separated";
 export const organiserPainPanels = [
   { value: "13:04", label: "Review delay", detail: "An illustrative scoring review can consume the schedule buffer intended to protect the run sheet." },
@@ -74,10 +75,16 @@ export const illustrativeDisputeCostScenario = {
 } as const;
 
 export const organiserImpactMetrics = [
-  { value: "20 hrs+", label: "Wasted time on dispute" },
-  { value: "HK$27k", label: "Extra cost related to all parties" },
-  { value: "4+", label: "Staff needed per officiating venue" },
+  { value: 20, label: "Wasted time on dispute", suffix: " hrs+", formatter: "plain", rolling: true },
+  { value: 27_000, label: "Extra cost related to all parties", suffix: "", formatter: "hkd-compact", rolling: true },
+  { value: 4, label: "Staff needed per officiating venue", suffix: "+", formatter: "plain", rolling: false },
 ] as const;
+export const organiserImpactMetricPresentation = "proof-point-band";
+export const rollingMetricPolicy = {
+  trigger: "when-visible",
+  durationMilliseconds: 900,
+  respectsReducedMotion: true,
+} as const;
 
 export const getDisputeTimeIncrements = (activeScrollMilliseconds: number) =>
   Math.floor(activeScrollMilliseconds / disputeTimerPolicy.activeScrollMillisecondsPerSecond);
@@ -89,6 +96,71 @@ export const getIllustrativeDisputeCost = (disputeSeconds: number) => {
   );
   return Math.round((hourlyOperatingCost * disputeSeconds) / 3600 / 10) * 10;
 };
+
+export const formatDisputeTimer = (seconds: number) =>
+  `${Math.floor(seconds / 60).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`;
+
+function RollingMetric({
+  value,
+  formatter = (nextValue) => nextValue.toLocaleString("en-HK"),
+  ariaLabel,
+  className,
+}: {
+  value: number;
+  formatter?: (value: number) => string;
+  ariaLabel: string;
+  className: string;
+}) {
+  const metricRef = useRef<HTMLSpanElement>(null);
+  const [displayValue, setDisplayValue] = useState(0);
+  const hasEnteredView = useRef(false);
+
+  useEffect(() => {
+    const metric = metricRef.current;
+    if (!metric) return;
+
+    let animationFrame = 0;
+    const animateToValue = (instant = false) => {
+      if (instant || typeof window === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setDisplayValue(value);
+        return;
+      }
+
+      const startedAt = window.performance.now();
+      const tick = (timestamp: number) => {
+        const progress = Math.min((timestamp - startedAt) / rollingMetricPolicy.durationMilliseconds, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        setDisplayValue(Math.round(value * easedProgress));
+        if (progress < 1) animationFrame = window.requestAnimationFrame(tick);
+      };
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+
+    if (hasEnteredView.current) {
+      animateToValue();
+      return () => window.cancelAnimationFrame(animationFrame);
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      animateToValue();
+      return () => window.cancelAnimationFrame(animationFrame);
+    }
+
+    const observer = new window.IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting || hasEnteredView.current) return;
+      hasEnteredView.current = true;
+      animateToValue();
+      observer.disconnect();
+    }, { threshold: 0.45 });
+    observer.observe(metric);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [value]);
+
+  return <span ref={metricRef} aria-label={ariaLabel} className={className}>{formatter(displayValue)}</span>;
+}
 
 export const smartRefereeMedia = {
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
@@ -162,7 +234,7 @@ export default function Product() {
     };
   }, []);
 
-  const disputeTimerLabel = `${Math.floor(disputeSeconds / 60).toString().padStart(2, "0")}:${(disputeSeconds % 60).toString().padStart(2, "0")}`;
+  const disputeTimerLabel = formatDisputeTimer(disputeSeconds);
   const illustrativeDisputeCost = getIllustrativeDisputeCost(disputeSeconds);
 
   return (
@@ -171,15 +243,15 @@ export default function Product() {
       <main data-reveal-page className="pt-16">
         <section data-testid="smart-referee-hero" className="border-b border-white/10 bg-[#111416]">
           <div className="container grid items-center gap-8 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
-            <div data-reveal className="reveal-up relative z-10 max-w-xl">
+            <div data-reveal className="reveal-up relative z-10 mx-auto flex max-w-xl flex-col items-center text-center">
               <div className="mb-4 h-1 w-12 bg-accent" />
               <blockquote className="max-w-2xl text-3xl font-semibold leading-[0.96] tracking-[-0.055em] text-white sm:text-4xl md:text-5xl">“{smartRefereeOpeningQuote.text}”</blockquote>
               <cite className="mt-4 block text-xs not-italic font-semibold uppercase tracking-[0.18em] text-accent">— {smartRefereeOpeningQuote.attribution}</cite>
               <h1 className="velocity-headline mb-4 mt-8 text-white">Turn the rule into a <span className="text-accent">reviewable decision.</span></h1>
               <p className="leading-7 text-white/75">Smart Referee combines calibrated tracking, rules-aware review, and event delivery support to help organisers protect the run sheet and give every stakeholder a clearer account of the call.</p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request event proposal <ArrowRight size={18} /></a>
-                <a href="#system-video" className="inline-flex items-center justify-center gap-2 self-start rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">See the system in action <ArrowRight size={18} /></a>
+              <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request event proposal <ArrowRight size={18} /></a>
+                <a href="#system-video" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">See the system in action <ArrowRight size={18} /></a>
               </div>
             </div>
             <div data-reveal className="reveal-up grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-3" data-presentation={organiserPainPanelPresentation} style={{ transitionDelay: "90ms" }}>
@@ -300,12 +372,12 @@ export default function Product() {
                 <div className="flex items-center gap-2 text-accent"><Clock3 size={18} /><p className="text-[10px] font-semibold uppercase tracking-[0.15em]">Illustrative dispute-time scenario</p></div>
                 <div className="mt-4 grid gap-5 sm:grid-cols-[1fr_0.9fr] sm:items-end">
                   <div>
-                    <time data-testid="dispute-time-counter" className="block font-mono text-6xl font-semibold leading-none tracking-tight text-white sm:text-8xl" aria-label={`${disputeTimerLabel} on the dispute time counter`}>{disputeTimerLabel}</time>
+                    <RollingMetric value={disputeSeconds} formatter={formatDisputeTimer} ariaLabel={`${disputeTimerLabel} on the dispute time counter`} className="block font-mono text-6xl font-semibold leading-none tracking-tight text-white sm:text-8xl" />
                     <p className="mt-3 text-xs leading-5 text-white/65">Elapsed review time consuming the margin between scheduled match starts.</p>
                   </div>
                   <div data-testid="illustrative-dispute-cost" className="border-l border-accent/35 pl-4 sm:pl-5">
                     <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-accent">{illustrativeDisputeCostScenario.label}</p>
-                    <p className="mt-2 font-mono text-4xl font-semibold leading-none tracking-tight text-white">{illustrativeDisputeCostScenario.currency}{illustrativeDisputeCost.toLocaleString()}</p>
+                    <RollingMetric value={illustrativeDisputeCost} formatter={(value) => `${illustrativeDisputeCostScenario.currency}${value.toLocaleString("en-HK")}`} ariaLabel={`${illustrativeDisputeCostScenario.currency}${illustrativeDisputeCost.toLocaleString("en-HK")} illustrative active event-time cost`} className="mt-2 block font-mono text-4xl font-semibold leading-none tracking-tight text-white" />
                     <p className="mt-2 text-xs leading-5 text-white/70">{illustrativeDisputeCostScenario.qualification}</p>
                   </div>
                 </div>
@@ -315,20 +387,22 @@ export default function Product() {
           </div>
         </section>
 
-        <section data-testid="organiser-impact-metrics" className="border-b border-white/10 bg-[#071117] py-5 sm:py-6">
+        <section data-testid="organiser-impact-metrics" data-presentation={organiserImpactMetricPresentation} className="border-y border-white/10 bg-[var(--ink-soft)] py-6 text-[var(--paper)] md:py-8">
           <div className="container">
-            <div data-reveal className="reveal-up mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">Illustrative organiser impact metrics</p>
-              <p className="max-w-xl text-xs leading-5 text-white/55">Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.</p>
-            </div>
-            <div data-reveal className="reveal-up grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-3" style={{ transitionDelay: "90ms" }}>
-              {organiserImpactMetrics.map((metric) => (
-                <div key={metric.label} className="bg-[#0B1419]/95 px-4 py-4 sm:px-5">
-                  <p className="font-mono text-3xl font-semibold leading-none tracking-tight text-accent sm:text-4xl">{metric.value}</p>
-                  <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">{metric.label}</p>
+            <h2 className="sr-only">Illustrative organiser impact metrics</h2>
+            <div className="grid gap-5 text-center sm:grid-cols-3">
+              {organiserImpactMetrics.map((metric, index) => (
+                <div data-reveal key={metric.label} className="reveal-up" style={{ transitionDelay: `${index * 70}ms` }}>
+                  {metric.rolling ? (
+                    <RollingMetric value={metric.value} formatter={metric.formatter === "hkd-compact" ? (value) => `HK$${Math.round(value / 1_000)}k` : (value) => `${value}${metric.suffix}`} ariaLabel={`${metric.formatter === "hkd-compact" ? "HK$27k" : `${metric.value}${metric.suffix}`} ${metric.label}`} className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl" />
+                  ) : (
+                    <div className="text-3xl font-bold tracking-tight text-[var(--paper)] md:text-4xl">{metric.value}{metric.suffix}</div>
+                  )}
+                  <p className="mt-2 text-sm text-[var(--mist)]">{metric.label}</p>
                 </div>
               ))}
             </div>
+            <p className="mt-4 text-center text-[10px] leading-5 text-[var(--mist)]">Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.</p>
           </div>
         </section>
 

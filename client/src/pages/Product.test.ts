@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { disputeTimerPolicy, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
+import { disputeTimerPolicy, formatDisputeTimer, getDisputeTimeIncrements, getIllustrativeDisputeCost, illustrativeDisputeCostScenario, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserAdoptionPanels, organiserImpactMetricPresentation, organiserImpactMetrics, organiserPainPanelPresentation, organiserPainPanels, proofPoints, rollingMetricPolicy, sharedExperienceSections, smartRefereeFeaturePanels, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereeOpeningQuote, smartRefereeOpeningQuotePresentation, smartRefereePageHierarchy, technicalSpecificationPresentation } from "./Product";
 
 describe("Smart Referee proof points", () => {
   it("uses the supplied OptiTrack motion-capture description", () => {
@@ -91,6 +91,7 @@ describe("Smart Referee dispute-reduction support", () => {
       text: "You may delay, but time will not.",
       attribution: "Benjamin Franklin",
     });
+    expect(smartRefereeOpeningQuotePresentation).toBe("centered");
     expect(organiserPainPanelPresentation).toBe("narrow-separated");
     expect(organiserPainPanels).toEqual([
       expect.objectContaining({ value: "13:04", label: "Review delay" }),
@@ -110,11 +111,21 @@ describe("Smart Referee dispute-reduction support", () => {
   });
 
   it("keeps the separately supplied organiser-impact values concise and distinct from the live timer model", () => {
+    expect(organiserImpactMetricPresentation).toBe("proof-point-band");
     expect(organiserImpactMetrics).toEqual([
-      { value: "20 hrs+", label: "Wasted time on dispute" },
-      { value: "HK$27k", label: "Extra cost related to all parties" },
-      { value: "4+", label: "Staff needed per officiating venue" },
+      { value: 20, label: "Wasted time on dispute", suffix: " hrs+", formatter: "plain", rolling: true },
+      { value: 27_000, label: "Extra cost related to all parties", suffix: "", formatter: "hkd-compact", rolling: true },
+      { value: 4, label: "Staff needed per officiating venue", suffix: "+", formatter: "plain", rolling: false },
     ]);
+  });
+
+  it("uses viewport-triggered rolling motion for time and money values while respecting reduced motion", () => {
+    expect(rollingMetricPolicy).toEqual({
+      trigger: "when-visible",
+      durationMilliseconds: 900,
+      respectsReducedMotion: true,
+    });
+    expect(formatDisputeTimer(13 * 60 + 4)).toBe("13:04");
   });
 
   it("adds individual organiser adoption panels without unsupported outcome claims", () => {
