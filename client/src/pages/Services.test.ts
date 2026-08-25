@@ -19,9 +19,11 @@ describe("Services thumbnail data", () => {
 
   it("links customers to the supplied Google Sheet for detailed service pricing", () => {
     expect(detailedServicePricingSheet).toEqual({
+      serviceTitle: "Drone Photo / Cinematography",
+      embedHref: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/preview?rm=minimal",
       href: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/edit?usp=sharing",
       label: "Detailed service pricing",
-      description: "View the current service price list in Google Sheets.",
+      description: "View the current public price book directly below.",
       ariaLabel: "Open detailed service pricing in Google Sheets (opens in a new tab)",
     });
   });
