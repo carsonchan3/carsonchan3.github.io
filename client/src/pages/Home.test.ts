@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHeroScrollCue, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio, partnerHeadingPresentation } from "./Home";
+import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHeroScrollCue, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio, partnerHeadingPresentation, publicCollaborators } from "./Home";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("homepage supporting organisations", () => {
@@ -8,6 +8,16 @@ describe("homepage supporting organisations", () => {
       name: "Hong Kong Science and Technology Parks Ideation Programme",
       logo: "/manus-storage/HKSTP_6e2bc852.png",
     }));
+  });
+
+  it("temporarily excludes HKDSA from the public partner strip while preserving its supplied record", () => {
+    expect(collaborators).toContainEqual(expect.objectContaining({
+      name: "Hong Kong Drone Sports Association",
+      logo: "/manus-storage/HKDSA_9a3a9c17.jpeg",
+      isPublic: false,
+    }));
+    expect(publicCollaborators.map((collaborator) => collaborator.name)).not.toContain("Hong Kong Drone Sports Association");
+    expect(publicCollaborators).toHaveLength(2);
   });
 
   it("keeps the Supporting network label at the upper left while centring the partner heading and copy", () => {

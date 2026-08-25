@@ -15,10 +15,13 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export const collaborators = [
-  { name: "Hong Kong Drone Sports Association", logo: "/manus-storage/HKDSA_9a3a9c17.jpeg" },
-  { name: "Eastern District Drone Association", logo: "/manus-storage/EDD_61b82de0.jpg" },
-  { name: "Hong Kong Science and Technology Parks Ideation Programme", logo: "/manus-storage/HKSTP_6e2bc852.png" },
+  // Temporarily hidden from the public partner strip. Set isPublic back to true to restore this supplied record and asset.
+  { name: "Hong Kong Drone Sports Association", logo: "/manus-storage/HKDSA_9a3a9c17.jpeg", isPublic: false },
+  { name: "Eastern District Drone Association", logo: "/manus-storage/EDD_61b82de0.jpg", isPublic: true },
+  { name: "Hong Kong Science and Technology Parks Ideation Programme", logo: "/manus-storage/HKSTP_6e2bc852.png", isPublic: true },
 ];
+
+export const publicCollaborators = collaborators.filter((collaborator) => collaborator.isPublic);
 
 export const mobileOfferingCardAspectRatio = "21:9";
 export const mobileHomeHeroVideoAspectRatio = "4:5";
@@ -144,7 +147,7 @@ export default function Home() {
         <section id="partners" className="vli-partner-band velocity-section border-y">
           <div className="container"><div className="mx-auto max-w-6xl">
             <div data-reveal data-presentation={`${partnerHeadingPresentation.labelPosition}-${partnerHeadingPresentation.headingAlignment}`} className="reveal-up relative mb-12"><p className="vli-section-label mb-6 lg:absolute lg:left-0 lg:top-0 lg:mb-0">Supporting network</p><div className="mx-auto max-w-4xl text-center"><h2 className="velocity-headline mb-5 text-white">Partners &amp; Supporting Organizations</h2><p className="velocity-body mx-auto max-w-2xl">Together, we are advancing fair, data-driven competition and growing the future of drone sports.</p></div></div>
-            <div data-reveal className="reveal-up" style={{ transitionDelay: "100ms" }}><LogoCarousel logos={collaborators} compact /></div>
+            <div data-reveal className="reveal-up" style={{ transitionDelay: "100ms" }}><LogoCarousel logos={publicCollaborators} compact /></div>
           </div></div>
         </section>
 
