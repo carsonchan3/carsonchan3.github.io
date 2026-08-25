@@ -1,6 +1,12 @@
 // Generated from the user-reviewed Traditional Chinese translation workbook.
 // Do not edit individual values here; update the review workbook and regenerate.
 export const traditionalChineseTranslations: Record<string, string> = {
+  "Follow VLI": "追蹤 VLI",
+  "Social media placeholder links": "社交媒體預留連結",
+  "Open LinkedIn placeholder link": "開啟 LinkedIn 預留連結",
+  "Open Instagram placeholder link": "開啟 Instagram 預留連結",
+  "Open YouTube placeholder link": "開啟 YouTube 預留連結",
+  "Open Facebook placeholder link": "開啟 Facebook 預留連結",
   "Drone Photo / Cinematography": "無人機攝影／航拍製作",
   "Drone Sports Referee Pitch": "無人機運動裁判簡介影片",
   "Show details": "顯示詳情",
