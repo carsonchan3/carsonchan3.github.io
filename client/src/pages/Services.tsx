@@ -114,44 +114,38 @@ export default function Services() {
               <h2 className="velocity-headline text-white">Choose the support that fits your next step.</h2>
             </div>
             <div className="space-y-4">
-              {banners.map((service, index) => {
-                const hasInlinePricingViewer = service.title === detailedServicePricingSheet.serviceTitle;
-
-                return (
-                <article data-reveal data-revealed={hasResolvedServiceCatalogue ? "" : undefined} key={service.title} data-testid={`service-card-${service.number}`} data-mobile-aspect-ratio={hasInlinePricingViewer ? undefined : mobileServiceCardAspectRatio} tabIndex={0} onClick={() => openServiceEnquiry(service.title)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openServiceEnquiry(service.title); } }} className={`group reveal-up relative min-h-0 cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-[#1C1D20] transition-all duration-300 hover:border-accent/60 hover:shadow-[0_18px_48px_rgba(64,224,208,0.1)] focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${hasInlinePricingViewer ? "aspect-auto" : "aspect-square sm:aspect-auto sm:min-h-[30rem] lg:min-h-[20rem]"}`} style={{ transitionDelay: `${index * 70}ms` }}>
-                  <div className={`grid ${hasInlinePricingViewer ? "h-auto lg:grid-cols-2 lg:items-stretch" : "h-full lg:h-[20rem] lg:grid-cols-2 lg:items-stretch"}`}>
-                    <div data-testid="service-image-panel" className={`${hasInlinePricingViewer ? "relative h-64 overflow-hidden sm:h-72 lg:h-full" : serviceImagePanelClassName} ${index % 2 === 1 ? "lg:order-2" : ""}`}>
+              {banners.map((service, index) => (
+                <article data-reveal data-revealed={hasResolvedServiceCatalogue ? "" : undefined} key={service.title} data-testid={`service-card-${service.number}`} data-mobile-aspect-ratio={mobileServiceCardAspectRatio} tabIndex={0} onClick={() => openServiceEnquiry(service.title)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openServiceEnquiry(service.title); } }} className="group reveal-up relative aspect-square min-h-0 cursor-pointer overflow-hidden rounded-lg border border-white/10 bg-[#1C1D20] transition-all duration-300 hover:border-accent/60 hover:shadow-[0_18px_48px_rgba(64,224,208,0.1)] focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 sm:aspect-auto sm:min-h-[30rem] lg:min-h-[20rem]" style={{ transitionDelay: `${index * 70}ms` }}>
+                  <div className="grid h-full lg:h-[20rem] lg:grid-cols-2 lg:items-stretch">
+                    <div data-testid="service-image-panel" className={`${serviceImagePanelClassName} ${index % 2 === 1 ? "lg:order-2" : ""}`}>
                       <img src={service.thumbnail} alt={service.imageAlt} loading="lazy" decoding="async" className={serviceImageClassName} />
                       <div data-testid="service-image-fade" className={`absolute inset-0 ${index % 2 === 1 ? "bg-gradient-to-b from-black/10 via-[#1C1D20]/20 to-[#1C1D20] lg:bg-gradient-to-l lg:from-transparent lg:via-[#1C1D20]/25 lg:to-[#1C1D20]" : "bg-gradient-to-b from-black/10 via-[#1C1D20]/20 to-[#1C1D20] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1C1D20]/25 lg:to-[#1C1D20]"}`} />
                       <div className="absolute inset-0 bg-black/10" />
                       <div className="absolute left-4 top-4 inline-flex rounded-full border border-accent/40 bg-black/70 p-2 text-accent shadow-lg shadow-black/20">{service.icon}</div>
                       <p className="absolute right-4 top-4 text-xs font-bold text-accent drop-shadow-sm">{service.number}</p>
                     </div>
-                    <div className={`relative z-10 ${hasInlinePricingViewer ? "bg-[#1C1D20] px-5 py-6 lg:flex lg:flex-col lg:justify-center lg:px-8 lg:py-8" : "mt-auto bg-gradient-to-t from-[#1C1D20] via-[#1C1D20]/94 to-transparent px-5 pb-5 pt-20 sm:mt-0 sm:bg-[#1C1D20] sm:px-5 sm:py-6 lg:flex lg:flex-col lg:justify-center lg:px-8 lg:py-8"} ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                    <div className={`relative z-10 mt-auto bg-gradient-to-t from-[#1C1D20] via-[#1C1D20]/94 to-transparent px-5 pb-5 pt-20 sm:mt-0 sm:bg-[#1C1D20] sm:px-5 sm:py-6 lg:flex lg:flex-col lg:justify-center lg:px-8 lg:py-8 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                       <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent sm:mb-1.5 sm:text-xs">VLI service</p>
                       <h3 className="mb-2 text-xl font-bold leading-tight tracking-[-0.03em] text-white md:text-3xl">{service.title}</h3>
-                      <p className={`${hasInlinePricingViewer ? "max-w-2xl" : "line-clamp-3 max-w-2xl sm:line-clamp-2 md:line-clamp-3"} text-sm leading-6 text-white/80 md:text-base md:leading-7`}>{service.description}</p>
+                      <p className="line-clamp-3 max-w-2xl text-sm leading-6 text-white/80 sm:line-clamp-2 md:line-clamp-3 md:text-base md:leading-7">{service.description}</p>
                       <dl data-testid="service-guidance" className="sr-only sm:mt-3 sm:grid sm:max-w-2xl sm:grid-cols-2 sm:gap-1.5 sm:text-[0.68rem] sm:leading-4 md:text-xs">
                         <div className="rounded-md border border-white/10 bg-black/15 px-2 py-1.5"><dt className="font-semibold uppercase tracking-[0.1em] text-accent">Estimated duration</dt><dd className="mt-1 text-white/75">{service.duration}</dd></div>
                         <div className="rounded-md border border-white/10 bg-black/15 px-2 py-1.5"><dt className="font-semibold uppercase tracking-[0.1em] text-accent">Pricing guidance</dt><dd className="mt-1 text-white/75">{service.pricing}</dd></div>
                       </dl>
                       <button type="button" data-testid={`service-enquiry-trigger-${service.number}`} onClick={(event) => { event.stopPropagation(); openServiceEnquiry(service.title); }} className="sr-only sm:mt-3 sm:inline-flex sm:items-center sm:gap-2 sm:rounded-full sm:border sm:border-white/50 sm:px-4 sm:py-2 sm:text-sm sm:font-semibold sm:text-white sm:transition-colors sm:hover:border-accent sm:hover:bg-accent sm:hover:text-black">Discuss this service <ArrowRight size={17} /></button>
                     </div>
-                    {hasInlinePricingViewer && (
-                      <div data-testid="service-pricing-sheet-viewer" onClick={(event) => event.stopPropagation()} onKeyDown={(event) => event.stopPropagation()} className="relative z-10 border-t border-white/10 bg-[#111215] p-4 sm:p-6 lg:col-span-2 lg:p-8">
-                        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                          <div><p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{detailedServicePricingSheet.label}</p><p className="mt-1 text-sm leading-6 text-white/65">{detailedServicePricingSheet.description}</p></div>
-                          <a data-testid="service-pricing-sheet-fallback" href={detailedServicePricingSheet.href} target="_blank" rel="noopener noreferrer" aria-label={detailedServicePricingSheet.ariaLabel} className="inline-flex shrink-0 items-center gap-2 rounded-full border border-accent/60 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:border-accent hover:bg-accent hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#111215]">Open in Google Sheets <ExternalLink size={16} aria-hidden="true" /></a>
-                        </div>
-                        <div className="overflow-hidden rounded-md border border-white/10 bg-white">
-                          <iframe data-testid="service-pricing-sheet-iframe" src={detailedServicePricingSheet.embedHref} title={language === "zh-Hant" ? "詳細服務價目表試算表" : "Detailed service pricing spreadsheet"} loading="eager" className="h-[32rem] w-full border-0 sm:h-[38rem]" />
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </article>
-                );
-              })}
+              ))}
+              <section data-testid="service-pricing-sheet-viewer" data-reveal className="reveal-up relative z-10 overflow-hidden rounded-lg border border-white/10 bg-[#111215] p-4 sm:p-6 lg:p-8">
+                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div><p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">{detailedServicePricingSheet.label}</p><p className="mt-1 text-sm leading-6 text-white/65">{detailedServicePricingSheet.description}</p></div>
+                  <a data-testid="service-pricing-sheet-fallback" href={detailedServicePricingSheet.href} target="_blank" rel="noopener noreferrer" aria-label={detailedServicePricingSheet.ariaLabel} className="inline-flex shrink-0 items-center gap-2 rounded-full border border-accent/60 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:border-accent hover:bg-accent hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#111215]">Open in Google Sheets <ExternalLink size={16} aria-hidden="true" /></a>
+                </div>
+                <div className="overflow-hidden rounded-md border border-white/10 bg-white">
+                  <iframe data-testid="service-pricing-sheet-iframe" src={detailedServicePricingSheet.embedHref} title={language === "zh-Hant" ? "詳細服務價目表試算表" : "Detailed service pricing spreadsheet"} loading="eager" className="h-[32rem] w-full border-0 sm:h-[38rem]" />
+                </div>
+              </section>
             </div>
           </div>
         </section>
