@@ -10,14 +10,14 @@ describe("homepage supporting organisations", () => {
     }));
   });
 
-  it("temporarily excludes HKDSA from the public partner strip while preserving its supplied record", () => {
+  it("includes HKDSA in the public partner strip using its preserved supplied record", () => {
     expect(collaborators).toContainEqual(expect.objectContaining({
       name: "Hong Kong Drone Sports Association",
       logo: "/manus-storage/HKDSA_9a3a9c17.jpeg",
-      isPublic: false,
+      isPublic: true,
     }));
-    expect(publicCollaborators.map((collaborator) => collaborator.name)).not.toContain("Hong Kong Drone Sports Association");
-    expect(publicCollaborators).toHaveLength(2);
+    expect(publicCollaborators.map((collaborator) => collaborator.name)).toContain("Hong Kong Drone Sports Association");
+    expect(publicCollaborators).toHaveLength(3);
   });
 
   it("keeps the Supporting network label at the upper left while centring the partner heading and copy", () => {

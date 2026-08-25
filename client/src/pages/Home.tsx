@@ -15,8 +15,7 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export const collaborators = [
-  // Temporarily hidden from the public partner strip. Set isPublic back to true to restore this supplied record and asset.
-  { name: "Hong Kong Drone Sports Association", logo: "/manus-storage/HKDSA_9a3a9c17.jpeg", isPublic: false },
+  { name: "Hong Kong Drone Sports Association", logo: "/manus-storage/HKDSA_9a3a9c17.jpeg", isPublic: true },
   { name: "Eastern District Drone Association", logo: "/manus-storage/EDD_61b82de0.jpg", isPublic: true },
   { name: "Hong Kong Science and Technology Parks Ideation Programme", logo: "/manus-storage/HKSTP_6e2bc852.png", isPublic: true },
 ];
