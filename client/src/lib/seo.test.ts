@@ -18,13 +18,19 @@ describe("SEO route registry", () => {
     expect(localizedPath("/#partners", "zh-Hant")).toBe("/zh-hant#partners");
     expect(trimLocalePrefix("/zh-hant/dronesportsreferee")).toBe("/dronesportsreferee");
     expect(absoluteUrl("/contact", "zh-Hant")).toBe("https://velocity-lab.com/zh-hant/contact/");
+    expect(absoluteUrl("/people", "en")).toBe("https://velocity-lab.com/people/");
+    expect(absoluteUrl("/privacy", "zh-Hant")).toBe("https://velocity-lab.com/zh-hant/privacy/");
   });
 
   it("builds only truthful published schema inputs for applicable pages", () => {
     const home = getSeoPage("/");
     const referee = getSeoPage("/dronesportsreferee");
+    const people = getSeoPage("/people");
+    const privacy = getSeoPage("/privacy");
     expect(home).not.toBeNull();
     expect(referee).not.toBeNull();
+    expect(people).not.toBeNull();
+    expect(privacy).not.toBeNull();
     expect(buildStructuredData(home!, "en").some((item) => item["@type"] === "Organization")).toBe(true);
     expect(buildStructuredData(referee!, "en").some((item) => item["@type"] === "VideoObject")).toBe(true);
   });

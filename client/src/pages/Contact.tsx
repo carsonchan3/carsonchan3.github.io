@@ -10,6 +10,10 @@ import { TurnstileField } from "@/components/TurnstileField";
 import { trpc } from "@/lib/trpc";
 import { publicContactEmail, publicContactEmailHref } from "@/lib/contactDetails";
 import { isStaticEnquiryHost, submitStaticEnquiry } from "@/lib/staticEnquiry";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
+import { staticSitePath } from "@/lib/staticPreview";
+import { localizedPath } from "@/lib/seo";
+import { trackConversion } from "@/lib/conversionTracking";
 
 const initialFormData = {
   name: "",
@@ -22,12 +26,30 @@ const initialFormData = {
 };
 
 export default function Contact() {
+  const { language } = useWebsiteLanguage();
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const contactMutation = trpc.contact.submit.useMutation();
   const usesStaticEnquiries = isStaticEnquiryHost();
+  const contactCopy = language === "zh-Hant"
+    ? {
+        nextTitle: "下一步",
+        nextBody: "團隊會檢視每個查詢，並根據您的場地、賽事形式或技術需要界定合適的下一步。",
+        success: "已收到查詢。我們會檢視資料並以合適的下一步跟進。",
+        privacyLead: "提交查詢即代表您同意速研創新按",
+        privacyLink: "私隱聲明",
+        privacyTail: "所述方式處理您提供的資料。",
+      }
+    : {
+        nextTitle: "What happens next",
+        nextBody: "Our team reviews each enquiry and uses your venue, format, or technical needs to define an appropriate next step.",
+        success: "Enquiry received. We will review the details and follow up with an appropriate next step.",
+        privacyLead: "By sending an enquiry, you acknowledge the way Velocity Lab Innovation handles the information you provide in its",
+        privacyLink: "Privacy notice",
+        privacyTail: ".",
+      };
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -70,7 +92,8 @@ export default function Contact() {
           website: formData.website || undefined,
         });
       }
-      toast.success("Enquiry received. Our team will contact you within one business day.");
+      trackConversion("contact_submit", { kind: "general", language });
+      toast.success(contactCopy.success);
       setFormData(initialFormData);
       setTurnstileToken("");
       setTurnstileResetKey((key) => key + 1);
@@ -96,11 +119,11 @@ export default function Contact() {
             <aside data-reveal className="reveal-up space-y-8 lg:pt-4">
               <div><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Direct contact</p><h2 className="velocity-subheading text-white">Start with the channel that suits you.</h2></div>
               <div className="space-y-6">
-                <div className="flex items-start gap-4"><Mail className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Email</h3><a href={publicContactEmailHref} className="text-white/70 transition-colors hover:text-accent">{publicContactEmail}</a></div></div>
-                <div className="flex items-start gap-4"><Phone className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Phone</h3><a href="tel:+85266507520" className="text-white/70 transition-colors hover:text-accent">+852 66507520</a></div></div>
+                <div className="flex items-start gap-4"><Mail className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Email</h3><a href={publicContactEmailHref} onClick={() => trackConversion("direct_contact_click", { channel: "email", language })} className="text-white/70 transition-colors hover:text-accent">{publicContactEmail}</a></div></div>
+                <div className="flex items-start gap-4"><Phone className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Phone</h3><a href="tel:+85266507520" onClick={() => trackConversion("direct_contact_click", { channel: "phone", language })} className="text-white/70 transition-colors hover:text-accent">+852 66507520</a></div></div>
                 <div className="flex items-start gap-4"><MapPin className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Location</h3><p className="text-white/70">Hong Kong, China</p></div></div>
               </div>
-              <div className="rounded-lg border border-accent/25 bg-accent/10 p-5"><p className="text-sm font-semibold text-white">What happens next</p><p className="mt-2 text-sm leading-6 text-white/70">Our team reviews each enquiry and responds within one business day with the appropriate next step.</p></div>
+              <div className="rounded-lg border border-accent/25 bg-accent/10 p-5"><p className="text-sm font-semibold text-white">{contactCopy.nextTitle}</p><p className="mt-2 text-sm leading-6 text-white/70">{contactCopy.nextBody}</p></div>
             </aside>
 
             <form data-reveal data-testid="contact-enquiry-form" onSubmit={handleFormSubmit} className="reveal-up rounded-lg border border-white/10 bg-[#27282B] p-5 shadow-2xl sm:p-7" style={{ transitionDelay: "90ms" }}>
@@ -112,7 +135,7 @@ export default function Contact() {
                 <div className="grid gap-4 md:grid-cols-2"><select name="sport" value={formData.sport} onChange={handleFormChange} aria-label="Area of interest" className="h-10 w-full rounded-md border border-white/20 bg-black/20 px-3 text-sm text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white"><option value="">Area of interest (Optional)</option><option value="Drone sports">Drone sports referee</option><option value="Research / technology">Drone equipment</option><option value="Other sports">Technical services</option><option value="Other">Other</option></select><select name="organizationType" value={formData.organizationType} onChange={handleFormChange} aria-label="Organization type" className="h-10 w-full rounded-md border border-white/20 bg-black/20 px-3 text-sm text-white outline-none transition-colors focus:border-accent [&>option]:bg-black [&>option]:text-white"><option value="">Organization type (Optional)</option><option value="Sports league or association">Sports league or association</option><option value="Event organizer">Event organizer</option><option value="Technology company">Technology company</option><option value="School or university">School or university</option><option value="Other organization">Other organization</option></select></div>
                 <Textarea name="message" placeholder="Tell us about your needs..." value={formData.message} onChange={handleFormChange} className="min-h-36 border-white/20 bg-black/20 text-white placeholder:text-white/50" required />
                 {usesStaticEnquiries ? <TurnstileField resetKey={turnstileResetKey} onToken={setTurnstileToken} onError={() => toast.error("Spam protection could not load. Please refresh and try again.")} /> : null}
-                <p className="text-sm text-white/55">Our team will review your details and reply within one business day.</p>
+                <p className="text-sm leading-6 text-white/55">{contactCopy.privacyLead} <a href={staticSitePath(localizedPath("/privacy", language))} className="font-medium text-white/80 underline decoration-accent/60 underline-offset-4 transition-colors hover:text-accent">{contactCopy.privacyLink}</a>{contactCopy.privacyTail}</p>
                 <Button type="submit" disabled={isSubmitting} className="w-full bg-accent font-semibold text-black hover:opacity-90">{isSubmitting ? "Sending..." : "Send enquiry"}</Button>
               </div>
             </form>

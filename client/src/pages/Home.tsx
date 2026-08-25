@@ -10,6 +10,7 @@ import SiteFooter from "@/components/SiteFooter";
 import { offeringCards } from "@/lib/offeringRoutes";
 import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 import { getRevealTransitionDelay } from "@/lib/revealMotion";
+import { trackConversion } from "@/lib/conversionTracking";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -37,8 +38,20 @@ export const partnerHeadingPresentation = {
   descriptionAlignment: "center",
 } as const;
 
+export const homepageBuyerStatement = {
+  en: "For drone-sports organisers, technical programmes, and teams that need a reviewable view of difficult match decisions.",
+  "zh-Hant": "為需要覆核困難比賽判決的無人機運動主辦方、技術項目及團隊而設。",
+} as const;
+
+export const homepagePlanningStatement = {
+  en: "Start with your venue, format, and schedule. We will help define the practical next step.",
+  "zh-Hant": "從您的場地、賽事形式及時間表開始，我們會協助界定最實際的下一步。",
+} as const;
+
 export default function Home() {
   const { language } = useWebsiteLanguage();
+  const buyerStatement = homepageBuyerStatement[language];
+  const planningStatement = homepagePlanningStatement[language];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -90,13 +103,14 @@ export default function Home() {
               <p className="vli-home-kicker mb-2 sm:mb-6 lg:mb-2">Precision drone sports systems</p>
               <h1 className="vli-home-title mb-2 text-white sm:mb-9 lg:mb-3 lg:text-[clamp(2.35rem,3.7vw,3.75rem)]">Every Frame Matters.<br /><span className="text-accent">Every Call Counts.</span></h1>
               <div className="grid max-w-2xl gap-3 sm:gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end lg:block">
-                <p className="text-xs leading-5 text-[var(--mist)] sm:text-base sm:leading-7 md:text-lg">Precision-driven drone sports refereeing powered by OptiTrack motion capture. Fair play, engineered. Real-time decisions backed by data.</p>
-                <p className="hidden max-w-xs text-xs leading-4 text-[var(--mist)] sm:block sm:text-sm sm:leading-6 lg:hidden">Build a more reliable event programme with integrated decision support, equipment, and technical delivery.</p>
+                <p className="text-xs leading-5 text-[var(--mist)] sm:text-base sm:leading-7 md:text-lg">{buyerStatement}</p>
+                <p className="hidden max-w-xs text-xs leading-4 text-[var(--mist)] sm:block sm:text-sm sm:leading-6 lg:hidden">{planningStatement}</p>
               </div>
               <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-8 sm:flex sm:gap-4 lg:mt-4">
-                <button onClick={() => scrollToSection("offerings")} className="flex items-center justify-center gap-1.5 bg-accent px-3 py-2 text-xs font-semibold text-black transition-colors hover:bg-[#7ff2e6] sm:gap-2 sm:px-6 sm:py-3 sm:text-base">Explore offerings <ArrowRight size={15} className="sm:size-5" /></button>
-                <a href={staticSitePath(localizedPath("/contact", language))} className="border border-white/45 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[#051018] sm:px-6 sm:py-3 sm:text-base">Plan an event</a>
+                <button onClick={() => { trackConversion("smart_referee_cta", { action: "explore_offerings", route: "home" }); scrollToSection("offerings"); }} className="flex items-center justify-center gap-1.5 bg-accent px-3 py-2 text-xs font-semibold text-black transition-colors hover:bg-[#7ff2e6] sm:gap-2 sm:px-6 sm:py-3 sm:text-base">Explore offerings <ArrowRight size={15} className="sm:size-5" /></button>
+                <a href={staticSitePath(localizedPath("/contact", language))} onClick={() => trackConversion("plan_event_click", { route: "home", language })} className="border border-white/45 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[#051018] sm:px-6 sm:py-3 sm:text-base">Plan an event</a>
               </div>
+              <p className="mt-3 text-[11px] leading-4 text-white/55 sm:mt-4 sm:text-sm sm:leading-6">{planningStatement}</p>
             </div>
           </div>
           <a href="#offerings" className="absolute bottom-7 right-8 z-10 hidden items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--mist)] transition-colors hover:text-accent lg:flex" aria-label="Scroll to offerings"><span className="h-px w-8 bg-accent" />Scroll to explore<span className="text-accent">↓</span></a>

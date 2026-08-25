@@ -10,6 +10,7 @@ import WebsiteTranslationObserver from "./components/WebsiteTranslationObserver"
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import People from "./pages/People";
+import Privacy from "./pages/Privacy";
 import Pricing from "./pages/Pricing";
 import Product from "./pages/Product";
 import Equipment from "./pages/Equipment";
@@ -29,6 +30,7 @@ function Router() {
       <Route path={"/contact"} component={Contact} />
       <Route path={"/"} component={Home} />
       <Route path={"/people"} component={People} />
+      <Route path={"/privacy"} component={Privacy} />
       <Route path={"/dronesportsreferee"} component={Product} />
       <Route path={"/product"} component={Equipment} />
       <Route path={"/equipment"}>{() => <Redirect to="/product" />}</Route>

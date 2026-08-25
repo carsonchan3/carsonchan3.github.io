@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
+import { trackConversion } from "@/lib/conversionTracking";
 
 export const proofPoints = [
   { value: "OptiTrack", label: "industry leading motion capture technology" },
@@ -248,7 +249,7 @@ export default function Product() {
               <h1 data-testid="smart-referee-hero-decision-heading" className="velocity-headline max-w-3xl text-[clamp(2.7rem,7vw,6.6rem)] leading-[0.92] text-white"><span>Fair calls. A</span><span data-smart-referee-zh-line-break className="text-accent"> protected schedule.</span></h1>
               <p className="mt-7 max-w-2xl text-base leading-8 text-white/80 md:text-lg">When a scoring moment is hard to see, Smart Referee gives officials a shared reviewable view—so your competition can move on with confidence.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a data-testid="smart-referee-hero-service-action" href="#pricing" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={18} /></a>
+                <a data-testid="smart-referee-hero-service-action" href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "hero_pricing", route: "dronesportsreferee" })} className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={18} /></a>
                 <a href="#system-video" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">Watch a decision replay <ArrowRight size={18} /></a>
               </div>
             </div>
@@ -360,7 +361,7 @@ export default function Product() {
         <section className="border-y border-white/10 bg-[var(--ink-soft)] py-10 text-[var(--paper)] md:py-12">
           <div data-reveal className="container reveal-up flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
             <div className="max-w-2xl"><div className="mb-4 h-1 w-12 bg-accent" /><h2 className="velocity-headline mb-3 text-[var(--paper)]">Plan your next competition with confidence.</h2><p className="text-lg leading-8 text-[var(--mist)]">Share your venue, match format, and schedule. We will propose the decision-support scope, event staffing, and delivery path that fit your programme.</p></div>
-            <a href="#pricing" className="inline-flex shrink-0 items-center gap-2 border border-white/40 px-6 py-3 font-semibold text-[var(--paper)] transition-colors hover:border-accent hover:bg-accent hover:text-black">Plan your event <ArrowRight size={18} /></a>
+            <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "delivery_pricing", route: "dronesportsreferee" })} className="inline-flex shrink-0 items-center gap-2 border border-white/40 px-6 py-3 font-semibold text-[var(--paper)] transition-colors hover:border-accent hover:bg-accent hover:text-black">Plan your event <ArrowRight size={18} /></a>
           </div>
         </section>
       </main>

@@ -2,7 +2,7 @@ import type { WebsiteLanguage } from "@/contexts/LanguageContext";
 
 export const siteOrigin = "https://velocity-lab.com";
 export const chineseLocalePrefix = "/zh-hant";
-export const publicRoutePaths = ["/", "/dronesportsreferee", "/product", "/services", "/contact"] as const;
+export const publicRoutePaths = ["/", "/dronesportsreferee", "/product", "/services", "/people", "/contact", "/privacy"] as const;
 export type PublicRoutePath = (typeof publicRoutePaths)[number];
 
 export type LocalizedSeoCopy = {
@@ -12,7 +12,7 @@ export type LocalizedSeoCopy = {
 
 export type PublicSeoPage = {
   path: PublicRoutePath;
-  key: "home" | "referee" | "product" | "services" | "contact";
+  key: "home" | "referee" | "product" | "services" | "people" | "contact" | "privacy";
   copy: Record<WebsiteLanguage, LocalizedSeoCopy>;
   breadcrumb: string;
   socialImage: string;
@@ -92,6 +92,23 @@ export const publicSeoPages: PublicSeoPage[] = [
     schemas: ["breadcrumb", "service"],
   },
   {
+    path: "/people",
+    key: "people",
+    copy: {
+      en: {
+        title: "About Velocity Lab Innovation | Team & Technical Delivery",
+        description: "Meet the engineers and drone-sports practitioners behind Velocity Lab Innovation, working across UAV systems, motion technology, robotics, and competition delivery.",
+      },
+      "zh-Hant": {
+        title: "關於速研創新 | 團隊與技術交付",
+        description: "認識速研創新背後的工程師及無人機運動實踐者，結合無人機系統、動作技術、機械人及賽事執行的實務經驗。",
+      },
+    },
+    breadcrumb: "About VLI",
+    socialImage: managedMediaUrl("/manus-storage/CarsonChan_2ddbd847.png"),
+    schemas: ["breadcrumb"],
+  },
+  {
     path: "/contact",
     key: "contact",
     copy: {
@@ -105,6 +122,23 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Contact",
+    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    schemas: ["breadcrumb"],
+  },
+  {
+    path: "/privacy",
+    key: "privacy",
+    copy: {
+      en: {
+        title: "Privacy Notice | Velocity Lab Innovation",
+        description: "Read how Velocity Lab Innovation handles information shared through website enquiries and how to contact the team with privacy questions.",
+      },
+      "zh-Hant": {
+        title: "私隱聲明 | 速研創新",
+        description: "了解速研創新如何處理您透過網站查詢提供的資料，以及如何聯絡團隊查詢私隱事宜。",
+      },
+    },
+    breadcrumb: "Privacy Notice",
     socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["breadcrumb"],
   },
