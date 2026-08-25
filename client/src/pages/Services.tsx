@@ -4,7 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import ServiceEnquiryDialog from "@/components/ServiceEnquiryDialog";
 import { localizedPath } from "@/lib/seo";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { ArrowRight, Camera, GraduationCap, SlidersHorizontal, Wrench } from "lucide-react";
+import { ArrowRight, Camera, ExternalLink, GraduationCap, SlidersHorizontal, Wrench } from "lucide-react";
 
 export const serviceBanners = [
   {
@@ -83,6 +83,13 @@ export const servicesHeroPresentation = {
   introductoryParagraph: "removed",
 } as const;
 
+export const detailedServicePricingSheet = {
+  href: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/edit?usp=sharing",
+  label: "Detailed service pricing",
+  description: "View the current service price list in Google Sheets.",
+  ariaLabel: "Open detailed service pricing in Google Sheets (opens in a new tab)",
+} as const;
+
 export default function Services() {
   const { language } = useWebsiteLanguage();
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -103,6 +110,10 @@ export default function Services() {
             <div data-reveal className="reveal-up mb-10 max-w-3xl">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Service options</p>
               <h2 className="velocity-headline text-white">Choose the support that fits your next step.</h2>
+              <a data-testid="service-pricing-sheet-link" href={detailedServicePricingSheet.href} target="_blank" rel="noopener noreferrer" aria-label={detailedServicePricingSheet.ariaLabel} className="mt-5 inline-flex items-center gap-3 rounded-full border border-accent/60 bg-accent/10 px-4 py-2.5 text-sm font-semibold text-accent transition-colors hover:border-accent hover:bg-accent hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black">
+                <span>{detailedServicePricingSheet.label}</span><ExternalLink size={16} aria-hidden="true" />
+              </a>
+              <p className="mt-2 text-sm leading-6 text-white/65">{detailedServicePricingSheet.description}</p>
             </div>
             <div className="space-y-4">
               {banners.map((service, index) => (

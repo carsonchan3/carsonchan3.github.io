@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mobileServiceCardAspectRatio, publicServiceCatalogueSource, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName, servicesHeroPresentation } from "./Services";
+import { detailedServicePricingSheet, mobileServiceCardAspectRatio, publicServiceCatalogueSource, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName, servicesHeroPresentation } from "./Services";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Services thumbnail data", () => {
@@ -14,6 +14,16 @@ describe("Services thumbnail data", () => {
     expect(traditionalChineseTranslations["Not sure which service is right?"]).toBe("需要定制服務？");
     expect(traditionalChineseTranslations["Drone Building Course / Coaching Sessions"]).toBe("無人機組裝課程／指導課程");
     expect(traditionalChineseTranslations["Drone Photo / Cinematography"]).toBe("無人機攝影／航拍製作");
+    expect(traditionalChineseTranslations["Detailed service pricing"]).toBe("詳細服務價目表");
+  });
+
+  it("links customers to the supplied Google Sheet for detailed service pricing", () => {
+    expect(detailedServicePricingSheet).toEqual({
+      href: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/edit?usp=sharing",
+      label: "Detailed service pricing",
+      description: "View the current service price list in Google Sheets.",
+      ariaLabel: "Open detailed service pricing in Google Sheets (opens in a new tab)",
+    });
   });
 
   it("maps every service option to the supplied real-world media", () => {
