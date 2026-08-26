@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronDown, Settings2, Trophy, Users } from "lucide-react";
 import { useState } from "react";
 import PricingRequestDialog from "@/components/PricingRequestDialog";
 import { getPricingSelectionLabel, pricingTiers, type PricingTierId } from "@/lib/pricingConfig";
@@ -7,6 +7,13 @@ import { pricingVisibilityClass } from "@/lib/pricingPresentation";
 export const pricingCardDetailPresentation = "scenario-led-progressive-details";
 export const pricingTierCardPresentation = "rounded-option-cards";
 export const pricingFamilyPresentation = "unified-quiet-service-family";
+export const pricingTierIconPresentation = ["Settings2", "Users", "Trophy"] as const;
+
+const pricingTierIcons = {
+  assist: Settings2,
+  managed: Users,
+  "evidence-pro": Trophy,
+} as const;
 
 export default function RefereePricingConfigurator() {
   const [selectedTier, setSelectedTier] = useState<PricingTierId>("managed");
@@ -29,10 +36,11 @@ export default function RefereePricingConfigurator() {
           <div className="grid gap-3 lg:grid-cols-3">
             {pricingTiers.map((tier) => {
               const selected = selectedTier === tier.id;
+              const Icon = pricingTierIcons[tier.id];
               return (
                 <button key={tier.id} type="button" data-testid={`pricing-tier-${tier.id}`} data-detail-presentation={pricingCardDetailPresentation} data-card-presentation={pricingTierCardPresentation} aria-pressed={selected} onClick={() => setSelectedTier(tier.id)} className={`group relative min-h-0 overflow-hidden rounded-[1.25rem] border p-5 text-left transition-all duration-200 ${selected ? "border-accent bg-accent/10 shadow-[0_0_0_1px_rgba(64,224,208,0.15)]" : "border-white/8 bg-black/10 hover:border-white/25 hover:bg-white/[0.035]"}`}>
                   {selected && <span className="absolute right-4 top-4 rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-black">Selected</span>}
-                  <div className="mb-5 flex size-10 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent"><Sparkles size={19} /></div>
+                  <div className="mb-5 flex size-10 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent"><Icon aria-hidden="true" size={19} strokeWidth={1.8} /></div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{tier.eyebrow}</p>
                   <h3 className="mt-3 max-w-[16rem] text-xl font-semibold tracking-tight text-white">{tier.scenario}</h3>
                   <p className="mt-3 text-sm leading-6 text-white/65">{tier.description}</p>

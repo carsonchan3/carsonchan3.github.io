@@ -1,4 +1,4 @@
-import { ArrowRight, CircleCheck, FileCheck2, ShieldCheck, TimerReset } from "lucide-react";
+import { ArrowRight, CircleCheck, Crosshair, Eye, FileCheck2, Radar, RefreshCw, ScanLine, Settings2, ShieldCheck, SlidersHorizontal, TimerReset } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
@@ -97,11 +97,22 @@ export const smartRefereeVisualStoryPresentation = {
   pricing: "unified-quiet-service-family",
 } as const;
 
+export const smartRefereeIconSystemPresentation = {
+  decisionRail: ["SlidersHorizontal", "ScanLine", "CircleCheck"],
+  organiserOutcomes: ["Eye", "ScanLine", "ShieldCheck"],
+  workflow: ["Settings2", "ScanLine", "CircleCheck"],
+  technical: ["Crosshair", "Radar", "RefreshCw", "SlidersHorizontal"],
+} as const;
+
 export const smartRefereeDecisionRail = [
   { label: "Rule input", value: "Active scoring condition" },
   { label: "Evidence", value: "Tracked position + review" },
   { label: "Decision", value: "Shared call" },
 ] as const;
+
+const decisionRailIcons = [SlidersHorizontal, ScanLine, CircleCheck] as const;
+const organiserOutcomeIcons = { resolve: Eye, schedule: ScanLine, standard: ShieldCheck } as const;
+const workflowStepIcons = [Settings2, ScanLine, CircleCheck] as const;
 
 export const organiserOutcomesIntroduction = {
   heading: "What is Drone Sports Referee?",
@@ -295,7 +306,7 @@ export default function Product() {
               </div>
             </div>
             <div data-testid="smart-referee-decision-rail" className="mt-10 grid border-t border-white/25 pt-5 sm:mt-14 sm:grid-cols-3 sm:gap-8">
-              {smartRefereeDecisionRail.map((item) => <div key={item.label} className="py-3 sm:py-0"><p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45">{item.label}</p><p className="mt-1 text-sm font-medium text-white">{item.value}</p></div>)}
+              {smartRefereeDecisionRail.map((item, index) => { const Icon = decisionRailIcons[index]; return <div key={item.label} className="py-3 sm:py-0"><p className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45"><Icon aria-hidden="true" size={14} className="text-accent" strokeWidth={1.8} />{item.label}</p><p className="mt-1 text-sm font-medium text-white">{item.value}</p></div>; })}
             </div>
           </div>
         </section>
@@ -308,13 +319,15 @@ export default function Product() {
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
             </div>
             <div className="mt-12 grid gap-px overflow-hidden border-y border-white/15 bg-white/15 md:grid-cols-3">
-              {organiserOutcomeCards.map((outcome, index) => (
-                <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] px-5 py-7 md:px-7 md:py-9" style={{ transitionDelay: `${index * 70}ms` }}>
+              {organiserOutcomeCards.map((outcome, index) => {
+                const Icon = organiserOutcomeIcons[outcome.id];
+                return <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] px-5 py-7 md:px-7 md:py-9" style={{ transitionDelay: `${index * 70}ms` }}>
+                  <Icon aria-hidden="true" className="h-5 w-5 text-accent" strokeWidth={1.7} />
                   <p className="font-mono text-xs font-semibold text-accent">{outcome.number}</p>
                   <h2 className="mt-5 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h2>
                   <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
-                </article>
-              ))}
+                </article>;
+              })}
             </div>
           </div>
         </section>
@@ -327,7 +340,7 @@ export default function Product() {
             </div>
             <div data-reveal data-presentation={smartRefereeHeroVideoPresentation.containerTreatment} className="reveal-up overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#02080A] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.38)] sm:p-3" style={{ transitionDelay: "90ms" }}>
               <div className="grid border-b border-white/10 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55 sm:grid-cols-3">
-                {smartRefereeDecisionRail.map((item, index) => <div key={item.label} className={`flex items-center gap-2 px-3 py-3 ${index > 0 ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""}`}><span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${index === 2 ? "bg-accent" : "bg-white/35"}`} />{item.label}</div>)}
+                {smartRefereeDecisionRail.map((item, index) => { const Icon = decisionRailIcons[index]; return <div key={item.label} className={`flex items-center gap-2 px-3 py-3 ${index > 0 ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""}`}><Icon aria-hidden="true" size={14} className={index === 2 ? "text-accent" : "text-white/45"} strokeWidth={1.8} />{item.label}</div>; })}
               </div>
               <div className="grid lg:grid-cols-[minmax(0,1fr)_15rem]">
                 <div className="relative min-h-[17rem] overflow-hidden bg-black sm:min-h-[28rem]">
@@ -338,7 +351,7 @@ export default function Product() {
                 </div>
                 <aside className="flex flex-col justify-between bg-[#091419] p-5 sm:p-6">
                   <div className="space-y-5">
-                    {smartRefereeDecisionRail.map((item, index) => <div key={item.label} className={`${index > 0 ? "border-t border-white/10 pt-5" : ""}`}><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">0{index + 1} · {item.label}</p><p className="mt-2 text-sm leading-6 text-white/80">{item.value}</p></div>)}
+                    {smartRefereeDecisionRail.map((item, index) => { const Icon = decisionRailIcons[index]; return <div key={item.label} className={`${index > 0 ? "border-t border-white/10 pt-5" : ""}`}><p className="flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-accent"><Icon aria-hidden="true" size={14} strokeWidth={1.8} />0{index + 1} · {item.label}</p><p className="mt-2 text-sm leading-6 text-white/80">{item.value}</p></div>; })}
                   </div>
                   <div className="mt-8 border-t border-white/10 pt-4"><div className="h-px w-10 bg-accent" /><p className="mt-3 text-xs leading-5 text-white/55">{technicalConfidence.description}</p></div>
                 </aside>
@@ -361,12 +374,14 @@ export default function Product() {
               <h2 className="velocity-headline max-w-2xl text-white">From question to <span className="text-accent">shared call.</span></h2>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
               <ol className="mt-7 divide-y divide-white/10 border-y border-white/10">
-                {eventWorkflowSteps.map((step) => (
+                {eventWorkflowSteps.map((step, index) => {
+                  const Icon = workflowStepIcons[index];
+                  return (
                   <li key={step.number} className="grid gap-3 py-4 sm:grid-cols-[3.25rem_1fr] sm:gap-5">
-                    <span className="font-mono text-sm font-semibold text-accent">{step.number}</span>
+                    <span className="flex items-center gap-2 font-mono text-sm font-semibold text-accent"><Icon aria-hidden="true" size={16} strokeWidth={1.8} />{step.number}</span>
                     <div><h3 className="font-semibold text-white">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-white/60">{step.detail}</p></div>
                   </li>
-                ))}
+                ); })}
               </ol>
             </div>
           </div>
@@ -410,11 +425,11 @@ export default function Product() {
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
             </div>
             <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-primary-panel={eventScaleFeatureTilePresentation.primaryPanel} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 sm:gap-5">
-              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[20rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419]" ><div className="flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
-              <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="min-h-[20rem] bg-[#0B1419]"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">02 · TRACKING SETUP</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
+              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[20rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419]" ><div className="flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Crosshair aria-hidden="true" size={16} strokeWidth={1.8} />01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
+              <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="min-h-[20rem] bg-[#0B1419]"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Radar aria-hidden="true" size={16} strokeWidth={1.8} />02 · TRACKING SETUP</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
               <div data-testid="technical-evidence-panels" className="contents">
-                <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="min-h-[20rem] bg-[#0E171B]"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
-                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="min-h-[20rem] bg-[linear-gradient(145deg,#0B1419,#132C31)]"><div className="flex h-full flex-col justify-between p-5 sm:p-6"><div><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">04 · CONFIGURABLE RULES</p><h3 className="mt-3 max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.rulesTitle}</h3><p className="mt-3 max-w-2xl text-xs leading-5 text-white/70">{technicalConfidence.rulesDescription}</p></div><div data-rule-reference-logos className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-9 min-w-0 flex-1 object-contain sm:h-11" />)}</div></div></EventScaleTile>
+                <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="min-h-[20rem] bg-[#0E171B]"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><RefreshCw aria-hidden="true" size={16} strokeWidth={1.8} />03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
+                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="min-h-[20rem] bg-[linear-gradient(145deg,#0B1419,#132C31)]"><div className="flex h-full flex-col justify-between p-5 sm:p-6"><div><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><SlidersHorizontal aria-hidden="true" size={16} strokeWidth={1.8} />04 · CONFIGURABLE RULES</p><h3 className="mt-3 max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.rulesTitle}</h3><p className="mt-3 max-w-2xl text-xs leading-5 text-white/70">{technicalConfidence.rulesDescription}</p></div><div data-rule-reference-logos className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-9 min-w-0 flex-1 object-contain sm:h-11" />)}</div></div></EventScaleTile>
               </div>
             </div>
           </div>

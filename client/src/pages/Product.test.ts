@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeDecisionRail, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeDecisionRail, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeIconSystemPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -30,6 +30,12 @@ describe("Smart Referee organiser-first journey", () => {
       decisionConsole: "verified-media-with-operational-status-rail",
       organiserImpact: "paper-outcomes-with-single-deep-ink-planning-rail",
       pricing: "unified-quiet-service-family",
+    });
+    expect(smartRefereeIconSystemPresentation).toEqual({
+      decisionRail: ["SlidersHorizontal", "ScanLine", "CircleCheck"],
+      organiserOutcomes: ["Eye", "ScanLine", "ShieldCheck"],
+      workflow: ["Settings2", "ScanLine", "CircleCheck"],
+      technical: ["Crosshair", "Radar", "RefreshCw", "SlidersHorizontal"],
     });
     expect(smartRefereeDecisionRail).toEqual([
       { label: "Rule input", value: "Active scoring condition" },
