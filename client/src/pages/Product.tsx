@@ -347,7 +347,7 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-[#071117]/10 bg-white text-[#071117]">
+        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-white/10 bg-[#0B1419] text-white">
           <div className="container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div data-reveal className="reveal-up overflow-hidden rounded-[1.75rem] border border-[#071117]/10 bg-[#071117] shadow-[0_20px_50px_rgba(7,17,23,0.16)]">
               <div className="relative aspect-[21/9] overflow-hidden sm:aspect-[4/3]">
@@ -358,13 +358,13 @@ export default function Product() {
             </div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
               <p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · DECISION RAIL</p>
-              <h2 className="velocity-headline max-w-2xl text-[#071117]">From question to <span className="text-accent">shared call.</span></h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#071117]/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
-              <ol className="mt-7 divide-y divide-[#071117]/10 border-y border-[#071117]/10">
+              <h2 className="velocity-headline max-w-2xl text-white">From question to <span className="text-accent">shared call.</span></h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
+              <ol className="mt-7 divide-y divide-white/10 border-y border-white/10">
                 {eventWorkflowSteps.map((step) => (
                   <li key={step.number} className="grid gap-3 py-4 sm:grid-cols-[3.25rem_1fr] sm:gap-5">
                     <span className="font-mono text-sm font-semibold text-accent">{step.number}</span>
-                    <div><h3 className="font-semibold text-[#071117]">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-[#071117]/60">{step.detail}</p></div>
+                    <div><h3 className="font-semibold text-white">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-white/60">{step.detail}</p></div>
                   </li>
                 ))}
               </ol>
@@ -372,25 +372,25 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" data-presentation={smartRefereeReferenceFormatPresentation.organiserImpact} className="border-b border-[#071117]/10 bg-white py-14 text-[#071117] md:py-24">
+        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" data-presentation={smartRefereeReferenceFormatPresentation.organiserImpact} className="border-b border-white/10 bg-[#071117] py-14 text-white md:py-24">
           <div className="container">
-            <div data-reveal className="reveal-up max-w-3xl border-t border-[#071117]/15 pt-5">
+            <div data-reveal className="reveal-up max-w-3xl border-t border-white/15 pt-5">
               <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">{organiserImpactDetail.index} · {organiserImpactDetail.audience}</p>
-              <h2 className="velocity-headline mt-5 max-w-3xl text-[clamp(2.5rem,5.5vw,5.6rem)] leading-[0.95] text-[#071117]">{organiserImpactDetail.title}</h2>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-[#071117]/70 md:text-lg">{organiserImpactDetail.description}</p>
-              <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "organiser_impact_pricing", route: "dronesportsreferee" })} className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#071117] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent hover:text-black">Plan your event <ArrowRight size={17} /></a>
+              <h2 className="velocity-headline mt-5 max-w-3xl text-[clamp(2.5rem,5.5vw,5.6rem)] leading-[0.95] text-white">{organiserImpactDetail.title}</h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/70 md:text-lg">{organiserImpactDetail.description}</p>
+              <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "organiser_impact_pricing", route: "dronesportsreferee" })} className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={17} /></a>
             </div>
-            <div data-testid="organiser-impact-outcomes" className="mt-12 grid divide-y divide-[#071117]/12 border-y border-[#071117]/12 md:grid-cols-3 md:divide-x md:divide-y-0">
+            <div data-testid="organiser-impact-outcomes" className="mt-12 grid divide-y divide-white/10 border-y border-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
               {organiserImpactDetail.outcomes.map((outcome, index) => (
                 <article key={outcome.title} data-reveal className="reveal-up px-0 py-7 md:px-7 md:py-9 first:md:pl-0 last:md:pr-0" style={{ transitionDelay: `${index * 70}ms` }}>
                   {(() => { const Icon = organiserImpactOutcomeIcons[outcome.title]; return <Icon aria-hidden="true" className="h-6 w-6 text-accent" strokeWidth={1.75} />; })()}
                   <p className="font-mono text-xs font-semibold text-accent">0{index + 1}</p>
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-[#071117]">{outcome.title}</h3>
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-[#071117]/65">{outcome.detail}</p>
+                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h3>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
                 </article>
               ))}
             </div>
-            <div data-testid="organiser-impact-planning-signals" className="mt-10 overflow-hidden rounded-[1.5rem] bg-[#071117] p-5 sm:p-7">
+            <div data-testid="organiser-impact-planning-signals" className="mt-10 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/35 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.18)] sm:p-7">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Planning signals</p>
               <div className="mt-5 grid divide-y divide-white/10 border-y border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                 {organiserImpactDetail.planningSignals.map((metric, index) => (
