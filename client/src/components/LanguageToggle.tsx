@@ -13,10 +13,13 @@ export default function LanguageToggle({ className = "", placement = "inline" }:
   const languageHref = (nextLanguage: "en" | "zh-Hant") => languageSwitchPath(location, nextLanguage);
   const chooseLanguage = (event: MouseEvent<HTMLAnchorElement>, nextLanguage: "en" | "zh-Hant") => {
     event.preventDefault();
+    const destination = languageHref(nextLanguage);
     setLanguage(nextLanguage);
 
-    const destination = event.currentTarget.href;
-    if (typeof window !== "undefined" && window.location.href !== destination) window.location.assign(destination);
+    if (typeof window !== "undefined") {
+      const absoluteDestination = new URL(destination, window.location.origin).toString();
+      if (window.location.href !== absoluteDestination) window.location.assign(absoluteDestination);
+    }
   };
 
   if (placement === "mobile-toolbar") {
