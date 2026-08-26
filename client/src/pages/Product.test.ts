@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroDecisionRail, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceLedFormat, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -13,6 +13,20 @@ describe("Smart Referee organiser-first journey", () => {
       expect.objectContaining({ title: "Resolve close calls" }),
       expect.objectContaining({ title: "Keep the next match moving" }),
       expect.objectContaining({ title: "Align officiating standards" }),
+    ]);
+  });
+
+  it("adapts the reference format into a VLI decision rail without adopting its branding or claims", () => {
+    expect(smartRefereeReferenceLedFormat).toEqual({
+      hero: "immersive-decision-status-rail",
+      sectionRhythm: "editorial-light-dark-module-sequence",
+      organiserJourney: "outcomes-before-evidence",
+      colourSystem: "vli-ink-paper-turquoise",
+    });
+    expect(smartRefereeHeroDecisionRail).toEqual([
+      { label: "Rule input", detail: "Active scoring condition", verified: false },
+      { label: "Evidence", detail: "Tracked position + review", verified: false },
+      { label: "Decision", detail: "Shared call", verified: true },
     ]);
   });
 
@@ -74,7 +88,7 @@ describe("Smart Referee organiser-first journey", () => {
 
   it("maps the revised organiser promise, outcomes, workflow, and visible evidence into Traditional Chinese", () => {
     [
-      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Configurable competition rules", "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.", "Drone Sports Referee Pitch", "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.", "Compare all service inclusions",
+      "Fair calls. A", "protected schedule.", "Plan your event", "Decision integrity, at match speed", "See the decision layer", "Rule input", "Active scoring condition", "Tracked position + review", "Shared call", "Let the match move. Keep the decision in view.", "The field, interpreted.", "Capture the field", "Surface the moment", "Stand behind the call", "From event rule to shared call.", "The decision layer", "Review console", "Make the next match easier to trust.", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Configurable competition rules", "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.", "Drone Sports Referee Pitch", "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.", "Compare all service inclusions",
     ].forEach((key) => expect(traditionalChineseTranslations[key]).toBeTruthy());
     expect(traditionalChinesePromisePresentation).toBe("two-intentional-lines");
   });
