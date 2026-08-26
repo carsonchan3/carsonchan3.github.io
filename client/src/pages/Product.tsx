@@ -1,8 +1,9 @@
 import { ArrowRight, CircleCheck } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
+import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 import { trackConversion } from "@/lib/conversionTracking";
 
@@ -131,7 +132,74 @@ export const organiserImpactDetail = {
     { title: "Build trust", detail: "Give teams and officials a clear process around consequential scoring decisions." },
     { title: "Retain the record", detail: "Keep a reviewable decision trail for organisers, officials, and post-event follow-up." },
   ],
+  planningSignals: [
+    { value: 4, label: "per review delay", formatter: "review-delay" },
+    { value: 40, label: "Wasted time on dispute per event", formatter: "dispute-time" },
+    { value: 27_000, label: "Extra cost related to all parties", formatter: "hkd-compact" },
+  ],
+  qualification: "Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.",
 } as const;
+
+export const organiserImpactMetricAnimation = {
+  trigger: "when-visible",
+  durationMilliseconds: 1800,
+  respectsReducedMotion: true,
+} as const;
+
+type OrganiserImpactMetric = (typeof organiserImpactDetail.planningSignals)[number];
+
+export const formatOrganiserImpactMetric = (metric: OrganiserImpactMetric, value: number, language: "en" | "zh-Hant") => {
+  if (metric.formatter === "hkd-compact") return `HK$${Math.round(value / 1_000)}k`;
+  if (metric.formatter === "review-delay") return language === "zh-Hant" ? `${value} 分鐘以上` : `${value}+ minutes`;
+  return language === "zh-Hant" ? `超過 ${value}+ 分鐘` : `over ${value}+ minutes`;
+};
+
+function RollingImpactMetric({ metric }: { metric: OrganiserImpactMetric }) {
+  const { language } = useWebsiteLanguage();
+  const valueRef = useRef<HTMLSpanElement>(null);
+  const [displayValue, setDisplayValue] = useState<number>(metric.value);
+  const hasEnteredView = useRef(false);
+
+  useEffect(() => {
+    const element = valueRef.current;
+    if (!element) return;
+
+    let animationFrame = 0;
+    const animate = (instant = false) => {
+      if (instant || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setDisplayValue(metric.value);
+        return;
+      }
+      const startedAt = window.performance.now();
+      const tick = (timestamp: number) => {
+        const progress = Math.min((timestamp - startedAt) / organiserImpactMetricAnimation.durationMilliseconds, 1);
+        setDisplayValue(Math.round(metric.value * (1 - Math.pow(1 - progress, 3))));
+        if (progress < 1) animationFrame = window.requestAnimationFrame(tick);
+      };
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      animate();
+      return () => window.cancelAnimationFrame(animationFrame);
+    }
+
+    const observer = new window.IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting || hasEnteredView.current) return;
+      hasEnteredView.current = true;
+      setDisplayValue(0);
+      animate();
+      observer.disconnect();
+    }, { threshold: 0.35 });
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [metric]);
+
+  return <span ref={valueRef} data-live-metric className="font-mono text-3xl font-semibold leading-none tracking-tight text-accent sm:text-4xl">{formatOrganiserImpactMetric(metric, displayValue, language)}</span>;
+}
 
 export const smartRefereeMedia = {
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
@@ -271,6 +339,15 @@ export default function Product() {
                   <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
                 </article>
               ))}
+            </div>
+            <div data-testid="organiser-impact-planning-signals" className="mt-7 border border-accent/25 bg-accent/5 p-5 sm:p-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Planning signals</p>
+              <div className="mt-5 grid gap-px overflow-hidden border border-accent/20 bg-accent/20 sm:grid-cols-3">
+                {organiserImpactDetail.planningSignals.map((metric, index) => (
+                  <div key={metric.label} data-reveal className="reveal-up bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
+                ))}
+              </div>
+              <p className="mt-5 text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
             </div>
           </div>
         </section>

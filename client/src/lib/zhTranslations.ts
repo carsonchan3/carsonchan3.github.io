@@ -673,6 +673,7 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "Give teams and officials a clear process around consequential scoring decisions.": "為隊伍和裁判提供圍繞關鍵得分判決的清晰流程。",
   "Retain the record": "保留紀錄",
   "Keep a reviewable decision trail for organisers, officials, and post-event follow-up.": "為主辦方、裁判及賽後跟進保留可覆核的判決紀錄。",
+  "Planning signals": "規劃訊號",
   "Built for event scale": "為賽事規模而設",
   "Technical confidence, when your team needs it.": "在團隊需要時提供技術信心。",
   "The Smart Referee system is designed to turn high-speed position data into a shared reference that can be prepared consistently for an event.": "Smart Referee 系統旨在把高速位置資料轉化為可在賽事前一致準備的共同依據。",
