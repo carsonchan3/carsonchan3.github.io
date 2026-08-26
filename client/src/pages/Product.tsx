@@ -78,6 +78,22 @@ export const smartRefereePageHierarchy = [
   "event-delivery-options",
 ] as const;
 
+export const smartRefereeReferenceFormatPresentation = {
+  hero: "immersive-decision-rail",
+  outcomes: "editorial-outcome-band",
+  replay: "wide-operational-console",
+  technical: "clustered-product-layer",
+  workflow: "numbered-decision-rail",
+  organiserImpact: "event-protection-outcomes-and-signals",
+  conversion: "ready-to-verify",
+} as const;
+
+export const smartRefereeDecisionRail = [
+  { label: "Rule input", value: "Active scoring condition" },
+  { label: "Evidence", value: "Tracked position + review" },
+  { label: "Decision", value: "Shared call" },
+] as const;
+
 export const organiserOutcomesIntroduction = {
   heading: "What is Drone Sports Referee?",
   description: "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.",
@@ -246,36 +262,38 @@ export default function Product() {
     <div className="smart-referee-page min-h-screen bg-black text-white" data-mobile-reveal-policy={mobileSmartRefereeRevealPolicy}>
       <SiteHeader active="referee" />
       <main data-reveal-page className="pt-16">
-        <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} className="relative isolate overflow-hidden border-b border-white/10 bg-[#071117]">
-          <img src={homepageHeroVideoPosterSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-center" />
-          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.97)_0%,rgba(7,17,23,0.88)_48%,rgba(7,17,23,0.66)_100%)]" />
-          <div className="container relative z-10 py-16 md:py-20 lg:py-24">
+        <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} data-presentation={smartRefereeReferenceFormatPresentation.hero} className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden border-b border-white/10 bg-[#071117]">
+          <img src={smartRefereeMedia.trackingPoster} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 z-0 h-full w-full object-cover object-right" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.34)_100%)]" />
+          <div className="container relative z-20 flex min-h-[calc(100svh-4rem)] flex-col justify-end py-12 md:py-16 lg:py-20">
             <div data-reveal className="reveal-up max-w-3xl">
               <div className="mb-5 h-1 w-12 bg-accent" />
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Smart Referee for event organisers</p>
-              <h1 data-testid="smart-referee-hero-decision-heading" className="velocity-headline max-w-3xl text-[clamp(2.7rem,7vw,6.6rem)] leading-[0.92] text-white"><span>Fair calls. A</span><span data-smart-referee-zh-line-break className="text-accent"> protected schedule.</span></h1>
+              <h1 data-testid="smart-referee-hero-decision-heading" className="velocity-headline max-w-3xl text-[clamp(2.9rem,7vw,6.8rem)] leading-[0.9] text-white"><span>Fair calls. A</span><span data-smart-referee-zh-line-break className="text-accent"> protected schedule.</span></h1>
               <p className="mt-7 max-w-2xl text-base leading-8 text-white/80 md:text-lg">When a scoring moment is hard to see, Smart Referee gives officials a shared reviewable view—so your competition can move on with confidence.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "hero_pricing", route: "dronesportsreferee" })} className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={18} /></a>
                 <a href="#system-video" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">Watch a decision replay <ArrowRight size={18} /></a>
               </div>
             </div>
+            <div data-testid="smart-referee-decision-rail" className="mt-10 grid border-t border-white/25 pt-5 sm:mt-14 sm:grid-cols-3 sm:gap-8">
+              {smartRefereeDecisionRail.map((item) => <div key={item.label} className="py-3 sm:py-0"><p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45">{item.label}</p><p className="mt-1 text-sm font-medium text-white">{item.value}</p></div>)}
+            </div>
           </div>
         </section>
 
-        <section id="organiser-outcomes" data-testid="organiser-outcomes" className="border-b border-white/10 bg-[#0B1419] py-5 md:py-7">
+        <section id="organiser-outcomes" data-testid="organiser-outcomes" data-presentation={smartRefereeReferenceFormatPresentation.outcomes} className="border-b border-white/10 bg-[#0B1419] py-12 md:py-20">
           <div className="container">
-            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up max-w-4xl py-8 md:py-10">
-              <div className="mb-5 h-1 w-12 bg-accent" />
+            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up max-w-4xl border-t border-white/15 pt-5">
+              <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">01 · SHARED VIEW</p>
               <h2 className="velocity-headline max-w-3xl text-[clamp(2.5rem,5vw,5.25rem)] leading-[0.96] text-white">{organiserOutcomesIntroduction.heading}</h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
             </div>
-            <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
+            <div className="mt-12 grid gap-px overflow-hidden border-y border-white/15 bg-white/15 md:grid-cols-3">
               {organiserOutcomeCards.map((outcome, index) => (
-                <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] p-5 md:p-6" style={{ transitionDelay: `${index * 70}ms` }}>
-                  <p className="font-mono text-sm font-semibold text-accent">{outcome.number}</p>
-                  <h2 className="mt-5 text-xl font-semibold tracking-tight text-white">{outcome.title}</h2>
+                <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] px-5 py-7 md:px-7 md:py-9" style={{ transitionDelay: `${index * 70}ms` }}>
+                  <p className="font-mono text-xs font-semibold text-accent">{outcome.number}</p>
+                  <h2 className="mt-5 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h2>
                   <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
                 </article>
               ))}
@@ -283,10 +301,10 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="system-video" data-testid="smart-referee-system-video" className="border-b border-white/10 bg-[#071117] py-12 md:py-16">
+        <section id="system-video" data-testid="smart-referee-system-video" data-presentation={smartRefereeReferenceFormatPresentation.replay} className="border-b border-white/10 bg-[#071117] py-14 md:py-20">
           <div className="container">
-            <div data-reveal className="reveal-up mb-7 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
-              <div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Decision replay</p><h2 className="velocity-headline max-w-2xl text-white">See the call, not just the <span className="text-accent">replay.</span></h2></div>
+            <div data-reveal className="reveal-up mb-8 grid gap-4 border-t border-white/15 pt-5 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+              <div><p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">OPERATIONAL REPLAY</p><h2 className="velocity-headline max-w-2xl text-white">See the call, not just the <span className="text-accent">replay.</span></h2></div>
               <p className="max-w-md text-sm leading-6 text-white/65">A single calibrated view helps officials review the relevant moment together, then return their attention to the event.</p>
             </div>
             <div data-reveal data-presentation={smartRefereeHeroVideoPresentation.containerTreatment} className="reveal-up relative -mx-4 overflow-hidden bg-[#071117] sm:-mx-6 lg:-mx-8" style={{ transitionDelay: "90ms" }}>
@@ -297,7 +315,7 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="event-workflow" data-testid="event-workflow" className="velocity-section border-b border-white/10 bg-[#27282B]">
+        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-white/10 bg-[#27282B]">
           <div className="container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20">
               <div className="relative aspect-[21/9] overflow-hidden sm:aspect-[4/3]">
@@ -307,8 +325,7 @@ export default function Product() {
               </div>
             </div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
-              <div className="mb-5 h-1 w-12 bg-accent" />
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">A simple event workflow</p>
+              <p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · DECISION RAIL</p>
               <h2 className="velocity-headline max-w-2xl text-white">From question to <span className="text-accent">shared call.</span></h2>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
               <ol className="mt-7 divide-y divide-white/10 border-y border-white/10">
@@ -323,7 +340,7 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" data-presentation="event-protection-outcomes" className="border-b border-white/10 bg-black py-14 md:py-20">
+        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" data-presentation={smartRefereeReferenceFormatPresentation.organiserImpact} className="border-b border-white/10 bg-black py-14 md:py-20">
           <div className="container">
             <div data-reveal className="reveal-up max-w-3xl border-t border-white/15 pt-5">
               <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">{organiserImpactDetail.index} · {organiserImpactDetail.audience}</p>
@@ -352,11 +369,10 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="technical-confidence" data-testid="technical-confidence" className="velocity-section border-b border-white/10 bg-[#171C1D]">
+        <section id="technical-confidence" data-testid="technical-confidence" data-presentation={smartRefereeReferenceFormatPresentation.technical} className="velocity-section border-b border-white/10 bg-[#171C1D]">
           <div className="container">
             <div data-reveal className="reveal-up mx-auto max-w-3xl text-center">
-              <div className="mb-5 h-1 w-12 bg-accent" />
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Built for event scale</p>
+              <p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">02 · TECHNICAL LAYER</p>
               <h2 className="velocity-headline mx-auto max-w-2xl text-white">{technicalConfidence.title}</h2>
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
             </div>
@@ -373,7 +389,7 @@ export default function Product() {
 
         <section id="drone-sports-referee-pitch" data-testid="drone-sports-referee-pitch" data-pitch-video-panel className="velocity-section border-b border-white/10 bg-[#0B1419]">
           <div data-reveal className="container reveal-up">
-            <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-4 sm:p-6 md:p-8"><div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Drone Sports Referee</p><h2 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-4xl">{technicalConfidence.pitchVideoTitle}</h2></div><p className="max-w-md text-sm leading-6 text-white/65">{technicalConfidence.pitchVideoDescription}</p></div><video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full rounded-xl bg-black object-contain">Your browser does not support embedded video.</video></div>
+            <div data-presentation={smartRefereeReferenceFormatPresentation.conversion} className="mx-auto max-w-5xl overflow-hidden border border-white/10 bg-black/20 p-4 sm:p-6 md:p-8"><div className="mb-5 flex flex-col gap-3 border-t border-white/15 pt-5 sm:flex-row sm:items-end sm:justify-between"><div><p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">05 · READY TO VERIFY</p><h2 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-4xl">{technicalConfidence.pitchVideoTitle}</h2></div><p className="max-w-md text-sm leading-6 text-white/65">{technicalConfidence.pitchVideoDescription}</p></div><video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full rounded-xl bg-black object-contain">Your browser does not support embedded video.</video></div>
           </div>
         </section>
 
