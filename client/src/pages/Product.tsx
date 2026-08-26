@@ -4,6 +4,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
+import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 import { trackConversion } from "@/lib/conversionTracking";
 
 export const proofPoints = [
@@ -39,8 +40,11 @@ export const smartRefereeHeroVideoPresentation = {
   containerTreatment: "borderless-integrated",
 } as const;
 export const smartRefereeHeroBackgroundPresentation = {
-  source: "tracking-poster",
+  source: "homepage-hero-video",
   treatment: "dark-overlay-background",
+  autoPlay: true,
+  muted: true,
+  loop: true,
 } as const;
 export const flex13SystemVideoPresentation = {
   title: "Drone Sports Referee Pitch",
@@ -71,19 +75,6 @@ export const smartRefereePageHierarchy = [
   "technical-confidence",
   "drone-sports-referee-pitch",
   "event-delivery-options",
-] as const;
-
-export const smartRefereeReferenceLedFormat = {
-  hero: "immersive-decision-status-rail",
-  sectionRhythm: "editorial-light-dark-module-sequence",
-  organiserJourney: "outcomes-before-evidence",
-  colourSystem: "vli-ink-paper-turquoise",
-} as const;
-
-export const smartRefereeHeroDecisionRail = [
-  { label: "Rule input", detail: "Active scoring condition", verified: false },
-  { label: "Evidence", detail: "Tracked position + review", verified: false },
-  { label: "Decision", detail: "Shared call", verified: true },
 ] as const;
 
 export const organiserOutcomesIntroduction = {
@@ -248,103 +239,131 @@ export default function Product() {
       <SiteHeader active="referee" />
       <main data-reveal-page className="pt-16">
         <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} className="relative isolate overflow-hidden border-b border-white/10 bg-[#071117]">
-          <img src={smartRefereeMedia.trackingPoster} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 z-0 h-full w-full object-cover object-right" />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.35)_100%)]" />
-          <div className="container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-end py-12 md:py-16 lg:py-20">
-            <div data-reveal className="reveal-up max-w-4xl">
-              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-accent">Decision integrity, at match speed</p>
-              <h1 data-testid="smart-referee-hero-decision-heading" className="velocity-headline max-w-3xl text-[clamp(3.1rem,8.3vw,7.5rem)] leading-[0.88] text-white"><span>Fair calls. A</span><span data-smart-referee-zh-line-break className="text-accent"> protected schedule.</span></h1>
+          <img src={homepageHeroVideoPosterSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-center" />
+          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.97)_0%,rgba(7,17,23,0.88)_48%,rgba(7,17,23,0.66)_100%)]" />
+          <div className="container relative z-10 py-16 md:py-20 lg:py-24">
+            <div data-reveal className="reveal-up max-w-3xl">
+              <div className="mb-5 h-1 w-12 bg-accent" />
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Smart Referee for event organisers</p>
+              <h1 data-testid="smart-referee-hero-decision-heading" className="velocity-headline max-w-3xl text-[clamp(2.7rem,7vw,6.6rem)] leading-[0.92] text-white"><span>Fair calls. A</span><span data-smart-referee-zh-line-break className="text-accent"> protected schedule.</span></h1>
               <p className="mt-7 max-w-2xl text-base leading-8 text-white/80 md:text-lg">When a scoring moment is hard to see, Smart Referee gives officials a shared reviewable view—so your competition can move on with confidence.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a data-testid="smart-referee-hero-service-action" href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "hero_pricing", route: "dronesportsreferee" })} className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={18} /></a>
-                <a href="#system-video" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">See the decision layer <ArrowRight size={18} /></a>
+                <a href="#system-video" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent">Watch a decision replay <ArrowRight size={18} /></a>
               </div>
-            </div>
-            <div data-reveal className="reveal-up mt-12 grid border-t border-white/25 pt-5 sm:grid-cols-3 sm:gap-8" style={{ transitionDelay: "100ms" }}>
-              {smartRefereeHeroDecisionRail.map((item) => <div key={item.label} className="mt-4 first:mt-0 sm:mt-0"><p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45">{item.label}</p><p className="mt-2 flex items-center gap-2 text-sm text-white/90">{item.verified ? <CircleCheck size={16} className="text-accent" /> : null}{item.detail}</p></div>)}
             </div>
           </div>
         </section>
 
-        <section id="organiser-outcomes" data-testid="organiser-outcomes" className="border-b border-black/10 bg-[var(--paper)] py-14 text-[var(--ink-deep)] md:py-20">
+        <section id="organiser-outcomes" data-testid="organiser-outcomes" className="border-b border-white/10 bg-[#0B1419] py-5 md:py-7">
           <div className="container">
-            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up grid gap-7 border-b border-black/10 pb-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-              <div><p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#1D6D71]">Built for the moment it matters</p><h2 className="velocity-headline max-w-3xl text-[var(--ink-deep)]">Let the match move. Keep the decision in view.</h2></div>
-              <p className="max-w-xl text-base leading-7 text-black/65 md:text-lg">{organiserOutcomesIntroduction.description}</p>
+            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up max-w-4xl py-8 md:py-10">
+              <div className="mb-5 h-1 w-12 bg-accent" />
+              <h2 className="velocity-headline max-w-3xl text-[clamp(2.5rem,5vw,5.25rem)] leading-[0.96] text-white">{organiserOutcomesIntroduction.heading}</h2>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-white/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
             </div>
-            <div className="grid border-l border-black/10 md:grid-cols-3">
+            <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
               {organiserOutcomeCards.map((outcome, index) => (
-                <article data-reveal key={outcome.id} className="reveal-up border-b border-r border-black/10 px-5 py-8 md:px-7 md:py-10" style={{ transitionDelay: `${index * 70}ms` }}>
-                  <p className="font-mono text-sm font-semibold text-[#1D6D71]">{outcome.number}</p>
-                  <h3 className="mt-7 text-2xl font-semibold tracking-tight text-[var(--ink-deep)]">{outcome.title}</h3>
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-black/65">{outcome.detail}</p>
+                <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] p-5 md:p-6" style={{ transitionDelay: `${index * 70}ms` }}>
+                  <p className="font-mono text-sm font-semibold text-accent">{outcome.number}</p>
+                  <h2 className="mt-5 text-xl font-semibold tracking-tight text-white">{outcome.title}</h2>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="system-video" data-testid="smart-referee-system-video" className="border-b border-white/10 bg-[#071117] py-14 md:py-20">
+        <section id="system-video" data-testid="smart-referee-system-video" className="border-b border-white/10 bg-[#071117] py-12 md:py-16">
           <div className="container">
-            <div data-reveal className="reveal-up grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-              <div><p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-accent">One operational picture</p><h2 className="velocity-headline max-w-3xl text-white">The field, <span className="text-accent">interpreted.</span></h2></div>
-              <p className="max-w-xl text-sm leading-7 text-white/65 md:text-base">A calibrated view brings the rule, the tracked position, and the decisive moment into one shared reference before a review becomes a prolonged interruption.</p>
+            <div data-reveal className="reveal-up mb-7 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+              <div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Decision replay</p><h2 className="velocity-headline max-w-2xl text-white">See the call, not just the <span className="text-accent">replay.</span></h2></div>
+              <p className="max-w-md text-sm leading-6 text-white/65">A single calibrated view helps officials review the relevant moment together, then return their attention to the event.</p>
             </div>
-            <div data-reveal data-presentation={smartRefereeHeroVideoPresentation.containerTreatment} className="reveal-up relative mt-10 overflow-hidden border border-white/10 bg-black/20" style={{ transitionDelay: "90ms" }}>
-              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(64,224,208,0.11),transparent_58%)]" />
+            <div data-reveal data-presentation={smartRefereeHeroVideoPresentation.containerTreatment} className="reveal-up relative -mx-4 overflow-hidden bg-[#071117] sm:-mx-6 lg:-mx-8" style={{ transitionDelay: "90ms" }}>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(64,224,208,0.08),transparent_58%)]" />
               <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} autoPlay={smartRefereeHeroVideoPresentation.autoPlay} muted={smartRefereeHeroVideoPresentation.muted} loop={smartRefereeHeroVideoPresentation.loop} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="relative z-10 mx-auto aspect-video h-full w-full max-w-7xl bg-transparent object-contain">Your browser does not support embedded video.</video>
-              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1/3 bg-gradient-to-t from-[#071117] to-transparent" />
-            </div>
-            <div data-reveal className="reveal-up mt-6 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3" style={{ transitionDelay: "120ms" }}>
-              <div className="bg-[#071117] p-5"><p className="font-mono text-xs text-accent">01</p><h3 className="mt-5 font-semibold text-white">Capture the field</h3><p className="mt-2 text-sm leading-6 text-white/60">Bring the relevant high-speed scoring moment into one reference view.</p></div>
-              <div className="bg-[#071117] p-5"><p className="font-mono text-xs text-accent">02</p><h3 className="mt-5 font-semibold text-white">Surface the moment</h3><p className="mt-2 text-sm leading-6 text-white/60">Give officials the configured rule and position evidence together.</p></div>
-              <div className="bg-[#071117] p-5"><p className="font-mono text-xs text-accent">03</p><h3 className="mt-5 font-semibold text-white">Stand behind the call</h3><p className="mt-2 text-sm leading-6 text-white/60">Return the shared decision to the competition without displacing human authority.</p></div>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1/4 bg-gradient-to-t from-[#071117] to-transparent" />
             </div>
           </div>
         </section>
 
-        <section id="event-workflow" data-testid="event-workflow" className="border-b border-white/10 bg-[#171C1D] py-14 md:py-20">
-          <div className="container grid gap-9 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
-            <div data-reveal className="reveal-up overflow-hidden border border-white/10 bg-black/20"><div className="relative aspect-[4/3] overflow-hidden"><img src={smartRefereeMedia.humanReferee} alt="Scoring officials viewing a drone-sports goal through the arena net" className="h-full w-full object-cover" /><div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#071117]/95 via-[#071117]/10 to-transparent" /><p className="absolute bottom-5 left-5 max-w-xs text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">One difficult moment. One shared view.</p></div></div>
+        <section id="event-workflow" data-testid="event-workflow" className="velocity-section border-b border-white/10 bg-[#27282B]">
+          <div className="container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20">
+              <div className="relative aspect-[21/9] overflow-hidden sm:aspect-[4/3]">
+                <img src={smartRefereeMedia.humanReferee} alt="Scoring officials viewing a drone-sports goal through the arena net" className="h-full w-full object-cover" />
+                <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#161719]/90 via-[#161719]/10 to-transparent" />
+                <p className="absolute bottom-4 left-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">One difficult moment. One shared view.</p>
+              </div>
+            </div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-accent">Decision rail</p>
-              <h2 className="velocity-headline max-w-2xl text-white">From event rule to <span className="text-accent">shared call.</span></h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee makes a difficult scoring moment easier to review without replacing human authority.</p>
-              <ol className="mt-8 divide-y divide-white/10 border-y border-white/10">
-                {eventWorkflowSteps.map((step) => <li key={step.number} className="grid gap-3 py-5 sm:grid-cols-[3.5rem_1fr] sm:gap-6"><span className="font-mono text-sm font-semibold text-accent">{step.number}</span><div><h3 className="font-semibold text-white">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-white/60">{step.detail}</p></div></li>)}
+              <div className="mb-5 h-1 w-12 bg-accent" />
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">A simple event workflow</p>
+              <h2 className="velocity-headline max-w-2xl text-white">From question to <span className="text-accent">shared call.</span></h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
+              <ol className="mt-7 divide-y divide-white/10 border-y border-white/10">
+                {eventWorkflowSteps.map((step) => (
+                  <li key={step.number} className="grid gap-3 py-4 sm:grid-cols-[3.25rem_1fr] sm:gap-5">
+                    <span className="font-mono text-sm font-semibold text-accent">{step.number}</span>
+                    <div><h3 className="font-semibold text-white">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-white/60">{step.detail}</p></div>
+                  </li>
+                ))}
               </ol>
             </div>
           </div>
         </section>
 
-        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" className="border-b border-black/10 bg-[var(--paper)] py-14 text-[var(--ink-deep)] md:py-20">
-          <div className="container">
-            <div data-reveal className="reveal-up rounded-[1.75rem] bg-[var(--ink-deep)] p-6 text-white sm:p-8 lg:p-10">
-              <div className="grid gap-7 lg:grid-cols-[1fr_0.85fr] lg:items-end"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">For organisers</p><h2 className="velocity-headline mt-4 max-w-2xl text-white">{organiserImpactDetail.title}</h2></div><p className="max-w-xl text-sm leading-7 text-white/65">{organiserImpactDetail.description}</p></div>
-              <div className="mt-9 grid gap-px overflow-hidden border border-white/15 bg-white/15 sm:grid-cols-3">
-                {organiserImpactDetail.metrics.map((metric, index) => <div key={metric.label} data-reveal className="reveal-up bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>)}
+        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" className="border-b border-white/10 bg-black py-10 md:py-12">
+          <div className="container max-w-4xl">
+            <div data-reveal className="reveal-up rounded-lg border border-accent/25 bg-accent/5 p-5 sm:p-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Organiser impact</p>
+              <h2 className="velocity-headline mt-3 max-w-2xl text-white">{organiserImpactDetail.title}</h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">{organiserImpactDetail.description}</p>
+              <div className="mt-7 grid gap-px overflow-hidden border border-accent/20 bg-accent/20 sm:grid-cols-3">
+                {organiserImpactDetail.metrics.map((metric, index) => (
+                  <div key={metric.label} data-reveal className="reveal-up bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
+                ))}
               </div>
-              <p className="mt-6 max-w-3xl text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
+              <p className="mt-6 text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
             </div>
           </div>
         </section>
 
-        <section id="technical-confidence" data-testid="technical-confidence" className="border-b border-black/10 bg-[var(--paper)] py-14 text-[var(--ink-deep)] md:py-20">
+        <section id="technical-confidence" data-testid="technical-confidence" className="velocity-section border-b border-white/10 bg-[#171C1D]">
           <div className="container">
-            <div data-reveal className="reveal-up grid gap-7 border-b border-black/10 pb-10 lg:grid-cols-[1fr_0.85fr] lg:items-end"><div><p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#1D6D71]">The decision layer</p><h2 className="velocity-headline max-w-2xl text-[var(--ink-deep)]">Technical confidence, when your team needs it.</h2></div><p className="max-w-xl text-sm leading-7 text-black/65 md:text-base">{technicalConfidence.description}</p></div>
+            <div data-reveal className="reveal-up mx-auto max-w-3xl text-center">
+              <div className="mb-5 h-1 w-12 bg-accent" />
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Built for event scale</p>
+              <h2 className="velocity-headline mx-auto max-w-2xl text-white">{technicalConfidence.title}</h2>
+              <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
+            </div>
             <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-tile-aspect-ratio={eventScaleFeatureTilePresentation.tileAspectRatio} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4 xl:gap-5">
               <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="bg-[radial-gradient(circle_at_70%_20%,rgba(64,224,208,0.18),transparent_0_34%),#0B1419]"><div className="p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">01 · DECISION DATA</p><div className="mt-4 grid grid-cols-2 gap-2 sm:gap-3">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-2 sm:pl-3"><p className="text-lg font-semibold tracking-[-0.05em] text-white sm:text-2xl">{point.value}</p><p className="mt-1 text-[9px] leading-3 text-white/55 sm:text-[10px] sm:leading-4">{point.label}</p></div>)}</div></div></EventScaleTile>
               <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="bg-[#0B1419]"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">02 · TRACKING SETUP</p><h3 className="mt-auto text-lg font-semibold tracking-tight text-white sm:text-2xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 hidden text-[10px] leading-4 text-white/70 sm:block">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
-              <div data-testid="technical-evidence-panels" className="contents"><EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="bg-black"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-lg font-semibold tracking-tight text-white sm:text-2xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 hidden text-[10px] leading-4 text-white/70 sm:block">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile><EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="bg-[#0B1419]"><div className="p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">04 · CONFIGURABLE RULES</p><h3 className="mt-2 text-sm font-semibold tracking-tight text-white sm:text-lg">{technicalConfidence.rulesTitle}</h3><div data-rule-reference-logos className="mt-4 flex items-center gap-2 border-t border-white/10 pt-3">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-7 min-w-0 flex-1 object-contain sm:h-9" />)}</div></div></EventScaleTile></div>
+              <div data-testid="technical-evidence-panels" className="contents">
+                <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="bg-black"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-lg font-semibold tracking-tight text-white sm:text-2xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 hidden text-[10px] leading-4 text-white/70 sm:block">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
+                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="bg-[#0B1419]"><div className="p-4 sm:p-5"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">04 · CONFIGURABLE RULES</p><h3 className="mt-2 text-sm font-semibold tracking-tight text-white sm:text-lg">{technicalConfidence.rulesTitle}</h3><div data-rule-reference-logos className="mt-4 flex items-center gap-2 border-t border-white/10 pt-3">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-7 min-w-0 flex-1 object-contain sm:h-9" />)}</div></div></EventScaleTile>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="drone-sports-referee-pitch" data-testid="drone-sports-referee-pitch" data-pitch-video-panel className="border-b border-white/10 bg-[#0B1419] py-14 md:py-20"><div data-reveal className="container reveal-up"><div className="overflow-hidden border border-white/10 bg-black/20 p-4 sm:p-6 md:p-8"><div className="mb-6 grid gap-4 lg:grid-cols-[1fr_0.85fr] lg:items-end"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Review console</p><h2 className="velocity-headline mt-3 max-w-xl text-white">{technicalConfidence.pitchVideoTitle}</h2></div><p className="max-w-md text-sm leading-6 text-white/65">{technicalConfidence.pitchVideoDescription}</p></div><video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full bg-black object-contain">Your browser does not support embedded video.</video></div></div></section>
+        <section id="drone-sports-referee-pitch" data-testid="drone-sports-referee-pitch" data-pitch-video-panel className="velocity-section border-b border-white/10 bg-[#0B1419]">
+          <div data-reveal className="container reveal-up">
+            <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-4 sm:p-6 md:p-8"><div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Drone Sports Referee</p><h2 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-4xl">{technicalConfidence.pitchVideoTitle}</h2></div><p className="max-w-md text-sm leading-6 text-white/65">{technicalConfidence.pitchVideoDescription}</p></div><video data-testid="flex13-system-video" src={smartRefereeMedia.precisionVideo} poster={smartRefereeMedia.precisionPoster} aria-label="Drone Sports Referee Pitch video" autoPlay={flex13SystemVideoPresentation.autoPlay} muted={flex13SystemVideoPresentation.muted} loop={flex13SystemVideoPresentation.loop} controls={flex13SystemVideoPresentation.controls} controlsList={flex13SystemVideoPresentation.controlsList} disablePictureInPicture={flex13SystemVideoPresentation.disablePictureInPicture} playsInline={flex13SystemVideoPresentation.playsInline} preload={flex13SystemVideoPresentation.preload} onContextMenu={(event) => event.preventDefault()} className="aspect-video w-full rounded-xl bg-black object-contain">Your browser does not support embedded video.</video></div>
+          </div>
+        </section>
 
         <RefereePricingConfigurator />
 
-        <section className="overflow-hidden border-y border-black/10 bg-[var(--paper)] py-14 text-[var(--ink-deep)] md:py-20"><div data-reveal className="container reveal-up grid gap-8 lg:grid-cols-[1fr_0.75fr] lg:items-end"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1D6D71]">Ready to verify</p><h2 className="velocity-headline mt-4 max-w-3xl text-[var(--ink-deep)]">Make the next match easier to trust.</h2></div><div><p className="max-w-xl text-base leading-7 text-black/65">Tell us your venue, format, and schedule. We will map a practical decision-support path for your event.</p><a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "delivery_pricing", route: "dronesportsreferee" })} className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--ink-deep)] px-6 py-3 font-semibold text-[var(--paper)] transition-colors hover:bg-accent hover:text-black">Plan your event <ArrowRight size={18} /></a></div></div></section>
+        <section className="border-y border-white/10 bg-[var(--ink-soft)] py-10 text-[var(--paper)] md:py-12">
+          <div data-reveal className="container reveal-up flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
+            <div className="max-w-2xl"><div className="mb-4 h-1 w-12 bg-accent" /><h2 className="velocity-headline mb-3 text-[var(--paper)]">Plan your next competition with confidence.</h2><p className="text-lg leading-8 text-[var(--mist)]">Share your venue, match format, and schedule. We will propose the decision-support scope, event staffing, and delivery path that fit your programme.</p></div>
+            <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "delivery_pricing", route: "dronesportsreferee" })} className="inline-flex shrink-0 items-center gap-2 border border-white/40 px-6 py-3 font-semibold text-[var(--paper)] transition-colors hover:border-accent hover:bg-accent hover:text-black">Plan your event <ArrowRight size={18} /></a>
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </div>
