@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -23,15 +23,15 @@ describe("Smart Referee organiser-first journey", () => {
     expect(eventWorkflowSteps[2].detail).toContain("Officials keep their authority");
   });
 
-  it("keeps the organiser-impact scenario visible, animated, and qualified as a planning discussion", () => {
+  it("frames organiser impact as clear event-protection outcomes without unsupported performance claims", () => {
     expect(smartRefereePageHierarchy).toContain("organiser-impact-detail");
-    expect(organiserImpactDetail.metrics).toHaveLength(3);
-    expect(organiserImpactDetail.qualification).toContain("validate against your own staffing");
-    expect(organiserImpactDetail.description).toContain("not measured outcomes or guaranteed savings");
-    expect(organiserImpactMetricAnimation).toEqual({ trigger: "when-visible", durationMilliseconds: 1800, respectsReducedMotion: true });
-    expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[0], 4, "en")).toBe("4+ minutes");
-    expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[1], 40, "zh-Hant")).toBe("超過 40+ 分鐘");
-    expect(formatOrganiserImpactMetric(organiserImpactDetail.metrics[2], 27_000, "en")).toBe("HK$27k");
+    expect(organiserImpactDetail).toMatchObject({
+      index: "04",
+      audience: "For organisers",
+      title: "Keep the schedule moving. Keep each decision clear.",
+    });
+    expect(organiserImpactDetail.description).toContain("without displacing the officials");
+    expect(organiserImpactDetail.outcomes.map((outcome) => outcome.title)).toEqual(["Keep play moving", "Build trust", "Retain the record"]);
   });
 
   it("keeps technical evidence visible after the organiser value narrative", () => {
@@ -74,7 +74,7 @@ describe("Smart Referee organiser-first journey", () => {
 
   it("maps the revised organiser promise, outcomes, workflow, and visible evidence into Traditional Chinese", () => {
     [
-      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "View an illustrative event-delay scenario", "Technical confidence, when your team needs it.", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Configurable competition rules", "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.", "Drone Sports Referee Pitch", "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.", "Compare all service inclusions",
+      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "For organisers", "Keep the schedule moving. Keep each decision clear.", "Smart Referee gives your competition a consistent way to review difficult scoring moments and retain a clear decision record—without displacing the officials responsible for the call.", "Keep play moving", "Help officials return a reviewable decision to the field, so the next match can begin with less uncertainty.", "Build trust", "Give teams and officials a clear process around consequential scoring decisions.", "Retain the record", "Keep a reviewable decision trail for organisers, officials, and post-event follow-up.", "Technical confidence, when your team needs it.", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Configurable competition rules", "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.", "Drone Sports Referee Pitch", "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.", "Compare all service inclusions",
     ].forEach((key) => expect(traditionalChineseTranslations[key]).toBeTruthy());
     expect(traditionalChinesePromisePresentation).toBe("two-intentional-lines");
   });

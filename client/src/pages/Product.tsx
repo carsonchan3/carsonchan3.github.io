@@ -1,9 +1,8 @@
 import { ArrowRight, CircleCheck } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
-import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 import { trackConversion } from "@/lib/conversionTracking";
 
@@ -123,76 +122,16 @@ export const eventWorkflowSteps = [
 ] as const;
 
 export const organiserImpactDetail = {
-  title: "One held call can affect more than the moment.",
-  description: "A scoring review can use the schedule buffer intended to protect the next match. The planning values below are discussion inputs, not measured outcomes or guaranteed savings.",
-  metrics: [
-    { value: 4, label: "per review delay", formatter: "review-delay" },
-    { value: 40, label: "Wasted time on dispute per event", formatter: "dispute-time" },
-    { value: 27_000, label: "Extra cost related to all parties", formatter: "hkd-compact" },
+  index: "04",
+  audience: "For organisers",
+  title: "Keep the schedule moving. Keep each decision clear.",
+  description: "Smart Referee gives your competition a consistent way to review difficult scoring moments and retain a clear decision record—without displacing the officials responsible for the call.",
+  outcomes: [
+    { title: "Keep play moving", detail: "Help officials return a reviewable decision to the field, so the next match can begin with less uncertainty." },
+    { title: "Build trust", detail: "Give teams and officials a clear process around consequential scoring decisions." },
+    { title: "Retain the record", detail: "Keep a reviewable decision trail for organisers, officials, and post-event follow-up." },
   ],
-  qualification: "Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.",
 } as const;
-
-export const organiserImpactMetricAnimation = {
-  trigger: "when-visible",
-  durationMilliseconds: 1800,
-  respectsReducedMotion: true,
-} as const;
-
-type OrganiserImpactMetric = (typeof organiserImpactDetail.metrics)[number];
-
-export const formatOrganiserImpactMetric = (metric: OrganiserImpactMetric, value: number, language: "en" | "zh-Hant") => {
-  if (metric.formatter === "hkd-compact") return `HK$${Math.round(value / 1_000)}k`;
-  if (metric.formatter === "review-delay") return language === "zh-Hant" ? `${value} 分鐘以上` : `${value}+ minutes`;
-  return language === "zh-Hant" ? `超過 ${value}+ 分鐘` : `over ${value}+ minutes`;
-};
-
-function RollingImpactMetric({ metric }: { metric: OrganiserImpactMetric }) {
-  const { language } = useWebsiteLanguage();
-  const valueRef = useRef<HTMLSpanElement>(null);
-  const [displayValue, setDisplayValue] = useState<number>(metric.value);
-  const hasEnteredView = useRef(false);
-
-  useEffect(() => {
-    const element = valueRef.current;
-    if (!element) return;
-
-    let animationFrame = 0;
-    const animate = (instant = false) => {
-      if (instant || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        setDisplayValue(metric.value);
-        return;
-      }
-      const startedAt = window.performance.now();
-      const tick = (timestamp: number) => {
-        const progress = Math.min((timestamp - startedAt) / organiserImpactMetricAnimation.durationMilliseconds, 1);
-        setDisplayValue(Math.round(metric.value * (1 - Math.pow(1 - progress, 3))));
-        if (progress < 1) animationFrame = window.requestAnimationFrame(tick);
-      };
-      animationFrame = window.requestAnimationFrame(tick);
-    };
-
-    if (!("IntersectionObserver" in window)) {
-      animate();
-      return () => window.cancelAnimationFrame(animationFrame);
-    }
-
-    const observer = new window.IntersectionObserver(([entry]) => {
-      if (!entry?.isIntersecting || hasEnteredView.current) return;
-      hasEnteredView.current = true;
-      setDisplayValue(0);
-      animate();
-      observer.disconnect();
-    }, { threshold: 0.35 });
-    observer.observe(element);
-    return () => {
-      observer.disconnect();
-      window.cancelAnimationFrame(animationFrame);
-    };
-  }, [metric]);
-
-  return <span ref={valueRef} data-live-metric className="font-mono text-3xl font-semibold leading-none tracking-tight text-accent sm:text-4xl">{formatOrganiserImpactMetric(metric, displayValue, language)}</span>;
-}
 
 export const smartRefereeMedia = {
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
@@ -316,18 +255,22 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" className="border-b border-white/10 bg-black py-10 md:py-12">
-          <div className="container max-w-4xl">
-            <div data-reveal className="reveal-up rounded-lg border border-accent/25 bg-accent/5 p-5 sm:p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Organiser impact</p>
-              <h2 className="velocity-headline mt-3 max-w-2xl text-white">{organiserImpactDetail.title}</h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">{organiserImpactDetail.description}</p>
-              <div className="mt-7 grid gap-px overflow-hidden border border-accent/20 bg-accent/20 sm:grid-cols-3">
-                {organiserImpactDetail.metrics.map((metric, index) => (
-                  <div key={metric.label} data-reveal className="reveal-up bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
-                ))}
-              </div>
-              <p className="mt-6 text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
+        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" data-presentation="event-protection-outcomes" className="border-b border-white/10 bg-black py-14 md:py-20">
+          <div className="container">
+            <div data-reveal className="reveal-up max-w-3xl border-t border-white/15 pt-5">
+              <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">{organiserImpactDetail.index} · {organiserImpactDetail.audience}</p>
+              <h2 className="velocity-headline mt-5 max-w-3xl text-[clamp(2.5rem,5.5vw,5.6rem)] leading-[0.95] text-white">{organiserImpactDetail.title}</h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/70 md:text-lg">{organiserImpactDetail.description}</p>
+              <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "organiser_impact_pricing", route: "dronesportsreferee" })} className="mt-8 inline-flex items-center gap-2 rounded-full border border-accent bg-accent px-5 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={17} /></a>
+            </div>
+            <div data-testid="organiser-impact-outcomes" className="mt-12 grid gap-px overflow-hidden border-y border-white/15 bg-white/15 md:grid-cols-3">
+              {organiserImpactDetail.outcomes.map((outcome, index) => (
+                <article key={outcome.title} data-reveal className="reveal-up bg-black px-5 py-7 md:px-7 md:py-8" style={{ transitionDelay: `${index * 70}ms` }}>
+                  <p className="font-mono text-xs font-semibold text-accent">0{index + 1}</p>
+                  <h3 className="mt-5 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h3>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
