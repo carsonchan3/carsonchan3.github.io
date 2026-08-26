@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeDecisionRail, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeDecisionRail, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -49,6 +49,7 @@ describe("Smart Referee organiser-first journey", () => {
     });
     expect(organiserImpactDetail.description).toContain("without displacing the officials");
     expect(organiserImpactDetail.outcomes.map((outcome) => outcome.title)).toEqual(["Keep play moving", "Build trust", "Retain the record"]);
+    expect(organiserImpactOutcomeIconPresentation).toEqual(["TimerReset", "ShieldCheck", "FileCheck2"]);
     expect(organiserImpactDetail.planningSignals).toHaveLength(3);
     expect(organiserImpactDetail.qualification).toContain("validate against your own staffing");
     expect(organiserImpactMetricAnimation).toEqual({ trigger: "when-visible", durationMilliseconds: 1800, respectsReducedMotion: true });
@@ -61,7 +62,7 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
     expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
     expect(eventScaleEvidencePanelPresentation).toBe("feature-cluster");
-    expect(eventScaleFeatureTilePresentation).toEqual({ mobileColumns: 1, desktopColumns: 12, primaryPanel: "decision-data", supportingPanels: ["passive-tracking", "continuous-calibration", "configurable-rules"], visibility: "clustered-all-features-together" });
+    expect(eventScaleFeatureTilePresentation).toEqual({ mobileColumns: 1, desktopColumns: 2, primaryPanel: "decision-data", supportingPanels: ["passive-tracking", "continuous-calibration", "configurable-rules"], visibility: "rounded-square-feature-surfaces" });
     expect(eventScaleTileDetailInteraction).toEqual({ hover: "reveals-description", click: "toggles-description", pitchPlacement: "standalone-panel-after-event-scale" });
     expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(technicalConfidence.markerTitle).toBe("Passive Tracking");
@@ -88,7 +89,7 @@ describe("Smart Referee organiser-first journey", () => {
 
   it("preserves the pitch-video controls and the mobile visibility policy", () => {
     expect(smartRefereeHeroVideoPresentation).toEqual({ aspectRatio: "16:9", objectFit: "contain", controls: false, autoPlay: true, muted: true, loop: true, containerTreatment: "borderless-integrated" });
-    expect(smartRefereeHeroBackgroundPresentation).toEqual({ source: "homepage-hero-video", treatment: "dark-overlay-background", autoPlay: true, muted: true, loop: true });
+    expect(smartRefereeHeroBackgroundPresentation).toEqual({ source: "homepage-hero-video", treatment: "autoplay-video-with-tracking-poster-fallback", autoPlay: true, muted: true, loop: true, playsInline: true, preload: "auto" });
     expect(flex13SystemVideoPresentation).toEqual({ title: "Drone Sports Referee Pitch", aspectRatio: "16:9", autoPlay: false, muted: false, loop: false, controls: true, playsInline: true, preload: "metadata", controlsList: "nodownload noremoteplayback", disablePictureInPicture: true });
     expect(continuousCalibrationVideoPresentation).toEqual({ autoPlay: true, muted: true, loop: true, controls: false, playsInline: true, preload: "metadata" });
     expect(mobileSmartRefereeRevealPolicy).toBe("always-visible");

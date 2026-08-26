@@ -1,4 +1,4 @@
-import { ArrowRight, CircleCheck } from "lucide-react";
+import { ArrowRight, CircleCheck, FileCheck2, ShieldCheck, TimerReset } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
@@ -21,10 +21,10 @@ export const traditionalChinesePromisePresentation = "two-intentional-lines";
 export const eventScaleEvidencePanelPresentation = "feature-cluster";
 export const eventScaleFeatureTilePresentation = {
   mobileColumns: 1,
-  desktopColumns: 12,
+  desktopColumns: 2,
   primaryPanel: "decision-data",
   supportingPanels: ["passive-tracking", "continuous-calibration", "configurable-rules"],
-  visibility: "clustered-all-features-together",
+  visibility: "rounded-square-feature-surfaces",
 } as const;
 export const eventScaleTileDetailInteraction = {
   hover: "reveals-description",
@@ -42,10 +42,12 @@ export const smartRefereeHeroVideoPresentation = {
 } as const;
 export const smartRefereeHeroBackgroundPresentation = {
   source: "homepage-hero-video",
-  treatment: "dark-overlay-background",
+  treatment: "autoplay-video-with-tracking-poster-fallback",
   autoPlay: true,
   muted: true,
   loop: true,
+  playsInline: true,
+  preload: "auto",
 } as const;
 export const flex13SystemVideoPresentation = {
   title: "Drone Sports Referee Pitch",
@@ -156,6 +158,14 @@ export const organiserImpactDetail = {
   qualification: "Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.",
 } as const;
 
+const organiserImpactOutcomeIcons = {
+  "Keep play moving": TimerReset,
+  "Build trust": ShieldCheck,
+  "Retain the record": FileCheck2,
+} as const;
+
+export const organiserImpactOutcomeIconPresentation = ["TimerReset", "ShieldCheck", "FileCheck2"] as const;
+
 export const organiserImpactMetricAnimation = {
   trigger: "when-visible",
   durationMilliseconds: 1800,
@@ -248,7 +258,7 @@ export const technicalConfidence = {
 
 function EventScaleTile({ id, label, detail, expanded, onToggle, className, technicalEvidence = false, children }: { id: string; label: string; detail: ReactNode; expanded: boolean; onToggle: () => void; className: string; technicalEvidence?: boolean; children: ReactNode }) {
   const detailId = `event-scale-tile-${id}-detail`;
-  return <article data-event-scale-panel data-feature-tile data-tile-index={id} data-technical-evidence-panel={technicalEvidence ? "true" : undefined} data-reveal className={`group relative aspect-square overflow-hidden rounded-xl border border-white/10 ${className}`}>
+  return <article data-event-scale-panel data-feature-tile data-tile-index={id} data-technical-evidence-panel={technicalEvidence ? "true" : undefined} data-reveal className={`group relative aspect-square overflow-hidden rounded-2xl border border-white/10 shadow-[0_18px_45px_rgba(0,0,0,0.22)] ${className}`}>
     <div className="relative z-10 h-full pointer-events-none">{children}</div>
     <button type="button" data-tile-detail-toggle data-tile-index={id} aria-expanded={expanded} aria-controls={detailId} aria-label={`${expanded ? "Hide" : "Show"} details for ${label}`} onClick={onToggle} className="absolute inset-0 z-20 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"><span className="sr-only">{expanded ? "Hide details" : "Show details"}</span></button>
     <div id={detailId} data-tile-detail-panel aria-hidden={!expanded} className={`pointer-events-none absolute inset-0 z-10 flex items-end bg-[linear-gradient(180deg,rgba(7,16,20,0.22)_0%,rgba(7,16,20,0.97)_62%)] p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 sm:p-5 ${expanded ? "opacity-100" : ""}`}><p className="text-[11px] leading-4 text-white/85 sm:text-xs sm:leading-5">{detail}</p></div>
@@ -264,6 +274,7 @@ export default function Product() {
       <main data-reveal-page className="pt-16">
         <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} data-presentation={smartRefereeReferenceFormatPresentation.hero} className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden border-b border-white/10 bg-[#071117]">
           <img src={smartRefereeMedia.trackingPoster} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 z-0 h-full w-full object-cover object-right" />
+          <video data-testid="smart-referee-hero-video" src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline={smartRefereeHeroBackgroundPresentation.playsInline} preload={smartRefereeHeroBackgroundPresentation.preload} onCanPlay={(event) => { void event.currentTarget.play().catch(() => undefined); }} className="absolute inset-0 z-[1] h-full w-full object-cover object-center" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.34)_100%)]" />
           <div className="container relative z-20 flex min-h-[calc(100svh-4rem)] flex-col justify-end py-12 md:py-16 lg:py-20">
             <div data-reveal className="reveal-up max-w-3xl">
@@ -348,20 +359,21 @@ export default function Product() {
               <p className="mt-6 max-w-2xl text-base leading-8 text-white/70 md:text-lg">{organiserImpactDetail.description}</p>
               <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "organiser_impact_pricing", route: "dronesportsreferee" })} className="mt-8 inline-flex items-center gap-2 rounded-full border border-accent bg-accent px-5 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={17} /></a>
             </div>
-            <div data-testid="organiser-impact-outcomes" className="mt-12 grid gap-px overflow-hidden border-y border-white/15 bg-white/15 md:grid-cols-3">
+            <div data-testid="organiser-impact-outcomes" className="mt-12 grid gap-4 md:grid-cols-3">
               {organiserImpactDetail.outcomes.map((outcome, index) => (
-                <article key={outcome.title} data-reveal className="reveal-up bg-black px-5 py-7 md:px-7 md:py-8" style={{ transitionDelay: `${index * 70}ms` }}>
+                <article key={outcome.title} data-reveal className="reveal-up rounded-2xl border border-white/10 bg-[#0B1419] px-5 py-7 shadow-[0_18px_45px_rgba(0,0,0,0.2)] md:px-7 md:py-8" style={{ transitionDelay: `${index * 70}ms` }}>
+                  {(() => { const Icon = organiserImpactOutcomeIcons[outcome.title]; return <Icon aria-hidden="true" className="h-6 w-6 text-accent" strokeWidth={1.75} />; })()}
                   <p className="font-mono text-xs font-semibold text-accent">0{index + 1}</p>
-                  <h3 className="mt-5 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h3>
+                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h3>
                   <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
                 </article>
               ))}
             </div>
-            <div data-testid="organiser-impact-planning-signals" className="mt-7 border border-accent/25 bg-accent/5 p-5 sm:p-7">
+            <div data-testid="organiser-impact-planning-signals" className="mt-7 rounded-2xl border border-accent/25 bg-accent/5 p-5 sm:p-7">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Planning signals</p>
-              <div className="mt-5 grid gap-px overflow-hidden border border-accent/20 bg-accent/20 sm:grid-cols-3">
+              <div className="mt-5 grid gap-3 sm:grid-cols-3">
                 {organiserImpactDetail.planningSignals.map((metric, index) => (
-                  <div key={metric.label} data-reveal className="reveal-up bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
+                  <div key={metric.label} data-reveal className="reveal-up rounded-xl border border-white/10 bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
                 ))}
               </div>
               <p className="mt-5 text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
@@ -376,12 +388,12 @@ export default function Product() {
               <h2 className="velocity-headline mx-auto max-w-2xl text-white">{technicalConfidence.title}</h2>
               <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
             </div>
-            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-primary-panel={eventScaleFeatureTilePresentation.primaryPanel} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mt-10 grid gap-3 sm:gap-4 lg:grid-cols-12 lg:gap-5">
-              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[19rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419] lg:col-span-7 lg:row-span-2 lg:aspect-auto lg:min-h-0" ><div className="flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:max-w-xl sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
-              <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="min-h-[15rem] bg-[#0B1419] lg:col-span-5 lg:aspect-auto lg:min-h-0"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">02 · TRACKING SETUP</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
+            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-primary-panel={eventScaleFeatureTilePresentation.primaryPanel} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5">
+              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[20rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419]" ><div className="flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
+              <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="min-h-[20rem] bg-[#0B1419]"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">02 · TRACKING SETUP</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
               <div data-testid="technical-evidence-panels" className="contents">
-                <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="min-h-[15rem] bg-black lg:col-span-5 lg:aspect-auto lg:min-h-0"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
-                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="min-h-[15rem] bg-[#0B1419] lg:col-span-12 lg:aspect-auto lg:min-h-[13rem]"><div className="flex h-full flex-col justify-between p-5 sm:p-6 lg:flex-row lg:items-end lg:gap-10"><div><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">04 · CONFIGURABLE RULES</p><h3 className="mt-3 max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.rulesTitle}</h3><p className="mt-3 max-w-2xl text-xs leading-5 text-white/70">{technicalConfidence.rulesDescription}</p></div><div data-rule-reference-logos className="mt-6 flex w-full max-w-sm items-center gap-3 border-t border-white/10 pt-4 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-7 lg:pt-0">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-9 min-w-0 flex-1 object-contain sm:h-11" />)}</div></div></EventScaleTile>
+                <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="min-h-[20rem] bg-[#0E171B]"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
+                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="min-h-[20rem] bg-[linear-gradient(145deg,#0B1419,#132C31)]"><div className="flex h-full flex-col justify-between p-5 sm:p-6"><div><p className="text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs">04 · CONFIGURABLE RULES</p><h3 className="mt-3 max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.rulesTitle}</h3><p className="mt-3 max-w-2xl text-xs leading-5 text-white/70">{technicalConfidence.rulesDescription}</p></div><div data-rule-reference-logos className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-9 min-w-0 flex-1 object-contain sm:h-11" />)}</div></div></EventScaleTile>
               </div>
             </div>
           </div>
