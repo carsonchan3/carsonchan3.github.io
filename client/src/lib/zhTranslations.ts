@@ -726,4 +726,8 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "TRACKING SETUP": "追蹤設定",
   "CONTINUOUS CALIBRATION": "持續校準",
   "CONFIGURABLE RULES": "可配置規則",
+  "01 · DECISION DATA": "01 · 判決資料",
+  "02 · TRACKING SETUP": "02 · 追蹤設定",
+  "03 · CONTINUOUS CALIBRATION": "03 · 持續校準",
+  "04 · CONFIGURABLE RULES": "04 · 可配置規則",
 };
