@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeDecisionRail, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeDecisionRail, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -20,11 +20,16 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeReferenceFormatPresentation).toEqual({
       hero: "immersive-decision-rail",
       outcomes: "editorial-outcome-band",
-      replay: "wide-operational-console",
+      replay: "signature-decision-console",
       technical: "clustered-product-layer",
-      workflow: "numbered-decision-rail",
-      organiserImpact: "event-protection-outcomes-and-signals",
+      workflow: "paper-editorial-workflow",
+      organiserImpact: "paper-outcome-band-and-operational-rail",
       conversion: "ready-to-verify",
+    });
+    expect(smartRefereeVisualStoryPresentation).toEqual({
+      decisionConsole: "verified-media-with-operational-status-rail",
+      organiserImpact: "paper-outcomes-with-single-deep-ink-planning-rail",
+      pricing: "unified-quiet-service-family",
     });
     expect(smartRefereeDecisionRail).toEqual([
       { label: "Rule input", value: "Active scoring condition" },

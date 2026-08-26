@@ -6,6 +6,7 @@ import { pricingVisibilityClass } from "@/lib/pricingPresentation";
 
 export const pricingCardDetailPresentation = "scenario-led-progressive-details";
 export const pricingTierCardPresentation = "rounded-option-cards";
+export const pricingFamilyPresentation = "unified-quiet-service-family";
 
 export default function RefereePricingConfigurator() {
   const [selectedTier, setSelectedTier] = useState<PricingTierId>("managed");
@@ -24,24 +25,26 @@ export default function RefereePricingConfigurator() {
           <p className="mt-4 leading-7 text-white/75">Start with the delivery outcome that best fits your venue, event team, and level of decision support.</p>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-3">
-          {pricingTiers.map((tier) => {
-            const selected = selectedTier === tier.id;
-            return (
-              <button key={tier.id} type="button" data-testid={`pricing-tier-${tier.id}`} data-detail-presentation={pricingCardDetailPresentation} data-card-presentation={pricingTierCardPresentation} aria-pressed={selected} onClick={() => setSelectedTier(tier.id)} className={`group relative min-h-0 overflow-hidden rounded-2xl border p-5 text-left transition-all ${selected ? "border-accent bg-accent/10 shadow-[0_0_0_1px_rgba(64,224,208,0.15)]" : "border-white/10 bg-[#27282B] hover:border-white/35"}`}>
-                {selected && <span className="absolute right-4 top-4 rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-black">Selected</span>}
-                <div className="mb-5 flex size-10 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent"><Sparkles size={19} /></div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{tier.eyebrow}</p>
-                <h3 className="mt-3 max-w-[16rem] text-xl font-semibold tracking-tight text-white">{tier.scenario}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/65">{tier.description}</p>
-                <div className="mt-6 flex items-end gap-2"><p data-testid={`pricing-price-${tier.id}`} className="text-2xl font-bold tracking-tight text-accent">{tier.price}</p><p className="pb-0.5 text-sm text-white/55">{tier.priceUnit}</p></div>
-                <ul className="mt-5 space-y-2 border-t border-white/10 pt-4">
-                  {tier.features.slice(0, 3).map((feature) => <li key={feature} className="flex items-start gap-2 text-sm leading-5 text-white/75"><CheckCircle2 aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-accent" />{feature}</li>)}
-                </ul>
-                <p className={`mt-6 text-sm font-semibold ${selected ? "text-accent" : "text-white/65 group-hover:text-white"}`}>{selected ? "Selected support" : `Select ${tier.name}`}</p>
-              </button>
-            );
-          })}
+        <div data-presentation={pricingFamilyPresentation} className="rounded-[1.75rem] border border-white/10 bg-[#0B1419] p-3 shadow-[0_20px_55px_rgba(0,0,0,0.22)] sm:p-4">
+          <div className="grid gap-3 lg:grid-cols-3">
+            {pricingTiers.map((tier) => {
+              const selected = selectedTier === tier.id;
+              return (
+                <button key={tier.id} type="button" data-testid={`pricing-tier-${tier.id}`} data-detail-presentation={pricingCardDetailPresentation} data-card-presentation={pricingTierCardPresentation} aria-pressed={selected} onClick={() => setSelectedTier(tier.id)} className={`group relative min-h-0 overflow-hidden rounded-[1.25rem] border p-5 text-left transition-all duration-200 ${selected ? "border-accent bg-accent/10 shadow-[0_0_0_1px_rgba(64,224,208,0.15)]" : "border-white/8 bg-black/10 hover:border-white/25 hover:bg-white/[0.035]"}`}>
+                  {selected && <span className="absolute right-4 top-4 rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-black">Selected</span>}
+                  <div className="mb-5 flex size-10 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent"><Sparkles size={19} /></div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{tier.eyebrow}</p>
+                  <h3 className="mt-3 max-w-[16rem] text-xl font-semibold tracking-tight text-white">{tier.scenario}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/65">{tier.description}</p>
+                  <div className="mt-6 flex items-end gap-2"><p data-testid={`pricing-price-${tier.id}`} className="text-2xl font-bold tracking-tight text-accent">{tier.price}</p><p className="pb-0.5 text-sm text-white/55">{tier.priceUnit}</p></div>
+                  <ul className="mt-5 space-y-2 border-t border-white/10 pt-4">
+                    {tier.features.slice(0, 3).map((feature) => <li key={feature} className="flex items-start gap-2 text-sm leading-5 text-white/75"><CheckCircle2 aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-accent" />{feature}</li>)}
+                  </ul>
+                  <p className={`mt-6 text-sm font-semibold ${selected ? "text-accent" : "text-white/65 group-hover:text-white"}`}>{selected ? "Selected support" : `Select ${tier.name}`}</p>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <details data-reveal className="reveal-up group mt-6 overflow-hidden rounded-lg border border-white/10 bg-[#171C1D]" style={{ transitionDelay: "70ms" }}>

@@ -84,11 +84,17 @@ export const smartRefereePageHierarchy = [
 export const smartRefereeReferenceFormatPresentation = {
   hero: "immersive-decision-rail",
   outcomes: "editorial-outcome-band",
-  replay: "wide-operational-console",
+  replay: "signature-decision-console",
   technical: "clustered-product-layer",
-  workflow: "numbered-decision-rail",
-  organiserImpact: "event-protection-outcomes-and-signals",
+  workflow: "paper-editorial-workflow",
+  organiserImpact: "paper-outcome-band-and-operational-rail",
   conversion: "ready-to-verify",
+} as const;
+
+export const smartRefereeVisualStoryPresentation = {
+  decisionConsole: "verified-media-with-operational-status-rail",
+  organiserImpact: "paper-outcomes-with-single-deep-ink-planning-rail",
+  pricing: "unified-quiet-service-family",
 } as const;
 
 export const smartRefereeDecisionRail = [
@@ -313,23 +319,37 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="system-video" data-testid="smart-referee-system-video" data-presentation={smartRefereeReferenceFormatPresentation.replay} className="border-b border-white/10 bg-[#071117] py-14 md:py-20">
+        <section id="system-video" data-testid="smart-referee-system-video" data-presentation={smartRefereeReferenceFormatPresentation.replay} className="border-b border-white/10 bg-[#071117] py-14 md:py-24">
           <div className="container">
             <div data-reveal className="reveal-up mb-8 grid gap-4 border-t border-white/15 pt-5 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
               <div><p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">OPERATIONAL REPLAY</p><h2 className="velocity-headline max-w-2xl text-white">See the call, not just the <span className="text-accent">replay.</span></h2></div>
               <p className="max-w-md text-sm leading-6 text-white/65">A single calibrated view helps officials review the relevant moment together, then return their attention to the event.</p>
             </div>
-            <div data-reveal data-presentation={smartRefereeHeroVideoPresentation.containerTreatment} className="reveal-up relative -mx-4 overflow-hidden bg-[#071117] sm:-mx-6 lg:-mx-8" style={{ transitionDelay: "90ms" }}>
-              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(64,224,208,0.08),transparent_58%)]" />
-              <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} autoPlay={smartRefereeHeroVideoPresentation.autoPlay} muted={smartRefereeHeroVideoPresentation.muted} loop={smartRefereeHeroVideoPresentation.loop} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="relative z-10 mx-auto aspect-video h-full w-full max-w-7xl bg-transparent object-contain">Your browser does not support embedded video.</video>
-              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1/4 bg-gradient-to-t from-[#071117] to-transparent" />
+            <div data-reveal data-presentation={smartRefereeHeroVideoPresentation.containerTreatment} className="reveal-up overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#02080A] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.38)] sm:p-3" style={{ transitionDelay: "90ms" }}>
+              <div className="grid border-b border-white/10 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55 sm:grid-cols-3">
+                {smartRefereeDecisionRail.map((item, index) => <div key={item.label} className={`flex items-center gap-2 px-3 py-3 ${index > 0 ? "border-t border-white/10 sm:border-l sm:border-t-0" : ""}`}><span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${index === 2 ? "bg-accent" : "bg-white/35"}`} />{item.label}</div>)}
+              </div>
+              <div className="grid lg:grid-cols-[minmax(0,1fr)_15rem]">
+                <div className="relative min-h-[17rem] overflow-hidden bg-black sm:min-h-[28rem]">
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_60%_30%,rgba(64,224,208,0.12),transparent_42%)]" />
+                  <video src={smartRefereeMedia.trackingVideo} poster={smartRefereeMedia.trackingPoster} autoPlay={smartRefereeHeroVideoPresentation.autoPlay} muted={smartRefereeHeroVideoPresentation.muted} loop={smartRefereeHeroVideoPresentation.loop} controls={smartRefereeHeroVideoPresentation.controls} playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover opacity-90">Your browser does not support embedded video.</video>
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#02080A]/95 via-transparent to-[#02080A]/35" />
+                  <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-4 p-4 sm:p-6"><div><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">{smartRefereeDecisionRail[1].label}</p><p className="mt-1 text-sm font-medium text-white">{smartRefereeDecisionRail[1].value}</p></div><p className="hidden text-right font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 sm:block">{smartRefereeDecisionRail[2].value}</p></div>
+                </div>
+                <aside className="flex flex-col justify-between bg-[#091419] p-5 sm:p-6">
+                  <div className="space-y-5">
+                    {smartRefereeDecisionRail.map((item, index) => <div key={item.label} className={`${index > 0 ? "border-t border-white/10 pt-5" : ""}`}><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">0{index + 1} · {item.label}</p><p className="mt-2 text-sm leading-6 text-white/80">{item.value}</p></div>)}
+                  </div>
+                  <div className="mt-8 border-t border-white/10 pt-4"><div className="h-px w-10 bg-accent" /><p className="mt-3 text-xs leading-5 text-white/55">{technicalConfidence.description}</p></div>
+                </aside>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-white/10 bg-[#27282B]">
+        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-[#071117]/10 bg-white text-[#071117]">
           <div className="container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-            <div data-reveal className="reveal-up overflow-hidden rounded-lg border border-white/10 bg-black/20">
+            <div data-reveal className="reveal-up overflow-hidden rounded-[1.75rem] border border-[#071117]/10 bg-[#071117] shadow-[0_20px_50px_rgba(7,17,23,0.16)]">
               <div className="relative aspect-[21/9] overflow-hidden sm:aspect-[4/3]">
                 <img src={smartRefereeMedia.humanReferee} alt="Scoring officials viewing a drone-sports goal through the arena net" className="h-full w-full object-cover" />
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#161719]/90 via-[#161719]/10 to-transparent" />
@@ -338,13 +358,13 @@ export default function Product() {
             </div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
               <p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · DECISION RAIL</p>
-              <h2 className="velocity-headline max-w-2xl text-white">From question to <span className="text-accent">shared call.</span></h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
-              <ol className="mt-7 divide-y divide-white/10 border-y border-white/10">
+              <h2 className="velocity-headline max-w-2xl text-[#071117]">From question to <span className="text-accent">shared call.</span></h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#071117]/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
+              <ol className="mt-7 divide-y divide-[#071117]/10 border-y border-[#071117]/10">
                 {eventWorkflowSteps.map((step) => (
                   <li key={step.number} className="grid gap-3 py-4 sm:grid-cols-[3.25rem_1fr] sm:gap-5">
                     <span className="font-mono text-sm font-semibold text-accent">{step.number}</span>
-                    <div><h3 className="font-semibold text-white">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-white/60">{step.detail}</p></div>
+                    <div><h3 className="font-semibold text-[#071117]">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-[#071117]/60">{step.detail}</p></div>
                   </li>
                 ))}
               </ol>
@@ -352,29 +372,29 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" data-presentation={smartRefereeReferenceFormatPresentation.organiserImpact} className="border-b border-white/10 bg-black py-14 md:py-20">
+        <section id="organiser-impact-detail" data-testid="organiser-impact-detail" data-presentation={smartRefereeReferenceFormatPresentation.organiserImpact} className="border-b border-[#071117]/10 bg-white py-14 text-[#071117] md:py-24">
           <div className="container">
-            <div data-reveal className="reveal-up max-w-3xl border-t border-white/15 pt-5">
+            <div data-reveal className="reveal-up max-w-3xl border-t border-[#071117]/15 pt-5">
               <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">{organiserImpactDetail.index} · {organiserImpactDetail.audience}</p>
-              <h2 className="velocity-headline mt-5 max-w-3xl text-[clamp(2.5rem,5.5vw,5.6rem)] leading-[0.95] text-white">{organiserImpactDetail.title}</h2>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-white/70 md:text-lg">{organiserImpactDetail.description}</p>
-              <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "organiser_impact_pricing", route: "dronesportsreferee" })} className="mt-8 inline-flex items-center gap-2 rounded-full border border-accent bg-accent px-5 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={17} /></a>
+              <h2 className="velocity-headline mt-5 max-w-3xl text-[clamp(2.5rem,5.5vw,5.6rem)] leading-[0.95] text-[#071117]">{organiserImpactDetail.title}</h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-[#071117]/70 md:text-lg">{organiserImpactDetail.description}</p>
+              <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "organiser_impact_pricing", route: "dronesportsreferee" })} className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#071117] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent hover:text-black">Plan your event <ArrowRight size={17} /></a>
             </div>
-            <div data-testid="organiser-impact-outcomes" className="mt-12 grid gap-4 md:grid-cols-3">
+            <div data-testid="organiser-impact-outcomes" className="mt-12 grid divide-y divide-[#071117]/12 border-y border-[#071117]/12 md:grid-cols-3 md:divide-x md:divide-y-0">
               {organiserImpactDetail.outcomes.map((outcome, index) => (
-                <article key={outcome.title} data-reveal className="reveal-up rounded-2xl border border-white/10 bg-[#0B1419] px-5 py-7 shadow-[0_18px_45px_rgba(0,0,0,0.2)] md:px-7 md:py-8" style={{ transitionDelay: `${index * 70}ms` }}>
+                <article key={outcome.title} data-reveal className="reveal-up px-0 py-7 md:px-7 md:py-9 first:md:pl-0 last:md:pr-0" style={{ transitionDelay: `${index * 70}ms` }}>
                   {(() => { const Icon = organiserImpactOutcomeIcons[outcome.title]; return <Icon aria-hidden="true" className="h-6 w-6 text-accent" strokeWidth={1.75} />; })()}
                   <p className="font-mono text-xs font-semibold text-accent">0{index + 1}</p>
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h3>
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
+                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-[#071117]">{outcome.title}</h3>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-[#071117]/65">{outcome.detail}</p>
                 </article>
               ))}
             </div>
-            <div data-testid="organiser-impact-planning-signals" className="mt-7 rounded-2xl border border-accent/25 bg-accent/5 p-5 sm:p-7">
+            <div data-testid="organiser-impact-planning-signals" className="mt-10 overflow-hidden rounded-[1.5rem] bg-[#071117] p-5 sm:p-7">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Planning signals</p>
-              <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              <div className="mt-5 grid divide-y divide-white/10 border-y border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                 {organiserImpactDetail.planningSignals.map((metric, index) => (
-                  <div key={metric.label} data-reveal className="reveal-up rounded-xl border border-white/10 bg-[#0B1419] p-5" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
+                  <div key={metric.label} data-reveal className="reveal-up py-5 sm:px-5 sm:first:pl-0 sm:last:pr-0" style={{ transitionDelay: `${index * 70}ms` }}><RollingImpactMetric metric={metric} /><p className="mt-3 text-xs leading-5 text-white/65">{metric.label}</p></div>
                 ))}
               </div>
               <p className="mt-5 text-xs leading-5 text-white/50">{organiserImpactDetail.qualification}</p>
