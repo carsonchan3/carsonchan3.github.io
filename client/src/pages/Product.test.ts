@@ -37,8 +37,8 @@ describe("Smart Referee organiser-first journey", () => {
   it("keeps technical evidence visible after the organiser value narrative", () => {
     expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
     expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
-    expect(eventScaleEvidencePanelPresentation).toBe("compact-square-feature-tiles");
-    expect(eventScaleFeatureTilePresentation).toEqual({ mobileColumns: 2, desktopColumns: 4, tileAspectRatio: "1:1", visibility: "all-features-together" });
+    expect(eventScaleEvidencePanelPresentation).toBe("feature-cluster");
+    expect(eventScaleFeatureTilePresentation).toEqual({ mobileColumns: 1, desktopColumns: 12, primaryPanel: "decision-data", supportingPanels: ["passive-tracking", "continuous-calibration", "configurable-rules"], visibility: "clustered-all-features-together" });
     expect(eventScaleTileDetailInteraction).toEqual({ hover: "reveals-description", click: "toggles-description", pitchPlacement: "standalone-panel-after-event-scale" });
     expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(technicalConfidence.markerTitle).toBe("Passive Tracking");
