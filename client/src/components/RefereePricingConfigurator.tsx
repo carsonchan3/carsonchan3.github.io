@@ -5,6 +5,7 @@ import { getPricingSelectionLabel, pricingTiers, type PricingTierId } from "@/li
 import { pricingVisibilityClass } from "@/lib/pricingPresentation";
 
 export const pricingCardDetailPresentation = "scenario-led-progressive-details";
+export const pricingTierCardPresentation = "rounded-option-cards";
 
 export default function RefereePricingConfigurator() {
   const [selectedTier, setSelectedTier] = useState<PricingTierId>("managed");
@@ -27,7 +28,7 @@ export default function RefereePricingConfigurator() {
           {pricingTiers.map((tier) => {
             const selected = selectedTier === tier.id;
             return (
-              <button key={tier.id} type="button" data-testid={`pricing-tier-${tier.id}`} data-detail-presentation={pricingCardDetailPresentation} aria-pressed={selected} onClick={() => setSelectedTier(tier.id)} className={`group relative min-h-0 overflow-hidden border p-5 text-left transition-all ${selected ? "border-accent bg-accent/10 shadow-[0_0_0_1px_rgba(64,224,208,0.15)]" : "border-white/10 bg-[#27282B] hover:border-white/35"}`}>
+              <button key={tier.id} type="button" data-testid={`pricing-tier-${tier.id}`} data-detail-presentation={pricingCardDetailPresentation} data-card-presentation={pricingTierCardPresentation} aria-pressed={selected} onClick={() => setSelectedTier(tier.id)} className={`group relative min-h-0 overflow-hidden rounded-2xl border p-5 text-left transition-all ${selected ? "border-accent bg-accent/10 shadow-[0_0_0_1px_rgba(64,224,208,0.15)]" : "border-white/10 bg-[#27282B] hover:border-white/35"}`}>
                 {selected && <span className="absolute right-4 top-4 rounded-full bg-accent px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-black">Selected</span>}
                 <div className="mb-5 flex size-10 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent"><Sparkles size={19} /></div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{tier.eyebrow}</p>

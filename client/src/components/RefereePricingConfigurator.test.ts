@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { pricingTiers } from "@/lib/pricingConfig";
-import { pricingCardDetailPresentation } from "./RefereePricingConfigurator";
+import { pricingCardDetailPresentation, pricingTierCardPresentation } from "./RefereePricingConfigurator";
 
 describe("Smart Referee pricing organiser scenarios", () => {
   it("uses scenario-led cards with optional detailed comparison instead of dense default matrices", () => {
     expect(pricingCardDetailPresentation).toBe("scenario-led-progressive-details");
+    expect(pricingTierCardPresentation).toBe("rounded-option-cards");
   });
 
   it("gives every event package a plain-language organiser scenario", () => {
