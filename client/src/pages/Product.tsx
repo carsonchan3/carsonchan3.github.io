@@ -4,7 +4,6 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
 import { trackConversion } from "@/lib/conversionTracking";
 
 export const proofPoints = [
@@ -40,11 +39,8 @@ export const smartRefereeHeroVideoPresentation = {
   containerTreatment: "borderless-integrated",
 } as const;
 export const smartRefereeHeroBackgroundPresentation = {
-  source: "homepage-hero-video",
+  source: "tracking-poster",
   treatment: "dark-overlay-background",
-  autoPlay: true,
-  muted: true,
-  loop: true,
 } as const;
 export const flex13SystemVideoPresentation = {
   title: "Drone Sports Referee Pitch",
@@ -253,8 +249,7 @@ export default function Product() {
       <main data-reveal-page className="pt-16">
         <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} className="relative isolate overflow-hidden border-b border-white/10 bg-[#071117]">
           <img src={smartRefereeMedia.trackingPoster} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 z-0 h-full w-full object-cover object-right" />
-          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline preload="metadata" className="absolute inset-0 z-[1] h-full w-full object-cover object-center opacity-35 mix-blend-screen" />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.24)_100%)]" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.35)_100%)]" />
           <div className="container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-end py-12 md:py-16 lg:py-20">
             <div data-reveal className="reveal-up max-w-4xl">
               <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-accent">Decision integrity, at match speed</p>

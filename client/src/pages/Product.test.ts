@@ -79,7 +79,7 @@ describe("Smart Referee organiser-first journey", () => {
 
   it("preserves the pitch-video controls and the mobile visibility policy", () => {
     expect(smartRefereeHeroVideoPresentation).toEqual({ aspectRatio: "16:9", objectFit: "contain", controls: false, autoPlay: true, muted: true, loop: true, containerTreatment: "borderless-integrated" });
-    expect(smartRefereeHeroBackgroundPresentation).toEqual({ source: "homepage-hero-video", treatment: "dark-overlay-background", autoPlay: true, muted: true, loop: true });
+    expect(smartRefereeHeroBackgroundPresentation).toEqual({ source: "tracking-poster", treatment: "dark-overlay-background" });
     expect(flex13SystemVideoPresentation).toEqual({ title: "Drone Sports Referee Pitch", aspectRatio: "16:9", autoPlay: false, muted: false, loop: false, controls: true, playsInline: true, preload: "metadata", controlsList: "nodownload noremoteplayback", disablePictureInPicture: true });
     expect(continuousCalibrationVideoPresentation).toEqual({ autoPlay: true, muted: true, loop: true, controls: false, playsInline: true, preload: "metadata" });
     expect(mobileSmartRefereeRevealPolicy).toBe("always-visible");
