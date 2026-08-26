@@ -252,8 +252,8 @@ export default function Product() {
       <SiteHeader active="referee" />
       <main data-reveal-page className="pt-16">
         <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} className="relative isolate overflow-hidden border-b border-white/10 bg-[#071117]">
-          <img src={homepageHeroVideoPosterSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-center" />
-          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+          <img src={smartRefereeMedia.trackingPoster} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-[62%_center]" />
+          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline preload="metadata" className="absolute inset-0 -z-20 h-full w-full object-cover object-center opacity-35 mix-blend-screen" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.52)_100%)]" />
           <div className="container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-end py-12 md:py-16 lg:py-20">
             <div data-reveal className="reveal-up max-w-4xl">
