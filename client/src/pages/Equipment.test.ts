@@ -15,7 +15,7 @@ describe("Spreadsheet-backed equipment catalogue content", () => {
     const topsShield205 = productFamilies.find((family) => family.familyId === "tops-shield-205");
     const topsShield220 = productFamilies.find((family) => family.familyId === "tops-shield-220");
 
-    expect(topsShield205?.variants.map((variant) => `${variant.label}:${variant.price}`)).toEqual(["RTF:HK$3,330", "PNP:HK$2,110"]);
+    expect(topsShield205?.variants.map((variant) => `${variant.label}:${variant.price}`)).toEqual(["RTF:HK$4,329", "PNP:HK$2,743"]);
     expect(topsShield220?.variants.map((variant) => variant.label)).toEqual(["RTF", "RTF + Bag", "PNP"]);
   });
 
@@ -32,8 +32,13 @@ describe("Spreadsheet-backed equipment catalogue content", () => {
     expect(visibleCopy.toLowerCase()).not.toContain("placeholder");
   });
 
-  it("uses the spreadsheet HKD price and photo for every item", () => {
+  it("uses the authorised 1.3× HKD price adjustment and spreadsheet photo for every item", () => {
     expect(catalogueItems.every((item) => /^HK\$[\d,]+$/.test(item.price))).toBe(true);
+    expect(catalogueItems.map((item) => item.price)).toEqual([
+      "HK$4,329", "HK$2,743", "HK$3,718", "HK$4,056", "HK$2,743", "HK$5,252", "HK$5,993",
+      "HK$5,590", "HK$5,616", "HK$5,993", "HK$6,708", "HK$5,395", "HK$234", "HK$520",
+      "HK$754", "HK$117", "HK$65", "HK$52", "HK$1,365", "HK$5,733", "HK$7,813",
+    ]);
     expect(catalogueItems.every((item) => item.image.startsWith("/manus-storage/excel_prod_") && item.imageAlt.length > 0)).toBe(true);
   });
 
