@@ -23,7 +23,7 @@ describe("Smart Referee organiser-first journey", () => {
       hero: "field-scene-decision-rail",
       outcomes: "editorial-outcome-spread",
       replay: "signature-decision-console",
-      technical: "image-led-product-stories",
+      technical: "dominant-plus-two-product-system",
       workflow: "true-white-decision-rail",
       organiserImpact: "deep-ink-outcome-band-and-operational-rail",
       conversion: "event-scope-closer",
@@ -46,7 +46,7 @@ describe("Smart Referee organiser-first journey", () => {
       decisionRail: ["SlidersHorizontal", "ScanLine", "CircleCheck"],
       organiserOutcomes: ["Eye", "ScanLine", "ShieldCheck"],
       workflow: ["Settings2", "ScanLine", "CircleCheck"],
-      technical: ["Crosshair", "Radar", "RefreshCw", "SlidersHorizontal"],
+      technical: ["Crosshair", "Radar", "RefreshCw"],
     });
     expect(smartRefereeDecisionRail).toEqual([
       { label: "Rule input", value: "Active scoring condition" },
@@ -85,17 +85,14 @@ describe("Smart Referee organiser-first journey", () => {
   it("keeps technical evidence visible after the organiser value narrative", () => {
     expect(smartRefereePageHierarchy.indexOf("technical-confidence")).toBeGreaterThan(smartRefereePageHierarchy.indexOf("event-workflow"));
     expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
-    expect(eventScaleEvidencePanelPresentation).toBe("feature-cluster");
-    expect(eventScaleFeatureTilePresentation).toEqual({ mobileColumns: 1, desktopColumns: 2, desktopWidth: "editorial-max-w-5xl", primaryPanel: "decision-data", supportingPanels: ["passive-tracking", "continuous-calibration", "configurable-rules"], visibility: "image-led-product-stories" });
+    expect(eventScaleEvidencePanelPresentation).toBe("dominant-plus-two-supporting");
+    expect(eventScaleFeatureTilePresentation).toEqual({ mobileColumns: 1, desktopColumns: 3, desktopRows: 2, desktopWidth: "editorial-max-w-5xl", primaryPanel: "decision-data", supportingPanels: ["passive-tracking", "continuous-calibration"], layout: "dominant-two-supporting", visibility: "image-led-product-stories" });
     expect(eventScaleTileDetailInteraction).toEqual({ hover: "reveals-description", click: "toggles-description", pitchPlacement: "standalone-panel-after-event-scale" });
     expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(technicalConfidence.markerTitle).toBe("Passive Tracking");
     expect(technicalConfidence.markerDescription).toContain("reflective markers");
     expect(technicalConfidence.continuousCalibrationTitle).toBe("Zero Drift. Pure Precision.");
     expect(technicalConfidence.continuousCalibrationDescription).toContain("automatically and continuously");
-    expect(technicalConfidence.rulesTitle).toBe("Configurable competition rules");
-    expect(technicalConfidence.rulesDescription).toContain("active rule set");
-    expect(technicalConfidence.rulesDescription).toContain("incorrectly recalled");
     expect(technicalConfidence.pitchVideoTitle).toBe("Drone Sports Referee Pitch");
     expect(proofPoints).toContainEqual({ value: "±0.20 mm", label: "3D accuracy" });
     expect(proofPoints).toContainEqual({ value: "10 ms", label: "decision making end to end" });
@@ -108,7 +105,6 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeMedia.precisionVideo).toBe("/manus-storage/v2fulluncompressed_1dc97341.mp4");
     expect(smartRefereeMedia.continuousCalibrationVideo).toBe("/manus-storage/cont-calibration_a6322d41.mp4");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
-    expect(smartRefereeMedia.ruleSupportLogos).toHaveLength(3);
   });
 
   it("preserves the pitch-video controls and the mobile visibility policy", () => {
@@ -122,7 +118,7 @@ describe("Smart Referee organiser-first journey", () => {
 
   it("maps the revised organiser promise, outcomes, workflow, and visible evidence into Traditional Chinese", () => {
     [
-      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "Rule input", "Active scoring condition", "Evidence", "Tracked position + review", "Decision", "Shared call", "Overview", "Decision Console", "Technical layer", "Event delivery", "View technical detail", "Close detail", "01 · SHARED VIEW", "OPERATIONAL REPLAY", "03 · DECISION RAIL", "02 · TECHNICAL LAYER", "03 · RULE WORKFLOW", "05 · READY TO VERIFY", "06 · READY TO SCOPE", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "For organisers", "Keep the schedule moving. Keep each decision clear.", "Smart Referee gives your competition a consistent way to review difficult scoring moments and retain a clear decision record—without displacing the officials responsible for the call.", "Keep play moving", "Help officials return a reviewable decision to the field, so the next match can begin with less uncertainty.", "Build trust", "Give teams and officials a clear process around consequential scoring decisions.", "Retain the record", "Keep a reviewable decision trail for organisers, officials, and post-event follow-up.", "Planning signals", "per review delay", "Wasted time on dispute per event", "Extra cost related to all parties", "Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.", "A product layer, built for", "event scale.", "One rule. One shared", "decision path.", "Rule condition", "Set the active scoring condition", "Position evidence", "Review the tracked moment", "Record the shared decision", "Active workflow stage", "Decision path", "Event fit", "Scope your event before the quote.", "Venue and cage count", "Match format", "Programme schedule", "Delivery support", "Request an event scope", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Configurable competition rules", "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.", "Drone Sports Referee Pitch", "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.", "Compare all service inclusions",
+      "Fair calls. A", "protected schedule.", "Plan your event", "Watch a decision replay", "Rule input", "Active scoring condition", "Evidence", "Tracked position + review", "Decision", "Shared call", "Overview", "Decision Console", "Technical layer", "Event delivery", "View technical detail", "Close detail", "01 · SHARED VIEW", "OPERATIONAL REPLAY", "03 · DECISION RAIL", "02 · TECHNICAL LAYER", "03 · RULE WORKFLOW", "05 · READY TO VERIFY", "06 · READY TO SCOPE", "What is Drone Sports Referee?", "A calibrated decision-support system that gives officials one shared, reviewable view of difficult scoring moments.", "Resolve close calls", "Keep the next match moving", "Align officiating standards", "For organisers", "Keep the schedule moving. Keep each decision clear.", "Smart Referee gives your competition a consistent way to review difficult scoring moments and retain a clear decision record—without displacing the officials responsible for the call.", "Keep play moving", "Help officials return a reviewable decision to the field, so the next match can begin with less uncertainty.", "Build trust", "Give teams and officials a clear process around consequential scoring decisions.", "Retain the record", "Keep a reviewable decision trail for organisers, officials, and post-event follow-up.", "Planning signals", "per review delay", "Wasted time on dispute per event", "Extra cost related to all parties", "Planning values supplied for event discussion; validate against your own staffing, venue, and programme data.", "A product layer, built for", "event scale.", "One rule. One shared", "decision path.", "Rule condition", "Set the active scoring condition", "Position evidence", "Review the tracked moment", "Record the shared decision", "Active workflow stage", "Decision path", "Event fit", "Scope your event before the quote.", "Venue and cage count", "Match format", "Programme schedule", "Delivery support", "Request an event scope", "Passive Tracking", "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.", "Zero Drift. Pure Precision.", "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.", "Drone Sports Referee Pitch", "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.", "Compare all service inclusions",
     ].forEach((key) => expect(traditionalChineseTranslations[key]).toBeTruthy());
     expect(traditionalChinesePromisePresentation).toBe("two-intentional-lines");
   });

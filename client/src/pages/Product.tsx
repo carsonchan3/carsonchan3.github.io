@@ -18,13 +18,15 @@ export const mobileSmartRefereeRevealPolicy = "always-visible";
 export const mobileSmartRefereeCardAspectRatio = "21:9";
 export const technicalSpecificationPresentation = "visible-evidence-panel";
 export const traditionalChinesePromisePresentation = "two-intentional-lines";
-export const eventScaleEvidencePanelPresentation = "feature-cluster";
+export const eventScaleEvidencePanelPresentation = "dominant-plus-two-supporting";
 export const eventScaleFeatureTilePresentation = {
   mobileColumns: 1,
-  desktopColumns: 2,
+  desktopColumns: 3,
+  desktopRows: 2,
   desktopWidth: "editorial-max-w-5xl",
   primaryPanel: "decision-data",
-  supportingPanels: ["passive-tracking", "continuous-calibration", "configurable-rules"],
+  supportingPanels: ["passive-tracking", "continuous-calibration"],
+  layout: "dominant-two-supporting",
   visibility: "image-led-product-stories",
 } as const;
 export const eventScaleTileDetailInteraction = {
@@ -87,7 +89,7 @@ export const smartRefereeReferenceFormatPresentation = {
   hero: "field-scene-decision-rail",
   outcomes: "editorial-outcome-spread",
   replay: "signature-decision-console",
-  technical: "image-led-product-stories",
+  technical: "dominant-plus-two-product-system",
   workflow: "true-white-decision-rail",
   organiserImpact: "deep-ink-outcome-band-and-operational-rail",
   conversion: "event-scope-closer",
@@ -127,7 +129,7 @@ export const smartRefereeIconSystemPresentation = {
   decisionRail: ["SlidersHorizontal", "ScanLine", "CircleCheck"],
   organiserOutcomes: ["Eye", "ScanLine", "ShieldCheck"],
   workflow: ["Settings2", "ScanLine", "CircleCheck"],
-  technical: ["Crosshair", "Radar", "RefreshCw", "SlidersHorizontal"],
+  technical: ["Crosshair", "Radar", "RefreshCw"],
 } as const;
 
 export const smartRefereeDecisionRail = [
@@ -279,11 +281,6 @@ function RollingImpactMetric({ metric }: { metric: OrganiserImpactMetric }) {
 
 export const smartRefereeMedia = {
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
-  ruleSupportLogos: [
-    { id: "afa", src: "/manus-storage/AFA-logo_0b746387.png", alt: "AFA logo" },
-    { id: "fida", src: "/manus-storage/fida-logo_98f84f21.jpg", alt: "FIDA logo" },
-    { id: "fai", src: "/manus-storage/fai-logo_375508e2.svg", alt: "FAI logo" },
-  ],
   stickers: "/manus-storage/cheapstickers_6b71bf1e.jpg",
   precisionPoster: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
   precisionVideo: "/manus-storage/v2fulluncompressed_1dc97341.mp4",
@@ -299,11 +296,8 @@ export const technicalConfidence = {
   markerDescription: "Passive tracking uses reflective markers that bounce infrared light from OptiTrack cameras back to the lens. It’s ideal for complex tracking volumes where cost-effective, lightweight markers are preferred.",
   continuousCalibrationTitle: "Zero Drift. Pure Precision.",
   continuousCalibrationDescription: "Motive calibrates automatically and continuously with data collected during normal use of the system. No longer does your calibration degrade over time with changing temperatures or challenging building movement—it is always a “fresh” calibration.",
-  rulesTitle: "Configurable competition rules",
-  rulesDescription: "Smart Referee can be configured around an organisation’s active rule set, scoring conditions, and review workflow. Making the selected rules explicit in the operating configuration helps officials apply the intended standard consistently and reduces the risk that a rule is overlooked or incorrectly recalled under event pressure.",
   pitchVideoTitle: "Drone Sports Referee Pitch",
   pitchVideoDescription: "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.",
-  referenceCaption: "Supplied rule and federation references are shown for event-context discussion only; their display does not indicate endorsement.",
 } as const;
 
 function EventScaleTile({ id, label, detail, expanded, onToggle, className, technicalEvidence = false, children }: { id: string; label: string; detail: ReactNode; expanded: boolean; onToggle: () => void; className: string; technicalEvidence?: boolean; children: ReactNode }) {
@@ -472,12 +466,11 @@ export default function Product() {
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
               </div>
             </div>
-            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-primary-panel={eventScaleFeatureTilePresentation.primaryPanel} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2 sm:gap-5">
-              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[19rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419] sm:col-span-2 sm:aspect-[2/1]" ><div className="flex h-full flex-col p-5 sm:p-7"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Crosshair aria-hidden="true" size={16} strokeWidth={1.8} />01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4 sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
-              <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="min-h-[20rem] bg-[#0B1419]"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Radar aria-hidden="true" size={16} strokeWidth={1.8} />02 · TRACKING SETUP</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
+            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-desktop-rows={eventScaleFeatureTilePresentation.desktopRows} data-primary-panel={eventScaleFeatureTilePresentation.primaryPanel} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mx-auto mt-10 grid max-w-5xl gap-4 md:grid-cols-3 md:grid-rows-2 md:gap-5">
+              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[22rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419] md:col-span-2 md:row-span-2 md:min-h-0 md:aspect-auto" ><div className="flex h-full flex-col p-5 sm:p-7"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Crosshair aria-hidden="true" size={16} strokeWidth={1.8} />01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4 sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
+              <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="min-h-[16rem] bg-[#0B1419] md:min-h-0 md:aspect-auto"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Radar aria-hidden="true" size={16} strokeWidth={1.8} />02 · TRACKING SETUP</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
               <div data-testid="technical-evidence-panels" className="contents">
-                <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="min-h-[20rem] bg-[#0E171B]"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><RefreshCw aria-hidden="true" size={16} strokeWidth={1.8} />03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
-                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="min-h-[19rem] bg-[linear-gradient(145deg,#0B1419,#132C31)] sm:col-span-2 sm:aspect-[2/1]"><div className="flex h-full flex-col justify-between p-5 sm:p-7"><div><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><SlidersHorizontal aria-hidden="true" size={16} strokeWidth={1.8} />04 · CONFIGURABLE RULES</p><h3 className="mt-3 max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.rulesTitle}</h3><p className="mt-3 max-w-2xl text-xs leading-5 text-white/70">{technicalConfidence.rulesDescription}</p></div><div data-rule-reference-logos className="mt-6 flex max-w-sm items-center gap-3 border-t border-white/10 pt-4">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-9 min-w-0 flex-1 object-contain sm:h-11" />)}</div></div></EventScaleTile>
+                <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="min-h-[16rem] bg-[#0E171B] md:min-h-0 md:aspect-auto"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><RefreshCw aria-hidden="true" size={16} strokeWidth={1.8} />03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
               </div>
             </div>
           </div>
