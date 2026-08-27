@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collaborators, desktopHomeHeroVideoAspectRatio, mobileHeroScrollCue, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio, partnerHeadingPresentation, publicCollaborators } from "./Home";
+import { collaborators, desktopHomeHeroVideoAspectRatio, homepagePartnerCtaPresentation, mobileHeroScrollCue, mobileHomeHeroContentPolicy, mobileHomeHeroVideoAspectRatio, mobileOfferingCardAspectRatio, partnerHeadingPresentation, publicCollaborators } from "./Home";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("homepage supporting organisations", () => {
@@ -26,6 +26,16 @@ describe("homepage supporting organisations", () => {
       headingAlignment: "center",
       descriptionAlignment: "center",
     });
+  });
+
+  it("places a formal partner CTA beneath the Supporting Network logos and routes it to contact", () => {
+    expect(homepagePartnerCtaPresentation).toEqual({
+      placement: "supporting-network-after-logo-carousel",
+      target: "contact",
+      commercialFraming: "qualified-partner-pricing-and-collaboration",
+    });
+    expect(traditionalChineseTranslations["For qualified organisations, partner discussions may include programme pricing and collaboration terms."]).toBe("符合資格的機構可與我們洽談計劃價格及合作方案。");
+    expect(traditionalChineseTranslations["Join as a partner"]).toBe("加入成為合作夥伴");
   });
 
   it("uses the requested bilingual HKSTP Ideation Programme name", () => {

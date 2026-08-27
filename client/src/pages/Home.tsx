@@ -39,6 +39,11 @@ export const partnerHeadingPresentation = {
   headingAlignment: "center",
   descriptionAlignment: "center",
 } as const;
+export const homepagePartnerCtaPresentation = {
+  placement: "supporting-network-after-logo-carousel",
+  target: "contact",
+  commercialFraming: "qualified-partner-pricing-and-collaboration",
+} as const;
 
 export const homepageBuyerStatement = {
   en: "For drone-sports organisers, technical programmes, and teams that need a reviewable view of difficult match decisions.",
@@ -147,6 +152,10 @@ export default function Home() {
           <div className="container"><div className="mx-auto max-w-6xl">
             <div data-reveal data-presentation={`${partnerHeadingPresentation.labelPosition}-${partnerHeadingPresentation.headingAlignment}`} className="reveal-up relative mb-12"><p className="vli-section-label mb-6 lg:absolute lg:left-0 lg:top-0 lg:mb-0">Supporting network</p><div className="mx-auto max-w-4xl text-center"><h2 className="velocity-headline mb-5 text-white">Partners &amp; Supporting Organizations</h2><p className="velocity-body mx-auto max-w-2xl">Together, we are advancing fair, data-driven competition and growing the future of drone sports.</p></div></div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "100ms" }}><LogoCarousel logos={publicCollaborators} compact /></div>
+            <div data-testid="homepage-partner-cta" data-reveal className="reveal-up mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4 border-t border-white/15 pt-7 text-center sm:flex-row sm:justify-between sm:text-left" style={{ transitionDelay: "180ms" }}>
+              <p className="max-w-xl text-sm leading-6 text-white/70">For qualified organisations, partner discussions may include programme pricing and collaboration terms.</p>
+              <a href={staticSitePath(localizedPath("/contact", language))} onClick={() => trackConversion("plan_event_click", { action: "partner_inquiry", route: "home", language })} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-accent px-5 py-2.5 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-[#051018]">Join as a partner <ArrowRight size={16} /></a>
+            </div>
           </div></div>
         </section>
 

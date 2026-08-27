@@ -595,6 +595,8 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "This route is outside the": "此航線位於",
   "This transparent scenario assumes two officials or jury members at HK$250/hour, two event or venue operations staff at HK$300/hour, and one active match-slot coordination cost at HK$1,200/hour.": "此示意情境假設兩位裁判或評審團成員的費率為 HK$250/小時、兩位活動或場地運營人員為 HK$300/小時，以及一位比賽時段即時協調的費率為 HK$1,200/小時。",
   "Together, we are advancing fair, data-driven competition and growing the future of drone sports.": "我們共同推動以數據為本的公平競賽，並培育無人機運動的未來。",
+  "For qualified organisations, partner discussions may include programme pricing and collaboration terms.": "符合資格的機構可與我們洽談計劃價格及合作方案。",
+  "Join as a partner": "加入成為合作夥伴",
   "Track relevant in-play movement": "追蹤比賽中相關移動",
   "Track the moments that decide the match.": "追蹤決定比賽勝負的關鍵時刻。",
   "Trusted partner organizations": "值得信賴的合作夥伴機構",
