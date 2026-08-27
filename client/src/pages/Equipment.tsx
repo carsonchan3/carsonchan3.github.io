@@ -11,6 +11,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ArrowRight, BatteryCharging, Cpu, Eye, Minus, Package, Plus, Radio, ShoppingCart, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 
+export const equipmentPricingNote = {
+  en: "Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.",
+  "zh-Hant": "所列價格僅供參考起點。最終供貨情況、運費及賽事計劃要求，將於為您度身訂造的報價中確認。",
+} as const;
+
 export const catalogueItems = [
   {
     number: "25",
@@ -450,6 +455,7 @@ export default function Equipment() {
         <section className="bg-black pb-20 pt-12 md:pb-28 md:pt-16">
           <div className="container">
             <div data-reveal className="reveal-up mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Equipment catalogue</p><h1 className="velocity-headline text-white">Select a starting point.</h1></div><p className="max-w-lg text-white/65">Browse equipment, power, charging, and venue systems from the supplied product list, then let us help configure the details around your programme.</p></div>
+            <p data-testid="equipment-pricing-note" data-reveal className="reveal-up mb-8 border-l-2 border-accent/70 bg-[#101113] px-4 py-3 text-sm leading-6 text-white/70 sm:mb-10 sm:px-5">{equipmentPricingNote[language]}</p>
             <article data-reveal data-testid="product-custom-request-card" className="reveal-up relative mb-8 overflow-hidden rounded-lg border border-accent/35 bg-[linear-gradient(115deg,rgba(64,224,208,0.16),rgba(39,40,43,0.94)_42%,rgba(22,23,25,1))] p-6 shadow-[0_20px_50px_rgba(64,224,208,0.08)] sm:mb-10 sm:p-8 lg:p-10">
               <div aria-hidden="true" className="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-accent/20 bg-accent/10 blur-2xl" />
               <div className="relative grid items-center gap-6 lg:grid-cols-[1fr_auto] lg:gap-10">

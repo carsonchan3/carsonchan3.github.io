@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { sanitizeProductCart } from "@/lib/productCart";
-import { catalogueItems, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
+import { catalogueItems, equipmentPricingNote, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
 
 describe("Spreadsheet-backed equipment catalogue content", () => {
+  it("provides formal starting-price guidance before shopping items in both site languages", () => {
+    expect(equipmentPricingNote.en).toBe("Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.");
+    expect(equipmentPricingNote["zh-Hant"]).toBe("所列價格僅供參考起點。最終供貨情況、運費及賽事計劃要求，將於為您度身訂造的報價中確認。");
+  });
   it("keeps the active catalogue records while presenting them as compact product families", () => {
     expect(catalogueItems).toHaveLength(21);
     expect(productFamilies).toHaveLength(13);
