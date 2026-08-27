@@ -22,10 +22,10 @@ export const eventScaleEvidencePanelPresentation = "feature-cluster";
 export const eventScaleFeatureTilePresentation = {
   mobileColumns: 1,
   desktopColumns: 2,
-  desktopWidth: "compact-max-w-4xl",
+  desktopWidth: "editorial-max-w-5xl",
   primaryPanel: "decision-data",
   supportingPanels: ["passive-tracking", "continuous-calibration", "configurable-rules"],
-  visibility: "rounded-square-feature-surfaces",
+  visibility: "image-led-product-stories",
 } as const;
 export const eventScaleTileDetailInteraction = {
   hover: "reveals-description",
@@ -77,25 +77,42 @@ export const smartRefereePageHierarchy = [
   "event-workflow",
   "organiser-impact-detail",
   "technical-confidence",
+  "rule-workflow",
   "drone-sports-referee-pitch",
   "event-delivery-options",
+  "event-scope",
 ] as const;
 
 export const smartRefereeReferenceFormatPresentation = {
-  hero: "immersive-decision-rail",
-  outcomes: "editorial-outcome-band",
+  hero: "field-scene-decision-rail",
+  outcomes: "editorial-outcome-spread",
   replay: "signature-decision-console",
-  technical: "clustered-product-layer",
-  workflow: "paper-editorial-workflow",
-  organiserImpact: "paper-outcome-band-and-operational-rail",
-  conversion: "ready-to-verify",
+  technical: "image-led-product-stories",
+  workflow: "true-white-decision-rail",
+  organiserImpact: "deep-ink-outcome-band-and-operational-rail",
+  conversion: "event-scope-closer",
 } as const;
 
 export const smartRefereeVisualStoryPresentation = {
   decisionConsole: "verified-media-with-operational-status-rail",
-  organiserImpact: "paper-outcomes-with-single-deep-ink-planning-rail",
-  pricing: "unified-quiet-service-family",
+  organiserImpact: "editorial-outcomes-with-single-deep-ink-planning-rail",
+  pricing: "light-utility-service-family",
+  ruleWorkflow: "configurable-condition-evidence-shared-call",
 } as const;
+
+export const smartRefereeContextNavigation = [
+  { href: "#organiser-outcomes", label: "Overview" },
+  { href: "#system-video", label: "Decision Console" },
+  { href: "#technical-confidence", label: "Technical layer" },
+  { href: "#pricing", label: "Event delivery" },
+] as const;
+
+export const eventScopePlanningInputs = [
+  "Venue and cage count",
+  "Match format",
+  "Programme schedule",
+  "Delivery support",
+] as const;
 
 export const smartRefereeIconSystemPresentation = {
   decisionRail: ["SlidersHorizontal", "ScanLine", "CircleCheck"],
@@ -113,6 +130,12 @@ export const smartRefereeDecisionRail = [
 const decisionRailIcons = [SlidersHorizontal, ScanLine, CircleCheck] as const;
 const organiserOutcomeIcons = { resolve: Eye, schedule: ScanLine, standard: ShieldCheck } as const;
 const workflowStepIcons = [Settings2, ScanLine, CircleCheck] as const;
+
+const ruleWorkflowStages = [
+  { id: "condition", label: "Rule condition", title: "Set the active scoring condition", detail: "Keep the rule requirement explicit before the review begins.", Icon: SlidersHorizontal },
+  { id: "evidence", label: "Position evidence", title: "Review the tracked moment", detail: "Bring the calibrated position and relevant replay into one view.", Icon: Crosshair },
+  { id: "decision", label: "Shared call", title: "Record the shared decision", detail: "Officials retain authority with one reviewable event context.", Icon: CircleCheck },
+] as const;
 
 export const organiserOutcomesIntroduction = {
   heading: "What is Drone Sports Referee?",
@@ -278,6 +301,7 @@ function EventScaleTile({ id, label, detail, expanded, onToggle, className, tech
   const detailId = `event-scale-tile-${id}-detail`;
   return <article data-event-scale-panel data-feature-tile data-tile-index={id} data-technical-evidence-panel={technicalEvidence ? "true" : undefined} data-reveal className={`group relative aspect-square overflow-hidden rounded-2xl border border-white/10 shadow-[0_18px_45px_rgba(0,0,0,0.22)] ${className}`}>
     <div className="relative z-10 h-full pointer-events-none">{children}</div>
+    <div aria-hidden="true" className="pointer-events-none absolute bottom-4 right-4 z-[15] inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-[#071117]/75 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm sm:bottom-5 sm:right-5"><span>{expanded ? "Close detail" : "View technical detail"}</span><ArrowRight size={13} className={expanded ? "rotate-90" : ""} /></div>
     <button type="button" data-tile-detail-toggle data-tile-index={id} aria-expanded={expanded} aria-controls={detailId} aria-label={`${expanded ? "Hide" : "Show"} details for ${label}`} onClick={onToggle} className="absolute inset-0 z-20 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-accent"><span className="sr-only">{expanded ? "Hide details" : "Show details"}</span></button>
     <div id={detailId} data-tile-detail-panel aria-hidden={!expanded} className={`pointer-events-none absolute inset-0 z-10 flex items-end bg-[linear-gradient(180deg,rgba(7,16,20,0.22)_0%,rgba(7,16,20,0.97)_62%)] p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100 sm:p-5 ${expanded ? "opacity-100" : ""}`}><p className="text-[11px] leading-4 text-white/85 sm:text-xs sm:leading-5">{detail}</p></div>
   </article>;
@@ -285,7 +309,9 @@ function EventScaleTile({ id, label, detail, expanded, onToggle, className, tech
 
 export default function Product() {
   const [expandedEventScaleTile, setExpandedEventScaleTile] = useState<string | null>(null);
+  const [activeRuleWorkflowStage, setActiveRuleWorkflowStage] = useState<(typeof ruleWorkflowStages)[number]["id"]>("condition");
   const toggleEventScaleTile = (id: string) => setExpandedEventScaleTile((current) => current === id ? null : id);
+  const activeRuleWorkflow = ruleWorkflowStages.find((stage) => stage.id === activeRuleWorkflowStage) ?? ruleWorkflowStages[0];
   return (
     <div className="smart-referee-page min-h-screen bg-black text-white" data-mobile-reveal-policy={mobileSmartRefereeRevealPolicy}>
       <SiteHeader active="referee" />
@@ -293,6 +319,7 @@ export default function Product() {
         <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} data-presentation={smartRefereeReferenceFormatPresentation.hero} className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden border-b border-white/10 bg-[#071117]">
           <img src={smartRefereeMedia.trackingPoster} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 z-0 h-full w-full object-cover object-right" />
           <video data-testid="smart-referee-hero-video" src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline={smartRefereeHeroBackgroundPresentation.playsInline} preload={smartRefereeHeroBackgroundPresentation.preload} onCanPlay={(event) => { void event.currentTarget.play().catch(() => undefined); }} className="absolute inset-0 z-[1] h-full w-full object-cover object-center" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] opacity-35 [background-image:linear-gradient(rgba(64,224,208,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(64,224,208,0.12)_1px,transparent_1px)] [background-size:3rem_3rem]" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.34)_100%)]" />
           <div className="container relative z-20 flex min-h-[calc(100svh-4rem)] flex-col justify-end py-12 md:py-16 lg:py-20">
             <div data-reveal className="reveal-up max-w-3xl">
@@ -311,21 +338,32 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="organiser-outcomes" data-testid="organiser-outcomes" data-presentation={smartRefereeReferenceFormatPresentation.outcomes} className="border-b border-white/10 bg-[#0B1419] py-12 md:py-20">
-          <div className="container">
-            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up max-w-4xl border-t border-white/15 pt-5">
-              <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">01 · SHARED VIEW</p>
-              <h2 className="velocity-headline max-w-3xl text-[clamp(2.5rem,5vw,5.25rem)] leading-[0.96] text-white">{organiserOutcomesIntroduction.heading}</h2>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-white/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
+        <nav aria-label="Smart Referee sections" className="sticky top-16 z-40 hidden border-b border-white/10 bg-[#071117]/95 backdrop-blur-lg lg:block">
+          <div className="container flex h-12 items-center justify-between gap-5">
+            <p className="shrink-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Smart Referee</p>
+            <div className="flex items-center gap-5 text-xs font-semibold text-white/70 xl:gap-7">
+              {smartRefereeContextNavigation.map((item) => <a key={item.href} href={item.href} className="transition-colors hover:text-accent">{item.label}</a>)}
             </div>
-            <div className="mt-12 grid gap-px overflow-hidden border-y border-white/15 bg-white/15 md:grid-cols-3">
+          </div>
+        </nav>
+
+        <section id="organiser-outcomes" data-testid="organiser-outcomes" data-presentation={smartRefereeReferenceFormatPresentation.outcomes} className="border-b border-[#071117]/10 bg-white py-14 text-[#071117] md:py-24">
+          <div className="container">
+            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up grid max-w-5xl gap-7 border-t border-[#071117]/15 pt-5 md:grid-cols-[1.1fr_0.9fr] md:items-end">
+              <div>
+              <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">01 · SHARED VIEW</p>
+              <h2 className="velocity-headline max-w-3xl text-[clamp(2.5rem,5vw,5.25rem)] leading-[0.96] text-[#071117]">{organiserOutcomesIntroduction.heading}</h2>
+              </div>
+              <p className="max-w-xl text-base leading-7 text-[#071117]/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
+            </div>
+            <div className="mt-12 grid gap-px overflow-hidden border-y border-[#071117]/15 bg-[#071117]/15 md:grid-cols-3">
               {organiserOutcomeCards.map((outcome, index) => {
                 const Icon = organiserOutcomeIcons[outcome.id];
-                return <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] px-5 py-7 md:px-7 md:py-9" style={{ transitionDelay: `${index * 70}ms` }}>
+                return <article data-reveal key={outcome.id} className="reveal-up bg-white px-5 py-8 md:px-7 md:py-10" style={{ transitionDelay: `${index * 70}ms` }}>
                   <Icon aria-hidden="true" className="h-5 w-5 text-accent" strokeWidth={1.7} />
-                  <p className="font-mono text-xs font-semibold text-accent">{outcome.number}</p>
-                  <h2 className="mt-5 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h2>
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
+                  <p className="mt-5 font-mono text-xs font-semibold text-accent">{outcome.number}</p>
+                  <h2 className="mt-4 text-2xl font-semibold tracking-tight text-[#071117]">{outcome.title}</h2>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-[#071117]/65">{outcome.detail}</p>
                 </article>;
               })}
             </div>
@@ -360,7 +398,7 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-white/10 bg-[#0B1419] text-white">
+        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-[#071117]/10 bg-white text-[#071117]">
           <div className="container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div data-reveal className="reveal-up overflow-hidden rounded-[1.75rem] border border-[#071117]/10 bg-[#071117] shadow-[0_20px_50px_rgba(7,17,23,0.16)]">
               <div className="relative aspect-[21/9] overflow-hidden sm:aspect-[4/3]">
@@ -371,15 +409,15 @@ export default function Product() {
             </div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
               <p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · DECISION RAIL</p>
-              <h2 className="velocity-headline max-w-2xl text-white">From question to <span className="text-accent">shared call.</span></h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
-              <ol className="mt-7 divide-y divide-white/10 border-y border-white/10">
+              <h2 className="velocity-headline max-w-2xl text-[#071117]">From question to <span className="text-accent">shared call.</span></h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#071117]/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
+              <ol className="mt-7 divide-y divide-[#071117]/10 border-y border-[#071117]/10">
                 {eventWorkflowSteps.map((step, index) => {
                   const Icon = workflowStepIcons[index];
                   return (
                   <li key={step.number} className="grid gap-3 py-4 sm:grid-cols-[3.25rem_1fr] sm:gap-5">
                     <span className="flex items-center gap-2 font-mono text-sm font-semibold text-accent"><Icon aria-hidden="true" size={16} strokeWidth={1.8} />{step.number}</span>
-                    <div><h3 className="font-semibold text-white">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-white/60">{step.detail}</p></div>
+                    <div><h3 className="font-semibold text-[#071117]">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-[#071117]/60">{step.detail}</p></div>
                   </li>
                 ); })}
               </ol>
@@ -393,7 +431,6 @@ export default function Product() {
               <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">{organiserImpactDetail.index} · {organiserImpactDetail.audience}</p>
               <h2 className="velocity-headline mt-5 max-w-3xl text-[clamp(2.5rem,5.5vw,5.6rem)] leading-[0.95] text-white">{organiserImpactDetail.title}</h2>
               <p className="mt-6 max-w-2xl text-base leading-8 text-white/70 md:text-lg">{organiserImpactDetail.description}</p>
-              <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "organiser_impact_pricing", route: "dronesportsreferee" })} className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90">Plan your event <ArrowRight size={17} /></a>
             </div>
             <div data-testid="organiser-impact-outcomes" className="mt-12 grid divide-y divide-white/10 border-y border-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
               {organiserImpactDetail.outcomes.map((outcome, index) => (
@@ -417,19 +454,43 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="technical-confidence" data-testid="technical-confidence" data-presentation={smartRefereeReferenceFormatPresentation.technical} className="velocity-section border-b border-white/10 bg-[#171C1D]">
+        <section id="technical-confidence" data-testid="technical-confidence" data-presentation={smartRefereeReferenceFormatPresentation.technical} className="velocity-section border-b border-white/10 bg-[#0B1419]">
           <div className="container">
-            <div data-reveal className="reveal-up mx-auto max-w-3xl text-center">
-              <p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">02 · TECHNICAL LAYER</p>
-              <h2 className="velocity-headline mx-auto max-w-2xl text-white">{technicalConfidence.title}</h2>
-              <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
+            <div data-reveal className="reveal-up grid max-w-5xl gap-5 border-t border-white/15 pt-5 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+              <p className="mb-0 font-mono text-xs font-semibold tracking-[0.18em] text-accent">02 · TECHNICAL LAYER</p>
+              <div>
+                <h2 className="velocity-headline max-w-3xl text-white">A product layer, built for <span className="text-accent">event scale.</span></h2>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">{technicalConfidence.description}</p>
+              </div>
             </div>
-            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-primary-panel={eventScaleFeatureTilePresentation.primaryPanel} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 sm:gap-5">
-              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[20rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419]" ><div className="flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Crosshair aria-hidden="true" size={16} strokeWidth={1.8} />01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
+            <div data-testid="event-scale-evidence-panels" data-presentation={eventScaleEvidencePanelPresentation} data-mobile-columns={eventScaleFeatureTilePresentation.mobileColumns} data-desktop-columns={eventScaleFeatureTilePresentation.desktopColumns} data-primary-panel={eventScaleFeatureTilePresentation.primaryPanel} data-visibility={eventScaleFeatureTilePresentation.visibility} className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2 sm:gap-5">
+              <EventScaleTile id="01" label="Decision data" detail={technicalConfidence.description} expanded={expandedEventScaleTile === "01"} onToggle={() => toggleEventScaleTile("01")} className="min-h-[19rem] bg-[radial-gradient(circle_at_74%_18%,rgba(64,224,208,0.24),transparent_0_36%),#0B1419] sm:col-span-2 sm:aspect-[2/1]" ><div className="flex h-full flex-col p-5 sm:p-7"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Crosshair aria-hidden="true" size={16} strokeWidth={1.8} />01 · DECISION DATA</p><div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4 sm:gap-x-8 sm:gap-y-8">{proofPoints.map((point) => <div key={point.value} className="border-l border-white/15 pl-3 sm:pl-4"><p className="text-2xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">{point.value}</p><p className="mt-1.5 max-w-[10rem] text-[10px] leading-4 text-white/55 sm:text-xs sm:leading-5">{point.label}</p></div>)}</div></div></EventScaleTile>
               <EventScaleTile id="02" label={technicalConfidence.markerTitle} detail={technicalConfidence.markerDescription} expanded={expandedEventScaleTile === "02"} onToggle={() => toggleEventScaleTile("02")} className="min-h-[20rem] bg-[#0B1419]"><img src={smartRefereeMedia.stickers} alt="Circular passive marker stickers for competition drones" className="absolute inset-0 h-full w-full object-cover opacity-35" /><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/70 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><Radar aria-hidden="true" size={16} strokeWidth={1.8} />02 · TRACKING SETUP</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.markerTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.markerDescription}</p></div></EventScaleTile>
               <div data-testid="technical-evidence-panels" className="contents">
                 <EventScaleTile id="03" technicalEvidence label={technicalConfidence.continuousCalibrationTitle} detail={technicalConfidence.continuousCalibrationDescription} expanded={expandedEventScaleTile === "03"} onToggle={() => toggleEventScaleTile("03")} className="min-h-[20rem] bg-[#0E171B]"><video data-testid="continuous-calibration-video" src={smartRefereeMedia.continuousCalibrationVideo} autoPlay={continuousCalibrationVideoPresentation.autoPlay} muted={continuousCalibrationVideoPresentation.muted} loop={continuousCalibrationVideoPresentation.loop} controls={continuousCalibrationVideoPresentation.controls} playsInline={continuousCalibrationVideoPresentation.playsInline} preload={continuousCalibrationVideoPresentation.preload} className="absolute inset-0 h-full w-full object-cover opacity-45">Your browser does not support embedded video.</video><div className="absolute inset-0 bg-gradient-to-t from-[#071014] via-[#071014]/60 to-transparent" /><div className="relative flex h-full flex-col p-5 sm:p-6"><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><RefreshCw aria-hidden="true" size={16} strokeWidth={1.8} />03 · CONTINUOUS CALIBRATION</p><h3 className="mt-auto text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.continuousCalibrationTitle}</h3><p className="mt-2 max-w-md text-xs leading-5 text-white/70">{technicalConfidence.continuousCalibrationDescription}</p></div></EventScaleTile>
-                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="min-h-[20rem] bg-[linear-gradient(145deg,#0B1419,#132C31)]"><div className="flex h-full flex-col justify-between p-5 sm:p-6"><div><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><SlidersHorizontal aria-hidden="true" size={16} strokeWidth={1.8} />04 · CONFIGURABLE RULES</p><h3 className="mt-3 max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.rulesTitle}</h3><p className="mt-3 max-w-2xl text-xs leading-5 text-white/70">{technicalConfidence.rulesDescription}</p></div><div data-rule-reference-logos className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-9 min-w-0 flex-1 object-contain sm:h-11" />)}</div></div></EventScaleTile>
+                <EventScaleTile id="04" technicalEvidence label={technicalConfidence.rulesTitle} detail={<>{technicalConfidence.rulesDescription}{" "}{technicalConfidence.referenceCaption}</>} expanded={expandedEventScaleTile === "04"} onToggle={() => toggleEventScaleTile("04")} className="min-h-[19rem] bg-[linear-gradient(145deg,#0B1419,#132C31)] sm:col-span-2 sm:aspect-[2/1]"><div className="flex h-full flex-col justify-between p-5 sm:p-7"><div><p className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-accent sm:text-xs"><SlidersHorizontal aria-hidden="true" size={16} strokeWidth={1.8} />04 · CONFIGURABLE RULES</p><h3 className="mt-3 max-w-xl text-2xl font-semibold tracking-tight text-white sm:text-3xl">{technicalConfidence.rulesTitle}</h3><p className="mt-3 max-w-2xl text-xs leading-5 text-white/70">{technicalConfidence.rulesDescription}</p></div><div data-rule-reference-logos className="mt-6 flex max-w-sm items-center gap-3 border-t border-white/10 pt-4">{smartRefereeMedia.ruleSupportLogos.map((logo) => <img key={logo.id} src={logo.src} alt={logo.alt} loading="lazy" decoding="async" className="h-9 min-w-0 flex-1 object-contain sm:h-11" />)}</div></div></EventScaleTile>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="rule-workflow" data-testid="rule-workflow" className="border-b border-[#071117]/10 bg-white py-14 text-[#071117] md:py-24">
+          <div className="container">
+            <div data-reveal className="reveal-up grid gap-5 border-t border-[#071117]/15 pt-5 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+              <div><p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · RULE WORKFLOW</p><h2 className="velocity-headline mt-4 max-w-xl text-[#071117]">One rule. One shared <span className="text-accent">decision path.</span></h2></div>
+              <p className="max-w-xl text-sm leading-7 text-[#071117]/70">Use the current event rule, the tracked moment, and the review context to keep the decision process explicit for everyone involved.</p>
+            </div>
+            <div data-reveal data-presentation={smartRefereeVisualStoryPresentation.ruleWorkflow} className="reveal-up mt-10 overflow-hidden rounded-[1.75rem] border border-[#071117]/15 bg-[#071117] p-3 shadow-[0_24px_60px_rgba(7,17,23,0.22)] sm:p-4" style={{ transitionDelay: "80ms" }}>
+              <div className="grid gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 md:grid-cols-3">
+                {ruleWorkflowStages.map((stage, index) => {
+                  const Icon = stage.Icon;
+                  const selected = activeRuleWorkflowStage === stage.id;
+                  return <button key={stage.id} type="button" aria-pressed={selected} onClick={() => setActiveRuleWorkflowStage(stage.id)} className={`group min-h-36 p-5 text-left transition-colors ${selected ? "bg-[#132C31]" : "bg-[#071117] hover:bg-white/[0.045]"}`}><div className="flex items-center justify-between"><Icon aria-hidden="true" size={19} className="text-accent" strokeWidth={1.75} /><span className="font-mono text-[10px] font-semibold text-white/40">0{index + 1}</span></div><p className="mt-7 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">{stage.label}</p><p className="mt-2 text-sm font-semibold text-white">{stage.title}</p></button>;
+                })}
+              </div>
+              <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[1fr_16rem] lg:items-end">
+                <div><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Active workflow stage</p><h3 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{activeRuleWorkflow.title}</h3><p className="mt-3 max-w-2xl text-sm leading-7 text-white/70">{activeRuleWorkflow.detail}</p></div>
+                <div className="border-t border-white/10 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0"><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45">Decision path</p><div className="mt-4 flex items-center gap-2 text-xs font-semibold text-white"><SlidersHorizontal aria-hidden="true" size={15} className="text-accent" /><ArrowRight aria-hidden="true" size={14} className="text-white/40" /><Crosshair aria-hidden="true" size={15} className="text-accent" /><ArrowRight aria-hidden="true" size={14} className="text-white/40" /><CircleCheck aria-hidden="true" size={15} className="text-accent" /></div></div>
               </div>
             </div>
           </div>
@@ -443,10 +504,10 @@ export default function Product() {
 
         <RefereePricingConfigurator />
 
-        <section className="border-y border-white/10 bg-[var(--ink-soft)] py-10 text-[var(--paper)] md:py-12">
-          <div data-reveal className="container reveal-up flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
-            <div className="max-w-2xl"><div className="mb-4 h-1 w-12 bg-accent" /><h2 className="velocity-headline mb-3 text-[var(--paper)]">Plan your next competition with confidence.</h2><p className="text-lg leading-8 text-[var(--mist)]">Share your venue, match format, and schedule. We will propose the decision-support scope, event staffing, and delivery path that fit your programme.</p></div>
-            <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "delivery_pricing", route: "dronesportsreferee" })} className="inline-flex shrink-0 items-center gap-2 border border-white/40 px-6 py-3 font-semibold text-[var(--paper)] transition-colors hover:border-accent hover:bg-accent hover:text-black">Plan your event <ArrowRight size={18} /></a>
+        <section id="event-scope" className="border-y border-white/10 bg-[#071117] py-14 text-white md:py-20">
+          <div data-reveal className="container reveal-up grid items-end gap-7 border-t border-white/15 pt-5 lg:grid-cols-[1fr_auto]">
+            <div className="max-w-2xl"><p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">06 · READY TO SCOPE</p><h2 className="velocity-headline mt-4 text-white">A clearer event day starts <span className="text-accent">before the first call.</span></h2><p className="mt-5 text-lg leading-8 text-white/70">Bring your venue, cage count, match format, and programme schedule. We will help define the appropriate Smart Referee delivery path.</p></div>
+            <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "event_scope_pricing", route: "dronesportsreferee" })} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request an event scope <ArrowRight size={18} /></a>
           </div>
         </section>
       </main>
