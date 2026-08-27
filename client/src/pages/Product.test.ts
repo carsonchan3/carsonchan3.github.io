@@ -99,6 +99,7 @@ describe("Smart Referee organiser-first journey", () => {
   });
 
   it("preserves the supplied tracking, human-officiating, marker, system-video, calibration-video, and reference media", () => {
+    expect(smartRefereeMedia.decisionDataBackground).toBe("/manus-storage/optitrack-unity-technical-background_748f5cdf.png");
     expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
     expect(smartRefereeMedia.stickers).toBe("/manus-storage/cheapstickers_6b71bf1e.jpg");
     expect(smartRefereeMedia.precisionPoster).toBe("/manus-storage/flex13camerasys_aa73a4e5.jpg");
