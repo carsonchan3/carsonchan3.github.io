@@ -87,7 +87,7 @@ describe("Smart Referee organiser-first journey", () => {
     expect(technicalSpecificationPresentation).toBe("visible-evidence-panel");
     expect(eventScaleEvidencePanelPresentation).toBe("dominant-plus-two-supporting");
     expect(eventScaleFeatureTilePresentation).toEqual({ mobileColumns: 1, desktopColumns: 3, desktopRows: 2, desktopWidth: "editorial-max-w-5xl", primaryPanel: "decision-data", supportingPanels: ["passive-tracking", "continuous-calibration"], layout: "dominant-two-supporting", visibility: "image-led-product-stories" });
-    expect(eventScaleTileDetailInteraction).toEqual({ hover: "reveals-description", click: "toggles-description", pitchPlacement: "standalone-panel-after-event-scale" });
+    expect(eventScaleTileDetailInteraction).toEqual({ hover: "reveals-description", click: "toggles-description", technicalCards: "static-no-duplicate-copy", pitchPlacement: "standalone-panel-after-event-scale" });
     expect(technicalConfidence.title).toBe("Technical confidence, when your team needs it.");
     expect(technicalConfidence.markerTitle).toBe("Passive Tracking");
     expect(technicalConfidence.markerDescription).toContain("reflective markers");
@@ -99,7 +99,7 @@ describe("Smart Referee organiser-first journey", () => {
   });
 
   it("preserves the supplied tracking, human-officiating, marker, system-video, calibration-video, and reference media", () => {
-    expect(smartRefereeMedia.decisionDataBackground).toBe("/manus-storage/optitrack-unity-technical-background_748f5cdf.png");
+    expect(smartRefereeMedia.decisionDataBackground).toBe("/manus-storage/precision-referee-console_516e698b.webp");
     expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
     expect(smartRefereeMedia.stickers).toBe("/manus-storage/cheapstickers_6b71bf1e.jpg");
     expect(smartRefereeMedia.precisionPoster).toBe("/manus-storage/flex13camerasys_aa73a4e5.jpg");
