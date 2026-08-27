@@ -6,7 +6,7 @@ describe("Smart Referee pricing organiser scenarios", () => {
   it("uses scenario-led cards with optional detailed comparison instead of dense default matrices", () => {
     expect(pricingCardDetailPresentation).toBe("scenario-led-progressive-details");
     expect(pricingTierCardPresentation).toBe("rounded-option-cards");
-    expect(pricingFamilyPresentation).toBe("light-utility-service-family");
+    expect(pricingFamilyPresentation).toBe("deep-ink-service-family");
     expect(pricingTierIconPresentation).toEqual(["Settings2", "Users", "Trophy"]);
     expect(eventFitPlanningInputs).toEqual(["Venue and cage count", "Match format", "Programme schedule", "Delivery support"]);
   });

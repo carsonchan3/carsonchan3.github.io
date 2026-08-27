@@ -95,9 +95,18 @@ export const smartRefereeReferenceFormatPresentation = {
 
 export const smartRefereeVisualStoryPresentation = {
   decisionConsole: "verified-media-with-operational-status-rail",
-  organiserImpact: "editorial-outcomes-with-single-deep-ink-planning-rail",
-  pricing: "light-utility-service-family",
+  organiserImpact: "deep-ink-editorial-outcomes-with-operational-rail",
+  pricing: "deep-ink-service-family",
   ruleWorkflow: "configurable-condition-evidence-shared-call",
+} as const;
+
+export const smartRefereeFullDarkThemePresentation = {
+  organiserOutcomes: "deep-ink-high-contrast",
+  eventWorkflow: "deep-ink-high-contrast",
+  technicalLayer: "deep-ink-high-contrast",
+  ruleWorkflow: "deep-ink-high-contrast",
+  eventDelivery: "deep-ink-high-contrast",
+  eventScope: "deep-ink-high-contrast",
 } as const;
 
 export const smartRefereeContextNavigation = [
@@ -347,23 +356,23 @@ export default function Product() {
           </div>
         </nav>
 
-        <section id="organiser-outcomes" data-testid="organiser-outcomes" data-presentation={smartRefereeReferenceFormatPresentation.outcomes} className="border-b border-[#071117]/10 bg-white py-14 text-[#071117] md:py-24">
+        <section id="organiser-outcomes" data-testid="organiser-outcomes" data-presentation={smartRefereeReferenceFormatPresentation.outcomes} data-theme={smartRefereeFullDarkThemePresentation.organiserOutcomes} className="border-b border-white/10 bg-[#0B1419] py-14 text-white md:py-24">
           <div className="container">
-            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up grid max-w-5xl gap-7 border-t border-[#071117]/15 pt-5 md:grid-cols-[1.1fr_0.9fr] md:items-end">
+            <div data-testid="organiser-outcomes-introduction" data-reveal className="reveal-up grid max-w-5xl gap-7 border-t border-white/15 pt-5 md:grid-cols-[1.1fr_0.9fr] md:items-end">
               <div>
               <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">01 · SHARED VIEW</p>
-              <h2 className="velocity-headline max-w-3xl text-[clamp(2.5rem,5vw,5.25rem)] leading-[0.96] text-[#071117]">{organiserOutcomesIntroduction.heading}</h2>
+              <h2 className="velocity-headline max-w-3xl text-[clamp(2.5rem,5vw,5.25rem)] leading-[0.96] text-white">{organiserOutcomesIntroduction.heading}</h2>
               </div>
-              <p className="max-w-xl text-base leading-7 text-[#071117]/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
+              <p className="max-w-xl text-base leading-7 text-white/70 md:text-lg">{organiserOutcomesIntroduction.description}</p>
             </div>
-            <div className="mt-12 grid gap-px overflow-hidden border-y border-[#071117]/15 bg-[#071117]/15 md:grid-cols-3">
+            <div className="mt-12 grid gap-px overflow-hidden border-y border-white/15 bg-white/10 md:grid-cols-3">
               {organiserOutcomeCards.map((outcome, index) => {
                 const Icon = organiserOutcomeIcons[outcome.id];
-                return <article data-reveal key={outcome.id} className="reveal-up bg-white px-5 py-8 md:px-7 md:py-10" style={{ transitionDelay: `${index * 70}ms` }}>
+                return <article data-reveal key={outcome.id} className="reveal-up bg-[#0B1419] px-5 py-8 md:px-7 md:py-10" style={{ transitionDelay: `${index * 70}ms` }}>
                   <Icon aria-hidden="true" className="h-5 w-5 text-accent" strokeWidth={1.7} />
                   <p className="mt-5 font-mono text-xs font-semibold text-accent">{outcome.number}</p>
-                  <h2 className="mt-4 text-2xl font-semibold tracking-tight text-[#071117]">{outcome.title}</h2>
-                  <p className="mt-3 max-w-sm text-sm leading-6 text-[#071117]/65">{outcome.detail}</p>
+                  <h2 className="mt-4 text-2xl font-semibold tracking-tight text-white">{outcome.title}</h2>
+                  <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">{outcome.detail}</p>
                 </article>;
               })}
             </div>
@@ -398,7 +407,7 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} className="velocity-section border-b border-[#071117]/10 bg-white text-[#071117]">
+        <section id="event-workflow" data-testid="event-workflow" data-presentation={smartRefereeReferenceFormatPresentation.workflow} data-theme={smartRefereeFullDarkThemePresentation.eventWorkflow} className="velocity-section border-b border-white/10 bg-[#071117] text-white">
           <div className="container grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div data-reveal className="reveal-up overflow-hidden rounded-[1.75rem] border border-[#071117]/10 bg-[#071117] shadow-[0_20px_50px_rgba(7,17,23,0.16)]">
               <div className="relative aspect-[21/9] overflow-hidden sm:aspect-[4/3]">
@@ -409,15 +418,15 @@ export default function Product() {
             </div>
             <div data-reveal className="reveal-up" style={{ transitionDelay: "90ms" }}>
               <p className="mb-3 font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · DECISION RAIL</p>
-              <h2 className="velocity-headline max-w-2xl text-[#071117]">From question to <span className="text-accent">shared call.</span></h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#071117]/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
-              <ol className="mt-7 divide-y divide-[#071117]/10 border-y border-[#071117]/10">
+              <h2 className="velocity-headline max-w-2xl text-white">From question to <span className="text-accent">shared call.</span></h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/70">Officials remain central to the game. Smart Referee is there to make a difficult scoring moment easier to review without replacing human authority.</p>
+              <ol className="mt-7 divide-y divide-white/10 border-y border-white/10">
                 {eventWorkflowSteps.map((step, index) => {
                   const Icon = workflowStepIcons[index];
                   return (
                   <li key={step.number} className="grid gap-3 py-4 sm:grid-cols-[3.25rem_1fr] sm:gap-5">
                     <span className="flex items-center gap-2 font-mono text-sm font-semibold text-accent"><Icon aria-hidden="true" size={16} strokeWidth={1.8} />{step.number}</span>
-                    <div><h3 className="font-semibold text-[#071117]">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-[#071117]/60">{step.detail}</p></div>
+                    <div><h3 className="font-semibold text-white">{step.title}</h3><p className="mt-1.5 text-sm leading-6 text-white/65">{step.detail}</p></div>
                   </li>
                 ); })}
               </ol>
@@ -454,7 +463,7 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="technical-confidence" data-testid="technical-confidence" data-presentation={smartRefereeReferenceFormatPresentation.technical} className="velocity-section border-b border-white/10 bg-[#0B1419]">
+        <section id="technical-confidence" data-testid="technical-confidence" data-presentation={smartRefereeReferenceFormatPresentation.technical} data-theme={smartRefereeFullDarkThemePresentation.technicalLayer} className="velocity-section border-b border-white/10 bg-[#0B1419]">
           <div className="container">
             <div data-reveal className="reveal-up grid max-w-5xl gap-5 border-t border-white/15 pt-5 md:grid-cols-[0.8fr_1.2fr] md:items-end">
               <p className="mb-0 font-mono text-xs font-semibold tracking-[0.18em] text-accent">02 · TECHNICAL LAYER</p>
@@ -474,11 +483,11 @@ export default function Product() {
           </div>
         </section>
 
-        <section id="rule-workflow" data-testid="rule-workflow" className="border-b border-[#071117]/10 bg-white py-14 text-[#071117] md:py-24">
+        <section id="rule-workflow" data-testid="rule-workflow" data-theme={smartRefereeFullDarkThemePresentation.ruleWorkflow} className="border-b border-white/10 bg-[#071117] py-14 text-white md:py-24">
           <div className="container">
-            <div data-reveal className="reveal-up grid gap-5 border-t border-[#071117]/15 pt-5 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-              <div><p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · RULE WORKFLOW</p><h2 className="velocity-headline mt-4 max-w-xl text-[#071117]">One rule. One shared <span className="text-accent">decision path.</span></h2></div>
-              <p className="max-w-xl text-sm leading-7 text-[#071117]/70">Use the current event rule, the tracked moment, and the review context to keep the decision process explicit for everyone involved.</p>
+            <div data-reveal className="reveal-up grid gap-5 border-t border-white/15 pt-5 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+              <div><p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">03 · RULE WORKFLOW</p><h2 className="velocity-headline mt-4 max-w-xl text-white">One rule. One shared <span className="text-accent">decision path.</span></h2></div>
+              <p className="max-w-xl text-sm leading-7 text-white/70">Use the current event rule, the tracked moment, and the review context to keep the decision process explicit for everyone involved.</p>
             </div>
             <div data-reveal data-presentation={smartRefereeVisualStoryPresentation.ruleWorkflow} className="reveal-up mt-10 overflow-hidden rounded-[1.75rem] border border-[#071117]/15 bg-[#071117] p-3 shadow-[0_24px_60px_rgba(7,17,23,0.22)] sm:p-4" style={{ transitionDelay: "80ms" }}>
               <div className="grid gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 md:grid-cols-3">

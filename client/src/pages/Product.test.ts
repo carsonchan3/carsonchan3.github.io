@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventScopePlanningInputs, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeContextNavigation, smartRefereeDecisionRail, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeIconSystemPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
+import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventScopePlanningInputs, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeContextNavigation, smartRefereeDecisionRail, smartRefereeFullDarkThemePresentation, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeIconSystemPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
 describe("Smart Referee organiser-first journey", () => {
@@ -30,9 +30,17 @@ describe("Smart Referee organiser-first journey", () => {
     });
     expect(smartRefereeVisualStoryPresentation).toEqual({
       decisionConsole: "verified-media-with-operational-status-rail",
-      organiserImpact: "editorial-outcomes-with-single-deep-ink-planning-rail",
-      pricing: "light-utility-service-family",
+      organiserImpact: "deep-ink-editorial-outcomes-with-operational-rail",
+      pricing: "deep-ink-service-family",
       ruleWorkflow: "configurable-condition-evidence-shared-call",
+    });
+    expect(smartRefereeFullDarkThemePresentation).toEqual({
+      organiserOutcomes: "deep-ink-high-contrast",
+      eventWorkflow: "deep-ink-high-contrast",
+      technicalLayer: "deep-ink-high-contrast",
+      ruleWorkflow: "deep-ink-high-contrast",
+      eventDelivery: "deep-ink-high-contrast",
+      eventScope: "deep-ink-high-contrast",
     });
     expect(smartRefereeIconSystemPresentation).toEqual({
       decisionRail: ["SlidersHorizontal", "ScanLine", "CircleCheck"],
