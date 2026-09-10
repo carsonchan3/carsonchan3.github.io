@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { type ChangeEvent, type FormEvent, useState } from "react";
 import { toast } from "sonner";
 import SiteFooter from "@/components/SiteFooter";
@@ -120,7 +120,6 @@ export default function Contact() {
               <div><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Direct contact</p><h2 className="velocity-subheading text-white">Start with the channel that suits you.</h2></div>
               <div className="space-y-6">
                 <div className="flex items-start gap-4"><Mail className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Email</h3><a href={publicContactEmailHref} onClick={() => trackConversion("direct_contact_click", { channel: "email", language })} className="text-white/70 transition-colors hover:text-accent">{publicContactEmail}</a></div></div>
-                <div className="flex items-start gap-4"><Phone className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Phone</h3><a href="tel:+85266507520" onClick={() => trackConversion("direct_contact_click", { channel: "phone", language })} className="text-white/70 transition-colors hover:text-accent">+852 66507520</a></div></div>
                 <div className="flex items-start gap-4"><MapPin className="mt-1 size-6 shrink-0 text-accent" /><div><h3 className="mb-1 font-semibold text-white">Location</h3><p className="text-white/70">Hong Kong, China</p></div></div>
               </div>
               <div className="rounded-lg border border-accent/25 bg-accent/10 p-5"><p className="text-sm font-semibold text-white">{contactCopy.nextTitle}</p><p className="mt-2 text-sm leading-6 text-white/70">{contactCopy.nextBody}</p></div>

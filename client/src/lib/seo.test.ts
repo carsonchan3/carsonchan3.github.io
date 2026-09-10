@@ -22,6 +22,12 @@ describe("SEO route registry", () => {
     expect(absoluteUrl("/privacy", "zh-Hant")).toBe("https://velocity-lab.com/zh-hant/privacy/");
   });
 
+  it("omits telephone data from the public Organization schema", () => {
+    const home = getSeoPage("/");
+    const organization = buildStructuredData(home!, "en").find((item) => item["@type"] === "Organization");
+    expect(organization).not.toHaveProperty("telephone");
+  });
+
   it("builds only truthful published schema inputs for applicable pages", () => {
     const home = getSeoPage("/");
     const referee = getSeoPage("/dronesportsreferee");

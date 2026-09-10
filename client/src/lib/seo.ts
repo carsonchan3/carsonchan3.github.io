@@ -194,7 +194,6 @@ export function buildStructuredData(page: PublicSeoPage, language: WebsiteLangua
       url: siteOrigin,
       logo: managedMediaUrl("/manus-storage/vli_logo_with_text_bb6773ef.png"),
       email: "info@velocity-lab.com",
-      telephone: "+85266507520",
       address: { "@type": "PostalAddress", addressLocality: "Hong Kong", addressCountry: "HK" },
     });
   }

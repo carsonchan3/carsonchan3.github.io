@@ -39,7 +39,6 @@ export default function SiteFooter() {
             <p className="vli-footer-label mb-4">Contact</p>
             <ul className="space-y-2 text-white/70">
               <li><a href={publicContactEmailHref} className="transition-colors hover:text-accent">{publicContactEmail}</a></li>
-              <li><a href="tel:+85266507520" className="transition-colors hover:text-accent">+852 66507520</a></li>
               <li><span>Hong Kong, China</span></li>
             </ul>
           </div>
