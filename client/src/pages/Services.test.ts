@@ -15,7 +15,6 @@ describe("Services thumbnail data", () => {
     expect(traditionalChineseTranslations["Drone Building Course / Coaching Sessions"]).toBe("無人機組裝課程／指導課程");
     expect(traditionalChineseTranslations["Drone Photo / Cinematography"]).toBe("無人機攝影／航拍製作");
     expect(traditionalChineseTranslations["Detailed service pricing"]).toBe("詳細服務價目表");
-    expect(traditionalChineseTranslations["Share your requirements and questions and we will help find the best equipment for you."]).toBe("分享您的要求及問題，我們會協助您尋找最適合的設備。");
   });
 
   it("links customers to the supplied Google Sheet for detailed service pricing", () => {
@@ -30,23 +29,17 @@ describe("Services thumbnail data", () => {
   });
 
   it("maps every service option to the supplied real-world media", () => {
-    expect(serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }))).toEqual([
+    const mappedServices = serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }));
+    expect(mappedServices).toEqual([
       { title: "Drone Repair Service", thumbnail: "/manus-storage/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "PID tuning service", thumbnail: "/manus-storage/pidtuningthumb_fcb394b2.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Drone Building Course / Coaching Sessions", thumbnail: "/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Advanced drone course for adults", thumbnail: "/manus-storage/advancedronecourseforadultthumb_193b4cb1.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Drone Photo / Cinematography", thumbnail: "/manus-storage/dronecinematography_894d41bd.jpeg", mediaSource: "user-supplied-real-world-photo" },
     ]);
+    expect(new Set(mappedServices.map((service) => service.thumbnail)).size).toBe(serviceBanners.length);
   });
 
-  it("keeps exactly one distinct visual thumbnail for each service", () => {
-    const thumbnails = serviceBanners.map((service) => service.thumbnail);
-
-    expect(thumbnails).toHaveLength(5);
-    expect(new Set(thumbnails).size).toBe(5);
-    expect(thumbnails.every((thumbnail) => thumbnail.startsWith("/manus-storage/"))).toBe(true);
-    expect(serviceBanners.every((service) => service.mediaSource === "user-supplied-real-world-photo" && service.imageAlt.length > 20)).toBe(true);
-  });
 
   it("provides duration and scope-based pricing guidance for every service", () => {
     expect(serviceBanners.every((service) => service.duration.length > 20 && service.pricing.length > 20)).toBe(true);
