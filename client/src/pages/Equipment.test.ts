@@ -1,12 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { sanitizeProductCart } from "@/lib/productCart";
-import { catalogueItems, equipmentPricingNote, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
+import { traditionalChineseTranslations } from "@/lib/zhTranslations";
+import { catalogueItems, equipmentPricingNote, getVisibleProductFamilies, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
 
 describe("Spreadsheet-backed equipment catalogue content", () => {
   it("provides formal starting-price guidance before shopping items in both site languages", () => {
     expect(equipmentPricingNote.en).toBe("Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.");
     expect(equipmentPricingNote["zh-Hant"]).toBe("所列價格僅供參考起點。最終供貨情況、運費及賽事計劃要求，將於為您度身訂造的報價中確認。");
   });
+  it("removes the requested catalogue families from the public product view", () => {
+    const visibleFamilies = getVisibleProductFamilies(productFamilies);
+    const visibleVariants = visibleFamilies.flatMap((family) => family.variants);
+
+    expect(visibleFamilies.map((family) => family.familyId)).toEqual(["tops-shield-205", "tops-shield-220", "r220f", "tops-shield-400", "d6-pro"]);
+    expect(visibleVariants).toHaveLength(9);
+    expect(visibleVariants.map((variant) => variant.sourceId)).toEqual(["25", "26", "27", "28", "29", "34", "35", "36", "78"]);
+  });
+
   it("keeps the active catalogue records while presenting them as compact product families", () => {
     expect(catalogueItems).toHaveLength(21);
     expect(productFamilies).toHaveLength(13);
@@ -28,6 +38,10 @@ describe("Spreadsheet-backed equipment catalogue content", () => {
 
     expect(variants.map((variant) => variant.number)).toEqual(Array.from({ length: 21 }, (_, index) => String(index + 1)));
     expect(variants.some((variant) => variant.sourceId === "79" || variant.name.includes("TA300"))).toBe(false);
+  });
+
+  it("uses the revised custom equipment request copy in Traditional Chinese", () => {
+    expect(traditionalChineseTranslations["Share your requirements and questions and we will help find the best equipment for you."]).toBe("分享您的要求及問題，我們會協助您尋找最適合的設備。");
   });
 
   it("does not expose placeholder copy in the catalogue data", () => {

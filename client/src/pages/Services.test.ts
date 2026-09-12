@@ -15,13 +15,14 @@ describe("Services thumbnail data", () => {
     expect(traditionalChineseTranslations["Drone Building Course / Coaching Sessions"]).toBe("無人機組裝課程／指導課程");
     expect(traditionalChineseTranslations["Drone Photo / Cinematography"]).toBe("無人機攝影／航拍製作");
     expect(traditionalChineseTranslations["Detailed service pricing"]).toBe("詳細服務價目表");
+    expect(traditionalChineseTranslations["Share your requirements and questions and we will help find the best equipment for you."]).toBe("分享您的要求及問題，我們會協助您尋找最適合的設備。");
   });
 
   it("links customers to the supplied Google Sheet for detailed service pricing", () => {
     expect(detailedServicePricingSheet).toEqual({
       serviceTitle: "Drone Photo / Cinematography",
-      embedHref: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/preview?rm=minimal",
-      href: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/edit?usp=sharing",
+      embedHref: "https://docs.google.com/spreadsheets/d/1pgINM3xf6ZbeMtfgLgd6kfBXSpe33T6iwcAmqn1T3-g/preview?rm=minimal",
+      href: "https://docs.google.com/spreadsheets/d/1pgINM3xf6ZbeMtfgLgd6kfBXSpe33T6iwcAmqn1T3-g/edit?usp=sharing",
       label: "Detailed service pricing",
       description: "View the current public price book directly below.",
       ariaLabel: "Open detailed service pricing in Google Sheets (opens in a new tab)",

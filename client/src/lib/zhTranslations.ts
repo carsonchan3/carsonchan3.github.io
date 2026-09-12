@@ -525,7 +525,7 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "Services": "服務",
   "Set the support, officials, escalation, and fallback responsibilities inside one proposed operating model.": "在擬定的營運模式中釐定支援、裁判、升級程序與備援責任。",
   "Share the context for your request and we will follow up with a tailored next step.": "提供您的需求背景，我們會跟進並提供度身訂造的後續步驟。",
-  "Share your preferred equipment, event format, technical constraints, and quantities. We will scope the right configuration before you compare standard catalogue items.": "告訴我們您偏好的裝備、活動形式、技術限制與數量。我們會在您比較標準型錄項目前，先評估並規劃合適的配置。",
+  "Share your requirements and questions and we will help find the best equipment for you.": "分享您的要求及問題，我們會協助您尋找最適合的設備。",
   "Share your venue, match format, and schedule. We will propose the decision-support scope, event staffing, and delivery path that fit your programme.": "提供您的場地、比賽形式與時程。我們會提出符合您賽程的決策支援範疇、活動人手安排與執行路徑。",
   "Shared evidence": "共享證據",
   "Six hours of support with a basic replay handover.": "提供六小時支援及基本重播交接。",

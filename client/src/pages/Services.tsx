@@ -85,8 +85,8 @@ export const servicesHeroPresentation = {
 
 export const detailedServicePricingSheet = {
   serviceTitle: "Drone Photo / Cinematography",
-  embedHref: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/preview?rm=minimal",
-  href: "https://docs.google.com/spreadsheets/d/1tHKN5LK8Vv5fidNPQ7llbM9eMuB8N06RSMfbMGnI2x4/edit?usp=sharing",
+  embedHref: "https://docs.google.com/spreadsheets/d/1pgINM3xf6ZbeMtfgLgd6kfBXSpe33T6iwcAmqn1T3-g/preview?rm=minimal",
+  href: "https://docs.google.com/spreadsheets/d/1pgINM3xf6ZbeMtfgLgd6kfBXSpe33T6iwcAmqn1T3-g/edit?usp=sharing",
   label: "Detailed service pricing",
   description: "View the current public price book directly below.",
   ariaLabel: "Open detailed service pricing in Google Sheets (opens in a new tab)",

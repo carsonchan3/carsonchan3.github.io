@@ -306,6 +306,21 @@ export const productFamilies: ProductDetail[] = [
   { familyId: "inflatable-drone-soccer-field", reference: "91, 94", name: "Inflatable Drone Soccer Field", category: "Competition venue", description: "Inflatable drone soccer field options with goals and pump.", variants: [createVariant("91", "3 × 3 × 3 m"), createVariant("94", "6 × 3 × 3 m")] },
 ];
 
+export const excludedProductFamilyIds = new Set([
+  "fb200-racer",
+  "fb210-racer",
+  "r200",
+  "r200f",
+  "ace-lipo-battery",
+  "usb-charger",
+  "b3-balance-charger",
+  "inflatable-drone-soccer-field",
+]);
+
+export function getVisibleProductFamilies(families: ProductDetail[]) {
+  return families.filter((family) => !excludedProductFamilyIds.has(family.familyId));
+}
+
 export type DatabaseProductRow = {
   familyId: string;
   name: string;
@@ -364,7 +379,7 @@ export function mergeCatalogueWithDatabase(
   }));
 }
 
-const catalogueVariants = productFamilies.flatMap((family) => family.variants);
+const catalogueVariants = getVisibleProductFamilies(productFamilies).flatMap((family) => family.variants);
 const catalogueSourceIds = catalogueVariants.map((variant) => variant.sourceId);
 
 function getPriceNumber(price: string) {
@@ -407,7 +422,7 @@ export default function Equipment() {
   const [cartPanelOpen, setCartPanelOpen] = useState(false);
 
   const activeProductFamilies: ProductDetail[] = useMemo(() => {
-    return mergeCatalogueWithDatabase(dbProductsQuery.data ?? []);
+    return getVisibleProductFamilies(mergeCatalogueWithDatabase(dbProductsQuery.data ?? []));
   }, [dbProductsQuery.data]);
 
   const activeCatalogueVariants = useMemo(() => activeProductFamilies.flatMap((f) => f.variants), [activeProductFamilies]);
@@ -462,7 +477,7 @@ export default function Equipment() {
                 <div className="max-w-3xl">
                   <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Need something specific?</p>
                   <h2 className="velocity-subheading mb-3 text-white sm:text-3xl">Start with a custom equipment request.</h2>
-                  <p className="max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">Share your preferred equipment, event format, technical constraints, and quantities. We will scope the right configuration before you compare standard catalogue items.</p>
+                  <p className="max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">Share your requirements and questions and we will help find the best equipment for you.</p>
                 </div>
                 <a href={localizedPath("/contact", language)} onClick={() => trackConversion("quote_request_start", { source: "custom_equipment", language })} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 font-semibold text-black transition-opacity hover:opacity-90">Request custom quote <ArrowRight size={18} /></a>
               </div>
