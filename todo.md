@@ -6755,5 +6755,5 @@
 - [x] Add explicit Traditional Chinese translations for all newly expanded premium product-detail content
 - [x] Add regression coverage for requested-item detail selection, default tiers, quote payloads, and bilingual labels
 - [x] Verify all requested detail modals at desktop and 375px mobile widths without horizontal overflow
-- [ ] Publish and verify the expanded product-detail release on the live GitHub Pages site
+- [x] Publish and verify the expanded product-detail release on the live GitHub Pages site
 - [x] Correct the remaining untranslated ready-to-fly subtitle discovered in the Traditional Chinese TOPS Shield 220 premium modal
