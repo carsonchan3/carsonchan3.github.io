@@ -6737,3 +6737,13 @@
 - [ ] Create and configure the new repository with a GitHub Pages-ready static build
 - [ ] Configure the static build for the `carsonchan3.github.io` root path and test the root-site output
 - [ ] Remove the old repository only after approval, verify the new Pages URL, and document the migration
+
+## TOPS Shield 205 premium product detail
+- [x] Redesign TOPS Shield 205 with a premium split-layout detail modal and tiered Builder’s / VLI Certified Edition selection
+- [x] Preselect VLI Certified Edition and surface VLI CARE coverage, activation code, and certified feature list
+- [x] Use Add to Quote instead of checkout while preserving the existing quote-cart flow
+- [x] Add explicit Traditional Chinese translations for all TOPS Shield 205 premium-detail content
+- [x] Add regression coverage for RTF/PNP tier resolution and run the full validation suite
+- [x] Verify the catalogue at desktop and 375px mobile widths, including responsive overflow checks
+- [ ] Commit and push the final TOPS Shield 205 release to GitHub Pages
+- [ ] Verify the live GitHub Pages deployment in English and Traditional Chinese

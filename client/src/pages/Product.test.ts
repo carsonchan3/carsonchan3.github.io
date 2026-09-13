@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventScopePlanningInputs, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeContextNavigation, smartRefereeDecisionRail, smartRefereeFullDarkThemePresentation, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeIconSystemPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
+import { getShield205Variant, shield205Content } from "@/components/ProductDetailDialog";
 
 describe("Smart Referee organiser-first journey", () => {
   it("leads with one organiser promise followed by three tangible outcomes", () => {
@@ -106,6 +107,33 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeMedia.precisionVideo).toBe("/manus-storage/v2fulluncompressed_1dc97341.mp4");
     expect(smartRefereeMedia.continuousCalibrationVideo).toBe("/manus-storage/cont-calibration_a6322d41.mp4");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
+  });
+
+  it("defines the premium TOPS Shield 205 product experience without checkout language", () => {
+    expect(shield205Content.title).toBe("TOPS Shield 205: The Agile Striker");
+    expect(shield205Content.pitch).toContain("high-intensity drone sports");
+    expect(shield205Content.tiers.certified.label).toBe("VLI Certified Edition");
+    expect(shield205Content.tiers.certified.features).toContain("Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements.");
+    expect(shield205Content.tiers.builder.features).toContain("Factory default settings (requires manual PID tuning).");
+    expect(shield205Content.specifications).toHaveLength(5);
+    expect(shield205Content.inTheBox).toContain("1x Custom VLI Transport Bag");
+    expect(shield205Content.inTheBox).not.toContain("1x VLI CARE Activation Code");
+    expect(traditionalChineseTranslations["TOPS Shield 205: The Agile Striker"]).toBe("TOPS Shield 205：敏捷突擊者");
+    expect(traditionalChineseTranslations["Add to Quote"]).toBe("加入報價");
+
+    const variants = {
+      familyId: "tops-shield-205",
+      reference: "1",
+      name: "TOPS Shield 205",
+      category: "Competition Frames",
+      description: "205 mm platform",
+      variants: [
+        { sourceId: "rtf", number: "1", label: "TOPS Shield 205 RTF", name: "TOPS Shield 205 RTF", model: "RTF", description: "Ready to fly", price: "HK$4,329", image: "", imageAlt: "" },
+        { sourceId: "pnp", number: "2", label: "TOPS Shield 205 PNP", name: "TOPS Shield 205 PNP", model: "PNP", description: "Bring your own receiver", price: "HK$2,743", image: "", imageAlt: "" },
+      ],
+    };
+    expect(getShield205Variant(variants, "certified").sourceId).toBe("rtf");
+    expect(getShield205Variant(variants, "builder").sourceId).toBe("pnp");
   });
 
   it("preserves the pitch-video controls and the mobile visibility policy", () => {
