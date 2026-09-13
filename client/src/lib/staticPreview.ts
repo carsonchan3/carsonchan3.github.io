@@ -1,7 +1,9 @@
 export const toStaticBasePath = (basePath: string, path: string) => {
   const normalizedBase = basePath === "/" ? "" : basePath.replace(/\/$/, "");
-  const normalizedPath = path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
-  return `${normalizedBase}${normalizedPath}` || "/";
+  const [pathname, hash = ""] = path.split("#", 2);
+  const normalizedPathname = pathname === "/" ? "" : pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const canonicalPathname = normalizedPathname ? `${normalizedPathname.replace(/\/$/, "")}/` : "";
+  return `${normalizedBase}${canonicalPathname}${hash ? `#${hash}` : ""}` || "/";
 };
 
 const staticBaseUrl = () => import.meta.env?.BASE_URL ?? "/";

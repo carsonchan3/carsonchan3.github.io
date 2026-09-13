@@ -24,6 +24,13 @@ for (const page of publicSeoPages) {
 await assertIncludes(path.join(outputRoot, "robots.txt"), "Sitemap: https://velocity-lab.com/sitemap.xml");
 const sitemap = await assertIncludes(path.join(outputRoot, "sitemap.xml"), "https://velocity-lab.com/zh-hant/dronesportsreferee");
 if (sitemap.includes("/owner")) throw new Error("Private owner routes must not be included in the sitemap");
+for (const alias of ["equipment", "pricing"]) {
+  await assertIncludes(path.join(outputRoot, alias, "index.html"), 'rel="canonical"');
+  await assertIncludes(path.join(outputRoot, "zh-hant", alias, "index.html"), 'rel="canonical"');
+}
+await assertIncludes(path.join(outputRoot, "use-cases", "index.html"), 'Drone Sports Use Cases | Velocity Lab Innovation');
+await assertIncludes(path.join(outputRoot, "zh-hant", "use-cases", "index.html"), '無人機運動應用場景 | 速研創新');
+await assertIncludes(path.join(outputRoot, "robots.txt"), "Disallow: /owner");
 await assertIncludes(path.join(outputRoot, "404.html"), 'content="noindex, nofollow"');
 
 console.log("SEO static output verification passed.");

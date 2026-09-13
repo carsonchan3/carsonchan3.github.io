@@ -2,7 +2,7 @@ import type { WebsiteLanguage } from "@/contexts/LanguageContext";
 
 export const siteOrigin = "https://velocity-lab.com";
 export const chineseLocalePrefix = "/zh-hant";
-export const publicRoutePaths = ["/", "/dronesportsreferee", "/product", "/services", "/people", "/contact", "/privacy"] as const;
+export const publicRoutePaths = ["/", "/dronesportsreferee", "/product", "/services", "/use-cases", "/people", "/contact", "/privacy"] as const;
 export type PublicRoutePath = (typeof publicRoutePaths)[number];
 
 export type LocalizedSeoCopy = {
@@ -12,7 +12,7 @@ export type LocalizedSeoCopy = {
 
 export type PublicSeoPage = {
   path: PublicRoutePath;
-  key: "home" | "referee" | "product" | "services" | "people" | "contact" | "privacy";
+  key: "home" | "referee" | "product" | "services" | "useCases" | "people" | "contact" | "privacy";
   copy: Record<WebsiteLanguage, LocalizedSeoCopy>;
   breadcrumb: string;
   socialImage: string;
@@ -90,6 +90,23 @@ export const publicSeoPages: PublicSeoPage[] = [
     breadcrumb: "Services",
     socialImage: managedMediaUrl("/manus-storage/dronerepairthumb_ad988635.jpeg"),
     schemas: ["breadcrumb", "service"],
+  },
+  {
+    path: "/use-cases",
+    key: "useCases",
+    copy: {
+      en: {
+        title: "Drone Sports Use Cases | Velocity Lab Innovation",
+        description: "See how Velocity Lab Innovation supports drone-sports officiating, competition delivery, robotics programmes, and technical proof with practical systems and services.",
+      },
+      "zh-Hant": {
+        title: "無人機運動應用場景 | 速研創新",
+        description: "了解速研創新如何以實用系統及服務支援無人機運動裁判、賽事執行、機械人計劃及技術驗證。",
+      },
+    },
+    breadcrumb: "Use Cases",
+    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    schemas: ["breadcrumb"],
   },
   {
     path: "/people",

@@ -140,6 +140,25 @@ async function writeDocument(destination: string, html: string) {
   await writeFile(destination, `<!doctype html>\n${html}`, "utf8");
 }
 
+const staticAliases = [
+  { alias: "/equipment", source: "/product" },
+  { alias: "/pricing", source: "/dronesportsreferee" },
+] as const;
+async function writeStaticAlias(template: string, alias: string, source: string, language: WebsiteLanguage) {
+  const { document } = parseHTML(template);
+  const root = document.getElementById("root");
+  if (!root) throw new Error("Static build is missing the #root element");
+  root.innerHTML = createStaticApp(source, language);
+  root.setAttribute("data-seo-prerendered", "true");
+  translateStaticTree(root, language);
+  localizeStaticLinks(document, language);
+  applySeoHead(document, source, language);
+  const outputPath = language === "en"
+    ? path.join(outputRoot, alias.slice(1), "index.html")
+    : path.join(outputRoot, "zh-hant", alias.slice(1), "index.html");
+  await writeDocument(outputPath, document.toString());
+}
+
 async function prerenderPublicPages() {
   const template = await readFile(path.join(outputRoot, "index.html"), "utf8");
   for (const page of publicSeoPages) {
@@ -159,6 +178,11 @@ async function prerenderPublicPages() {
     }
   }
 
+  for (const alias of staticAliases) {
+    for (const language of ["en", "zh-Hant"] as const) {
+      await writeStaticAlias(template, alias.alias, alias.source, language);
+    }
+  }
   const { document: notFoundDocument } = parseHTML(template);
   const notFoundRoot = notFoundDocument.getElementById("root");
   if (!notFoundRoot) throw new Error("Static build is missing the #root element");
