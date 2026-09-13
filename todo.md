@@ -6759,8 +6759,8 @@
 - [x] Correct the remaining untranslated ready-to-fly subtitle discovered in the Traditional Chinese TOPS Shield 220 premium modal
 
 ## Google Search Console indexing remediation
-- [ ] Audit Search Console-relevant route variants, generated static paths, redirects, canonical URLs, sitemap, robots.txt, and GitHub Pages fallback behavior
-- [ ] Fix any unintended redirect targets or missing public route artifacts while preserving intentional canonical redirects
-- [ ] Fix any genuine public 404 routes identified by the audit and remove stale links from generated SEO output
-- [ ] Validate bilingual routes, sitemap entries, canonical metadata, robots directives, and static 404 behavior
-- [ ] Publish the indexing remediation and verify live route responses
+- [x] Audit Search Console-relevant route variants, generated static paths, redirects, canonical URLs, sitemap, robots.txt, and GitHub Pages fallback behavior
+- [x] Fix any unintended redirect targets or missing public route artifacts while preserving intentional canonical redirects
+- [x] Fix any genuine public 404 routes identified by the audit and remove stale links from generated SEO output
+- [x] Validate bilingual routes, sitemap entries, canonical metadata, robots directives, and static 404 behavior
+- [x] Publish the indexing remediation and verify live route responses
