@@ -34,7 +34,7 @@ describe("homepage supporting organisations", () => {
       target: "contact",
       commercialFraming: "qualified-partner-pricing-and-collaboration",
     });
-    expect(traditionalChineseTranslations["For qualified organisations, partner discussions may include programme pricing and collaboration terms."]).toBe("符合資格的機構可與我們洽談計劃價格及合作方案。");
+    expect(traditionalChineseTranslations["Qualified organisations can join our partner network to access exclusive discounts, programme pricing, and collaboration terms."]).toBe("符合資格的機構可加入我們的合作夥伴網絡，享有專屬優惠、計劃價格及合作方案。");
     expect(traditionalChineseTranslations["Join as a partner"]).toBe("加入成為合作夥伴");
   });
 

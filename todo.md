@@ -6764,3 +6764,8 @@
 - [x] Fix any genuine public 404 routes identified by the audit and remove stale links from generated SEO output
 - [x] Validate bilingual routes, sitemap entries, canonical metadata, robots directives, and static 404 behavior
 - [x] Publish the indexing remediation and verify live route responses
+
+## Homepage partner CTA clarification
+- [x] Update the English Join as a partner CTA to explain access to exclusive discounts
+- [x] Add matching Traditional Chinese partner CTA copy
+- [x] Validate and publish the homepage CTA change
