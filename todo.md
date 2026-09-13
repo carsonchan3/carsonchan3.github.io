@@ -6745,5 +6745,5 @@
 - [x] Add explicit Traditional Chinese translations for all TOPS Shield 205 premium-detail content
 - [x] Add regression coverage for RTF/PNP tier resolution and run the full validation suite
 - [x] Verify the catalogue at desktop and 375px mobile widths, including responsive overflow checks
-- [ ] Commit and push the final TOPS Shield 205 release to GitHub Pages
-- [ ] Verify the live GitHub Pages deployment in English and Traditional Chinese
+- [x] Commit and push the final TOPS Shield 205 release to GitHub Pages
+- [x] Verify the live GitHub Pages deployment in English and Traditional Chinese
