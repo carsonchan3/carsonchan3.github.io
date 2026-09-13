@@ -6747,3 +6747,13 @@
 - [x] Verify the catalogue at desktop and 375px mobile widths, including responsive overflow checks
 - [x] Commit and push the final TOPS Shield 205 release to GitHub Pages
 - [x] Verify the live GitHub Pages deployment in English and Traditional Chinese
+
+## Premium detail expansion for remaining catalogue items
+- [x] Extend the premium detail experience to TOPS Shield 220 items #3–5 with clear configuration tiers, specifications, and quote-first CTA
+- [x] Extend the premium detail experience to R220F item #10 with its own configuration, specifications, and quote-first CTA
+- [x] Extend the premium detail experience to TOPS Shield 400 items #11–12 with clear configuration tiers, specifications, and quote-first CTA
+- [x] Add explicit Traditional Chinese translations for all newly expanded premium product-detail content
+- [x] Add regression coverage for requested-item detail selection, default tiers, quote payloads, and bilingual labels
+- [x] Verify all requested detail modals at desktop and 375px mobile widths without horizontal overflow
+- [ ] Publish and verify the expanded product-detail release on the live GitHub Pages site
+- [x] Correct the remaining untranslated ready-to-fly subtitle discovered in the Traditional Chinese TOPS Shield 220 premium modal

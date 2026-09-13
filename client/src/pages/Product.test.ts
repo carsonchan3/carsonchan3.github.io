@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventScopePlanningInputs, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeContextNavigation, smartRefereeDecisionRail, smartRefereeFullDarkThemePresentation, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeIconSystemPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
-import { getShield205Variant, shield205Content } from "@/components/ProductDetailDialog";
+import { getPremiumVariant, getShield205Variant, premiumProductContent, shield205Content } from "@/components/ProductDetailDialog";
 
 describe("Smart Referee organiser-first journey", () => {
   it("leads with one organiser promise followed by three tangible outcomes", () => {
@@ -134,6 +134,32 @@ describe("Smart Referee organiser-first journey", () => {
     };
     expect(getShield205Variant(variants, "certified").sourceId).toBe("rtf");
     expect(getShield205Variant(variants, "builder").sourceId).toBe("pnp");
+  });
+
+  it("defines premium quote-first experiences for TOPS Shield 220, R220F, and TOPS Shield 400", () => {
+    expect(premiumProductContent["tops-shield-220"].defaultTier).toBe("certified");
+    expect(Object.keys(premiumProductContent["tops-shield-220"].tiers)).toEqual(["certified", "travel", "builder"]);
+    expect(premiumProductContent["r220f"].tiers.certified?.label).toBe("VLI Ready-to-Deploy Edition");
+    expect(premiumProductContent["tops-shield-400"].defaultTier).toBe("certified");
+
+    const shield220 = {
+      familyId: "tops-shield-220",
+      reference: "3–5",
+      name: "TOPS Shield 220",
+      category: "Drone platform",
+      description: "220 mm platform",
+      variants: [
+        { sourceId: "27", number: "3", label: "RTF", name: "TOPS Shield 220 RTF", model: "TZ002", description: "", price: "HK$3,718", image: "", imageAlt: "" },
+        { sourceId: "28", number: "4", label: "RTF + Bag", name: "TOPS Shield 220 RTF + Bag", model: "TZ002", description: "", price: "HK$4,056", image: "", imageAlt: "" },
+        { sourceId: "29", number: "5", label: "PNP", name: "TOPS Shield 220 PNP", model: "TZ002", description: "", price: "HK$2,743", image: "", imageAlt: "" },
+      ],
+    };
+    expect(getPremiumVariant(shield220, "certified", premiumProductContent["tops-shield-220"]).sourceId).toBe("27");
+    expect(getPremiumVariant(shield220, "travel", premiumProductContent["tops-shield-220"]).sourceId).toBe("28");
+    expect(getPremiumVariant(shield220, "builder", premiumProductContent["tops-shield-220"]).sourceId).toBe("29");
+    expect(traditionalChineseTranslations["TOPS Shield 220: The Competition Workhorse"]).toBe("TOPS Shield 220：競賽主力平台");
+    expect(traditionalChineseTranslations["R220F: The Ready-to-Deploy Training Platform"]).toBe("R220F：可即時部署的訓練平台");
+    expect(traditionalChineseTranslations["TOPS Shield 400: The Arena-Scale Platform"]).toBe("TOPS Shield 400：場館級平台");
   });
 
   it("preserves the pitch-video controls and the mobile visibility policy", () => {
