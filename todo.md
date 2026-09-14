@@ -6779,3 +6779,11 @@
 - [x] Add CMS-ready editing guidance and a clear GitHub-based manual publishing workflow
 - [x] Add at least one bilingual sample article to verify the publishing pipeline
 - [x] Validate, publish, and verify the live blog pages
+
+## GitHub-managed product descriptions
+- [x] Audit current product catalogue data, premium detail metadata, translations, and build generation
+- [x] Add Markdown product content with bilingual descriptions and stable product identifiers
+- [x] Apply generated Markdown descriptions without changing prices, images, quote flow, or premium tiers
+- [x] Add GitHub editing guidance and a direct product-content publishing link
+- [x] Add regression tests and static SEO/build validation for Markdown product content
+- [x] Validate and publish the product description workflow

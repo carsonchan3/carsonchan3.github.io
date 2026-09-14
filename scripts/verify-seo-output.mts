@@ -3,6 +3,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { publicSeoPages } from "../client/src/lib/seo";
 import { blogPosts } from "../client/src/lib/blog";
+import { productContent } from "../client/src/lib/productContent.generated";
+import { getVisibleProductFamilies, productFamilies } from "../client/src/pages/Equipment";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputRoot = path.join(projectRoot, "dist", "public");
@@ -37,6 +39,12 @@ for (const post of blogPosts) {
   const chineseArticle = await assertIncludes(path.join(outputRoot, "zh-hant", "blog", post.slug, "index.html"), post.title["zh-Hant"]);
   if (!englishArticle.includes('"@type":"Article"') || !chineseArticle.includes('"@type":"Article"')) throw new Error(`${post.slug} is missing Article structured data`);
   if (!sitemap.includes(`/blog/${post.slug}/`) || !sitemap.includes(`/zh-hant/blog/${post.slug}/`)) throw new Error(`${post.slug} is missing from the sitemap`);
+}
+const productEnglish = await assertIncludes(path.join(outputRoot, "product", "index.html"), 'rel="canonical"');
+const productChinese = await assertIncludes(path.join(outputRoot, "zh-hant", "product", "index.html"), 'lang="zh-Hant"');
+const visibleFamilyIds = new Set(getVisibleProductFamilies(productFamilies).map((family) => family.familyId));
+for (const product of productContent.filter((item) => visibleFamilyIds.has(item.familyId))) {
+  if (!productEnglish.includes(product.description.en) || !productChinese.includes(product.description["zh-Hant"])) throw new Error(`${product.familyId} Markdown content is missing from the generated catalogue`);
 }
 await assertIncludes(path.join(outputRoot, "404.html"), 'content="noindex, nofollow"');
 

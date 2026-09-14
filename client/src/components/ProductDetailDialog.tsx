@@ -270,7 +270,7 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
         <div className="flex flex-col justify-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{translate("Drone platform · premium configuration")}</p>
           <h2 data-testid="product-detail-title" className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">{translate(content.title)}</h2>
-          <p data-testid="product-detail-description" className="mt-4 text-sm leading-7 text-white/70 sm:text-base">{translate(content.pitch)}</p>
+          <p data-testid="product-detail-description" className="mt-4 text-sm leading-7 text-white/70 sm:text-base">{translate(product.description)}</p>
 
           <div data-testid={`${content.testId}-tier-options`} className={`mt-6 grid gap-3 ${Object.keys(content.tiers).length > 1 ? "sm:grid-cols-2" : ""}`}>
             {(Object.keys(content.tiers) as PremiumTier[]).map((option) => {
