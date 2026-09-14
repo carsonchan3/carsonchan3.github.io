@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { publicSeoPages } from "../client/src/lib/seo";
+import { blogPosts } from "../client/src/lib/blog";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputRoot = path.join(projectRoot, "dist", "public");
@@ -31,6 +32,12 @@ for (const alias of ["equipment", "pricing"]) {
 await assertIncludes(path.join(outputRoot, "use-cases", "index.html"), 'Drone Sports Use Cases | Velocity Lab Innovation');
 await assertIncludes(path.join(outputRoot, "zh-hant", "use-cases", "index.html"), '無人機運動應用場景 | 速研創新');
 await assertIncludes(path.join(outputRoot, "robots.txt"), "Disallow: /owner");
+for (const post of blogPosts) {
+  const englishArticle = await assertIncludes(path.join(outputRoot, "blog", post.slug, "index.html"), post.title.en);
+  const chineseArticle = await assertIncludes(path.join(outputRoot, "zh-hant", "blog", post.slug, "index.html"), post.title["zh-Hant"]);
+  if (!englishArticle.includes('"@type":"Article"') || !chineseArticle.includes('"@type":"Article"')) throw new Error(`${post.slug} is missing Article structured data`);
+  if (!sitemap.includes(`/blog/${post.slug}/`) || !sitemap.includes(`/zh-hant/blog/${post.slug}/`)) throw new Error(`${post.slug} is missing from the sitemap`);
+}
 await assertIncludes(path.join(outputRoot, "404.html"), 'content="noindex, nofollow"');
 
 console.log("SEO static output verification passed.");

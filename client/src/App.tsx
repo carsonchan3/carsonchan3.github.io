@@ -9,6 +9,8 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import WebsiteTranslationObserver from "./components/WebsiteTranslationObserver";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import People from "./pages/People";
 import Privacy from "./pages/Privacy";
 import Pricing from "./pages/Pricing";
@@ -35,6 +37,8 @@ function Router() {
       <Route path={"/product"} component={Equipment} />
       <Route path={"/equipment"}>{() => <Redirect to="/product" />}</Route>
       <Route path={"/services"} component={Services} />
+      <Route path={"/blog"} component={Blog} />
+      <Route path={"/blog/:slug"} component={BlogPost} />
       <Route path={"/owner"} component={OwnerEnquiries} />
       <Route path={"/owner/enquiries"}>{() => <Redirect to="/owner" />}</Route>
       <Route path={"/use-cases"} component={UseCases} />

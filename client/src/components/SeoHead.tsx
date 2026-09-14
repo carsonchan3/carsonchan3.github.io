@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { absoluteUrl, buildStructuredData, getSeoPage, isPrivateOrNonIndexablePath } from "@/lib/seo";
+import { absoluteUrl, buildStructuredData, getSeoPage, isPrivateOrNonIndexablePath, trimLocalePrefix } from "@/lib/seo";
+import { blogArticleStructuredData, blogCoverImage, blogPostUrl, getBlogPost } from "@/lib/blog";
 
 type HeadElementTag = "meta" | "link" | "script";
 
@@ -21,6 +22,35 @@ export default function SeoHead() {
   const { language } = useWebsiteLanguage();
 
   useEffect(() => {
+    const blogPath = trimLocalePrefix(location).replace(/\/$/, "");
+    const blogSlug = blogPath.match(/^\/blog\/([^/]+)$/)?.[1];
+    const blogPost = blogSlug ? getBlogPost(blogSlug) : null;
+    if (blogPost) {
+      const title = blogPost.title[language];
+      const description = blogPost.description[language];
+      const canonical = blogPostUrl(blogPost, language);
+      document.title = title;
+      document.documentElement.lang = language;
+      ensureHeadElement("meta", 'meta[name="description"]', { name: "description", content: description });
+      ensureHeadElement("meta", 'meta[name="robots"]', { name: "robots", content: "index, follow" });
+      ensureHeadElement("link", 'link[rel="canonical"]', { rel: "canonical", href: canonical });
+      ensureHeadElement("link", 'link[rel="alternate"][hreflang="en"]', { rel: "alternate", hreflang: "en", href: blogPostUrl(blogPost, "en") });
+      ensureHeadElement("link", 'link[rel="alternate"][hreflang="zh-Hant"]', { rel: "alternate", hreflang: "zh-Hant", href: blogPostUrl(blogPost, "zh-Hant") });
+      ensureHeadElement("link", 'link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: blogPostUrl(blogPost, "en") });
+      ensureHeadElement("meta", 'meta[property="og:type"]', { property: "og:type", content: "article" });
+      ensureHeadElement("meta", 'meta[property="og:site_name"]', { property: "og:site_name", content: "Velocity Lab Innovation" });
+      ensureHeadElement("meta", 'meta[property="og:locale"]', { property: "og:locale", content: language === "zh-Hant" ? "zh_HK" : "en_US" });
+      ensureHeadElement("meta", 'meta[property="og:title"]', { property: "og:title", content: title });
+      ensureHeadElement("meta", 'meta[property="og:description"]', { property: "og:description", content: description });
+      ensureHeadElement("meta", 'meta[property="og:url"]', { property: "og:url", content: canonical });
+      ensureHeadElement("meta", 'meta[property="og:image"]', { property: "og:image", content: blogCoverImage(blogPost) });
+      ensureHeadElement("meta", 'meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
+      ensureHeadElement("meta", 'meta[name="twitter:title"]', { name: "twitter:title", content: title });
+      ensureHeadElement("meta", 'meta[name="twitter:description"]', { name: "twitter:description", content: description });
+      ensureHeadElement("meta", 'meta[name="twitter:image"]', { name: "twitter:image", content: blogCoverImage(blogPost) });
+      ensureHeadElement("script", 'script[data-seo-schema="true"]', { type: "application/ld+json", "data-seo-schema": "true" }, JSON.stringify({ "@context": "https://schema.org", "@graph": blogArticleStructuredData(blogPost, language) }));
+      return;
+    }
     const page = getSeoPage(location);
     if (!page || isPrivateOrNonIndexablePath(location)) {
       document.title = "Velocity Lab Innovation";

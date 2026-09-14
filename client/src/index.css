@@ -385,3 +385,25 @@
     transition: none !important;
   }
 }
+
+.blog-prose {
+  color: var(--mist);
+  font-size: 1.08rem;
+  line-height: 1.9;
+}
+.blog-prose > * + * { margin-top: 1.45rem; }
+.blog-prose h1,
+.blog-prose h2,
+.blog-prose h3 { color: var(--paper); font-family: 'Space Grotesk', sans-serif; letter-spacing: -.035em; line-height: 1.08; }
+.blog-prose h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
+.blog-prose h2 { margin-top: 3.25rem; font-size: clamp(1.55rem, 3vw, 2.25rem); }
+.blog-prose h3 { margin-top: 2.25rem; font-size: 1.35rem; }
+.blog-prose p { max-width: 72ch; }
+.blog-prose a { color: var(--signal); text-decoration: underline; text-underline-offset: 4px; }
+.blog-prose strong { color: var(--paper); font-weight: 650; }
+.blog-prose ul,
+.blog-prose ol { padding-left: 1.5rem; }
+.blog-prose li + li { margin-top: .55rem; }
+.blog-prose blockquote { border-left: 2px solid var(--signal); color: var(--paper); padding-left: 1.25rem; font-size: 1.2em; }
+.blog-prose code { border: 1px solid var(--line); background: var(--ink-soft); padding: .15rem .35rem; font-size: .9em; }
+.blog-prose hr { border-color: var(--line); }

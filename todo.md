@@ -6769,3 +6769,13 @@
 - [x] Update the English Join as a partner CTA to explain access to exclusive discounts
 - [x] Add matching Traditional Chinese partner CTA copy
 - [x] Validate and publish the homepage CTA change
+
+## GitHub-managed bilingual blog
+- [x] Add Markdown article content model with English and Traditional Chinese fields, metadata, and cover-image support
+- [x] Add public `/blog/` listing and `/blog/<slug>/` article routes with static prerendering
+- [x] Add per-article title, description, canonical, Open Graph, hreflang, Article, and breadcrumb SEO metadata
+- [x] Add blog entries to the sitemap and validate generated article output
+- [x] Add a GitHub Pages publishing workflow that rebuilds the blog when Markdown content changes
+- [x] Add CMS-ready editing guidance and a clear GitHub-based manual publishing workflow
+- [x] Add at least one bilingual sample article to verify the publishing pipeline
+- [x] Validate, publish, and verify the live blog pages

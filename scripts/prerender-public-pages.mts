@@ -11,6 +11,7 @@ import App from "../client/src/App";
 import { translateReviewedCopy } from "../client/src/components/WebsiteTranslationObserver";
 import type { WebsiteLanguage } from "../client/src/contexts/LanguageContext";
 import { absoluteUrl, buildStructuredData, getSeoPage, localizedPath, publicSeoPages } from "../client/src/lib/seo";
+import { blogArticleStructuredData, blogPostUrl, blogPosts } from "../client/src/lib/blog";
 import { trpc } from "../client/src/lib/trpc";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -124,6 +125,35 @@ function applyNoIndexHead(document: Document) {
   setMeta(document, 'meta[name="robots"]', { name: "robots", content: "noindex, nofollow" });
 }
 
+function applyBlogSeoHead(document: Document, post: (typeof blogPosts)[number], language: WebsiteLanguage) {
+  const title = post.title[language];
+  const description = post.description[language];
+  const canonical = blogPostUrl(post, language);
+  document.documentElement.setAttribute("lang", language);
+  document.title = title;
+  setMeta(document, 'meta[name="description"]', { name: "description", content: description });
+  setMeta(document, 'meta[name="robots"]', { name: "robots", content: "index, follow" });
+  setLink(document, 'link[rel="canonical"]', { rel: "canonical", href: canonical });
+  setLink(document, 'link[rel="alternate"][hreflang="en"]', { rel: "alternate", hreflang: "en", href: blogPostUrl(post, "en") });
+  setLink(document, 'link[rel="alternate"][hreflang="zh-Hant"]', { rel: "alternate", hreflang: "zh-Hant", href: blogPostUrl(post, "zh-Hant") });
+  setLink(document, 'link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", hreflang: "x-default", href: blogPostUrl(post, "en") });
+  setMeta(document, 'meta[property="og:type"]', { property: "og:type", content: "article" });
+  setMeta(document, 'meta[property="og:title"]', { property: "og:title", content: title });
+  setMeta(document, 'meta[property="og:description"]', { property: "og:description", content: description });
+  setMeta(document, 'meta[property="og:url"]', { property: "og:url", content: canonical });
+  setMeta(document, 'meta[property="og:image"]', { property: "og:image", content: post.coverImage });
+  setMeta(document, 'meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
+  setMeta(document, 'meta[name="twitter:title"]', { name: "twitter:title", content: title });
+  setMeta(document, 'meta[name="twitter:description"]', { name: "twitter:description", content: description });
+  setMeta(document, 'meta[name="twitter:image"]', { name: "twitter:image", content: post.coverImage });
+  const schema = document.createElement("script");
+  schema.setAttribute("type", "application/ld+json");
+  schema.setAttribute("data-seo-schema", "true");
+  schema.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": blogArticleStructuredData(post, language) });
+  document.head.querySelector('script[data-seo-schema="true"]')?.remove();
+  document.head.appendChild(schema);
+}
+
 function buildSitemap() {
   const urlEntries = publicSeoPages.flatMap((page) => {
     const variants: WebsiteLanguage[] = ["en", "zh-Hant"];
@@ -132,7 +162,14 @@ function buildSitemap() {
       return `  <url>\n    <loc>${absoluteUrl(page.path, language)}</loc>\n${alternateLinks}\n    <xhtml:link rel="alternate" hreflang="x-default" href="${absoluteUrl(page.path, "en")}" />\n  </url>`;
     });
   });
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urlEntries.join("\n")}\n</urlset>\n`;
+  const blogEntries = blogPosts.flatMap((post) => {
+    const variants: WebsiteLanguage[] = ["en", "zh-Hant"];
+    return variants.map((language) => {
+      const alternateLinks = variants.map((alternateLanguage) => `    <xhtml:link rel="alternate" hreflang="${alternateLanguage}" href="${blogPostUrl(post, alternateLanguage)}" />`).join("\n");
+      return `  <url>\n    <loc>${blogPostUrl(post, language)}</loc>\n${alternateLinks}\n    <xhtml:link rel="alternate" hreflang="x-default" href="${blogPostUrl(post, "en")}" />\n  </url>`;
+    });
+  });
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${[...urlEntries, ...blogEntries].join("\n")}\n</urlset>\n`;
 }
 
 async function writeDocument(destination: string, html: string) {
@@ -178,6 +215,23 @@ async function prerenderPublicPages() {
     }
   }
 
+  for (const post of blogPosts) {
+    for (const language of ["en", "zh-Hant"] as const) {
+      const { document } = parseHTML(template);
+      const route = `/blog/${post.slug}`;
+      const root = document.getElementById("root");
+      if (!root) throw new Error("Static build is missing the #root element");
+      root.innerHTML = createStaticApp(route, language);
+      root.setAttribute("data-seo-prerendered", "true");
+      translateStaticTree(root, language);
+      localizeStaticLinks(document, language);
+      applyBlogSeoHead(document, post, language);
+      const outputPath = language === "en"
+        ? path.join(outputRoot, "blog", post.slug, "index.html")
+        : path.join(outputRoot, "zh-hant", "blog", post.slug, "index.html");
+      await writeDocument(outputPath, document.toString());
+    }
+  }
   for (const alias of staticAliases) {
     for (const language of ["en", "zh-Hant"] as const) {
       await writeStaticAlias(template, alias.alias, alias.source, language);
