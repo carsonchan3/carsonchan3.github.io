@@ -6787,3 +6787,11 @@
 - [x] Add GitHub editing guidance and a direct product-content publishing link
 - [x] Add regression tests and static SEO/build validation for Markdown product content
 - [x] Validate and publish the product description workflow
+
+## Full product detail Markdown editing
+- [x] Audit premium and generic product detail fields and their bilingual translation dependencies
+- [x] Extend product Markdown schema to cover product briefs, package tiers, VLI Certified Edition copy, features, specifications, in-the-box contents, and care information
+- [x] Connect generated Markdown detail content to premium and generic product dialogs without changing protected pricing, images, IDs, or quote behavior
+- [x] Update product Markdown files and authoring documentation with the full schema
+- [x] Add regression tests and validate English/Traditional Chinese desktop and mobile product details
+- [x] Publish the expanded full-detail product Markdown workflow

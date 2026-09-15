@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Box, Check, Gauge, ShieldCheck, ShoppingCart, Wrench } from "lucide-react";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
+import { getEditablePremiumProductContent } from "@/lib/productContent";
 import { useEffect, useMemo, useState } from "react";
 
 export type ProductVariant = {
@@ -34,13 +35,13 @@ type ProductDetailDialogProps = {
 };
 
 export type PremiumTier = "builder" | "certified" | "travel";
-type PremiumTierContent = {
+export type PremiumTierContent = {
   label: string;
   subtitle: string;
   match: RegExp;
   features: readonly string[];
 };
-type PremiumProductContent = {
+export type PremiumProductContent = {
   testId: string;
   title: string;
   pitch: string;
@@ -50,6 +51,8 @@ type PremiumProductContent = {
   specifications: readonly (readonly [string, string])[];
   inTheBox: readonly string[];
   certifiedCare?: boolean;
+  careTitle?: string;
+  careDescription?: string;
 };
 
 export function getPremiumVariant(product: ProductDetail, tier: PremiumTier, content: PremiumProductContent) {
@@ -257,6 +260,8 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
   const translate = (value: string) => isChinese ? traditionalChineseTranslations[value] ?? value : value;
   const tier = content.tiers[selectedTier] ?? content.tiers[content.defaultTier]!;
   const certified = selectedTier === "certified" && content.certifiedCare;
+  const careTitle = content.careTitle ?? "Includes 1-Year VLI CARE";
+  const careDescription = content.careDescription ?? "Coverage for heavy collision damage, water damage, and rapid replacements.";
 
   return (
     <div data-testid={content.testId} className="space-y-7">
@@ -295,7 +300,7 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
             <div className="flex items-start gap-3"><div className="mt-0.5 rounded-full bg-accent/15 p-2 text-accent"><Wrench size={16} /></div><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/45">{translate(tier.label)}</p><p className="mt-2 text-sm leading-6 text-white/75">{translate(tier.subtitle)}</p><ul className="mt-3 space-y-2">{tier.features.map((feature) => <li key={feature} className="flex gap-2 text-xs leading-5 text-white/65"><Check size={15} className="mt-0.5 shrink-0 text-accent" />{translate(feature)}</li>)}</ul></div></div>
           </div>
 
-          {certified ? <div data-testid={`${content.testId}-vli-care-badge`} className="mt-4 flex items-center gap-3 rounded-2xl border border-accent/35 bg-accent/10 p-4 text-accent"><ShieldCheck size={24} className="shrink-0" /><div><p className="text-sm font-bold">{translate("Includes 1-Year VLI CARE")}</p><p className="mt-1 text-xs leading-5 text-white/65">{translate("Coverage for heavy collision damage, water damage, and rapid replacements.")}</p></div></div> : null}
+          {certified ? <div data-testid={`${content.testId}-vli-care-badge`} className="mt-4 flex items-center gap-3 rounded-2xl border border-accent/35 bg-accent/10 p-4 text-accent"><ShieldCheck size={24} className="shrink-0" /><div><p className="text-sm font-bold">{translate(careTitle)}</p><p className="mt-1 text-xs leading-5 text-white/65">{translate(careDescription)}</p></div></div> : null}
 
           <Button type="button" data-testid="product-detail-add-to-quote" onClick={() => onAddToCart(selectedVariant, product)} className="mt-5 h-12 w-full rounded-full bg-accent font-semibold text-black hover:opacity-90"><ShoppingCart className="mr-2 size-4" />{translate("Add to Quote")}</Button>
           <p className="mt-3 text-center text-xs leading-5 text-white/45">{translate("Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.")}</p>
@@ -311,9 +316,10 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
 }
 
 export default function ProductDetailDialog({ product, onOpenChange, onAddToCart }: ProductDetailDialogProps) {
+  const { language } = useWebsiteLanguage();
   const [selectedVariantId, setSelectedVariantId] = useState("");
   const [selectedPremiumTier, setSelectedPremiumTier] = useState<PremiumTier>("certified");
-  const premiumContent = product ? premiumProductContent[product.familyId] : undefined;
+  const premiumContent = product ? getEditablePremiumProductContent(product.familyId, language, premiumProductContent[product.familyId]) : undefined;
 
   useEffect(() => {
     setSelectedPremiumTier(premiumContent?.defaultTier ?? "certified");

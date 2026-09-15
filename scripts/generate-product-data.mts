@@ -6,21 +6,70 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 const contentRoot = path.join(projectRoot, "content", "products");
 const outputPath = path.join(projectRoot, "client", "src", "lib", "productContent.generated.ts");
 
+type Language = "en" | "zh-Hant";
+type Detail = {
+  platformLabel: string;
+  premiumTitle: string;
+  careTitle: string;
+  careDescription: string;
+  tiers: Record<string, { label: string; subtitle: string; features: string[] }>;
+  specifications: Array<[string, string]>;
+  inTheBox: string[];
+};
 type ProductContent = {
   familyId: string;
   title: { en: string; "zh-Hant": string };
   description: { en: string; "zh-Hant": string };
+  detail?: { en: Detail; "zh-Hant": Detail };
 };
+
+function parseKeyValue(lines: string[]) {
+  const values: Record<string, string> = {};
+  for (const line of lines) {
+    const separator = line.indexOf(":");
+    if (separator === -1) continue;
+    values[line.slice(0, separator).trim()] = line.slice(separator + 1).trim();
+  }
+  return values;
+}
+
+function parseDetail(source: string, language: Language): Detail | undefined {
+  const marker = new RegExp(`<!--\\s*detail:${language}\\s*-->\\s*([\\s\\S]*?)(?=<!--\\s*detail:|$)`).exec(source);
+  if (!marker) return undefined;
+  const values = parseKeyValue(marker[1].trim().split("\n"));
+  const required = ["platformLabel", "premiumTitle", "careTitle", "careDescription", "specifications", "inTheBox"];
+  for (const key of required) {
+    if (values[key] === undefined) throw new Error(`Product detail ${language} is missing ${key}`);
+  }
+  const tiers: Detail["tiers"] = {};
+  for (const [key, value] of Object.entries(values)) {
+    const match = /^tier\.([^.]+)\.(label|subtitle|features)$/.exec(key);
+    if (!match) continue;
+    const [, tier, field] = match;
+    tiers[tier] ??= { label: "", subtitle: "", features: [] };
+    if (field === "features") tiers[tier].features = value.split(" || ").map((item) => item.trim()).filter(Boolean);
+    else tiers[tier][field] = value;
+  }
+  const specifications = values.specifications.split(" || ").map((item) => {
+    const separator = item.indexOf(" | ");
+    if (separator === -1) throw new Error(`Product detail ${language} has an invalid specification: ${item}`);
+    return [item.slice(0, separator).trim(), item.slice(separator + 3).trim()] as [string, string];
+  });
+  return {
+    platformLabel: values.platformLabel,
+    premiumTitle: values.premiumTitle,
+    careTitle: values.careTitle,
+    careDescription: values.careDescription,
+    tiers,
+    specifications,
+    inTheBox: values.inTheBox.split(" || ").map((item) => item.trim()).filter(Boolean),
+  };
+}
 
 function parseProduct(source: string): ProductContent {
   const match = source.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) throw new Error("Product Markdown is missing frontmatter");
-  const metadata: Record<string, string> = {};
-  for (const line of match[1].split("\n")) {
-    const separator = line.indexOf(":");
-    if (separator === -1) continue;
-    metadata[line.slice(0, separator).trim()] = line.slice(separator + 1).trim();
-  }
+  const metadata = parseKeyValue(match[1].split("\n"));
   const required = ["familyId", "title.en", "title.zh-Hant", "description.en", "description.zh-Hant"];
   for (const key of required) {
     if (!metadata[key]) throw new Error(`Product Markdown is missing ${key}`);
@@ -28,16 +77,20 @@ function parseProduct(source: string): ProductContent {
   const sections = match[2].split(/^<!--\s*locale:(en|zh-Hant)\s*-->\s*$/m);
   const body = { en: "", "zh-Hant": "" };
   for (let index = 1; index < sections.length; index += 2) {
-    const language = sections[index] as "en" | "zh-Hant";
-    body[language] = sections[index + 1].trim();
+    const language = sections[index] as Language;
+    body[language] = sections[index + 1].split(/<!--\s*detail:/, 1)[0].trim();
   }
   if (body.en !== metadata["description.en"] || body["zh-Hant"] !== metadata["description.zh-Hant"]) {
     throw new Error(`Product ${metadata.familyId} body must match its description metadata`);
   }
+  const detailEn = parseDetail(match[2], "en");
+  const detailZh = parseDetail(match[2], "zh-Hant");
+  if (Boolean(detailEn) !== Boolean(detailZh)) throw new Error(`Product ${metadata.familyId} must provide detail blocks for both languages`);
   return {
     familyId: metadata.familyId,
     title: { en: metadata["title.en"], "zh-Hant": metadata["title.zh-Hant"] },
     description: { en: metadata["description.en"], "zh-Hant": metadata["description.zh-Hant"] },
+    detail: detailEn && detailZh ? { en: detailEn, "zh-Hant": detailZh } : undefined,
   };
 }
 
@@ -45,5 +98,5 @@ const filenames = (await readdir(contentRoot)).filter((filename) => filename.end
 const products = (await Promise.all(filenames.map(async (filename) => parseProduct(await readFile(path.join(contentRoot, filename), "utf8")))))
   .sort((a, b) => a.familyId.localeCompare(b.familyId));
 
-await writeFile(outputPath, `// Generated by scripts/generate-product-data.mts. Edit Markdown files under content/products instead.\nexport const productContent = ${JSON.stringify(products, null, 2)} as const;\n`, "utf8");
+await writeFile(outputPath, `// Generated by scripts/generate-product-data.mts. Edit Markdown files under content/products instead.\nexport type ProductDetailContentRecord = {\n  familyId: string;\n  title: { en: string; "zh-Hant": string };\n  description: { en: string; "zh-Hant": string };\n  detail?: {\n    en: { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };\n    "zh-Hant": { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };\n  };\n};\nexport const productContent: readonly ProductDetailContentRecord[] = ${JSON.stringify(products, null, 2)};\n`, "utf8");
 console.log(`Generated ${products.length} product content record(s).`);
