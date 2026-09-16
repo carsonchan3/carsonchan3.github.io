@@ -34,7 +34,7 @@ export const peopleContent: Record<WebsiteLanguage, PeoplePageContent> = {
       {
         name: "Carson Chan",
         role: "Co-Founder · Systems & Drone Operations",
-        image: "/manus-storage/CarsonChan_2ddbd847.png",
+        image: "/media/CarsonChan_2ddbd847.png",
         alt: "Carson Chan at a drone sports event",
         introduction: "Carson brings together electrical and mechanical design, drone operations, and competition experience to help turn technical systems into practical event delivery.",
         specialties: ["UAV systems", "Electrical design", "Mechanical design", "Drone operations"],
@@ -65,7 +65,7 @@ export const peopleContent: Record<WebsiteLanguage, PeoplePageContent> = {
       {
         name: "Carson Chan",
         role: "共同創辦人 · 系統與無人機營運",
-        image: "/manus-storage/CarsonChan_2ddbd847.png",
+        image: "/media/CarsonChan_2ddbd847.png",
         alt: "Carson Chan 於無人機運動賽事",
         introduction: "Carson 結合電子與機械設計、無人機營運及賽事經驗，協助把技術系統轉化為可實際執行的賽事交付。",
         specialties: ["無人機系統", "電子設計", "機械設計", "無人機營運"],

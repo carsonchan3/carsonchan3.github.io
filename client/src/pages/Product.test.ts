@@ -103,7 +103,7 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeMedia.decisionDataBackground).toBe("/manus-storage/precision-referee-console_516e698b.webp");
     expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
     expect(smartRefereeMedia.stickers).toBe("/manus-storage/cheapstickers_6b71bf1e.jpg");
-    expect(smartRefereeMedia.precisionPoster).toBe("/manus-storage/flex13camerasys_aa73a4e5.jpg");
+    expect(smartRefereeMedia.precisionPoster).toBe("/media/flex13camerasys_aa73a4e5.jpg");
     expect(smartRefereeMedia.precisionVideo).toBe("/manus-storage/v2fulluncompressed_1dc97341.mp4");
     expect(smartRefereeMedia.continuousCalibrationVideo).toBe("/manus-storage/cont-calibration_a6322d41.mp4");
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");

@@ -3,7 +3,7 @@ import { headerLogoSrc, mobileHeaderLogoScale, mobileHeaderLogoScaleClass } from
 
 describe("Velocity Lab Innovation brand assets", () => {
   it("uses the supplied white-and-turquoise logo for website headers", () => {
-    expect(headerLogoSrc).toBe("/manus-storage/velocity-lab-innovation-header-logo-white_90e0b256.png");
+    expect(headerLogoSrc).toBe("/media/velocity-lab-innovation-header-logo-white_90e0b256.png");
   });
 
   it("keeps desktop logo sizing unchanged while scaling the header logo to 90 percent on mobile", () => {

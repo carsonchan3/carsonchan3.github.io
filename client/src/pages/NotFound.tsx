@@ -7,7 +7,7 @@ export default function NotFound() {
         <div className="container flex h-16 items-center justify-between">
           <a href="/" className="flex items-center transition-opacity hover:opacity-75" aria-label="Back to Velocity Lab Innovation home">
             <img
-              src="/manus-storage/vli_logo_with_text_bb6773ef.png"
+              src="/media/vli_logo_with_text_bb6773ef.png"
               alt="Velocity Lab Innovation"
               className="vli-brand-logo"
             />

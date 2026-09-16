@@ -7,6 +7,6 @@ describe("homepage hero media", () => {
   });
 
   it("uses the first video frame as the hero loading poster", () => {
-    expect(homepageHeroVideoPosterSrc).toBe("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg");
+    expect(homepageHeroVideoPosterSrc).toBe("/media/vli-hero-video-first-frame_6e981c30.jpg");
   });
 });

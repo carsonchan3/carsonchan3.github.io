@@ -2,7 +2,7 @@
 slug: reviewable-drone-sports-decisions
 publishedAt: 2026-09-13
 author: Velocity Lab Innovation
-coverImage: /manus-storage/vli-hero-video-first-frame_6e981c30.jpg
+coverImage: /media/vli-hero-video-first-frame_6e981c30.jpg
 title.en: Why Reviewable Decisions Matter in Drone Sports
 title.zh-Hant: 為何可覆核判決對無人機運動至關重要
 description.en: A practical guide for organisers who want faster, more consistent, and more reviewable drone-sports decisions.

@@ -31,11 +31,11 @@ describe("Services thumbnail data", () => {
   it("maps every service option to the supplied real-world media", () => {
     const mappedServices = serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }));
     expect(mappedServices).toEqual([
-      { title: "Drone Repair Service", thumbnail: "/manus-storage/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Drone Repair Service", thumbnail: "/media/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "PID tuning service", thumbnail: "/manus-storage/pidtuningthumb_fcb394b2.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Drone Building Course / Coaching Sessions", thumbnail: "/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg", mediaSource: "user-supplied-real-world-photo" },
       { title: "Advanced drone course for adults", thumbnail: "/manus-storage/advancedronecourseforadultthumb_193b4cb1.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "Drone Photo / Cinematography", thumbnail: "/manus-storage/dronecinematography_894d41bd.jpeg", mediaSource: "user-supplied-real-world-photo" },
+      { title: "Drone Photo / Cinematography", thumbnail: "/media/dronecinematography_894d41bd.jpeg", mediaSource: "user-supplied-real-world-photo" },
     ]);
     expect(new Set(mappedServices.map((service) => service.thumbnail)).size).toBe(serviceBanners.length);
   });
@@ -60,7 +60,7 @@ describe("Services thumbnail data", () => {
   it("uses the supplied photo for the Drone Photo / Cinematography scope", () => {
     const droneServices = serviceBanners.find((service) => service.title === "Drone Photo / Cinematography");
     expect(droneServices?.description).toBe("Plan and capture professional drone photography and video for events, facilities, campaigns, and technical storytelling.");
-    expect(droneServices?.thumbnail).toBe("/manus-storage/dronecinematography_894d41bd.jpeg");
+    expect(droneServices?.thumbnail).toBe("/media/dronecinematography_894d41bd.jpeg");
   });
 
   it("prioritizes a mail-in repair assessment and conditional delivery-fee waiver", () => {

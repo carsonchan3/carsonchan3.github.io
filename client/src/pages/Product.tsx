@@ -284,7 +284,7 @@ export const smartRefereeMedia = {
   decisionDataBackground: "/manus-storage/precision-referee-console_516e698b.webp",
   humanReferee: "/manus-storage/referee-angle_083e0bbc.webp",
   stickers: "/manus-storage/cheapstickers_6b71bf1e.jpg",
-  precisionPoster: "/manus-storage/flex13camerasys_aa73a4e5.jpg",
+  precisionPoster: "/media/flex13camerasys_aa73a4e5.jpg",
   precisionVideo: "/manus-storage/v2fulluncompressed_1dc97341.mp4",
   continuousCalibrationVideo: "/manus-storage/cont-calibration_a6322d41.mp4",
   trackingVideo: "/manus-storage/vli-tracking-test-video_f82aa6d7.mp4",

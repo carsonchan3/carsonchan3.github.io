@@ -46,7 +46,7 @@ for (const viewport of viewports) {
         partnerHeight,
         viewportHeight,
         partnerAfterVideo: Boolean(video && partners && video.compareDocumentPosition(partners) & Node.DOCUMENT_POSITION_FOLLOWING),
-        faviconConfigured: faviconHref === "/manus-storage/vli-favicon_a7bf92f0.webp",
+        faviconConfigured: faviconHref === "/media/vli-favicon_a7bf92f0.webp",
         standardHeadingHierarchy: partners?.querySelector("h2")?.textContent?.trim() === "Partners & Supporting Organizations" && bodyText.includes("Together, we are advancing fair, data-driven competition"),
         cardRatios,
         squareLogoPanels: cardRatios.length === 3 && cardRatios.every((cardRatio) => Math.abs(cardRatio - 1) <= 0.02),

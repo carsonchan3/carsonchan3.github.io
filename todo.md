@@ -6795,3 +6795,14 @@
 - [x] Update product Markdown files and authoring documentation with the full schema
 - [x] Add regression tests and validate English/Traditional Chinese desktop and mobile product details
 - [x] Publish the expanded full-detail product Markdown workflow
+
+## GitHub-hosted reusable media
+- [x] Migrate high-reuse logo, favicon, hero poster, offering, service, and social image assets into the repository media directory
+- [x] Publish repository media through the GitHub Pages build and update selected source references to `/media/` paths
+- [x] Validate selected media on English and Traditional Chinese routes, including generated SEO metadata and direct asset loading
+- [ ] Publish the media migration and document which large or dynamic assets remain on managed storage
+
+## Publish repository-media migration
+- [ ] Commit and push the validated repository-media migration to carsonchan3/carsonchan3.github.io
+- [ ] Verify the GitHub Pages workflow completes successfully
+- [ ] Verify the live custom-domain homepage and selected `/media/` asset URLs

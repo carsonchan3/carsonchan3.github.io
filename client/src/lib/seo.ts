@@ -20,7 +20,7 @@ export type PublicSeoPage = {
 };
 
 const managedMediaOrigin = "https://velolab-gkpolzge.manus.space";
-export const managedMediaUrl = (path: string) => `${managedMediaOrigin}${path}`;
+export const managedMediaUrl = (path: string) => path.startsWith("/media/") ? absoluteUrl(path) : `${managedMediaOrigin}${path}`;
 
 export const publicSeoPages: PublicSeoPage[] = [
   {
@@ -37,7 +37,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Home",
-    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["organization", "website"],
   },
   {
@@ -54,7 +54,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Smart Referee",
-    socialImage: managedMediaUrl("/manus-storage/flex13camerasys_aa73a4e5.jpg"),
+    socialImage: managedMediaUrl("/media/flex13camerasys_aa73a4e5.jpg"),
     schemas: ["breadcrumb", "service", "video"],
   },
   {
@@ -71,7 +71,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Products",
-    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["breadcrumb"],
   },
   {
@@ -88,7 +88,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Services",
-    socialImage: managedMediaUrl("/manus-storage/dronerepairthumb_ad988635.jpeg"),
+    socialImage: managedMediaUrl("/media/dronerepairthumb_ad988635.jpeg"),
     schemas: ["breadcrumb", "service"],
   },
   {
@@ -105,7 +105,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Blog",
-    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["breadcrumb"],
   },
   {
@@ -122,7 +122,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Use Cases",
-    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["breadcrumb"],
   },
   {
@@ -139,7 +139,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "About VLI",
-    socialImage: managedMediaUrl("/manus-storage/CarsonChan_2ddbd847.png"),
+    socialImage: managedMediaUrl("/media/CarsonChan_2ddbd847.png"),
     schemas: ["breadcrumb"],
   },
   {
@@ -156,7 +156,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Contact",
-    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["breadcrumb"],
   },
   {
@@ -173,7 +173,7 @@ export const publicSeoPages: PublicSeoPage[] = [
       },
     },
     breadcrumb: "Privacy Notice",
-    socialImage: managedMediaUrl("/manus-storage/vli-hero-video-first-frame_6e981c30.jpg"),
+    socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["breadcrumb"],
   },
 ];
@@ -226,7 +226,7 @@ export function buildStructuredData(page: PublicSeoPage, language: WebsiteLangua
       name: "Velocity Lab Innovation",
       alternateName: "VLI",
       url: siteOrigin,
-      logo: managedMediaUrl("/manus-storage/vli_logo_with_text_bb6773ef.png"),
+      logo: managedMediaUrl("/media/vli_logo_with_text_bb6773ef.png"),
       email: "info@velocity-lab.com",
       address: { "@type": "PostalAddress", addressLocality: "Hong Kong", addressCountry: "HK" },
     });
@@ -280,7 +280,7 @@ export function buildStructuredData(page: PublicSeoPage, language: WebsiteLangua
       "@type": "VideoObject",
       name: language === "zh-Hant" ? "無人機運動裁判簡介影片" : "Drone Sports Referee Pitch",
       description: language === "zh-Hant" ? "為主辦方、裁判及執行團隊提供的 Smart Referee 工作流程重點概覽。" : "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.",
-      thumbnailUrl: managedMediaUrl("/manus-storage/flex13camerasys_aa73a4e5.jpg"),
+      thumbnailUrl: managedMediaUrl("/media/flex13camerasys_aa73a4e5.jpg"),
       uploadDate: "2026-08-24T12:26:38+00:00",
       contentUrl: managedMediaUrl("/manus-storage/v2fulluncompressed_1dc97341.mp4"),
       embedUrl: canonicalUrl,
