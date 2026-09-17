@@ -12,8 +12,8 @@ Every price shown on velocity-lab.com is set in this file.
 
 | ID | Product | Version | Price |
 | --- | --- | --- | --- |
-| 25 | TOPS Shield 205 | RTF | HK$4,329 |
-| 26 | TOPS Shield 205 | PNP | HK$2,743 |
+| 25 | TOPS Shield 205 | RTF-VLI | HK$4,329 |
+| 26 | TOPS Shield 205 | RTF | HK$2,750 |
 | 27 | TOPS Shield 220 | RTF | HK$3,718 |
 | 28 | TOPS Shield 220 | RTF + Bag | HK$4,056 |
 | 29 | TOPS Shield 220 | PNP | HK$2,743 |
