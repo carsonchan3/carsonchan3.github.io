@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { detailedServicePricingSheet, mobileServiceCardAspectRatio, publicServiceCatalogueSource, resolvedServiceCatalogueRevealPolicy, serviceBanners, serviceImageClassName, serviceImagePanelClassName, servicesHeroPresentation } from "./Services";
+import { detailedServicePricingSheet, mobileServiceCardAspectRatio, publicServiceCatalogueSource, serviceBanners, serviceCardInteraction, serviceImageClassName, serviceImagePanelClassName, servicesHeroPresentation } from "./Services";
+import { renderServiceMarkdown, serviceContent } from "@/lib/serviceContent";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
 
-describe("Services thumbnail data", () => {
+describe("Markdown-managed services", () => {
   it("keeps the Services hero focused by removing the introductory paragraph", () => {
     expect(servicesHeroPresentation).toEqual({ introductoryParagraph: "removed" });
   });
@@ -12,8 +13,6 @@ describe("Services thumbnail data", () => {
     expect(traditionalChineseTranslations["Build skill."]).toBe("培養技能，");
     expect(traditionalChineseTranslations["Fly with purpose."]).toBe("自由翱翔前往您的目標。");
     expect(traditionalChineseTranslations["Not sure which service is right?"]).toBe("需要定制服務？");
-    expect(traditionalChineseTranslations["Drone Building Course / Coaching Sessions"]).toBe("無人機組裝課程／指導課程");
-    expect(traditionalChineseTranslations["Drone Photo / Cinematography"]).toBe("無人機攝影／航拍製作");
     expect(traditionalChineseTranslations["Detailed service pricing"]).toBe("詳細服務價目表");
   });
 
@@ -28,26 +27,8 @@ describe("Services thumbnail data", () => {
     });
   });
 
-  it("maps every service option to the supplied real-world media", () => {
-    const mappedServices = serviceBanners.map((service) => ({ title: service.title, thumbnail: service.thumbnail, mediaSource: service.mediaSource }));
-    expect(mappedServices).toEqual([
-      { title: "Drone Repair Service", thumbnail: "/media/dronerepairthumb_ad988635.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "PID tuning service", thumbnail: "/manus-storage/pidtuningthumb_fcb394b2.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "Drone Building Course / Coaching Sessions", thumbnail: "/manus-storage/Competition-readydecisionlayerthumb_b7c645e2.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "Advanced drone course for adults", thumbnail: "/manus-storage/advancedronecourseforadultthumb_193b4cb1.jpeg", mediaSource: "user-supplied-real-world-photo" },
-      { title: "Drone Photo / Cinematography", thumbnail: "/media/dronecinematography_894d41bd.jpeg", mediaSource: "user-supplied-real-world-photo" },
-    ]);
-    expect(new Set(mappedServices.map((service) => service.thumbnail)).size).toBe(serviceBanners.length);
-  });
-
-
-  it("provides duration and scope-based pricing guidance for every service", () => {
-    expect(serviceBanners.every((service) => service.duration.length > 20 && service.pricing.length > 20)).toBe(true);
-    expect(serviceBanners.every((service) => /quoted|quotation/i.test(service.pricing))).toBe(true);
-    expect(serviceBanners.some((service) => /HK\$|\$\d/.test(service.pricing))).toBe(false);
-  });
-
-  it("uses the service titles as valid persisted service-enquiry selections", () => {
+  it("loads services from content/services in order, with the same enquiry titles as before", () => {
+    expect(publicServiceCatalogueSource).toBe("markdown-content-services");
     expect(serviceBanners.map((service) => service.title)).toEqual([
       "Drone Repair Service",
       "PID tuning service",
@@ -55,21 +36,32 @@ describe("Services thumbnail data", () => {
       "Advanced drone course for adults",
       "Drone Photo / Cinematography",
     ]);
+    expect(serviceBanners.map((service) => service.number)).toEqual(["01", "02", "03", "04", "05"]);
+    expect(new Set(serviceBanners.map((service) => service.thumbnail)).size).toBe(serviceBanners.length);
   });
 
-  it("uses the supplied photo for the Drone Photo / Cinematography scope", () => {
-    const droneServices = serviceBanners.find((service) => service.title === "Drone Photo / Cinematography");
-    expect(droneServices?.description).toBe("Plan and capture professional drone photography and video for events, facilities, campaigns, and technical storytelling.");
-    expect(droneServices?.thumbnail).toBe("/media/dronecinematography_894d41bd.jpeg");
+  it("provides bilingual summary, dropdown description, and guidance for every service", () => {
+    for (const service of serviceContent) {
+      for (const language of ["en", "zh-Hant"] as const) {
+        expect(service.title[language].length).toBeGreaterThan(0);
+        expect(service.summary[language].length).toBeGreaterThan(20);
+        expect(service.body[language].length).toBeGreaterThan(10);
+      }
+      expect(service.summary["zh-Hant"]).toMatch(/[㐀-鿿]/);
+      expect(service.body["zh-Hant"]).toMatch(/[㐀-鿿]/);
+    }
+    expect(serviceContent.every((service) => /quoted|quotation/i.test(service.pricing.en))).toBe(true);
   });
 
-  it("prioritizes a mail-in repair assessment and conditional delivery-fee waiver", () => {
-    const repairService = serviceBanners[0];
+  it("uses the repair intake form only for the repair service", () => {
+    expect(serviceBanners.filter((service) => service.enquiryForm === "repair").map((service) => service.title)).toEqual(["Drone Repair Service"]);
+    expect(serviceBanners[0].record.summary.en).toMatch(/mail in/i);
+    expect(serviceBanners[0].record.pricing.en).toMatch(/delivery fees can be waived/i);
+  });
 
-    expect(repairService?.title).toBe("Drone Repair Service");
-    expect(repairService?.description).toMatch(/mail in/i);
-    expect(repairService?.pricing).toMatch(/quotation.*first/i);
-    expect(repairService?.pricing).toMatch(/delivery fees can be waived/i);
+  it("toggles a Markdown description when a service card is clicked", () => {
+    expect(serviceCardInteraction).toBe("click-toggles-markdown-description");
+    expect(renderServiceMarkdown("Hello **team**")).toContain("<strong>team</strong>");
   });
 
   it("uses one fixed responsive crop treatment for every service image panel", () => {
@@ -82,10 +74,5 @@ describe("Services thumbnail data", () => {
 
   it("uses a square mobile format for service cards", () => {
     expect(mobileServiceCardAspectRatio).toBe("1:1");
-  });
-
-  it("keeps asynchronously loaded service records visible after desktop reveal setup", () => {
-    expect(publicServiceCatalogueSource).toBe("versioned-static-catalogue");
-    expect(resolvedServiceCatalogueRevealPolicy).toBe("show-static-results-immediately");
   });
 });

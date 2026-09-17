@@ -11,6 +11,8 @@ import { isStaticEnquiryHost, submitStaticEnquiry } from "@/lib/staticEnquiry";
 
 type ServiceEnquiryDialogProps = {
   service: string | null;
+  /** "repair" shows the repair intake checklist; set with enquiryForm in content/services. */
+  enquiryForm?: "repair" | "general";
   onOpenChange: (open: boolean) => void;
 };
 
@@ -28,14 +30,14 @@ const initialFormData = {
   website: "",
 };
 
-export default function ServiceEnquiryDialog({ service, onOpenChange }: ServiceEnquiryDialogProps) {
+export default function ServiceEnquiryDialog({ service, enquiryForm, onOpenChange }: ServiceEnquiryDialogProps) {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState("");
   const [turnstileResetKey, setTurnstileResetKey] = useState(0);
   const contactMutation = trpc.contact.submit.useMutation();
   const isOpen = Boolean(service);
-  const isRepairService = service === "Drone Repair Service";
+  const isRepairService = enquiryForm ? enquiryForm === "repair" : service === "Drone Repair Service";
   const usesStaticEnquiries = isStaticEnquiryHost();
 
   useEffect(() => {

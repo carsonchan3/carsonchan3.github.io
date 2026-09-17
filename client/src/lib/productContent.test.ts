@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { productContent } from "./productContent.generated";
-import { getProductContent } from "./productContent";
+import { getPremiumProductContent, getProductContent } from "./productContent";
 import { productFamilies } from "@/pages/Equipment";
 
 describe("Markdown-managed product content", () => {
@@ -10,7 +10,8 @@ describe("Markdown-managed product content", () => {
       const content = getProductContent(family.familyId);
       expect(content).toBeDefined();
       expect(content?.description.en.length).toBeGreaterThan(20);
-      expect(content?.description["zh-Hant"]).toMatch(/[\u3400-\u9fff]/);
+      expect(content?.description["zh-Hant"]).toMatch(/[㐀-鿿]/);
+      expect(content?.variants.length).toBeGreaterThan(0);
     }
   });
 
@@ -27,11 +28,17 @@ describe("Markdown-managed product content", () => {
     }
   });
 
-  it("keeps stable family identifiers and does not encode pricing or media in Markdown content", () => {
+  it("keeps stable family and variant identifiers", () => {
     expect(new Set(productContent.map((item) => item.familyId)).size).toBe(productContent.length);
-    for (const item of productContent) {
-      expect(JSON.stringify(item)).not.toMatch(/HK\$/);
-      expect(JSON.stringify(item)).not.toMatch(/manus-storage/);
-    }
+    const variantIds = productContent.flatMap((item) => item.variants.map((variant) => variant.id));
+    expect(new Set(variantIds).size).toBe(variantIds.length);
+  });
+
+  it("maps every premium tier to a Markdown variant and keeps VLI CARE off R220F", () => {
+    const shield220 = getPremiumProductContent("tops-shield-220", "en");
+    expect(Object.keys(shield220?.tiers ?? {})).toEqual(["certified", "travel", "builder"]);
+    expect(shield220?.careTiers).toEqual(["certified"]);
+    expect(getPremiumProductContent("r220f", "en")?.careTiers).toEqual([]);
+    expect(getPremiumProductContent("d6-pro", "en")).toBeUndefined();
   });
 });

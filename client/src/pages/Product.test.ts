@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { continuousCalibrationVideoPresentation, eventScaleEvidencePanelPresentation, eventScaleFeatureTilePresentation, eventScaleTileDetailInteraction, eventScopePlanningInputs, eventWorkflowSteps, flex13SystemVideoPresentation, formatOrganiserImpactMetric, mobileSmartRefereeCardAspectRatio, mobileSmartRefereeRevealPolicy, organiserImpactDetail, organiserImpactMetricAnimation, organiserImpactOutcomeIconPresentation, organiserOutcomeCards, organiserOutcomesIntroduction, proofPoints, smartRefereeContextNavigation, smartRefereeDecisionRail, smartRefereeFullDarkThemePresentation, smartRefereeHeroBackgroundPresentation, smartRefereeHeroVideoPresentation, smartRefereeIconSystemPresentation, smartRefereeMedia, smartRefereePageHierarchy, smartRefereeReferenceFormatPresentation, smartRefereeVisualStoryPresentation, technicalConfidence, technicalSpecificationPresentation, traditionalChinesePromisePresentation } from "./Product";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
-import { getPremiumVariant, getShield205Variant, premiumProductContent, shield205Content } from "@/components/ProductDetailDialog";
+import { getPremiumVariant } from "@/components/ProductDetailDialog";
+import { getPremiumProductContent } from "@/lib/productContent";
+import { productFamilies } from "./Equipment";
 
 describe("Smart Referee organiser-first journey", () => {
   it("leads with one organiser promise followed by three tangible outcomes", () => {
@@ -109,54 +111,34 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
   });
 
-  it("defines the premium TOPS Shield 205 product experience without checkout language", () => {
-    expect(shield205Content.title).toBe("TOPS Shield 205: The Agile Striker");
-    expect(shield205Content.pitch).toContain("high-intensity drone sports");
-    expect(shield205Content.tiers.certified.label).toBe("VLI Certified Edition");
-    expect(shield205Content.tiers.certified.features).toContain("Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements.");
-    expect(shield205Content.tiers.builder.features).toContain("Factory default settings (requires manual PID tuning).");
-    expect(shield205Content.specifications).toHaveLength(5);
-    expect(shield205Content.inTheBox).toContain("1x Custom VLI Transport Bag");
-    expect(shield205Content.inTheBox).not.toContain("1x VLI CARE Activation Code");
+  it("defines the premium TOPS Shield 205 product experience from Markdown without checkout language", () => {
+    const shield205 = getPremiumProductContent("tops-shield-205", "en");
+    expect(shield205?.title).toBe("TOPS Shield 205: The Agile Striker");
+    expect(shield205?.pitch).toContain("high-intensity drone sports");
+    expect(shield205?.tiers.certified.label).toBe("VLI Certified Edition");
+    expect(shield205?.tiers.certified.features).toContain("Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements.");
+    expect(shield205?.tiers.builder.features).toContain("Factory default settings (requires manual PID tuning).");
+    expect(shield205?.specifications).toHaveLength(5);
+    expect(shield205?.inTheBox).toContain("1x Custom VLI Transport Bag");
+    expect(shield205?.inTheBox).not.toContain("1x VLI CARE Activation Code");
     expect(traditionalChineseTranslations["TOPS Shield 205: The Agile Striker"]).toBe("TOPS Shield 205：敏捷突擊者");
     expect(traditionalChineseTranslations["Add to Quote"]).toBe("加入報價");
 
-    const variants = {
-      familyId: "tops-shield-205",
-      reference: "1",
-      name: "TOPS Shield 205",
-      category: "Competition Frames",
-      description: "205 mm platform",
-      variants: [
-        { sourceId: "rtf", number: "1", label: "TOPS Shield 205 RTF", name: "TOPS Shield 205 RTF", model: "RTF", description: "Ready to fly", price: "HK$4,329", image: "", imageAlt: "" },
-        { sourceId: "pnp", number: "2", label: "TOPS Shield 205 PNP", name: "TOPS Shield 205 PNP", model: "PNP", description: "Bring your own receiver", price: "HK$2,743", image: "", imageAlt: "" },
-      ],
-    };
-    expect(getShield205Variant(variants, "certified").sourceId).toBe("rtf");
-    expect(getShield205Variant(variants, "builder").sourceId).toBe("pnp");
+    const family = productFamilies.find((item) => item.familyId === "tops-shield-205")!;
+    expect(getPremiumVariant(family, "certified").sourceId).toBe("25");
+    expect(getPremiumVariant(family, "builder").sourceId).toBe("26");
   });
 
   it("defines premium quote-first experiences for TOPS Shield 220, R220F, and TOPS Shield 400", () => {
-    expect(premiumProductContent["tops-shield-220"].defaultTier).toBe("certified");
-    expect(Object.keys(premiumProductContent["tops-shield-220"].tiers)).toEqual(["certified", "travel", "builder"]);
-    expect(premiumProductContent["r220f"].tiers.certified?.label).toBe("VLI Ready-to-Deploy Edition");
-    expect(premiumProductContent["tops-shield-400"].defaultTier).toBe("certified");
+    expect(getPremiumProductContent("tops-shield-220", "en")?.defaultTier).toBe("certified");
+    expect(Object.keys(getPremiumProductContent("tops-shield-220", "en")?.tiers ?? {})).toEqual(["certified", "travel", "builder"]);
+    expect(getPremiumProductContent("r220f", "en")?.tiers.certified?.label).toBe("VLI Ready-to-Deploy Edition");
+    expect(getPremiumProductContent("tops-shield-400", "en")?.defaultTier).toBe("certified");
 
-    const shield220 = {
-      familyId: "tops-shield-220",
-      reference: "3–5",
-      name: "TOPS Shield 220",
-      category: "Drone platform",
-      description: "220 mm platform",
-      variants: [
-        { sourceId: "27", number: "3", label: "RTF", name: "TOPS Shield 220 RTF", model: "TZ002", description: "", price: "HK$3,718", image: "", imageAlt: "" },
-        { sourceId: "28", number: "4", label: "RTF + Bag", name: "TOPS Shield 220 RTF + Bag", model: "TZ002", description: "", price: "HK$4,056", image: "", imageAlt: "" },
-        { sourceId: "29", number: "5", label: "PNP", name: "TOPS Shield 220 PNP", model: "TZ002", description: "", price: "HK$2,743", image: "", imageAlt: "" },
-      ],
-    };
-    expect(getPremiumVariant(shield220, "certified", premiumProductContent["tops-shield-220"]).sourceId).toBe("27");
-    expect(getPremiumVariant(shield220, "travel", premiumProductContent["tops-shield-220"]).sourceId).toBe("28");
-    expect(getPremiumVariant(shield220, "builder", premiumProductContent["tops-shield-220"]).sourceId).toBe("29");
+    const shield220 = productFamilies.find((item) => item.familyId === "tops-shield-220")!;
+    expect(getPremiumVariant(shield220, "certified").sourceId).toBe("27");
+    expect(getPremiumVariant(shield220, "travel").sourceId).toBe("28");
+    expect(getPremiumVariant(shield220, "builder").sourceId).toBe("29");
     expect(traditionalChineseTranslations["TOPS Shield 220: The Competition Workhorse"]).toBe("TOPS Shield 220：競賽主力平台");
     expect(traditionalChineseTranslations["R220F: The Ready-to-Deploy Training Platform"]).toBe("R220F：可即時部署的訓練平台");
     expect(traditionalChineseTranslations["TOPS Shield 400: The Arena-Scale Platform"]).toBe("TOPS Shield 400：場館級平台");

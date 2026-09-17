@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Box, Check, Gauge, ShieldCheck, ShoppingCart, Wrench } from "lucide-react";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
-import { getEditablePremiumProductContent } from "@/lib/productContent";
+import { getPremiumProductContent } from "@/lib/productContent";
 import { useEffect, useMemo, useState } from "react";
 
 export type ProductVariant = {
@@ -17,6 +17,8 @@ export type ProductVariant = {
   image: string;
   fallbackImage?: string;
   imageAlt: string;
+  /** Premium package this variant is sold as, set with variant.<id>.tier in content/products. */
+  tier?: string;
 };
 
 export type ProductDetail = {
@@ -34,11 +36,10 @@ type ProductDetailDialogProps = {
   onAddToCart: (variant: ProductVariant, family: ProductDetail) => void;
 };
 
-export type PremiumTier = "builder" | "certified" | "travel";
+export type PremiumTier = string;
 export type PremiumTierContent = {
   label: string;
   subtitle: string;
-  match: RegExp;
   features: readonly string[];
 };
 export type PremiumProductContent = {
@@ -47,205 +48,18 @@ export type PremiumProductContent = {
   pitch: string;
   platformLabel: string;
   defaultTier: PremiumTier;
-  tiers: Partial<Record<PremiumTier, PremiumTierContent>>;
+  tiers: Record<PremiumTier, PremiumTierContent>;
   specifications: readonly (readonly [string, string])[];
   inTheBox: readonly string[];
-  certifiedCare?: boolean;
-  careTitle?: string;
-  careDescription?: string;
+  /** Tiers that show the VLI CARE badge and activation code. */
+  careTiers: readonly PremiumTier[];
+  careTitle: string;
+  careDescription: string;
 };
 
-export function getPremiumVariant(product: ProductDetail, tier: PremiumTier, content: PremiumProductContent) {
-  const tierContent = content.tiers[tier];
-  const matchesTier = (variant: ProductVariant) => `${variant.label} ${variant.model} ${variant.name}`.toLowerCase();
-  return product.variants.find((variant) => tierContent?.match.test(matchesTier(variant))) ?? product.variants[0];
+export function getPremiumVariant(product: ProductDetail, tier: PremiumTier) {
+  return product.variants.find((variant) => variant.tier === tier) ?? product.variants[0];
 }
-
-export function getShield205Variant(product: ProductDetail, tier: "builder" | "certified") {
-  return getPremiumVariant(product, tier, premiumProductContent["tops-shield-205"]);
-}
-
-export const shield205Content = {
-  title: "TOPS Shield 205: The Agile Striker",
-  pitch: "Engineered for high-intensity drone sports, the TOPS Shield 205 combines a lightweight 205mm spherical exoskeleton with a competition-tuned powertrain. Designed to bounce off arena walls and opponents without dropping from the sky, it is the ultimate platform for tight-quarters maneuverability.",
-  tiers: {
-    builder: {
-      label: "Builder's Edition",
-      subtitle: "For teams with in-house technicians.",
-      match: /pnp|plug/,
-      features: [
-        "Factory default settings (requires manual PID tuning).",
-        "Standard manufacturer visual inspection.",
-        "Standard 14-day defect return policy (Does not cover flight crashes).",
-      ],
-    },
-    certified: {
-      label: "VLI Certified Edition",
-      subtitle: "Plug-and-play for professional arenas and schools.",
-      match: /rtf|ready/,
-      features: [
-        "Professionally tuned by VLI engineers for arena agility.",
-        "15-point VLI Pre-Flight Verification (motors and ESCs stress-tested).",
-        "Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements.",
-      ],
-    },
-  },
-  specifications: [
-    ["Frame Diameter", "205 mm"],
-    ["Design", "Spherical impact-resistant competition cage"],
-    ["Flight Dynamics", "360-degree collision tolerance with auto-righting"],
-    ["Propulsion", "High-torque brushless motors"],
-    ["Telemetry", "Low-latency transmission, fully compatible with Smart Referee systems"],
-  ],
-  inTheBox: [
-    "1x TOPS Shield 205 Competition Ball Drone",
-    "1x Pre-Bound Receiver / Transmission Unit",
-    "2x Sets of Competition Propellers",
-    "1x High-Impact Spare Outer Shell Segment",
-    "1x Custom VLI Transport Bag",
-  ],
-} as const;
-
-export const premiumProductContent: Record<string, PremiumProductContent> = {
-  "tops-shield-205": {
-    testId: "tops-shield-205-premium-detail",
-    ...shield205Content,
-    platformLabel: "205 mm platform",
-    defaultTier: "certified",
-    certifiedCare: true,
-  },
-  "tops-shield-220": {
-    testId: "tops-shield-220-premium-detail",
-    title: "TOPS Shield 220: The Competition Workhorse",
-    pitch: "The TOPS Shield 220 gives competition teams a balanced 220mm platform for repeatable training and event deployment. Choose a ready-to-fly configuration for a faster operational start, add the travel set when logistics matter, or bring your own receiver for an in-house build workflow.",
-    platformLabel: "220 mm platform",
-    defaultTier: "certified",
-    certifiedCare: true,
-    tiers: {
-      certified: {
-        label: "VLI Certified Edition",
-        subtitle: "Ready-to-fly for competition teams and schools.",
-        match: /rtf(?!.*bag)|ready/,
-        features: [
-          "Competition-ready receiver and flight setup.",
-          "VLI pre-flight configuration check before handover.",
-          "Includes 1-Year VLI CARE for approved programme deployments.",
-        ],
-      },
-      travel: {
-        label: "Certified Travel Edition",
-        subtitle: "Ready-to-fly with a transport bag for touring programmes.",
-        match: /bag|travel/,
-        features: [
-          "Ready-to-fly 220mm platform with matched flight electronics.",
-          "Includes a carrying bag for training and event travel.",
-          "Designed for teams moving equipment between venues.",
-        ],
-      },
-      builder: {
-        label: "Builder's Edition",
-        subtitle: "PNP platform for teams with their own control system.",
-        match: /pnp|plug/,
-        features: [
-          "Bring your own receiver and control equipment.",
-          "Flexible starting point for technical teams and custom builds.",
-          "Standard manufacturer inspection before dispatch.",
-        ],
-      },
-    },
-    specifications: [
-      ["Frame Diameter", "220 mm"],
-      ["Configuration", "RTF, travel-ready, or PNP platform options"],
-      ["Use Case", "Training, competition, and touring event programmes"],
-      ["Flight Setup", "Competition-ready power and control configuration"],
-      ["Compatibility", "Suitable for Smart Referee-supported drone sports workflows"],
-    ],
-    inTheBox: [
-      "1x TOPS Shield 220 Competition Ball Drone",
-      "1x Receiver / Transmission Unit on RTF configurations",
-      "2x Sets of Competition Propellers",
-      "1x High-Impact Spare Outer Shell Segment",
-      "1x Carrying Bag on Travel Edition",
-    ],
-  },
-  "r220f": {
-    testId: "r220f-premium-detail",
-    title: "R220F: The Ready-to-Deploy Training Platform",
-    pitch: "The R220F is a practical 220mm ball-drone platform for organisations that need a complete, portable setup. Its upgraded motor, battery, and carrying bag make it a straightforward choice for training fleets, demonstrations, and event-side replacement capacity.",
-    platformLabel: "R220F platform",
-    defaultTier: "certified",
-    tiers: {
-      certified: {
-        label: "VLI Ready-to-Deploy Edition",
-        subtitle: "Complete RTF setup for training, demonstration, and event support.",
-        match: /rtf|ready/,
-        features: [
-          "Upgraded motor and matched flight battery included.",
-          "Ready-to-fly configuration for faster programme setup.",
-          "Includes a carrying bag for practical transport between venues.",
-        ],
-      },
-    },
-    specifications: [
-      ["Frame Diameter", "220 mm"],
-      ["Configuration", "Ready-to-fly ball drone platform"],
-      ["Powertrain", "Upgraded motor with matched flight battery"],
-      ["Deployment", "Portable setup for training, demonstration, and event support"],
-      ["Transport", "Carrying bag included"],
-    ],
-    inTheBox: [
-      "1x R220F Ready-to-Fly Ball Drone",
-      "1x Upgraded Motor Configuration",
-      "1x Matched Flight Battery",
-      "1x Remote / Control Setup",
-      "1x Carrying Bag",
-    ],
-  },
-  "tops-shield-400": {
-    testId: "tops-shield-400-premium-detail",
-    title: "TOPS Shield 400: The Arena-Scale Platform",
-    pitch: "The TOPS Shield 400 is built for larger-format drone sports where teams need more physical presence and endurance at the arena boundary. Select a ready-to-fly system for a complete deployment package or use the PNP platform as the foundation for your own receiver and battery workflow.",
-    platformLabel: "400 mm platform",
-    defaultTier: "certified",
-    certifiedCare: true,
-    tiers: {
-      certified: {
-        label: "VLI Certified Arena Edition",
-        subtitle: "Ready-to-fly for larger-format matches and venue deployments.",
-        match: /rtf|ready/,
-        features: [
-          "Complete flight-electronics configuration for arena-scale use.",
-          "VLI pre-flight configuration check before handover.",
-          "Designed for larger-format match operations and venue planning.",
-        ],
-      },
-      builder: {
-        label: "Arena Builder's Edition",
-        subtitle: "PNP platform for technical teams with their own electronics.",
-        match: /pnp|plug/,
-        features: [
-          "Bring your own receiver and battery workflow.",
-          "Flexible foundation for venue-specific configuration.",
-          "Standard manufacturer inspection before dispatch.",
-        ],
-      },
-    },
-    specifications: [
-      ["Frame Diameter", "400 mm"],
-      ["Design", "Large-format spherical competition cage"],
-      ["Use Case", "Arena-scale matches and boundary operations"],
-      ["Configuration", "RTF or PNP platform options"],
-      ["Programme Fit", "Suitable for larger venues and higher-visibility deployments"],
-    ],
-    inTheBox: [
-      "1x TOPS Shield 400 Competition Ball Drone",
-      "1x Flight-Electronics Configuration on RTF Edition",
-      "2x Sets of Competition Propellers",
-      "1x High-Impact Outer Shell Component",
-      "1x VLI Configuration Handover Checklist",
-    ],
-  },
-};
 
 function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierChange, onAddToCart, content }: {
   product: ProductDetail;
@@ -258,10 +72,9 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
   const { language } = useWebsiteLanguage();
   const isChinese = language === "zh-Hant";
   const translate = (value: string) => isChinese ? traditionalChineseTranslations[value] ?? value : value;
-  const tier = content.tiers[selectedTier] ?? content.tiers[content.defaultTier]!;
-  const certified = selectedTier === "certified" && content.certifiedCare;
-  const careTitle = content.careTitle ?? "Includes 1-Year VLI CARE";
-  const careDescription = content.careDescription ?? "Coverage for heavy collision damage, water damage, and rapid replacements.";
+  const tier = content.tiers[selectedTier] ?? content.tiers[content.defaultTier];
+  const certified = content.careTiers.includes(selectedTier);
+  const { careTitle, careDescription } = content;
 
   return (
     <div data-testid={content.testId} className="space-y-7">
@@ -273,7 +86,7 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
         </div>
 
         <div className="flex flex-col justify-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{translate("Drone platform · premium configuration")}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{translate(product.category)}</p>
           <h2 data-testid="product-detail-title" className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">{translate(content.title)}</h2>
           <p data-testid="product-detail-description" className="mt-4 text-sm leading-7 text-white/70 sm:text-base">{translate(product.description)}</p>
 
@@ -281,7 +94,7 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
             {(Object.keys(content.tiers) as PremiumTier[]).map((option) => {
               const optionContent = content.tiers[option];
               if (!optionContent) return null;
-              const optionVariant = getPremiumVariant(product, option, content);
+              const optionVariant = getPremiumVariant(product, option);
               const selected = option === selectedTier;
               const isRecommended = option === content.defaultTier;
               return (
@@ -319,7 +132,7 @@ export default function ProductDetailDialog({ product, onOpenChange, onAddToCart
   const { language } = useWebsiteLanguage();
   const [selectedVariantId, setSelectedVariantId] = useState("");
   const [selectedPremiumTier, setSelectedPremiumTier] = useState<PremiumTier>("certified");
-  const premiumContent = product ? getEditablePremiumProductContent(product.familyId, language, premiumProductContent[product.familyId]) : undefined;
+  const premiumContent = product ? getPremiumProductContent(product.familyId, language) : undefined;
 
   useEffect(() => {
     setSelectedPremiumTier(premiumContent?.defaultTier ?? "certified");
@@ -328,7 +141,7 @@ export default function ProductDetailDialog({ product, onOpenChange, onAddToCart
 
   const selectedVariant = useMemo(() => {
     if (!product) return undefined;
-    if (premiumContent) return getPremiumVariant(product, selectedPremiumTier, premiumContent);
+    if (premiumContent) return getPremiumVariant(product, selectedPremiumTier);
     return product.variants.find((variant) => variant.sourceId === selectedVariantId) ?? product.variants[0];
   }, [product, premiumContent, selectedPremiumTier, selectedVariantId]);
 

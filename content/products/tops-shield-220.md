@@ -1,9 +1,42 @@
 ---
 familyId: tops-shield-220
+order: 2
+visible: true
+
 title.en: TOPS Shield 220
 title.zh-Hant: TOPS Shield 220
-description.en: The TOPS Shield 220 gives competition teams a balanced 220mm platform for repeatable training and event deployment. Choose a ready-to-fly configuration for a faster operational start, add the travel set when logistics matter, or bring your own receiver for an in-house build workflow.
-description.zh-Hant: TOPS Shield 220 為競賽隊伍提供平衡的 220 毫米平台，適合重複訓練及賽事部署。您可選擇開箱即飛配置以快速投入運作，在重視物流時加入運輸套裝，或使用自備接收器建立內部技術流程。
+category.en: Drone platform
+category.zh-Hant: 無人機平台
+
+defaultTier: certified
+vliCareTiers: certified
+
+# Variant 27
+variant.27.label: RTF
+variant.27.name: TOPS Shield 220 RTF
+variant.27.model: TZ002
+variant.27.price: HK$3,718
+variant.27.tier: certified
+variant.27.image: /manus-storage/excel_prod_9_417b350f.png
+variant.27.imageAlt: TOPS Shield 220 competition drone cage illustration
+
+# Variant 28
+variant.28.label: RTF + Bag
+variant.28.name: TOPS Shield 220 RTF + Bag
+variant.28.model: TZ002
+variant.28.price: HK$4,056
+variant.28.tier: travel
+variant.28.image: /manus-storage/excel_prod_21_68f8cfe7.png
+variant.28.imageAlt: TOPS Shield 220 drone with remote controller
+
+# Variant 29
+variant.29.label: PNP
+variant.29.name: TOPS Shield 220 PNP
+variant.29.model: TZ002
+variant.29.price: HK$2,743
+variant.29.tier: builder
+variant.29.image: /manus-storage/excel_prod_24_65d1f683.png
+variant.29.imageAlt: TOPS Shield 220 PNP competition drone cage diagram
 ---
 
 <!-- locale:en -->

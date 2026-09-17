@@ -1,9 +1,33 @@
 ---
 familyId: tops-shield-400
+order: 8
+visible: true
+
 title.en: TOPS Shield 400
 title.zh-Hant: TOPS Shield 400
-description.en: The TOPS Shield 400 is built for larger-format drone sports where teams need more physical presence and endurance at the arena boundary. Select a ready-to-fly system for a complete deployment package or use the PNP platform as the foundation for your own receiver and battery workflow.
-description.zh-Hant: TOPS Shield 400 為較大規模的無人機運動而設，適合隊伍在場館邊界需要更大體量及耐用性的情況。您可選擇完整部署套裝的開箱即飛系統，或以 PNP 平台作為自備接收器及電池流程的基礎。
+category.en: Drone platform
+category.zh-Hant: 無人機平台
+
+defaultTier: certified
+vliCareTiers: certified
+
+# Variant 35
+variant.35.label: RTF
+variant.35.name: TOPS Shield 400 RTF
+variant.35.model: TZ003
+variant.35.price: HK$6,708
+variant.35.tier: certified
+variant.35.image: /manus-storage/excel_prod_26_26e91f83.png
+variant.35.imageAlt: TOPS Shield 400 competition drone in a blue cage
+
+# Variant 36
+variant.36.label: PNP
+variant.36.name: TOPS Shield 400 PNP
+variant.36.model: TZ003
+variant.36.price: HK$5,395
+variant.36.tier: builder
+variant.36.image: /manus-storage/excel_prod_19_2844a82e.png
+variant.36.imageAlt: TOPS Shield 400 PNP competition drone
 ---
 
 <!-- locale:en -->

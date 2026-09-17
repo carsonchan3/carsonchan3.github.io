@@ -3,13 +3,12 @@ import SiteHeader from "@/components/SiteHeader";
 import CartPricingDialog, { type CartPricingSelection } from "@/components/CartPricingDialog";
 import ProductDetailDialog, { type ProductDetail, type ProductVariant } from "@/components/ProductDetailDialog";
 import { PRODUCT_CART_STORAGE_KEY, sanitizeProductCart, type ProductCart } from "@/lib/productCart";
-import { trpc } from "@/lib/trpc";
 import { localizedPath } from "@/lib/seo";
 import { trackConversion } from "@/lib/conversionTracking";
-import { applyProductContent } from "@/lib/productContent";
+import { applyProductContent, buildProductFamilies, hiddenProductFamilyIds } from "@/lib/productContent";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import React, { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BatteryCharging, Cpu, Eye, Minus, Package, Plus, Radio, ShoppingCart, Trash2, X } from "lucide-react";
+import { ArrowRight, Eye, Minus, Plus, ShoppingCart, Trash2, X } from "lucide-react";
 import { toast } from "sonner";
 
 export const equipmentPricingNote = {
@@ -17,306 +16,10 @@ export const equipmentPricingNote = {
   "zh-Hant": "所列價格僅供參考起點。最終供貨情況、運費及賽事計劃要求，將於為您度身訂造的報價中確認。",
 } as const;
 
-export const catalogueItems = [
-  {
-    number: "25",
-    sourceId: "25",
-    model: "TZ009",
-    icon: <Radio size={28} />,
-    name: "TOPS Shield 205 RTF",
-    category: "Drone platform",
-    description: "Ready-to-fly 205 mm competition ball drone with remote, battery, and accessory kit.",
-    price: "HK$4,329",
-    image: "/manus-storage/excel_prod_30_a7d07b66.png",
-    imageAlt: "TOPS Shield 205 competition drone kit box",
-  },
-  {
-    number: "26",
-    sourceId: "26",
-    model: "TZ009",
-    icon: <Radio size={28} />,
-    name: "TOPS Shield 205 PNP",
-    category: "Drone platform",
-    description: "PNP 205 mm competition ball drone for pilots with compatible control gear.",
-    price: "HK$2,743",
-    image: "/manus-storage/excel_prod_31_93c6811c.png",
-    imageAlt: "TOPS Shield 205 PNP competition drone product image",
-  },
-  {
-    number: "27",
-    sourceId: "27",
-    model: "TZ002",
-    icon: <Radio size={28} />,
-    name: "TOPS Shield 220 RTF",
-    category: "Drone platform",
-    description: "Ready-to-fly 220 mm competition ball drone with a racing-ready setup.",
-    price: "HK$3,718",
-    image: "/manus-storage/excel_prod_9_417b350f.png",
-    imageAlt: "TOPS Shield 220 competition drone cage illustration",
-  },
-  {
-    number: "28",
-    sourceId: "28",
-    model: "TZ002",
-    icon: <Radio size={28} />,
-    name: "TOPS Shield 220 RTF + Bag",
-    category: "Drone platform",
-    description: "220 mm ready-to-fly set with a carrying bag for training and competition travel.",
-    price: "HK$4,056",
-    image: "/manus-storage/excel_prod_21_68f8cfe7.png",
-    imageAlt: "TOPS Shield 220 drone with remote controller",
-  },
-  {
-    number: "29",
-    sourceId: "29",
-    model: "TZ002",
-    icon: <Radio size={28} />,
-    name: "TOPS Shield 220 PNP",
-    category: "Drone platform",
-    description: "PNP 220 mm competition ball drone for custom receiver and control setups.",
-    price: "HK$2,743",
-    image: "/manus-storage/excel_prod_24_65d1f683.png",
-    imageAlt: "TOPS Shield 220 PNP competition drone cage diagram",
-  },
-  {
-    number: "30",
-    sourceId: "30",
-    model: "FB200",
-    icon: <Radio size={28} />,
-    name: "FB200 RTF Racer",
-    category: "Drone platform",
-    description: "200 mm RTF racer with ball guard, controller, battery, and charger.",
-    price: "HK$5,252",
-    image: "/manus-storage/excel_prod_10_e5fc5653.png",
-    imageAlt: "FB200 RTF racer drone with remote controller",
-  },
-  {
-    number: "31",
-    sourceId: "31",
-    model: "FB210",
-    icon: <Radio size={28} />,
-    name: "FB210 RTF Racer",
-    category: "Drone platform",
-    description: "210 mm RTF ball drone with upgraded motor package and carry bag.",
-    price: "HK$5,993",
-    image: "/manus-storage/excel_prod_11_fc95565c.png",
-    imageAlt: "FB210 RTF racer drone with remote controller",
-  },
-  {
-    number: "32",
-    sourceId: "32",
-    model: "R200",
-    icon: <Radio size={28} />,
-    name: "R200 RTF",
-    category: "Drone platform",
-    description: "200 mm RTF ball drone with compact 3S power setup and carry bag.",
-    price: "HK$5,590",
-    image: "/manus-storage/excel_prod_13_712f9740.png",
-    imageAlt: "R200 RTF competition drone with remote controller",
-  },
-  {
-    number: "33",
-    sourceId: "33",
-    model: "R200F",
-    icon: <Radio size={28} />,
-    name: "R200F RTF",
-    category: "Drone platform",
-    description: "200 mm RTF ball drone with higher-output motor and 3S–4S capability.",
-    price: "HK$5,616",
-    image: "/manus-storage/excel_prod_15_cb880557.png",
-    imageAlt: "R200F RTF competition drone with remote controller",
-  },
-  {
-    number: "34",
-    sourceId: "34",
-    model: "R220F",
-    icon: <Radio size={28} />,
-    name: "R220F RTF",
-    category: "Drone platform",
-    description: "220 mm RTF ball drone with upgraded motor, battery, and carry bag.",
-    price: "HK$5,993",
-    image: "/manus-storage/excel_prod_17_584dbd72.png",
-    imageAlt: "R220F RTF competition drone with remote controller",
-  },
-  {
-    number: "35",
-    sourceId: "35",
-    model: "TZ003",
-    icon: <Radio size={28} />,
-    name: "TOPS Shield 400 RTF",
-    category: "Drone platform",
-    description: "400 mm RTF competition ball drone kit with flight electronics and battery.",
-    price: "HK$6,708",
-    image: "/manus-storage/excel_prod_26_26e91f83.png",
-    imageAlt: "TOPS Shield 400 competition drone in a blue cage",
-  },
-  {
-    number: "36",
-    sourceId: "36",
-    model: "TZ003",
-    icon: <Radio size={28} />,
-    name: "TOPS Shield 400 PNP",
-    category: "Drone platform",
-    description: "400 mm PNP competition ball drone for teams with their own receiver and battery.",
-    price: "HK$5,395",
-    image: "/manus-storage/excel_prod_19_2844a82e.png",
-    imageAlt: "TOPS Shield 400 PNP competition drone",
-  },
-  {
-    number: "69",
-    sourceId: "69",
-    model: "3S battery",
-    icon: <BatteryCharging size={28} />,
-    name: "ACE 3S 1100 mAh Battery",
-    category: "Drone power",
-    description: "3S 1100 mAh LiPo battery for 200/220 mm ball drones and FPV builds.",
-    price: "HK$234",
-    image: "/manus-storage/excel_prod_3_aa72f902.png",
-    imageAlt: "ACE 3S 1100 mAh LiPo battery",
-  },
-  {
-    number: "70",
-    sourceId: "70",
-    model: "4S battery",
-    icon: <BatteryCharging size={28} />,
-    name: "ACE 4S 3000 mAh Battery",
-    category: "Drone power",
-    description: "4S 3000 mAh 120C LiPo battery for 400 mm ball drones and FPV builds.",
-    price: "HK$520",
-    image: "/manus-storage/excel_prod_27_854f107d.png",
-    imageAlt: "ACE 4S 3000 mAh LiPo battery",
-  },
-  {
-    number: "71",
-    sourceId: "71",
-    model: "6S battery",
-    icon: <BatteryCharging size={28} />,
-    name: "ACE 6S 3000 mAh Battery",
-    category: "Drone power",
-    description: "6S 3000 mAh 120C LiPo battery for higher-voltage 400 mm builds.",
-    price: "HK$754",
-    image: "/manus-storage/excel_prod_28_5edbfa4d.png",
-    imageAlt: "ACE 6S 3000 mAh LiPo battery",
-  },
-  {
-    number: "75",
-    sourceId: "75",
-    model: "10-port USB charger",
-    icon: <Cpu size={28} />,
-    name: "10-Port USB Charger",
-    category: "Charging equipment",
-    description: "10-port USB charger for charging multiple compatible batteries together.",
-    price: "HK$117",
-    image: "/manus-storage/excel_prod_6_81781e24.png",
-    imageAlt: "10-port white USB charger",
-  },
-  {
-    number: "76",
-    sourceId: "76",
-    model: "B3 20W",
-    icon: <Cpu size={28} />,
-    name: "B3 20W Balance Charger",
-    category: "Charging equipment",
-    description: "20 W balance charger for 2S and 3S LiPo batteries.",
-    price: "HK$65",
-    image: "/manus-storage/excel_prod_1_f4a517d6.png",
-    imageAlt: "B3 balance charger",
-  },
-  {
-    number: "77",
-    sourceId: "77",
-    model: "B3 10W",
-    icon: <Cpu size={28} />,
-    name: "B3 10W Balance Charger",
-    category: "Charging equipment",
-    description: "10 W balance charger for smaller 2S and 3S model batteries.",
-    price: "HK$52",
-    image: "/manus-storage/excel_prod_4_5d33c966.png",
-    imageAlt: "B3 10W balance charger",
-  },
-  {
-    number: "78",
-    sourceId: "78",
-    model: "D6 PRO",
-    icon: <Cpu size={28} />,
-    name: "D6 PRO Smart Charger",
-    category: "Charging equipment",
-    description: "Dual-channel smart balance charger for 1S–6S battery systems.",
-    price: "HK$1,365",
-    image: "/manus-storage/excel_prod_25_422ab006.png",
-    imageAlt: "D6 PRO smart balance charger",
-  },
-  {
-    number: "91",
-    sourceId: "91",
-    model: "3 × 3 × 3 m",
-    icon: <Package size={28} />,
-    name: "Inflatable Drone Soccer Field 3 × 3 × 3 m",
-    category: "Competition venue",
-    description: "Inflatable 3 × 3 × 3 m competition field with two goals and pump.",
-    price: "HK$5,733",
-    image: "/manus-storage/excel_prod_7_7475981f.png",
-    imageAlt: "Inflatable drone soccer field with two goals",
-  },
-  {
-    number: "94",
-    sourceId: "94",
-    model: "6 × 3 × 3 m",
-    icon: <Package size={28} />,
-    name: "Inflatable Drone Soccer Field 6 × 3 × 3 m",
-    category: "Competition venue",
-    description: "Inflatable 6 × 3 × 3 m field with two goals, pump, and custom branding option.",
-    price: "HK$7,813",
-    image: "/manus-storage/excel_prod_8_903cb396.png",
-    imageAlt: "Large inflatable drone soccer field with two goals",
-  },
-];
+/** Every product family, prices, variants and images come from content/products/*.md. */
+export const productFamilies: ProductDetail[] = buildProductFamilies();
 
-const catalogueItemById = new Map(catalogueItems.map((item) => [item.sourceId, item]));
-
-function createVariant(sourceId: string, label: string): ProductVariant {
-  const item = catalogueItemById.get(sourceId);
-  if (!item) throw new Error(`Missing catalogue item ${sourceId}`);
-
-  return {
-    sourceId: item.sourceId,
-    number: String(catalogueItems.findIndex((catalogueItem) => catalogueItem.sourceId === item.sourceId) + 1),
-    label,
-    name: item.name,
-    model: item.model,
-    description: item.description,
-    price: item.price,
-    image: item.image,
-    imageAlt: item.imageAlt,
-  };
-}
-
-export const productFamilies: ProductDetail[] = [
-  { familyId: "tops-shield-205", reference: "25–26", name: "TOPS Shield 205", category: "Drone platform", description: "205 mm competition ball drone platform.", variants: [createVariant("25", "RTF"), createVariant("26", "PNP")] },
-  { familyId: "tops-shield-220", reference: "27–29", name: "TOPS Shield 220", category: "Drone platform", description: "220 mm competition ball drone platform.", variants: [createVariant("27", "RTF"), createVariant("28", "RTF + Bag"), createVariant("29", "PNP")] },
-  { familyId: "fb200-racer", reference: "30", name: "FB200 Racer", category: "Drone platform", description: "200 mm ready-to-fly racer with ball guard and essential flying kit.", variants: [createVariant("30", "RTF")] },
-  { familyId: "fb210-racer", reference: "31", name: "FB210 Racer", category: "Drone platform", description: "210 mm ready-to-fly ball drone with upgraded motor package and carry bag.", variants: [createVariant("31", "RTF")] },
-  { familyId: "r200", reference: "32", name: "R200", category: "Drone platform", description: "Compact 200 mm ball drone platform with 3S power setup.", variants: [createVariant("32", "RTF")] },
-  { familyId: "r200f", reference: "33", name: "R200F", category: "Drone platform", description: "Higher-output 200 mm ball drone platform with 3S–4S capability.", variants: [createVariant("33", "RTF")] },
-  { familyId: "r220f", reference: "34", name: "R220F", category: "Drone platform", description: "220 mm ball drone platform with upgraded motor, battery, and carry bag.", variants: [createVariant("34", "RTF")] },
-  { familyId: "tops-shield-400", reference: "35–36", name: "TOPS Shield 400", category: "Drone platform", description: "400 mm competition ball drone platform for larger-format matches.", variants: [createVariant("35", "RTF"), createVariant("36", "PNP")] },
-  { familyId: "ace-lipo-battery", reference: "69–71", name: "ACE LiPo Battery", category: "Drone power", description: "LiPo battery options for 200 mm, 220 mm, and higher-voltage 400 mm builds.", variants: [createVariant("69", "3S · 1100 mAh"), createVariant("70", "4S · 3000 mAh"), createVariant("71", "6S · 3000 mAh")] },
-  { familyId: "usb-charger", reference: "75", name: "10-Port USB Charger", category: "Charging equipment", description: "Multi-port USB charger for compatible battery workflows.", variants: [createVariant("75", "10-port") ] },
-  { familyId: "b3-balance-charger", reference: "76–77", name: "B3 Balance Charger", category: "Charging equipment", description: "Compact balance charger options for 2S and 3S LiPo batteries.", variants: [createVariant("76", "20 W"), createVariant("77", "10 W")] },
-  { familyId: "d6-pro", reference: "78", name: "D6 PRO Smart Charger", category: "Charging equipment", description: "Dual-channel smart balance charger for 1S–6S battery systems.", variants: [createVariant("78", "Dual-channel") ] },
-  { familyId: "inflatable-drone-soccer-field", reference: "91, 94", name: "Inflatable Drone Soccer Field", category: "Competition venue", description: "Inflatable drone soccer field options with goals and pump.", variants: [createVariant("91", "3 × 3 × 3 m"), createVariant("94", "6 × 3 × 3 m")] },
-];
-
-export const excludedProductFamilyIds = new Set([
-  "fb200-racer",
-  "fb210-racer",
-  "r200",
-  "r200f",
-  "ace-lipo-battery",
-  "usb-charger",
-  "b3-balance-charger",
-  "inflatable-drone-soccer-field",
-]);
+export const excludedProductFamilyIds = hiddenProductFamilyIds;
 
 export function getVisibleProductFamilies(families: ProductDetail[]) {
   return families.filter((family) => !excludedProductFamilyIds.has(family.familyId));
@@ -362,6 +65,7 @@ export function mergeCatalogueWithDatabase(
         image: variant.imageUrl && isValidCatalogImageUrl(variant.imageUrl) ? variant.imageUrl : (isValidCatalogImageUrl(row.imageUrl) ? row.imageUrl : fallbackVariant?.image ?? ""),
         fallbackImage: fallbackVariant?.image,
         imageAlt: row.imageAlt || fallbackVariant?.imageAlt || row.name,
+        ...(fallbackVariant?.tier ? { tier: fallbackVariant.tier } : {}),
       };
     }),
   });
@@ -416,16 +120,15 @@ function readSavedCart(): ProductCart {
 
 export default function Equipment() {
   const { language } = useWebsiteLanguage();
-  const productContentUrl = "https://github.com/carsonchan3/carsonchan3.github.io/new/main/content/products";
-  const dbProductsQuery = trpc.products.list.useQuery();
+  const productContentUrl = "https://github.com/carsonchan3/carsonchan3.github.io/tree/main/content/products";
   const [cart, setCart] = useState<ProductCart>(readSavedCart);
   const [selectedProduct, setSelectedProduct] = useState<ProductDetail | null>(null);
   const [cartPricingOpen, setCartPricingOpen] = useState(false);
   const [cartPanelOpen, setCartPanelOpen] = useState(false);
 
   const activeProductFamilies: ProductDetail[] = useMemo(() => {
-    return getVisibleProductFamilies(mergeCatalogueWithDatabase(dbProductsQuery.data ?? [])).map((family) => applyProductContent(family, language));
-  }, [dbProductsQuery.data, language]);
+    return getVisibleProductFamilies(productFamilies).map((family) => applyProductContent(family, language));
+  }, [language]);
 
   const activeCatalogueVariants = useMemo(() => activeProductFamilies.flatMap((f) => f.variants), [activeProductFamilies]);
   const activeCatalogueSourceIds = useMemo(() => activeCatalogueVariants.map((v) => v.sourceId), [activeCatalogueVariants]);

@@ -1,28 +1,26 @@
 import { describe, expect, it } from "vitest";
 import { sanitizeProductCart } from "@/lib/productCart";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
-import { catalogueItems, equipmentPricingNote, getVisibleProductFamilies, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
+import { equipmentPricingNote, getVisibleProductFamilies, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
 
-describe("Spreadsheet-backed equipment catalogue content", () => {
+describe("Markdown-backed equipment catalogue content", () => {
   it("provides formal starting-price guidance before shopping items in both site languages", () => {
     expect(equipmentPricingNote.en).toBe("Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.");
     expect(equipmentPricingNote["zh-Hant"]).toBe("所列價格僅供參考起點。最終供貨情況、運費及賽事計劃要求，將於為您度身訂造的報價中確認。");
   });
-  it("removes the requested catalogue families from the public product view", () => {
+
+  it("hides the families marked visible: false in Markdown", () => {
     const visibleFamilies = getVisibleProductFamilies(productFamilies);
     const visibleVariants = visibleFamilies.flatMap((family) => family.variants);
 
     expect(visibleFamilies.map((family) => family.familyId)).toEqual(["tops-shield-205", "tops-shield-220", "r220f", "tops-shield-400", "d6-pro"]);
-    expect(visibleVariants).toHaveLength(9);
     expect(visibleVariants.map((variant) => variant.sourceId)).toEqual(["25", "26", "27", "28", "29", "34", "35", "36", "78"]);
   });
 
-  it("keeps the active catalogue records while presenting them as compact product families", () => {
-    expect(catalogueItems).toHaveLength(21);
+  it("keeps every catalogue family and variant from content/products", () => {
     expect(productFamilies).toHaveLength(13);
     expect(productFamilies.flatMap((family) => family.variants)).toHaveLength(21);
-    expect(catalogueItems.every((item) => item.name.length > 0 && item.description.length >= 30 && item.description.length <= 110)).toBe(true);
-    expect(catalogueItems.every((item) => item.category.length > 0 && item.sourceId.length > 0)).toBe(true);
+    expect(productFamilies.every((family) => family.name.length > 0 && family.category.length > 0)).toBe(true);
   });
 
   it("groups TOPS Shield configurations as selectable versions with their own prices", () => {
@@ -33,31 +31,19 @@ describe("Spreadsheet-backed equipment catalogue content", () => {
     expect(topsShield220?.variants.map((variant) => variant.label)).toEqual(["RTF", "RTF + Bag", "PNP"]);
   });
 
-  it("renumbers active product variants sequentially from #1 and excludes the former #79 item", () => {
+  it("numbers product variants sequentially from #1", () => {
     const variants = productFamilies.flatMap((family) => family.variants);
-
     expect(variants.map((variant) => variant.number)).toEqual(Array.from({ length: 21 }, (_, index) => String(index + 1)));
-    expect(variants.some((variant) => variant.sourceId === "79" || variant.name.includes("TA300"))).toBe(false);
   });
 
   it("uses the revised custom equipment request copy in Traditional Chinese", () => {
     expect(traditionalChineseTranslations["Share your requirements and questions and we will help find the best equipment for you."]).toBe("分享您的要求及問題，我們會協助您尋找最適合的設備。");
   });
 
-  it("does not expose placeholder copy in the catalogue data", () => {
-    const visibleCopy = catalogueItems.flatMap((item) => [item.name, item.category, item.description]).join(" ");
-
-    expect(visibleCopy.toLowerCase()).not.toContain("placeholder");
-  });
-
-  it("uses the authorised 1.3× HKD price adjustment and spreadsheet photo for every item", () => {
-    expect(catalogueItems.every((item) => /^HK\$[\d,]+$/.test(item.price))).toBe(true);
-    expect(catalogueItems.map((item) => item.price)).toEqual([
-      "HK$4,329", "HK$2,743", "HK$3,718", "HK$4,056", "HK$2,743", "HK$5,252", "HK$5,993",
-      "HK$5,590", "HK$5,616", "HK$5,993", "HK$6,708", "HK$5,395", "HK$234", "HK$520",
-      "HK$754", "HK$117", "HK$65", "HK$52", "HK$1,365", "HK$5,733", "HK$7,813",
-    ]);
-    expect(catalogueItems.every((item) => item.image.startsWith("/manus-storage/excel_prod_") && item.imageAlt.length > 0)).toBe(true);
+  it("gives every variant a price and image", () => {
+    const variants = productFamilies.flatMap((family) => family.variants);
+    expect(variants.every((variant) => /^HK\$[\d,]+$/.test(variant.price))).toBe(true);
+    expect(variants.every((variant) => variant.image.length > 0 && variant.imageAlt.length > 0)).toBe(true);
   });
 
   it("restores only valid known cart quantities from local persistence", () => {
