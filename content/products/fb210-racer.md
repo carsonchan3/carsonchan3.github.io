@@ -12,7 +12,6 @@ category.zh-Hant: 無人機平台
 variant.31.label: RTF
 variant.31.name: FB210 RTF Racer
 variant.31.model: FB210
-variant.31.price: HK$5,993
 variant.31.image: /manus-storage/excel_prod_11_fc95565c.png
 variant.31.imageAlt: FB210 RTF racer drone with remote controller
 ---

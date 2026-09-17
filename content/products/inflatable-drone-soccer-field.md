@@ -12,7 +12,6 @@ category.zh-Hant: 比賽場地
 variant.91.label: 3 × 3 × 3 m
 variant.91.name: Inflatable Drone Soccer Field 3 × 3 × 3 m
 variant.91.model: 3 × 3 × 3 m
-variant.91.price: HK$5,733
 variant.91.image: /manus-storage/excel_prod_7_7475981f.png
 variant.91.imageAlt: Inflatable drone soccer field with two goals
 
@@ -20,7 +19,6 @@ variant.91.imageAlt: Inflatable drone soccer field with two goals
 variant.94.label: 6 × 3 × 3 m
 variant.94.name: Inflatable Drone Soccer Field 6 × 3 × 3 m
 variant.94.model: 6 × 3 × 3 m
-variant.94.price: HK$7,813
 variant.94.image: /manus-storage/excel_prod_8_903cb396.png
 variant.94.imageAlt: Large inflatable drone soccer field with two goals
 ---

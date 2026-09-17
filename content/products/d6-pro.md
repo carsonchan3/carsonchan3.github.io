@@ -12,7 +12,6 @@ category.zh-Hant: 充電設備
 variant.78.label: Dual-channel
 variant.78.name: D6 PRO Smart Charger
 variant.78.model: D6 PRO
-variant.78.price: HK$1,365
 variant.78.image: /manus-storage/excel_prod_25_422ab006.png
 variant.78.imageAlt: D6 PRO smart balance charger
 ---

@@ -15,7 +15,6 @@ vliCareTiers: certified
 variant.25.label: RTF
 variant.25.name: TOPS Shield 205 RTF
 variant.25.model: TZ009
-variant.25.price: HK$4,329
 variant.25.tier: certified
 variant.25.image: /manus-storage/excel_prod_30_a7d07b66.png
 variant.25.imageAlt: TOPS Shield 205 competition drone kit box
@@ -24,7 +23,6 @@ variant.25.imageAlt: TOPS Shield 205 competition drone kit box
 variant.26.label: PNP
 variant.26.name: TOPS Shield 205 PNP
 variant.26.model: TZ009
-variant.26.price: HK$2,743
 variant.26.tier: builder
 variant.26.image: /manus-storage/excel_prod_31_93c6811c.png
 variant.26.imageAlt: TOPS Shield 205 PNP competition drone product image

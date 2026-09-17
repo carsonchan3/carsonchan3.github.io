@@ -15,7 +15,6 @@ vliCareTiers: certified
 variant.35.label: RTF
 variant.35.name: TOPS Shield 400 RTF
 variant.35.model: TZ003
-variant.35.price: HK$6,708
 variant.35.tier: certified
 variant.35.image: /manus-storage/excel_prod_26_26e91f83.png
 variant.35.imageAlt: TOPS Shield 400 competition drone in a blue cage
@@ -24,7 +23,6 @@ variant.35.imageAlt: TOPS Shield 400 competition drone in a blue cage
 variant.36.label: PNP
 variant.36.name: TOPS Shield 400 PNP
 variant.36.model: TZ003
-variant.36.price: HK$5,395
 variant.36.tier: builder
 variant.36.image: /manus-storage/excel_prod_19_2844a82e.png
 variant.36.imageAlt: TOPS Shield 400 PNP competition drone

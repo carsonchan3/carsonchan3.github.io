@@ -1,6 +1,8 @@
 # VLI Product Authoring Guide
 
-The whole equipment catalogue lives in Markdown files under `content/products/`, one file per product family. Everything customers see is edited there: prices, versions (variants), model numbers, images, names, categories, descriptions, visibility, display order, premium package tiers, VLI CARE, technical specifications, and in-the-box contents.
+The whole equipment catalogue lives in Markdown files under `content/products/`, one file per product family. Everything customers see is edited there: versions (variants), model numbers, images, names, categories, descriptions, visibility, display order, premium package tiers, VLI CARE, technical specifications, and in-the-box contents.
+
+> **Prices are not in these files.** All prices (equipment and Smart Referee packages) are in one table: [`content/pricing.md`](../content/pricing.md).
 
 Edit a file on GitHub (open it → pencil icon → **Commit changes** to `main`). The **Deploy static content to Pages** workflow rebuilds the site in about a minute. If the Markdown has a mistake, the workflow fails with a message naming the file and the problem, and the live site keeps the previous version.
 
@@ -24,7 +26,6 @@ vliCareTiers: certified
 variant.27.label: RTF
 variant.27.name: TOPS Shield 220 RTF
 variant.27.model: TZ002
-variant.27.price: HK$3,718
 variant.27.tier: certified
 variant.27.image: /manus-storage/excel_prod_9_417b350f.png
 variant.27.imageAlt: TOPS Shield 220 competition drone cage illustration
@@ -59,23 +60,22 @@ Lines starting with `#` inside the `---` block are notes and are ignored.
 
 The text under `<!-- locale:en -->` and `<!-- locale:zh-Hant -->` is the product description.
 
-## Variants (versions and prices)
+## Variants (versions)
 
-Each version is a group of `variant.<id>.<field>` lines. The `<id>` can be any short word or number, must be unique across **all** product files, and should not change once published (customers’ saved quote carts use it).
+Each version is a group of `variant.<id>.<field>` lines. The `<id>` can be any short word or number, must be unique across **all** product files, and should not change once published (customers’ saved quote carts use it). Its price is the row with the same ID in `content/pricing.md`.
 
 | Field | Required | What it does |
 | --- | --- | --- |
 | `label` | Yes | Version button text, e.g. `RTF`, `PNP`. |
-| `price` | Yes | Shown exactly as typed, e.g. `HK$3,718`. The card shows “From …” using the lowest price. |
 | `image` | Yes | Image path, e.g. `/manus-storage/…` or `/media/…` (files in the repository `media/` folder). |
 | `name` | No | Full name sent in quote requests. Default: title + label. |
 | `model` | No | Model number shown in the product window. |
 | `imageAlt` | No | Image description for accessibility. |
 | `tier` | Premium only | Which premium package this version is sold as (must match a `tier.<name>` in the detail blocks). |
 
-**To change a price:** edit the `variant.<id>.price` line and commit.
-**To add a version:** copy a variant group, give it a new unique id, and edit the values.
-**To add a product:** copy an existing file, rename it, and change `familyId` and every variant id.
+**To change a price:** edit its row in `content/pricing.md` and commit.
+**To add a version:** copy a variant group, give it a new unique id, edit the values, and add a row with that id to `content/pricing.md`.
+**To add a product:** copy an existing file, rename it, change `familyId` and every variant id, and add a price row for each new id.
 
 ## Premium detail blocks (optional)
 

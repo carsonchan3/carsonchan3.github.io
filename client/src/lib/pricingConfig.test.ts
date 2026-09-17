@@ -34,3 +34,10 @@ describe("pricing configuration", () => {
     expect(buildPricingRequestMessage("evidence-pro", "We need an indoor pilot.")).toContain("Evidence Pro");
   });
 });
+
+describe("content/pricing.md", () => {
+  it("supplies the Smart Referee package prices", async () => {
+    const { refereePackagePrices } = await import("./pricing.generated");
+    expect(pricingTiers.map((tier) => tier.price)).toEqual([refereePackagePrices.assist, refereePackagePrices.managed, refereePackagePrices["evidence-pro"]]);
+  });
+});

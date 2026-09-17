@@ -12,7 +12,6 @@ category.zh-Hant: 充電設備
 variant.75.label: 10-port
 variant.75.name: 10-Port USB Charger
 variant.75.model: 10-port USB charger
-variant.75.price: HK$117
 variant.75.image: /manus-storage/excel_prod_6_81781e24.png
 variant.75.imageAlt: 10-port white USB charger
 ---

@@ -12,7 +12,6 @@ category.zh-Hant: 無人機平台
 variant.30.label: RTF
 variant.30.name: FB200 RTF Racer
 variant.30.model: FB200
-variant.30.price: HK$5,252
 variant.30.image: /manus-storage/excel_prod_10_e5fc5653.png
 variant.30.imageAlt: FB200 RTF racer drone with remote controller
 ---

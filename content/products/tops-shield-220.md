@@ -15,7 +15,6 @@ vliCareTiers: certified
 variant.27.label: RTF
 variant.27.name: TOPS Shield 220 RTF
 variant.27.model: TZ002
-variant.27.price: HK$3,718
 variant.27.tier: certified
 variant.27.image: /manus-storage/excel_prod_9_417b350f.png
 variant.27.imageAlt: TOPS Shield 220 competition drone cage illustration
@@ -24,7 +23,6 @@ variant.27.imageAlt: TOPS Shield 220 competition drone cage illustration
 variant.28.label: RTF + Bag
 variant.28.name: TOPS Shield 220 RTF + Bag
 variant.28.model: TZ002
-variant.28.price: HK$4,056
 variant.28.tier: travel
 variant.28.image: /manus-storage/excel_prod_21_68f8cfe7.png
 variant.28.imageAlt: TOPS Shield 220 drone with remote controller
@@ -33,7 +31,6 @@ variant.28.imageAlt: TOPS Shield 220 drone with remote controller
 variant.29.label: PNP
 variant.29.name: TOPS Shield 220 PNP
 variant.29.model: TZ002
-variant.29.price: HK$2,743
 variant.29.tier: builder
 variant.29.image: /manus-storage/excel_prod_24_65d1f683.png
 variant.29.imageAlt: TOPS Shield 220 PNP competition drone cage diagram
