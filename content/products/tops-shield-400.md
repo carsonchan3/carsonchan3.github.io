@@ -47,10 +47,10 @@ platformLabel: 400 mm platform
 premiumTitle: TOPS Shield 400: The Arena-Scale Platform
 careTitle: Includes 1-Year VLI CARE
 careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
-tier.certified.label: VLI Certified Arena Edition
+tier.certified.label: RTF
 tier.certified.subtitle: Ready-to-fly for larger-format matches and venue deployments.
 tier.certified.features: Complete flight-electronics configuration for arena-scale use. || VLI pre-flight configuration check before handover. || Designed for larger-format match operations and venue planning.
-tier.builder.label: Arena Builder's Edition
+tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: PNP platform for technical teams with their own electronics.
 tier.builder.features: Bring your own receiver and battery workflow. || Flexible foundation for venue-specific configuration. || Standard manufacturer inspection before dispatch.
 specifications: Frame Diameter | 400 mm || Design | Large-format spherical competition cage || Use Case | Arena-scale matches and boundary operations || Configuration | RTF or PNP platform options || Programme Fit | Suitable for larger venues and higher-visibility deployments
@@ -69,10 +69,10 @@ platformLabel: 400 毫米平台
 premiumTitle: TOPS Shield 400：場館級平台
 careTitle: 包括一年 VLI CARE
 careDescription: 涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。
-tier.certified.label: VLI Certified Arena Edition
+tier.certified.label: RTF 全家桶
 tier.certified.subtitle: 適合較大規模賽事及場館部署的開箱即飛配置。
 tier.certified.features: 完整的場館級飛行電子設備配置。 || 交付前由 VLI 進行配置檢查。 || 為較大規模賽事運作及場館規劃而設。
-tier.builder.label: Arena Builder’s Edition
+tier.builder.label: PNP 僅無人機 (+ELRS)
 tier.builder.subtitle: 適合使用自備電子設備的技術隊伍的 PNP 平台。
 tier.builder.features: 使用自備接收器及電池流程。 || 為場館特定配置提供靈活基礎。 || 出貨前進行標準製造商檢查。
 specifications: 機架直徑 | 400 毫米 || 設計 | 大型球形競賽保護架 || 用途 | 場館級賽事及邊界運作 || 配置 | RTF 或 PNP 平台選項 || 計劃適配 | 適合較大型場地及高可見度部署
