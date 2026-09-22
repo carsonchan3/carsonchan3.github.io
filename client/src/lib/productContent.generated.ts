@@ -5,6 +5,9 @@ export type ProductVariantContentRecord = {
   name: string;
   model: string;
   price: string;
+  tier1Price: string;
+  tier2Price?: string;
+  vliCarePrice?: string;
   tier?: string;
   image: string;
   imageAlt: string;
@@ -47,7 +50,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "RTF",
         "name": "TOPS Shield 205 RTF",
         "model": "TZ009",
-        "price": "HK$4,329",
+        "price": "HK$2,430",
+        "tier1Price": "HK$2,430",
+        "tier2Price": "HK$3,430",
+        "vliCarePrice": "HK$560",
         "tier": "certified",
         "image": "/manus-storage/excel_prod_30_a7d07b66.png",
         "imageAlt": "TOPS Shield 205 competition drone kit box"
@@ -57,7 +63,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "PNP",
         "name": "TOPS Shield 205 PNP",
         "model": "TZ009",
-        "price": "HK$2,743",
+        "price": "HK$1,900",
+        "tier1Price": "HK$1,900",
+        "tier2Price": "HK$2,900",
+        "vliCarePrice": "HK$560",
         "tier": "builder",
         "image": "/manus-storage/excel_prod_31_93c6811c.png",
         "imageAlt": "TOPS Shield 205 PNP competition drone product image"
@@ -202,7 +211,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "RTF",
         "name": "TOPS Shield 220 RTF",
         "model": "TZ002",
-        "price": "HK$3,718",
+        "price": "HK$2,430",
+        "tier1Price": "HK$2,430",
+        "tier2Price": "HK$3,430",
+        "vliCarePrice": "HK$560",
         "tier": "certified",
         "image": "/manus-storage/excel_prod_9_417b350f.png",
         "imageAlt": "TOPS Shield 220 competition drone cage illustration"
@@ -212,7 +224,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "RTF + Bag",
         "name": "TOPS Shield 220 RTF + Bag",
         "model": "TZ002",
-        "price": "HK$4,056",
+        "price": "HK$2,650",
+        "tier1Price": "HK$2,650",
+        "tier2Price": "HK$3,650",
+        "vliCarePrice": "HK$560",
         "tier": "travel",
         "image": "/manus-storage/excel_prod_21_68f8cfe7.png",
         "imageAlt": "TOPS Shield 220 drone with remote controller"
@@ -222,7 +237,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "PNP",
         "name": "TOPS Shield 220 PNP",
         "model": "TZ002",
-        "price": "HK$2,743",
+        "price": "HK$1,900",
+        "tier1Price": "HK$1,900",
+        "tier2Price": "HK$2,900",
+        "vliCarePrice": "HK$560",
         "tier": "builder",
         "image": "/manus-storage/excel_prod_24_65d1f683.png",
         "imageAlt": "TOPS Shield 220 PNP competition drone cage diagram"
@@ -386,6 +404,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "FB200 RTF Racer",
         "model": "FB200",
         "price": "HK$5,252",
+        "tier1Price": "HK$5,252",
         "image": "/manus-storage/excel_prod_10_e5fc5653.png",
         "imageAlt": "FB200 RTF racer drone with remote controller"
       }
@@ -415,6 +434,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "FB210 RTF Racer",
         "model": "FB210",
         "price": "HK$5,993",
+        "tier1Price": "HK$5,993",
         "image": "/manus-storage/excel_prod_11_fc95565c.png",
         "imageAlt": "FB210 RTF racer drone with remote controller"
       }
@@ -444,6 +464,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "R200 RTF",
         "model": "R200",
         "price": "HK$5,590",
+        "tier1Price": "HK$5,590",
         "image": "/manus-storage/excel_prod_13_712f9740.png",
         "imageAlt": "R200 RTF competition drone with remote controller"
       }
@@ -453,7 +474,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
   {
     "familyId": "r200f",
     "order": 6,
-    "visible": false,
+    "visible": true,
     "title": {
       "en": "R200F",
       "zh-Hant": "R200F"
@@ -472,7 +493,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "RTF",
         "name": "R200F RTF",
         "model": "R200F",
-        "price": "HK$5,616",
+        "price": "HK$3,650",
+        "tier1Price": "HK$3,650",
+        "tier2Price": "HK$4,650",
+        "vliCarePrice": "HK$700",
         "image": "/manus-storage/excel_prod_15_cb880557.png",
         "imageAlt": "R200F RTF competition drone with remote controller"
       }
@@ -501,7 +525,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "RTF",
         "name": "R220F RTF",
         "model": "R220F",
-        "price": "HK$5,993",
+        "price": "HK$3,890",
+        "tier1Price": "HK$3,890",
+        "tier2Price": "HK$4,890",
+        "vliCarePrice": "HK$700",
         "tier": "certified",
         "image": "/manus-storage/excel_prod_17_584dbd72.png",
         "imageAlt": "R220F RTF competition drone with remote controller"
@@ -626,7 +653,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "RTF",
         "name": "TOPS Shield 400 RTF",
         "model": "TZ003",
-        "price": "HK$6,708",
+        "price": "HK$4,350",
+        "tier1Price": "HK$4,350",
+        "tier2Price": "HK$5,350",
+        "vliCarePrice": "HK$950",
         "tier": "certified",
         "image": "/manus-storage/excel_prod_26_26e91f83.png",
         "imageAlt": "TOPS Shield 400 competition drone in a blue cage"
@@ -636,7 +666,10 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "PNP",
         "name": "TOPS Shield 400 PNP",
         "model": "TZ003",
-        "price": "HK$5,395",
+        "price": "HK$3,510",
+        "tier1Price": "HK$3,510",
+        "tier2Price": "HK$4,510",
+        "vliCarePrice": "HK$950",
         "tier": "builder",
         "image": "/manus-storage/excel_prod_19_2844a82e.png",
         "imageAlt": "TOPS Shield 400 PNP competition drone"
@@ -762,7 +795,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
   {
     "familyId": "ace-lipo-battery",
     "order": 9,
-    "visible": false,
+    "visible": true,
     "title": {
       "en": "ACE LiPo Battery",
       "zh-Hant": "ACE LiPo 電池"
@@ -781,7 +814,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "3S · 1100 mAh",
         "name": "ACE 3S 1100 mAh Battery",
         "model": "3S battery",
-        "price": "HK$234",
+        "price": "HK$144",
+        "tier1Price": "HK$144",
         "image": "/manus-storage/excel_prod_3_aa72f902.png",
         "imageAlt": "ACE 3S 1100 mAh LiPo battery"
       },
@@ -790,7 +824,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "4S · 3000 mAh",
         "name": "ACE 4S 3000 mAh Battery",
         "model": "4S battery",
-        "price": "HK$520",
+        "price": "HK$330",
+        "tier1Price": "HK$330",
         "image": "/manus-storage/excel_prod_27_854f107d.png",
         "imageAlt": "ACE 4S 3000 mAh LiPo battery"
       },
@@ -799,7 +834,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "6S · 3000 mAh",
         "name": "ACE 6S 3000 mAh Battery",
         "model": "6S battery",
-        "price": "HK$754",
+        "price": "HK$477.60",
+        "tier1Price": "HK$477.60",
         "image": "/manus-storage/excel_prod_28_5edbfa4d.png",
         "imageAlt": "ACE 6S 3000 mAh LiPo battery"
       }
@@ -829,6 +865,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "10-Port USB Charger",
         "model": "10-port USB charger",
         "price": "HK$117",
+        "tier1Price": "HK$117",
         "image": "/manus-storage/excel_prod_6_81781e24.png",
         "imageAlt": "10-port white USB charger"
       }
@@ -858,6 +895,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "B3 20W Balance Charger",
         "model": "B3 20W",
         "price": "HK$65",
+        "tier1Price": "HK$65",
         "image": "/manus-storage/excel_prod_1_f4a517d6.png",
         "imageAlt": "B3 balance charger"
       },
@@ -867,8 +905,39 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "B3 10W Balance Charger",
         "model": "B3 10W",
         "price": "HK$52",
+        "tier1Price": "HK$52",
         "image": "/manus-storage/excel_prod_4_5d33c966.png",
         "imageAlt": "B3 10W balance charger"
+      }
+    ],
+    "vliCareTiers": []
+  },
+  {
+    "familyId": "tops-shield-200",
+    "order": 11,
+    "visible": true,
+    "title": {
+      "en": "TOPS Shield 200 Brushless",
+      "zh-Hant": "TOPS 飛盾 200 無刷版"
+    },
+    "category": {
+      "en": "Drone platform",
+      "zh-Hant": "無人機平台"
+    },
+    "description": {
+      "en": "A cost-conscious 200 mm brushless drone platform for training and entry-level competition preparation.",
+      "zh-Hant": "適合訓練及入門競賽準備的高性價比 200 毫米無刷球形無人機平台。"
+    },
+    "variants": [
+      {
+        "id": "5",
+        "label": "Standard",
+        "name": "TOPS Shield 200 Brushless",
+        "model": "200 mm brushless",
+        "price": "HK$1,200",
+        "tier1Price": "HK$1,200",
+        "image": "/media/Droneequipment_2ab6c2b7.jpg",
+        "imageAlt": "TOPS Shield 200 brushless competition drone"
       }
     ],
     "vliCareTiers": []
@@ -895,9 +964,40 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "label": "Dual-channel",
         "name": "D6 PRO Smart Charger",
         "model": "D6 PRO",
-        "price": "HK$1,365",
+        "price": "HK$874.80",
+        "tier1Price": "HK$874.80",
         "image": "/manus-storage/excel_prod_25_422ab006.png",
         "imageAlt": "D6 PRO smart balance charger"
+      }
+    ],
+    "vliCareTiers": []
+  },
+  {
+    "familyId": "tops-shield-200-cup",
+    "order": 12,
+    "visible": true,
+    "title": {
+      "en": "TOPS Shield 200 Brushed RTF Set",
+      "zh-Hant": "TOPS 飛盾 200 空心杯足球無人機套裝"
+    },
+    "category": {
+      "en": "Drone platform",
+      "zh-Hant": "無人機平台"
+    },
+    "description": {
+      "en": "A portable ready-to-fly 200 mm drone set for training, classroom use, and pre-event team preparation.",
+      "zh-Hant": "適合訓練、課堂使用及賽前隊伍準備的便攜式 200 毫米開箱即飛套裝。"
+    },
+    "variants": [
+      {
+        "id": "19",
+        "label": "Portable RTF set",
+        "name": "TOPS Shield 200 Brushed RTF Set",
+        "model": "TZ001",
+        "price": "HK$810",
+        "tier1Price": "HK$810",
+        "image": "/media/Droneequipment_2ab6c2b7.jpg",
+        "imageAlt": "TOPS Shield 200 portable ready-to-fly drone set"
       }
     ],
     "vliCareTiers": []
@@ -925,6 +1025,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "Inflatable Drone Soccer Field 3 × 3 × 3 m",
         "model": "3 × 3 × 3 m",
         "price": "HK$5,733",
+        "tier1Price": "HK$5,733",
         "image": "/manus-storage/excel_prod_7_7475981f.png",
         "imageAlt": "Inflatable drone soccer field with two goals"
       },
@@ -934,8 +1035,159 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "name": "Inflatable Drone Soccer Field 6 × 3 × 3 m",
         "model": "6 × 3 × 3 m",
         "price": "HK$7,813",
+        "tier1Price": "HK$7,813",
         "image": "/manus-storage/excel_prod_8_903cb396.png",
         "imageAlt": "Large inflatable drone soccer field with two goals"
+      }
+    ],
+    "vliCareTiers": []
+  },
+  {
+    "familyId": "tops-shield-200-battery",
+    "order": 13,
+    "visible": true,
+    "title": {
+      "en": "TOPS Shield 200 2S Battery",
+      "zh-Hant": "TOPS 飛盾 200 2S 電池"
+    },
+    "category": {
+      "en": "Drone power",
+      "zh-Hant": "無人機電源"
+    },
+    "description": {
+      "en": "A replacement 2S flight battery for compatible TOPS Shield 200 drone configurations.",
+      "zh-Hant": "適用於兼容 TOPS 飛盾 200 配置的替換用 2S 飛行電池。"
+    },
+    "variants": [
+      {
+        "id": "20",
+        "label": "450 mAh · 2S",
+        "name": "TOPS Shield 200 450 mAh 2S Battery",
+        "model": "2S 7.4 V 25C",
+        "price": "HK$35",
+        "tier1Price": "HK$35",
+        "image": "/media/Droneequipment_2ab6c2b7.jpg",
+        "imageAlt": "TOPS Shield 200 2S flight battery"
+      }
+    ],
+    "vliCareTiers": []
+  },
+  {
+    "familyId": "gmb-4s-battery",
+    "order": 14,
+    "visible": true,
+    "title": {
+      "en": "GMB High-Energy 4S Battery",
+      "zh-Hant": "GMB 高能 4S 電池"
+    },
+    "category": {
+      "en": "Drone power",
+      "zh-Hant": "無人機電源"
+    },
+    "description": {
+      "en": "A high-energy 4S battery for compatible brushless racing and drone-soccer platforms.",
+      "zh-Hant": "適用於兼容無刷競賽及無人機足球平台的高能 4S 電池。"
+    },
+    "variants": [
+      {
+        "id": "72",
+        "label": "3000 mAh · 4S",
+        "name": "GMB High-Energy 15.2 V 3000 mAh 4S Battery",
+        "model": "4S 15.2 V",
+        "price": "HK$288",
+        "tier1Price": "HK$288",
+        "image": "/media/Droneequipment_2ab6c2b7.jpg",
+        "imageAlt": "GMB high-energy 4S drone battery"
+      }
+    ],
+    "vliCareTiers": []
+  },
+  {
+    "familyId": "ta300-charger",
+    "order": 15,
+    "visible": true,
+    "title": {
+      "en": "TA300 300W Eight-Channel Charger",
+      "zh-Hant": "TA300 300W 八通道充電器"
+    },
+    "category": {
+      "en": "Charging equipment",
+      "zh-Hant": "充電設備"
+    },
+    "description": {
+      "en": "An eight-channel smart charger for preparing multiple 2–4S batteries efficiently and consistently.",
+      "zh-Hant": "適合高效及一致地準備多枚 2–4S 電池的八通道智能充電器。"
+    },
+    "variants": [
+      {
+        "id": "79",
+        "label": "Eight-channel",
+        "name": "TA300 300W Eight-Channel 2–4S Smart Charger",
+        "model": "TA300",
+        "price": "HK$958.80",
+        "tier1Price": "HK$958.80",
+        "image": "/media/Droneequipment_2ab6c2b7.jpg",
+        "imageAlt": "TA300 eight-channel smart battery charger"
+      }
+    ],
+    "vliCareTiers": []
+  },
+  {
+    "familyId": "tops-bag-200",
+    "order": 16,
+    "visible": true,
+    "title": {
+      "en": "TOPS 200 mm Drone Carry Bag",
+      "zh-Hant": "TOPS 200 毫米球機收納包"
+    },
+    "category": {
+      "en": "Event equipment",
+      "zh-Hant": "賽事設備"
+    },
+    "description": {
+      "en": "A dedicated carry bag for transporting a 200 mm spherical drone and its essential accessories.",
+      "zh-Hant": "專為運送 200 毫米球形無人機及基本配件而設的收納包。"
+    },
+    "variants": [
+      {
+        "id": "83",
+        "label": "200 mm",
+        "name": "TOPS Drone Carry Bag for 200 mm Ball Drone",
+        "model": "200 mm",
+        "price": "HK$180",
+        "tier1Price": "HK$180",
+        "image": "/media/Droneequipment_2ab6c2b7.jpg",
+        "imageAlt": "TOPS carry bag for a 200 mm drone"
+      }
+    ],
+    "vliCareTiers": []
+  },
+  {
+    "familyId": "tops-bag-220",
+    "order": 17,
+    "visible": true,
+    "title": {
+      "en": "TOPS 200–220 mm Drone Carry Bag",
+      "zh-Hant": "TOPS 200–220 毫米球機收納包"
+    },
+    "category": {
+      "en": "Event equipment",
+      "zh-Hant": "賽事設備"
+    },
+    "description": {
+      "en": "A portable carry bag for transporting compatible 200–220 mm spherical drones between training and event venues.",
+      "zh-Hant": "適合在訓練場地及賽事場館之間運送兼容 200–220 毫米球形無人機的便攜式收納包。"
+    },
+    "variants": [
+      {
+        "id": "84",
+        "label": "200–220 mm",
+        "name": "TOPS Drone Carry Bag for 200–220 mm Ball Drone",
+        "model": "200–220 mm",
+        "price": "HK$264",
+        "tier1Price": "HK$264",
+        "image": "/media/Droneequipment_2ab6c2b7.jpg",
+        "imageAlt": "TOPS carry bag for a 200 to 220 mm drone"
       }
     ],
     "vliCareTiers": []

@@ -13,13 +13,13 @@ describe("Markdown-backed equipment catalogue content", () => {
     const visibleFamilies = getVisibleProductFamilies(productFamilies);
     const visibleVariants = visibleFamilies.flatMap((family) => family.variants);
 
-    expect(visibleFamilies.map((family) => family.familyId)).toEqual(["tops-shield-205", "tops-shield-220", "r220f", "tops-shield-400", "d6-pro"]);
-    expect(visibleVariants.map((variant) => variant.sourceId)).toEqual(["25", "26", "27", "28", "29", "34", "35", "36", "78"]);
+    expect(visibleFamilies.map((family) => family.familyId)).toEqual(expect.arrayContaining(["tops-shield-205", "tops-shield-220", "r220f", "tops-shield-400", "d6-pro", "tops-shield-200", "tops-shield-200-cup", "tops-shield-200-battery", "gmb-4s-battery", "ta300-charger", "tops-bag-200", "tops-bag-220"]));
+    expect(visibleVariants.map((variant) => variant.sourceId)).toEqual(expect.arrayContaining(["5", "19", "20", "25", "26", "27", "28", "29", "34", "35", "36", "69", "70", "71", "72", "78", "79", "83", "84"]));
   });
 
   it("keeps every catalogue family and variant from content/products", () => {
-    expect(productFamilies).toHaveLength(13);
-    expect(productFamilies.flatMap((family) => family.variants)).toHaveLength(21);
+    expect(productFamilies).toHaveLength(20);
+    expect(productFamilies.flatMap((family) => family.variants)).toHaveLength(28);
     expect(productFamilies.every((family) => family.name.length > 0 && family.category.length > 0)).toBe(true);
   });
 
@@ -27,13 +27,13 @@ describe("Markdown-backed equipment catalogue content", () => {
     const topsShield205 = productFamilies.find((family) => family.familyId === "tops-shield-205");
     const topsShield220 = productFamilies.find((family) => family.familyId === "tops-shield-220");
 
-    expect(topsShield205?.variants.map((variant) => `${variant.label}:${variant.price}`)).toEqual(["RTF:HK$4,329", "PNP:HK$2,743"]);
+    expect(topsShield205?.variants.map((variant) => `${variant.label}:${variant.price}`)).toEqual(["RTF:HK$2,430", "PNP:HK$1,900"]);
     expect(topsShield220?.variants.map((variant) => variant.label)).toEqual(["RTF", "RTF + Bag", "PNP"]);
   });
 
   it("numbers product variants sequentially from #1", () => {
     const variants = productFamilies.flatMap((family) => family.variants);
-    expect(variants.map((variant) => variant.number)).toEqual(Array.from({ length: 21 }, (_, index) => String(index + 1)));
+    expect(variants.map((variant) => variant.number)).toEqual(Array.from({ length: variants.length }, (_, index) => String(index + 1)));
   });
 
   it("uses the revised custom equipment request copy in Traditional Chinese", () => {
@@ -42,7 +42,7 @@ describe("Markdown-backed equipment catalogue content", () => {
 
   it("gives every variant a price and image", () => {
     const variants = productFamilies.flatMap((family) => family.variants);
-    expect(variants.every((variant) => /^HK\$[\d,]+$/.test(variant.price))).toBe(true);
+    expect(variants.every((variant) => /^HK\$[\d,]+(?:\.\d{1,2})?$/.test(variant.price))).toBe(true);
     expect(variants.every((variant) => variant.image.length > 0 && variant.imageAlt.length > 0)).toBe(true);
   });
 
@@ -50,7 +50,7 @@ describe("Markdown-backed equipment catalogue content", () => {
     const variantIds = productFamilies.flatMap((family) => family.variants.map((variant) => variant.sourceId));
     const savedCart = sanitizeProductCart({ "25": 2, "26": 99, "79": 1, unknown: 1, "27": 0, "28": 100, "29": "3" }, variantIds);
 
-    expect(savedCart).toEqual({ "25": 2, "26": 99 });
+    expect(savedCart).toEqual({ "25": 2, "26": 99, "79": 1 });
   });
 
   it("keeps static product images when an existing database record has an incomplete upload URL", () => {

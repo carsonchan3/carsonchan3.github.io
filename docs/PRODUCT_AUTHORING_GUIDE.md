@@ -2,7 +2,7 @@
 
 The whole equipment catalogue lives in Markdown files under `content/products/`, one file per product family. Everything customers see is edited there: versions (variants), model numbers, images, names, categories, descriptions, visibility, display order, premium package tiers, VLI CARE, technical specifications, and in-the-box contents.
 
-> **Prices are not in these files.** All prices (equipment and Smart Referee packages) are in one table: [`content/pricing.md`](../content/pricing.md).
+> **Prices are managed in one Markdown table.** Equipment prices and Smart Referee package prices are in [`content/pricing.md`](../content/pricing.md). Equipment rows support Tier 1, Tier 2, and the optional VLI-CARE add-on columns.
 
 Edit a file on GitHub (open it → pencil icon → **Commit changes** to `main`). The **Deploy static content to Pages** workflow rebuilds the site in about a minute. If the Markdown has a mistake, the workflow fails with a message naming the file and the problem, and the live site keeps the previous version.
 
@@ -73,7 +73,7 @@ Each version is a group of `variant.<id>.<field>` lines. The `<id>` can be any s
 | `imageAlt` | No | Image description for accessibility. |
 | `tier` | Premium only | Which premium package this version is sold as (must match a `tier.<name>` in the detail blocks). |
 
-**To change a price:** edit its row in `content/pricing.md` and commit.
+**To change a price:** edit the relevant tier column in `content/pricing.md` and commit. Tier 1 is always the parts-only starting price. If Tier 2 is blank, the item has one purchase level. If Tier 2 is present, the site shows Tier 1 and Tier 2 as selectable options; VLI-CARE is shown only as an add-on for Tier 2.
 **To add a version:** copy a variant group, give it a new unique id, edit the values, and add a row with that id to `content/pricing.md`.
 **To add a product:** copy an existing file, rename it, change `familyId` and every variant id, and add a price row for each new id.
 

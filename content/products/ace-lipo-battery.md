@@ -1,8 +1,7 @@
 ---
 familyId: ace-lipo-battery
 order: 9
-visible: false
-
+visible: true
 title.en: ACE LiPo Battery
 title.zh-Hant: ACE LiPo 電池
 category.en: Drone power
