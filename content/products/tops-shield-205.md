@@ -47,10 +47,10 @@ platformLabel: 205 mm platform
 premiumTitle: TOPS Shield 205: The Agile Striker
 careTitle: Includes 1-Year VLI CARE
 careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
-tier.builder.label: Builder's Edition
+tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: For teams with in-house technicians.
 tier.builder.features: Factory default settings (requires manual PID tuning). || Standard manufacturer visual inspection. || Standard 14-day defect return policy (Does not cover flight crashes).
-tier.certified.label: VLI Certified Edition
+tier.certified.label: RTF
 tier.certified.subtitle: Plug-and-play for professional arenas and schools.
 tier.certified.features: Professionally tuned by VLI engineers for arena agility. || 15-point VLI Pre-Flight Verification (motors and ESCs stress-tested). || Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements.
 specifications: Frame Diameter | 205 mm || Design | Spherical impact-resistant competition cage || Flight Dynamics | 360-degree collision tolerance with auto-righting || Propulsion | High-torque brushless motors || Telemetry | Low-latency transmission, fully compatible with Smart Referee systems
@@ -69,10 +69,10 @@ platformLabel: 205 毫米平台
 premiumTitle: TOPS Shield 205：靈活進攻平台
 careTitle: 包括一年 VLI CARE
 careDescription: 涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。
-tier.builder.label: Builder’s Edition
+tier.builder.label: 無人機足球 (僅無人機)
 tier.builder.subtitle: 適合具備內部技術人員的隊伍。
 tier.builder.features: 原廠預設設定（需要手動 PID 調校）。 || 標準製造商目視檢查。 || 標準 14 天產品缺陷退貨政策（不涵蓋飛行碰撞）。
-tier.certified.label: VLI Certified Edition
+tier.certified.label: RTF全家桶
 tier.certified.subtitle: 適合專業場地及學校的即插即用配置。
 tier.certified.features: 由 VLI 工程師為場地靈活性進行專業調校。 || 15 項 VLI 交付前檢查（馬達及 ESC 經壓力測試）。 || 包括一年 VLI CARE：涵蓋嚴重碰撞損壞、進水損壞及快速更換。
 specifications: 機架直徑 | 205 毫米 || 設計 | 耐撞擊球形競賽保護架 || 飛行動態 | 360 度碰撞容錯及自動翻正 || 推進系統 | 高扭矩無刷馬達 || 遙測 | 低延遲傳輸，完全兼容 Smart Referee 系統
