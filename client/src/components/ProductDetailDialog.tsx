@@ -54,6 +54,8 @@ export type PremiumProductContent = {
   tiers: Record<PremiumTier, PremiumTierContent>;
   specifications: readonly (readonly [string, string])[];
   inTheBox: readonly string[];
+  specificationsTitle: string;
+  inTheBoxTitle: string;
   /** Tiers that show the VLI CARE badge and activation code. */
   careTiers: readonly PremiumTier[];
   careTitle: string;
@@ -155,8 +157,8 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <section data-testid={`${content.testId}-specifications`} className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Gauge size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{translate("Technical Specifications")}</h3></div><dl className="space-y-3">{content.specifications.map(([label, value]) => <div key={label} className="grid grid-cols-[0.8fr_1.2fr] gap-3 border-t border-white/10 pt-3 text-sm"><dt className="text-white/45">{translate(label)}</dt><dd className="text-right text-white/75">{translate(value)}</dd></div>)}</dl></section>
-        <section data-testid={`${content.testId}-in-the-box`} className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Box size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{translate("In the Box")}</h3></div><ul className="space-y-3">{[...content.inTheBox, ...(certified ? ["1x VLI CARE Activation Code"] : [])].map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/75"><Check size={15} className="mt-1 shrink-0 text-accent" />{translate(item)}</li>)}</ul></section>
+        <section data-testid={`${content.testId}-specifications`} className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Gauge size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{translate(content.specificationsTitle)}</h3></div><dl className="space-y-3">{content.specifications.map(([label, value]) => <div key={label} className="grid grid-cols-[0.8fr_1.2fr] gap-3 border-t border-white/10 pt-3 text-sm"><dt className="text-white/45">{translate(label)}</dt><dd className="text-right text-white/75">{translate(value)}</dd></div>)}</dl></section>
+        <section data-testid={`${content.testId}-in-the-box`} className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Box size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{translate(content.inTheBoxTitle)}</h3></div><ul className="space-y-3">{[...content.inTheBox, ...(certified ? ["1x VLI CARE Activation Code"] : [])].map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/75"><Check size={15} className="mt-1 shrink-0 text-accent" />{translate(item)}</li>)}</ul></section>
       </div>
     </div>
   );

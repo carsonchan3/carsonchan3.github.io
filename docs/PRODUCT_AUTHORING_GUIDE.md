@@ -87,6 +87,8 @@ platformLabel: 220 mm platform
 premiumTitle: TOPS Shield 220: The Competition Workhorse
 careTitle: Includes 1-Year VLI CARE
 careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
+specificationsTitle: Technical Specifications
+inTheBoxTitle: What's in the Box
 tier.certified.label: VLI Certified Edition
 tier.certified.subtitle: Ready-to-fly for competition teams and schools.
 tier.certified.features: First feature. || Second feature. || Third feature.
@@ -97,8 +99,9 @@ specifications: Frame Diameter | 220 mm || Configuration | RTF or PNP
 inTheBox: 1x Competition Ball Drone || 2x Sets of Competition Propellers
 ```
 
-- Tiers appear in the order they are written. Tier names (`certified`, `builder`, `travel`, or any new word) must be the same in both languages, and each tier needs at least one variant with a matching `variant.<id>.tier`.
+- Tiers appear in the order they are written. The customer-facing tier names, such as `VLI Certified Edition` and `Builder's Edition`, are the values after `tier.<name>.label` and can be changed independently in each language. The internal tier key (`certified`, `builder`, `travel`, or any new word) must be the same in both languages, and each tier needs at least one variant with a matching `variant.<id>.tier`.
 - Separate list items with `||`. In `specifications`, each row is `Label | Value`.
+- `specificationsTitle` controls the heading above the technical specification table. `inTheBoxTitle` controls the heading above the included-items list. Both are required in both language blocks and can be renamed per product.
 
 ## Keep it accurate
 

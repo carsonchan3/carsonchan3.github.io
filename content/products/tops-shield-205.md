@@ -35,6 +35,8 @@ Engineered for high-intensity drone sports, the TOPS Shield 205 combines a light
 TOPS Shield 205 專為高強度無人機運動而設，結合輕量化 205 毫米球形外骨骼與競賽調校動力系統。即使碰撞場地圍網或對手，也能保持飛行，是狹窄空間靈活操控的理想平台。
 
 <!-- detail:en -->
+specificationsTitle: Technical Specifications
+inTheBoxTitle: What's in the Box
 platformLabel: 205 mm platform
 premiumTitle: TOPS Shield 205: The Agile Striker
 careTitle: Includes 1-Year VLI CARE
@@ -49,6 +51,8 @@ specifications: Frame Diameter | 205 mm || Design | Spherical impact-resistant c
 inTheBox: 1x TOPS Shield 205 Competition Ball Drone || 1x Pre-Bound Receiver / Transmission Unit || 2x Sets of Competition Propellers || 1x High-Impact Spare Outer Shell Segment || 1x Custom VLI Transport Bag
 
 <!-- detail:zh-Hant -->
+specificationsTitle: 技術規格
+inTheBoxTitle: 包裝內容
 platformLabel: 205 毫米平台
 premiumTitle: TOPS Shield 205：靈活進攻平台
 careTitle: 包括一年 VLI CARE

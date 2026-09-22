@@ -20,6 +20,10 @@ describe("Markdown-managed product content", () => {
       const content = getProductContent(familyId);
       expect(content?.detail?.en.premiumTitle).toBeTruthy();
       expect(content?.detail?.["zh-Hant"].premiumTitle).toBeTruthy();
+      expect(content?.detail?.en.specificationsTitle).toBeTruthy();
+      expect(content?.detail?.en.inTheBoxTitle).toBeTruthy();
+      expect(content?.detail?.["zh-Hant"].specificationsTitle).toBeTruthy();
+      expect(content?.detail?.["zh-Hant"].inTheBoxTitle).toBeTruthy();
       expect(Object.keys(content?.detail?.en.tiers ?? {}).length).toBeGreaterThan(0);
       expect(Object.keys(content?.detail?.["zh-Hant"].tiers ?? {}).length).toBeGreaterThan(0);
       expect(content?.detail?.en.specifications.length).toBeGreaterThan(0);

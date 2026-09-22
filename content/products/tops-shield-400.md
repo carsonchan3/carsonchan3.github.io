@@ -35,6 +35,8 @@ The TOPS Shield 400 is built for larger-format drone sports where teams need mor
 TOPS Shield 400 為較大規模的無人機運動而設，適合隊伍在場館邊界需要更大體量及耐用性的情況。您可選擇完整部署套裝的開箱即飛系統，或以 PNP 平台作為自備接收器及電池流程的基礎。
 
 <!-- detail:en -->
+specificationsTitle: Technical Specifications
+inTheBoxTitle: What's in the Box
 platformLabel: 400 mm platform
 premiumTitle: TOPS Shield 400: The Arena-Scale Platform
 careTitle: Includes 1-Year VLI CARE
@@ -49,6 +51,8 @@ specifications: Frame Diameter | 400 mm || Design | Large-format spherical compe
 inTheBox: 1x TOPS Shield 400 Competition Ball Drone || 1x Flight-Electronics Configuration on RTF Edition || 2x Sets of Competition Propellers || 1x High-Impact Outer Shell Component || 1x VLI Configuration Handover Checklist
 
 <!-- detail:zh-Hant -->
+specificationsTitle: 技術規格
+inTheBoxTitle: 包裝內容
 platformLabel: 400 毫米平台
 premiumTitle: TOPS Shield 400：場館級平台
 careTitle: 包括一年 VLI CARE

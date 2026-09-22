@@ -43,6 +43,8 @@ The TOPS Shield 220 gives competition teams a balanced 220mm platform for repeat
 TOPS Shield 220 為競賽隊伍提供平衡的 220 毫米平台，適合重複訓練及賽事部署。您可選擇開箱即飛配置以快速投入運作，在重視物流時加入運輸套裝，或使用自備接收器建立內部技術流程。
 
 <!-- detail:en -->
+specificationsTitle: Technical Specifications
+inTheBoxTitle: What's in the Box
 platformLabel: 220 mm platform
 premiumTitle: TOPS Shield 220: The Competition Workhorse
 careTitle: Includes 1-Year VLI CARE
@@ -60,6 +62,8 @@ specifications: Frame Diameter | 220 mm || Configuration | RTF, travel-ready, or
 inTheBox: 1x TOPS Shield 220 Competition Ball Drone || 1x Receiver / Transmission Unit on RTF configurations || 2x Sets of Competition Propellers || 1x High-Impact Spare Outer Shell Segment || 1x Carrying Bag on Travel Edition
 
 <!-- detail:zh-Hant -->
+specificationsTitle: 技術規格
+inTheBoxTitle: 包裝內容
 platformLabel: 220 毫米平台
 premiumTitle: TOPS Shield 220：競賽主力平台
 careTitle: 包括一年 VLI CARE

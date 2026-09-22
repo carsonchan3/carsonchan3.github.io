@@ -78,6 +78,8 @@ export function getPremiumProductContent(familyId: string, language: WebsiteLang
     tiers: detail.tiers,
     specifications: detail.specifications,
     inTheBox: detail.inTheBox,
+    specificationsTitle: detail.specificationsTitle,
+    inTheBoxTitle: detail.inTheBoxTitle,
     careTiers: record.vliCareTiers,
     careTitle: detail.careTitle,
     careDescription: detail.careDescription,

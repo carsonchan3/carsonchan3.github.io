@@ -23,8 +23,8 @@ export type ProductDetailContentRecord = {
   defaultTier?: string;
   vliCareTiers: string[];
   detail?: {
-    en: { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
-    "zh-Hant": { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
+    en: { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
+    "zh-Hant": { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
   };
 };
 export const productContent: readonly ProductDetailContentRecord[] = [
@@ -82,6 +82,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "TOPS Shield 205: The Agile Striker",
         "careTitle": "Includes 1-Year VLI CARE",
         "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
         "tiers": {
           "builder": {
             "label": "Builder's Edition",
@@ -137,6 +139,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "TOPS Shield 205：靈活進攻平台",
         "careTitle": "包括一年 VLI CARE",
         "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
         "tiers": {
           "builder": {
             "label": "Builder’s Edition",
@@ -256,6 +260,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "TOPS Shield 220: The Competition Workhorse",
         "careTitle": "Includes 1-Year VLI CARE",
         "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
         "tiers": {
           "certified": {
             "label": "VLI Certified Edition",
@@ -320,6 +326,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "TOPS Shield 220：競賽主力平台",
         "careTitle": "包括一年 VLI CARE",
         "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
         "tiers": {
           "certified": {
             "label": "VLI Certified Edition",
@@ -542,6 +550,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "R220F: The Ready-to-Deploy Training Platform",
         "careTitle": "VLI CARE not included",
         "careDescription": "This package does not include VLI CARE.",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
         "tiers": {
           "certified": {
             "label": "VLI Ready-to-Deploy Edition",
@@ -588,6 +598,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "R220F：即時部署訓練平台",
         "careTitle": "不包括 VLI CARE",
         "careDescription": "此配置不包括 VLI CARE。",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
         "tiers": {
           "certified": {
             "label": "VLI Ready-to-Deploy Edition",
@@ -685,6 +697,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "TOPS Shield 400: The Arena-Scale Platform",
         "careTitle": "Includes 1-Year VLI CARE",
         "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
         "tiers": {
           "certified": {
             "label": "VLI Certified Arena Edition",
@@ -740,6 +754,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "premiumTitle": "TOPS Shield 400：場館級平台",
         "careTitle": "包括一年 VLI CARE",
         "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
         "tiers": {
           "certified": {
             "label": "VLI Certified Arena Edition",
