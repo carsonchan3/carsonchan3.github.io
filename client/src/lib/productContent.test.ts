@@ -24,6 +24,12 @@ describe("Markdown-managed product content", () => {
       expect(content?.detail?.en.inTheBoxTitle).toBeTruthy();
       expect(content?.detail?.["zh-Hant"].specificationsTitle).toBeTruthy();
       expect(content?.detail?.["zh-Hant"].inTheBoxTitle).toBeTruthy();
+      expect(content?.detail?.en.equipmentTierPartsLabel).toBeTruthy();
+      expect(content?.detail?.en.equipmentTierVerifiedLabel).toBeTruthy();
+      expect(content?.detail?.en.careAddOnTitle).toBeTruthy();
+      expect(content?.detail?.["zh-Hant"].equipmentTierPartsLabel).toBeTruthy();
+      expect(content?.detail?.["zh-Hant"].equipmentTierVerifiedLabel).toBeTruthy();
+      expect(content?.detail?.["zh-Hant"].careAddOnTitle).toBeTruthy();
       expect(Object.keys(content?.detail?.en.tiers ?? {}).length).toBeGreaterThan(0);
       expect(Object.keys(content?.detail?.["zh-Hant"].tiers ?? {}).length).toBeGreaterThan(0);
       expect(content?.detail?.en.specifications.length).toBeGreaterThan(0);

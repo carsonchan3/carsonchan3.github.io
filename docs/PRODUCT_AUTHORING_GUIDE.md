@@ -89,6 +89,12 @@ careTitle: Includes 1-Year VLI CARE
 careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
 specificationsTitle: Technical Specifications
 inTheBoxTitle: What's in the Box
+equipmentTierPartsLabel: Tier 1 · PARTS only
+equipmentTierPartsDescription: Parts-only supply with a limited warranty up to 7 days.
+equipmentTierVerifiedLabel: Tier 2 · VLI-verified
+equipmentTierVerifiedDescription: The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.
+careAddOnTitle: Add VLI-CARE
+careAddOnDescription: Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair; shipping is not included.
 tier.certified.label: VLI Certified Edition
 tier.certified.subtitle: Ready-to-fly for competition teams and schools.
 tier.certified.features: First feature. || Second feature. || Third feature.
@@ -102,6 +108,7 @@ inTheBox: 1x Competition Ball Drone || 2x Sets of Competition Propellers
 - Tiers appear in the order they are written. The customer-facing tier names, such as `VLI Certified Edition` and `Builder's Edition`, are the values after `tier.<name>.label` and can be changed independently in each language. The internal tier key (`certified`, `builder`, `travel`, or any new word) must be the same in both languages, and each tier needs at least one variant with a matching `variant.<id>.tier`.
 - Separate list items with `||`. In `specifications`, each row is `Label | Value`.
 - `specificationsTitle` controls the heading above the technical specification table. `inTheBoxTitle` controls the heading above the included-items list. Both are required in both language blocks and can be renamed per product.
+- `equipmentTierPartsLabel` / `equipmentTierPartsDescription` and `equipmentTierVerifiedLabel` / `equipmentTierVerifiedDescription` control the Tier 1 and Tier 2 purchase choices. `careAddOnTitle` / `careAddOnDescription` control the optional VLI-CARE add-on copy. These fields are also required in both language blocks.
 
 ## Keep it accurate
 

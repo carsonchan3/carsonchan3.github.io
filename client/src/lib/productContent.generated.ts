@@ -23,8 +23,8 @@ export type ProductDetailContentRecord = {
   defaultTier?: string;
   vliCareTiers: string[];
   detail?: {
-    en: { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
-    "zh-Hant": { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
+    en: { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
+    "zh-Hant": { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
   };
 };
 export const productContent: readonly ProductDetailContentRecord[] = [
@@ -84,6 +84,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
         "specificationsTitle": "Technical Specifications",
         "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "Tier 1 · PARTS only",
+        "equipmentTierPartsDescription": "Parts-only supply with a limited warranty up to 7 days.",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI-verified",
+        "equipmentTierVerifiedDescription": "The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.",
+        "careAddOnTitle": "Add VLI-CARE",
+        "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "builder": {
             "label": "Builder's Edition",
@@ -141,6 +147,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
         "specificationsTitle": "技術規格",
         "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "Tier 1 · 僅零件",
+        "equipmentTierPartsDescription": "僅供應零件，有限保養期最長 7 天。",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI 驗證",
+        "equipmentTierVerifiedDescription": "無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 21 天。",
+        "careAddOnTitle": "加購 VLI CARE",
+        "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "builder": {
             "label": "Builder’s Edition",
@@ -262,6 +274,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
         "specificationsTitle": "Technical Specifications",
         "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "Tier 1 · PARTS only",
+        "equipmentTierPartsDescription": "Parts-only supply with a limited warranty up to 7 days.",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI-verified",
+        "equipmentTierVerifiedDescription": "The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.",
+        "careAddOnTitle": "Add VLI-CARE",
+        "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "certified": {
             "label": "VLI Certified Edition",
@@ -328,6 +346,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
         "specificationsTitle": "技術規格",
         "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "Tier 1 · 僅零件",
+        "equipmentTierPartsDescription": "僅供應零件，有限保養期最長 7 天。",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI 驗證",
+        "equipmentTierVerifiedDescription": "無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 21 天。",
+        "careAddOnTitle": "加購 VLI CARE",
+        "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "certified": {
             "label": "VLI Certified Edition",
@@ -552,6 +576,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "This package does not include VLI CARE.",
         "specificationsTitle": "Technical Specifications",
         "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "Tier 1 · PARTS only",
+        "equipmentTierPartsDescription": "Parts-only supply with a limited warranty up to 7 days.",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI-verified",
+        "equipmentTierVerifiedDescription": "The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.",
+        "careAddOnTitle": "Add VLI-CARE",
+        "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "certified": {
             "label": "VLI Ready-to-Deploy Edition",
@@ -600,6 +630,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "此配置不包括 VLI CARE。",
         "specificationsTitle": "技術規格",
         "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "Tier 1 · 僅零件",
+        "equipmentTierPartsDescription": "僅供應零件，有限保養期最長 7 天。",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI 驗證",
+        "equipmentTierVerifiedDescription": "無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 21 天。",
+        "careAddOnTitle": "加購 VLI CARE",
+        "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "certified": {
             "label": "VLI Ready-to-Deploy Edition",
@@ -699,6 +735,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
         "specificationsTitle": "Technical Specifications",
         "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "Tier 1 · PARTS only",
+        "equipmentTierPartsDescription": "Parts-only supply with a limited warranty up to 7 days.",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI-verified",
+        "equipmentTierVerifiedDescription": "The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.",
+        "careAddOnTitle": "Add VLI-CARE",
+        "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "certified": {
             "label": "VLI Certified Arena Edition",
@@ -756,6 +798,12 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
         "specificationsTitle": "技術規格",
         "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "Tier 1 · 僅零件",
+        "equipmentTierPartsDescription": "僅供應零件，有限保養期最長 7 天。",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI 驗證",
+        "equipmentTierVerifiedDescription": "無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 21 天。",
+        "careAddOnTitle": "加購 VLI CARE",
+        "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "certified": {
             "label": "VLI Certified Arena Edition",

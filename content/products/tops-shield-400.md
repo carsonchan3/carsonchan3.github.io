@@ -37,6 +37,12 @@ TOPS Shield 400 為較大規模的無人機運動而設，適合隊伍在場館�
 <!-- detail:en -->
 specificationsTitle: Technical Specifications
 inTheBoxTitle: What's in the Box
+equipmentTierPartsLabel: Tier 1 · PARTS only
+equipmentTierPartsDescription: Parts-only supply with a limited warranty up to 7 days.
+equipmentTierVerifiedLabel: Tier 2 · VLI-verified
+equipmentTierVerifiedDescription: The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.
+careAddOnTitle: Add VLI-CARE
+careAddOnDescription: Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.
 platformLabel: 400 mm platform
 premiumTitle: TOPS Shield 400: The Arena-Scale Platform
 careTitle: Includes 1-Year VLI CARE
@@ -53,6 +59,12 @@ inTheBox: 1x TOPS Shield 400 Competition Ball Drone || 1x Flight-Electronics Con
 <!-- detail:zh-Hant -->
 specificationsTitle: 技術規格
 inTheBoxTitle: 包裝內容
+equipmentTierPartsLabel: Tier 1 · 僅零件
+equipmentTierPartsDescription: 僅供應零件，有限保養期最長 7 天。
+equipmentTierVerifiedLabel: Tier 2 · VLI 驗證
+equipmentTierVerifiedDescription: 無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 21 天。
+careAddOnTitle: 加購 VLI CARE
+careAddOnDescription: 僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。
 platformLabel: 400 毫米平台
 premiumTitle: TOPS Shield 400：場館級平台
 careTitle: 包括一年 VLI CARE

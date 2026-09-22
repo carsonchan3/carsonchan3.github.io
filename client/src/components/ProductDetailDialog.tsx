@@ -56,6 +56,12 @@ export type PremiumProductContent = {
   inTheBox: readonly string[];
   specificationsTitle: string;
   inTheBoxTitle: string;
+  equipmentTierPartsLabel: string;
+  equipmentTierPartsDescription: string;
+  equipmentTierVerifiedLabel: string;
+  equipmentTierVerifiedDescription: string;
+  careAddOnTitle: string;
+  careAddOnDescription: string;
   /** Tiers that show the VLI CARE badge and activation code. */
   careTiers: readonly PremiumTier[];
   careTitle: string;
@@ -80,15 +86,15 @@ function getDisplayedVariant(variant: ProductVariant, tier: EquipmentTier, inclu
   return { ...variant, price: variant.tier1Price ?? variant.price, label: tier === "parts" ? `${variant.label} · Tier 1` : variant.label };
 }
 
-function EquipmentTierOptions({ variant, selectedTier, onChange, includeCare, onIncludeCareChange }: { variant: ProductVariant; selectedTier: EquipmentTier; onChange: (tier: EquipmentTier) => void; includeCare: boolean; onIncludeCareChange: (include: boolean) => void }) {
+function EquipmentTierOptions({ variant, selectedTier, onChange, includeCare, onIncludeCareChange, content }: { variant: ProductVariant; selectedTier: EquipmentTier; onChange: (tier: EquipmentTier) => void; includeCare: boolean; onIncludeCareChange: (include: boolean) => void; content?: PremiumProductContent }) {
   const { language } = useWebsiteLanguage();
   const isChinese = language === "zh-Hant";
-  if (!variant.tier2Price) return null;
+  if (!variant.tier2Price || !content) return null;
   const options = [
-    { id: "parts" as const, label: isChinese ? "Tier 1 · 僅零件" : "Tier 1 · PARTS only", description: isChinese ? "僅供應零件，有限保養期最長 7 天。" : "Parts-only supply with a limited warranty up to 7 days.", price: variant.tier1Price ?? variant.price },
-    { id: "verified" as const, label: isChinese ? "Tier 2 · VLI 驗證" : "Tier 2 · VLI-verified", description: isChinese ? "完成檢查及報告，並進行 PID 微調，保養期 21 天。" : "Checked, reported, and PID-tuned with a 21-day warranty.", price: variant.tier2Price },
+    { id: "parts" as const, label: content.equipmentTierPartsLabel, description: content.equipmentTierPartsDescription, price: variant.tier1Price ?? variant.price },
+    { id: "verified" as const, label: content.equipmentTierVerifiedLabel, description: content.equipmentTierVerifiedDescription, price: variant.tier2Price },
   ];
-  return <div className="mt-5" data-testid="equipment-tier-options"><p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/55">{isChinese ? "選擇服務級別" : "Choose service tier"}</p><div className="grid gap-2 sm:grid-cols-2">{options.map((option) => <button type="button" key={option.id} aria-pressed={selectedTier === option.id} onClick={() => { onChange(option.id); if (option.id === "parts") onIncludeCareChange(false); }} className={`rounded-2xl border p-3 text-left transition-colors ${selectedTier === option.id ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/30"}`}><span className="block text-sm font-semibold text-white">{option.label}</span><span className="mt-1 block min-h-10 text-xs leading-5 text-white/55">{option.description}</span><span className="mt-2 block text-sm font-semibold text-accent">{option.price}</span></button>)}</div>{variant.vliCarePrice ? <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 p-3 text-xs leading-5 text-white/65"><button type="button" aria-pressed={selectedTier === "verified" && includeCare} disabled={selectedTier !== "verified"} onClick={() => onIncludeCareChange(!includeCare)} className="flex w-full items-start gap-2 text-left disabled:cursor-not-allowed disabled:opacity-45"><span className={`mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border text-[10px] ${selectedTier === "verified" && includeCare ? "border-accent bg-accent text-black" : "border-white/30"}`}>{selectedTier === "verified" && includeCare ? "✓" : ""}</span><span><strong className="text-white">{isChinese ? "加購 VLI CARE" : "Add VLI-CARE"}</strong><span className="ml-2 text-accent">{variant.vliCarePrice}</span><span className="mt-1 block leading-5">{isChinese ? "僅適用於 Tier 2：一年保障（最多兩次更換）及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。" : "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included."}</span></span></button></div> : null}</div>;
+  return <div className="mt-5" data-testid="equipment-tier-options"><p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/55">{isChinese ? "選擇服務級別" : "Choose service tier"}</p><div className="grid gap-2 sm:grid-cols-2">{options.map((option) => <button type="button" key={option.id} aria-pressed={selectedTier === option.id} onClick={() => { onChange(option.id); if (option.id === "parts") onIncludeCareChange(false); }} className={`rounded-2xl border p-3 text-left transition-colors ${selectedTier === option.id ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/30"}`}><span className="block text-sm font-semibold text-white">{option.label}</span><span className="mt-1 block min-h-10 text-xs leading-5 text-white/55">{option.description}</span><span className="mt-2 block text-sm font-semibold text-accent">{option.price}</span></button>)}</div>{variant.vliCarePrice ? <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 p-3 text-xs leading-5 text-white/65"><button type="button" aria-pressed={selectedTier === "verified" && includeCare} disabled={selectedTier !== "verified"} onClick={() => onIncludeCareChange(!includeCare)} className="flex w-full items-start gap-2 text-left disabled:cursor-not-allowed disabled:opacity-45"><span className={`mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border text-[10px] ${selectedTier === "verified" && includeCare ? "border-accent bg-accent text-black" : "border-white/30"}`}>{selectedTier === "verified" && includeCare ? "✓" : ""}</span><span><strong className="text-white">{content.careAddOnTitle}</strong><span className="ml-2 text-accent">{variant.vliCarePrice}</span><span className="mt-1 block leading-5">{content.careAddOnDescription}</span></span></button></div> : null}</div>;
 }
 
 function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierChange, equipmentTier, onEquipmentTierChange, includeCare, onIncludeCareChange, onAddToCart, content }: {
@@ -143,7 +149,7 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
             })}
           </div>
 
-          <EquipmentTierOptions variant={selectedVariant} selectedTier={equipmentTier} onChange={onEquipmentTierChange} includeCare={includeCare} onIncludeCareChange={onIncludeCareChange} />
+          <EquipmentTierOptions variant={selectedVariant} selectedTier={equipmentTier} onChange={onEquipmentTierChange} includeCare={includeCare} onIncludeCareChange={onIncludeCareChange} content={content} />
 
           <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
             <div className="flex items-start gap-3"><div className="mt-0.5 rounded-full bg-accent/15 p-2 text-accent"><Wrench size={16} /></div><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/45">{translate(tier.label)}</p><p className="mt-2 text-sm leading-6 text-white/75">{translate(tier.subtitle)}</p><ul className="mt-3 space-y-2">{tier.features.map((feature) => <li key={feature} className="flex gap-2 text-xs leading-5 text-white/65"><Check size={15} className="mt-0.5 shrink-0 text-accent" />{translate(feature)}</li>)}</ul></div></div>
