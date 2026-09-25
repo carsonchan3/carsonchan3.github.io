@@ -53,7 +53,7 @@ tier.builder.inTheBox: 1x Drone soccer aircraft body
 tier.certified.label: RTF
 tier.certified.subtitle: Plug-and-play for professional arenas and schools.
 tier.certified.inTheBox: 1x Drone soccer aircraft || 1x Remote controller || 1x Battery || 1x Accessory pack
-specifications: Dimensions | 205mm diameter || Weight | 200g (w/o battery) / 267g (with battery) || Flight Time | 8 mins (hover) || Motor | 1404 (or 1407) Brushless Motor || Wheelbase | 110mm || Battery | 1100mAh 11.1V 3S 60C LiPo || Carbon Plate Thickness | 3mm || Propeller | 75mm 3-blade || LED | Color-tunable LED + smart light controller || Other Functions | Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable) || Colour Options | White, Red, Blue
+specifications: Dimensions | 205mm diameter || Weight | 200g (w/o battery) / 267g (with battery) || Flight Time | 8 mins (hover) || Motor | 1407 Brushless Motor || Wheelbase | 110mm || Battery | 1100mAh 11.1V 3S 60C LiPo || Carbon Plate Thickness | 3mm || Propeller | 75mm 3-blade || LED | Color-tunable LED + smart light controller || Other Functions | Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable) || Colour Options | White, Red, Blue
 
 <!-- detail:zh-Hant -->
 specificationsTitle: 技術規格
@@ -74,4 +74,4 @@ tier.builder.inTheBox: 1x 球機機體
 tier.certified.label: RTF全家桶
 tier.certified.subtitle: 適合專業場地及學校的即插即用配置。
 tier.certified.inTheBox: 1x 球機 || 1x 遙控 || 1x 電池 || 1x 配件包
-specifications: 外形尺寸 | 205直徑 || 機身重量 | 200g（不含電池）/267g（含電池） || 飛行時間 | 8分鐘（懸停） || 電機 | 無刷電機 1404（或1407） || 軸距 | 110mm || 電池 | 1100mAh 11.1V 3S 60C 鋰電池 || 碳板厚度 | 3mm || 螺旋槳 | 75mm 3葉槳葉 || LED | 可調色LED+智能燈控 || 其他功能 | 自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節） || 顏色 | 白、紅、藍可選
+specifications: 外形尺寸 | 205直徑 || 機身重量 | 200g（不含電池）/267g（含電池） || 飛行時間 | 8分鐘（懸停） || 電機 | 無刷電機 1407 || 軸距 | 110mm || 電池 | 1100mAh 11.1V 3S 60C 鋰電池 || 碳板厚度 | 3mm || 螺旋槳 | 75mm 3葉槳葉 || LED | 可調色LED+智能燈控 || 其他功能 | 自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節） || 顏色 | 白、紅、藍可選
