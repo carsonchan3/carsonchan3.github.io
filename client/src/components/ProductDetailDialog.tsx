@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Box, Check, Gauge, ShieldCheck, ShoppingCart } from "lucide-react";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
@@ -137,7 +137,7 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
 
         <div className="flex flex-col justify-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{translate(product.category)}</p>
-          <h2 data-testid="product-detail-title" className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">{translate(content.title)}</h2>
+          <DialogTitle data-testid="product-detail-title" className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">{translate(content.title)}</DialogTitle>
           <p data-testid="product-detail-description" className="mt-4 text-sm leading-7 text-white/70 sm:text-base">{translate(product.description)}</p>
 
           <div data-testid={`${content.testId}-tier-options`} className={`mt-6 grid gap-3 ${Object.keys(content.tiers).length > 1 ? "sm:grid-cols-2" : ""}`}>
@@ -178,13 +178,69 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
   );
 }
 
+function SimpleProductDetail({ product, selectedVariant, onSelectVariant, onAddToCart, detail }: {
+  product: ProductDetail;
+  selectedVariant: ProductVariant;
+  onSelectVariant: (sourceId: string) => void;
+  onAddToCart: (variant: ProductVariant, family: ProductDetail, option: ServiceOption) => void;
+  detail?: ReturnType<typeof getProductSpecsAndContents>;
+}) {
+  const { language } = useWebsiteLanguage();
+  const isChinese = language === "zh-Hant";
+  const translate = (value: string) => isChinese ? traditionalChineseTranslations[value] ?? value : value;
+  const minimum = minimumQuantity(selectedVariant, "t1");
+
+  return (
+    <div data-testid="product-detail-simple" className="space-y-7">
+      <div className="grid gap-7 md:grid-cols-[0.95fr_1.05fr] md:items-stretch">
+        <div className="relative flex min-h-64 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#0B1419] p-6 sm:min-h-80">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_36%,rgba(48,224,202,0.18),transparent_36%),linear-gradient(145deg,rgba(7,17,23,0.98),rgba(11,20,25,0.7))]" />
+          <img data-testid="product-detail-image" src={selectedVariant.image} alt={selectedVariant.imageAlt} onError={(event) => { if (selectedVariant.fallbackImage && event.currentTarget.src !== selectedVariant.fallbackImage) event.currentTarget.src = selectedVariant.fallbackImage; else { event.currentTarget.style.display = "none"; event.currentTarget.alt = ""; } }} className="relative z-10 max-h-72 w-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.45)]" />
+          {selectedVariant.model ? <span data-testid="product-detail-model" className="absolute bottom-4 left-4 z-20 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent"><Gauge size={13} /> {selectedVariant.model}</span> : null}
+        </div>
+
+        <div className="flex flex-col justify-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{product.category}</p>
+          <DialogTitle data-testid="product-detail-title" className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">{product.name}</DialogTitle>
+          <p data-testid="product-detail-description" className="mt-4 text-sm leading-7 text-white/70 sm:text-base">{product.description}</p>
+
+          <div data-testid="product-detail-variant-options" className={`mt-6 grid gap-3 ${product.variants.length > 1 ? "sm:grid-cols-2" : ""}`}>
+            {product.variants.map((variant) => {
+              const selected = variant.sourceId === selectedVariant.sourceId;
+              return (
+                <button type="button" key={variant.sourceId} data-testid="product-detail-variant" aria-pressed={selected} onClick={() => onSelectVariant(variant.sourceId)} className={`relative rounded-2xl border p-4 text-left transition-colors ${selected ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/30"}`}>
+                  <span className="block text-sm font-semibold text-white">{variant.label}</span>
+                  {variant.model ? <span className="mt-1 block text-xs leading-5 text-white/55">{variant.model}</span> : null}
+                  <span data-testid={selected ? "product-detail-price" : undefined} className="mt-3 block text-lg font-semibold text-accent">{servicePrice(variant, "t1")}</span>
+                  <span className="mt-1 block text-[10px] uppercase tracking-[0.12em] text-white/40">{translate("Starting point")}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {detail?.inTheBox.length ? (
+            <div data-testid="product-detail-in-the-box" className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <div className="flex items-start gap-3"><div className="mt-0.5 rounded-full bg-accent/15 p-2 text-accent"><Box size={16} /></div><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/45">{detail.inTheBoxTitle}{product.variants.length > 1 ? ` · ${selectedVariant.label}` : ""}</p><ul className="mt-3 space-y-2">{detail.inTheBox.map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/75"><Check size={15} className="mt-1 shrink-0 text-accent" />{item}</li>)}</ul></div></div>
+            </div>
+          ) : null}
+
+          <Button type="button" data-testid="product-detail-add-to-cart" onClick={() => onAddToCart(selectedVariant, product, "t1")} className="mt-5 h-12 w-full rounded-full bg-accent font-semibold text-black hover:opacity-90"><ShoppingCart className="mr-2 size-4" />{translate("Add to Quote")}{minimum > 1 ? ` · ×${minimum}` : ""}</Button>
+          {minimum > 1 ? <p data-testid="tier-minimum-order-hint" className="mt-3 text-center text-xs font-semibold leading-5 text-amber-200/80">{minimumOrderNote(minimum, isChinese)}</p> : null}
+          <p className="mt-3 text-center text-xs leading-5 text-white/45">{translate("Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.")}</p>
+        </div>
+      </div>
+
+      {detail ? <SpecificationsPanel testId="product-detail-specifications" title={detail.specificationsTitle} specifications={detail.specifications} /> : null}
+    </div>
+  );
+}
+
 export default function ProductDetailDialog({ product, onOpenChange, onAddToCart }: ProductDetailDialogProps) {
   const { language } = useWebsiteLanguage();
   const [selectedVariantId, setSelectedVariantId] = useState("");
   const [selectedPremiumTier, setSelectedPremiumTier] = useState<PremiumTier>("certified");
   const [selectedEquipmentTier, setSelectedEquipmentTier] = useState<EquipmentTier>("parts");
   const [includeCare, setIncludeCare] = useState(false);
-  const isChinese = language === "zh-Hant";
   const premiumContent = product ? getPremiumProductContent(product.familyId, language) : undefined;
   const simpleDetail = product && !premiumContent ? getProductSpecsAndContents(product.familyId, language) : undefined;
 
@@ -206,11 +262,7 @@ export default function ProductDetailDialog({ product, onOpenChange, onAddToCart
       <DialogContent className="max-h-[92vh] overflow-y-auto border-white/10 bg-[#1C1D20] text-white sm:max-w-5xl">
         {product && selectedVariant ? (
           premiumContent ? <PremiumProductDetail product={product} selectedVariant={selectedVariant} selectedTier={selectedPremiumTier} onTierChange={setSelectedPremiumTier} equipmentTier={selectedEquipmentTier} onEquipmentTierChange={setSelectedEquipmentTier} includeCare={includeCare} onIncludeCareChange={setIncludeCare} onAddToCart={onAddToCart} content={premiumContent} /> : (
-            <>
-              <DialogHeader><p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Product information</p><DialogTitle data-testid="product-detail-title" className="text-2xl text-white sm:text-3xl">{product.name}</DialogTitle><DialogDescription className="text-white/65">Choose a version to view its listed price, then add that exact configuration to your quote request.</DialogDescription></DialogHeader>
-              <div className="mt-2 grid gap-6 md:grid-cols-[0.9fr_1.1fr]"><div className="flex min-h-56 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-black/25 p-5"><img data-testid="product-detail-image" src={selectedVariant.image} alt={selectedVariant.imageAlt} onError={(event) => { if (selectedVariant.fallbackImage && event.currentTarget.src !== selectedVariant.fallbackImage) event.currentTarget.src = selectedVariant.fallbackImage; else { event.currentTarget.style.display = "none"; event.currentTarget.alt = ""; } }} className="max-h-72 w-full object-contain" /></div><div className="flex flex-col">{product.variants.length > 1 ? <div data-testid="product-detail-variant-options" className="mb-5"><p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/55">Choose a version</p><div className="grid gap-2 sm:grid-cols-2">{product.variants.map((variant) => { const selected = variant.sourceId === selectedVariant.sourceId; return <button type="button" data-testid="product-detail-variant" key={variant.sourceId} aria-pressed={selected} onClick={() => setSelectedVariantId(variant.sourceId)} className={`rounded-md border p-3 text-left transition-colors ${selected ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/35"}`}><span className="block text-sm font-semibold text-white">{variant.label}</span><span className="mt-1 block text-xs text-white/55">{variant.model}</span><span className="mt-2 block text-sm font-semibold text-accent">{variant.price}</span></button>; })}</div></div> : null}<EquipmentTierOptions variant={selectedVariant} selectedTier={selectedEquipmentTier} onChange={setSelectedEquipmentTier} includeCare={includeCare} onIncludeCareChange={setIncludeCare} /><div className="grid grid-cols-2 gap-3 text-sm"><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Category</p><p className="mt-1 font-medium text-white">{product.category}</p></div><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Model</p><p data-testid="product-detail-model" className="mt-1 font-medium text-white">{selectedVariant.model}</p></div><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Product ref.</p><p className="mt-1 font-medium text-white">#{selectedVariant.number}</p></div><div className="rounded-md border border-accent/25 bg-accent/10 p-3"><p className="text-xs uppercase tracking-[0.14em] text-accent">Listed price</p><p data-testid="product-detail-price" className="mt-1 font-semibold text-accent">{servicePrice(selectedVariant, getServiceOption(selectedVariant, selectedEquipmentTier, includeCare))}</p></div></div><p data-testid="product-detail-description" className="mt-5 text-sm leading-7 text-white/75">{selectedVariant.description}</p><p className="mt-4 text-xs leading-5 text-white/50">Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.</p>{minimumQuantity(selectedVariant, "t1") > 1 ? <p data-testid="tier-minimum-order-hint" className="mt-3 text-xs font-semibold text-amber-200/80">{minimumOrderNote(minimumQuantity(selectedVariant, "t1"), isChinese)}</p> : null}<Button type="button" data-testid="product-detail-add-to-cart" onClick={() => onAddToCart(selectedVariant, product, getServiceOption(selectedVariant, selectedEquipmentTier, includeCare))} className="mt-6 w-full bg-accent font-semibold text-black hover:opacity-90"><ShoppingCart className="mr-2 size-4" />Add {selectedVariant.label} to cart</Button></div></div>
-              {simpleDetail ? <div className="mt-6 space-y-4">{simpleDetail.inTheBox.length ? <section data-testid="product-detail-in-the-box" className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Box size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{simpleDetail.inTheBoxTitle}</h3></div><ul className="grid gap-x-8 gap-y-2 sm:grid-cols-2">{simpleDetail.inTheBox.map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/75"><Check size={15} className="mt-1 shrink-0 text-accent" />{item}</li>)}</ul></section> : null}<SpecificationsPanel testId="product-detail-specifications" title={simpleDetail.specificationsTitle} specifications={simpleDetail.specifications} /></div> : null}
-            </>
+            <SimpleProductDetail product={product} selectedVariant={selectedVariant} onSelectVariant={setSelectedVariantId} onAddToCart={onAddToCart} detail={simpleDetail} />
           )
         ) : null}
       </DialogContent>

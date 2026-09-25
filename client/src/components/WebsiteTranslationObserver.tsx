@@ -20,6 +20,15 @@ export function translateReviewedCopy(source: string, language: WebsiteLanguage)
   return `${prefix}${translatedFragments}${suffix}`;
 }
 
+/**
+ * Returns the English source for a node's current value. If React has replaced the value (a cart quantity, a
+ * counter, a toggled label), the new value becomes the source instead of being overwritten with the old one.
+ */
+export function resolveSourceCopy(stored: string | undefined, current: string) {
+  if (stored === undefined || current === stored || current === translateReviewedCopy(stored, "zh-Hant")) return stored ?? current;
+  return current;
+}
+
 function shouldSkipTextNode(node: Text) {
   const parent = node.parentElement;
   return !parent || ["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA"].includes(parent.tagName) || Boolean(parent.closest(".vli-language-toggle, [data-live-metric]"));
@@ -27,7 +36,7 @@ function shouldSkipTextNode(node: Text) {
 
 function translateTextNode(node: Text, language: WebsiteLanguage) {
   if (shouldSkipTextNode(node)) return;
-  const original = textOriginals.get(node) ?? node.data;
+  const original = resolveSourceCopy(textOriginals.get(node), node.data);
   textOriginals.set(node, original);
   const translated = translateReviewedCopy(original, language);
   if (node.data !== translated) node.data = translated;
@@ -40,7 +49,7 @@ function translateElementAttributes(element: Element, language: WebsiteLanguage)
   for (const attribute of translatableAttributes) {
     const current = element.getAttribute(attribute);
     if (current === null) continue;
-    const original = originals.get(attribute) ?? current;
+    const original = resolveSourceCopy(originals.get(attribute), current);
     originals.set(attribute, original);
     const translated = translateReviewedCopy(original, language);
     if (current !== translated) element.setAttribute(attribute, translated);

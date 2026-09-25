@@ -1,5 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { translateReviewedCopy } from "./WebsiteTranslationObserver";
+import { resolveSourceCopy, translateReviewedCopy } from "./WebsiteTranslationObserver";
+
+describe("live text updates", () => {
+  it("keeps React updates such as cart quantities instead of restoring the first value", () => {
+    expect(resolveSourceCopy("1", "3")).toBe("3");
+    expect(resolveSourceCopy("View details", "Hide details")).toBe("Hide details");
+  });
+
+  it("still recognises its own translation of the stored source", () => {
+    expect(resolveSourceCopy("Velocity Lab Innovation", "速研創新")).toBe("Velocity Lab Innovation");
+    expect(resolveSourceCopy("Velocity Lab Innovation", "Velocity Lab Innovation")).toBe("Velocity Lab Innovation");
+    expect(resolveSourceCopy(undefined, "Add to Quote")).toBe("Add to Quote");
+  });
+});
 
 describe("reviewed Traditional Chinese copy layer", () => {
   it("uses the user-approved brand and partner overrides in the Chinese experience", () => {
