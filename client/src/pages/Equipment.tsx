@@ -6,6 +6,7 @@ import { PRODUCT_CART_STORAGE_KEY, sanitizeProductCart, type ProductCart } from 
 import { localizedPath } from "@/lib/seo";
 import { trackConversion } from "@/lib/conversionTracking";
 import { applyProductContent, buildProductFamilies, hiddenProductFamilyIds } from "@/lib/productContent";
+import { availableServiceOptions, cartKey, minimumQuantity, parseCartKey, serviceOptionLabel, servicePrice, type ServiceOption } from "@/lib/productPricing";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import React, { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Eye, Minus, Plus, ShoppingCart, Trash2, X } from "lucide-react";
@@ -85,7 +86,15 @@ export function mergeCatalogueWithDatabase(
 }
 
 const catalogueVariants = getVisibleProductFamilies(productFamilies).flatMap((family) => family.variants);
-const catalogueSourceIds = catalogueVariants.map((variant) => variant.sourceId);
+const catalogueVariantById = new Map(catalogueVariants.map((variant) => [variant.sourceId, variant]));
+const catalogueCartKeys = catalogueVariants.flatMap((variant) => availableServiceOptions(variant).map((option) => cartKey(variant.sourceId, option)));
+
+/** Minimum quantity for a cart line (Tier 1 min. qty from content/pricing.md; 1 otherwise). */
+export function cartLineMinimum(key: string) {
+  const parsed = parseCartKey(key);
+  const variant = parsed ? catalogueVariantById.get(parsed.sourceId) : undefined;
+  return parsed && variant ? minimumQuantity(variant, parsed.option) : 1;
+}
 
 function getPriceNumber(price: string) {
   return Number(price.replace(/[^\d]/g, ""));
@@ -112,7 +121,7 @@ function readSavedCart(): ProductCart {
 
   try {
     const storedCart = window.localStorage.getItem(PRODUCT_CART_STORAGE_KEY);
-    return storedCart ? sanitizeProductCart(JSON.parse(storedCart), catalogueSourceIds) : {};
+    return storedCart ? sanitizeProductCart(JSON.parse(storedCart), catalogueCartKeys, cartLineMinimum) : {};
   } catch {
     return {};
   }
@@ -131,12 +140,15 @@ export default function Equipment() {
   }, [language]);
 
   const activeCatalogueVariants = useMemo(() => activeProductFamilies.flatMap((f) => f.variants), [activeProductFamilies]);
-  const activeCatalogueSourceIds = useMemo(() => activeCatalogueVariants.map((v) => v.sourceId), [activeCatalogueVariants]);
 
-  const cartItems: CartPricingSelection[] = activeCatalogueVariants.flatMap((variant) => {
-    const quantity = cart[variant.sourceId];
-    return quantity ? [{ sourceId: variant.sourceId, name: variant.name, model: variant.model, category: "Equipment", price: variant.price, quantity }] : [];
-  });
+  // One line per variant and service option, in catalogue order; the option label and price travel with the quote request.
+  const cartItems: CartPricingSelection[] = activeCatalogueVariants.flatMap((variant) => availableServiceOptions(variant).flatMap((option) => {
+    const key = cartKey(variant.sourceId, option);
+    const quantity = cart[key];
+    if (!quantity) return [];
+    const optionLabel = serviceOptionLabel(variant, option);
+    return [{ sourceId: key, name: optionLabel ? `${variant.name} · ${optionLabel}` : variant.name, model: variant.model, category: "Equipment", price: servicePrice(variant, option), quantity, minQuantity: minimumQuantity(variant, option) }];
+  }));
   const cartUnitCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   useEffect(() => {
@@ -151,14 +163,17 @@ export default function Equipment() {
     }
   }, [cart]);
 
-  const addToCart = (variant: ProductVariant, family: ProductDetail) => {
-    setCart((current) => ({ ...current, [variant.sourceId]: current[variant.sourceId] ?? 1 }));
-    toast.success(`${family.name} · ${variant.label} added to your cart.`);
+  const addToCart = (variant: ProductVariant, family: ProductDetail, option: ServiceOption = "t1") => {
+    const key = cartKey(variant.sourceId, option);
+    const minimum = minimumQuantity(variant, option);
+    setCart((current) => ({ ...current, [key]: Math.max(current[key] ?? minimum, minimum) }));
+    const optionLabel = serviceOptionLabel(variant, option);
+    toast.success(`${family.name} · ${variant.label}${optionLabel ? ` · ${optionLabel}` : ""}${minimum > 1 ? ` (×${minimum} minimum)` : ""} added to your cart.`);
   };
-  const changeCartQuantity = (sourceId: string, adjustment: number) => {
+  const changeCartQuantity = (key: string, adjustment: number) => {
     setCart((current) => {
-      const nextQuantity = Math.min(99, Math.max(1, (current[sourceId] ?? 1) + adjustment));
-      return { ...current, [sourceId]: nextQuantity };
+      const nextQuantity = Math.min(99, Math.max(cartLineMinimum(key), (current[key] ?? 1) + adjustment));
+      return { ...current, [key]: nextQuantity };
     });
   };
   const removeFromCart = (sourceId: string) => {
@@ -250,8 +265,8 @@ export default function Equipment() {
               <ul className="my-3 divide-y divide-white/10">
                 {cartItems.map((item) => (
                   <li data-testid="floating-cart-item" key={item.sourceId} className="py-3 first:pt-0">
-                    <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate text-sm font-semibold text-white">{item.name}</p><p className="mt-1 text-xs text-accent">{item.price}</p></div><button type="button" data-testid="floating-cart-remove" onClick={() => removeFromCart(item.sourceId)} aria-label={`Remove ${item.name} from quote cart`} className="grid size-8 shrink-0 place-items-center rounded-full border border-white/15 text-white/65 transition-colors hover:border-red-400/70 hover:text-red-300"><Trash2 size={14} /></button></div>
-                    <div className="mt-3 inline-flex h-9 items-center rounded-md border border-white/15 bg-black/20"><button type="button" data-testid="floating-cart-decrease" onClick={() => changeCartQuantity(item.sourceId, -1)} disabled={item.quantity === 1} aria-label={`Decrease ${item.name} quantity`} className="grid size-9 place-items-center text-white/70 transition-colors hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"><Minus size={14} /></button><span data-testid="floating-cart-quantity" className="min-w-7 text-center text-sm font-semibold text-white">{item.quantity}</span><button type="button" data-testid="floating-cart-increase" onClick={() => changeCartQuantity(item.sourceId, 1)} aria-label={`Increase ${item.name} quantity`} className="grid size-9 place-items-center text-white/70 transition-colors hover:text-accent"><Plus size={14} /></button></div>
+                    <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="text-sm font-semibold leading-5 text-white">{item.name}</p><p className="mt-1 text-xs text-accent">{item.price}</p>{(item.minQuantity ?? 1) > 1 ? <p data-testid="floating-cart-minimum" className="mt-1 text-[11px] text-amber-200/80">{language === "zh-Hant" ? `最少訂購 ${item.minQuantity} 件` : `Minimum order: ${item.minQuantity} pcs`}</p> : null}</div><button type="button" data-testid="floating-cart-remove" onClick={() => removeFromCart(item.sourceId)} aria-label={`Remove ${item.name} from quote cart`} className="grid size-8 shrink-0 place-items-center rounded-full border border-white/15 text-white/65 transition-colors hover:border-red-400/70 hover:text-red-300"><Trash2 size={14} /></button></div>
+                    <div className="mt-3 inline-flex h-9 items-center rounded-md border border-white/15 bg-black/20"><button type="button" data-testid="floating-cart-decrease" onClick={() => changeCartQuantity(item.sourceId, -1)} disabled={item.quantity <= (item.minQuantity ?? 1)} aria-label={`Decrease ${item.name} quantity`} className="grid size-9 place-items-center text-white/70 transition-colors hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"><Minus size={14} /></button><span data-testid="floating-cart-quantity" className="min-w-7 text-center text-sm font-semibold text-white">{item.quantity}</span><button type="button" data-testid="floating-cart-increase" onClick={() => changeCartQuantity(item.sourceId, 1)} aria-label={`Increase ${item.name} quantity`} className="grid size-9 place-items-center text-white/70 transition-colors hover:text-accent"><Plus size={14} /></button></div>
                   </li>
                 ))}
               </ul>

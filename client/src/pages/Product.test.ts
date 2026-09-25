@@ -114,13 +114,12 @@ describe("Smart Referee organiser-first journey", () => {
   it("defines the premium TOPS Shield 205 product experience from Markdown without checkout language", () => {
     const shield205 = getPremiumProductContent("tops-shield-205", "en");
     expect(shield205?.title).toBe("TOPS Shield 205: The Agile Striker");
-    expect(shield205?.pitch).toContain("high-intensity drone sports");
-    expect(shield205?.tiers.certified.label).toBe("VLI Certified Edition");
-    expect(shield205?.tiers.certified.features).toContain("Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements.");
-    expect(shield205?.tiers.builder.features).toContain("Factory default settings (requires manual PID tuning).");
-    expect(shield205?.specifications).toHaveLength(5);
-    expect(shield205?.inTheBox).toContain("1x Custom VLI Transport Bag");
-    expect(shield205?.inTheBox).not.toContain("1x VLI CARE Activation Code");
+    expect(shield205?.pitch).toContain("F9A-B Striker");
+    expect(shield205?.tiers.certified.label).toBe("RTF");
+    expect(shield205?.tiers.certified.inTheBox).toEqual(["1x Drone soccer aircraft", "1x Remote controller", "1x Battery", "1x Accessory pack"]);
+    expect(shield205?.tiers.builder.inTheBox).toEqual(["1x Drone soccer aircraft body"]);
+    expect(shield205?.specifications.length).toBeGreaterThanOrEqual(10);
+    expect(shield205?.tiers.certified.inTheBox).not.toContain("1x VLI CARE Activation Code");
     expect(traditionalChineseTranslations["TOPS Shield 205: The Agile Striker"]).toBe("TOPS Shield 205：敏捷突擊者");
     expect(traditionalChineseTranslations["Add to Quote"]).toBe("加入報價");
 
@@ -132,7 +131,8 @@ describe("Smart Referee organiser-first journey", () => {
   it("defines premium quote-first experiences for TOPS Shield 220, R220F, and TOPS Shield 400", () => {
     expect(getPremiumProductContent("tops-shield-220", "en")?.defaultTier).toBe("certified");
     expect(Object.keys(getPremiumProductContent("tops-shield-220", "en")?.tiers ?? {})).toEqual(["certified", "travel", "builder"]);
-    expect(getPremiumProductContent("r220f", "en")?.tiers.certified?.label).toBe("VLI Ready-to-Deploy Edition");
+    expect(getPremiumProductContent("r220f", "en")?.tiers.certified?.label).toBe("RTF");
+    expect(getPremiumProductContent("r200f", "en")?.tiers.certified?.inTheBox).toContain("1x Receiver");
     expect(getPremiumProductContent("tops-shield-400", "en")?.defaultTier).toBe("certified");
 
     const shield220 = productFamilies.find((item) => item.familyId === "tops-shield-220")!;

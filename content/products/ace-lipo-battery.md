@@ -30,7 +30,19 @@ variant.71.imageAlt: ACE 6S 3000 mAh LiPo battery
 ---
 
 <!-- locale:en -->
-LiPo battery options for 200 mm, 220 mm, and higher-voltage 400 mm builds.
+Gens ACE LiPo batteries for drone soccer and FPV racing. The 3S 11.1V 1100mAh pack suits 200 and 220 brushless soccer drones; the 4S and 6S 3000mAh 120C packs suit 400 brushless soccer drones.
 
 <!-- locale:zh-Hant -->
-適用於 200 毫米、220 毫米及高電壓 400 毫米配置的 LiPo 電池選項。
+格氏ACE鋰電池，適用於足球無人機及穿越機。3S 11.1V 1100mAh 適用於200或220無刷球機；4S及6S 3000mAh 120C 適用於400無刷球機。
+
+<!-- detail:en -->
+specificationsTitle: Technical Specifications
+inTheBoxTitle: What's in the Box
+specifications: 3S 11.1V 1100mAh | For 200 or 220 brushless soccer drones and FPV racing drones; 68g; 60*28*20mm || 4S 3000mAh 120C | For 400 brushless soccer drones and FPV racing drones || 6S 3000mAh 120C | 22.2V, 6S1P, XT60; for 400 brushless soccer drones and FPV racing drones
+inTheBox: 1x Battery (selected version)
+
+<!-- detail:zh-Hant -->
+specificationsTitle: 技術規格
+inTheBoxTitle: 包裝內容
+specifications: 3S 11.1V 1100mAh | 200或者220無刷球機、穿越機用；68g；60*28*20mm || 4S 3000mAh 120C | 400無刷球機用、穿越機用 || 6S 3000mAh 120C | 22.2V，6S1P，XT60；400無刷球機用、穿越機用
+inTheBox: 1x 電池（所選型號）

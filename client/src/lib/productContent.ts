@@ -32,6 +32,7 @@ export function buildProductFamilies(records: readonly ProductContentRecord[] = 
       tier1Price: variant.tier1Price,
       ...(variant.tier2Price ? { tier2Price: variant.tier2Price } : {}),
       ...(variant.vliCarePrice ? { vliCarePrice: variant.vliCarePrice } : {}),
+      ...(variant.tier1MinQty ? { tier1MinQty: variant.tier1MinQty } : {}),
       image: variant.image,
       imageAlt: variant.imageAlt,
       ...(variant.tier ? { tier: variant.tier } : {}),
@@ -66,6 +67,7 @@ export function getPremiumProductContent(familyId: string, language: WebsiteLang
   const detail = record?.detail?.[language];
   if (!record || !detail) return undefined;
   const tierIds = Object.keys(detail.tiers);
+  if (!tierIds.length) return undefined;
   const defaultTier = record.defaultTier && tierIds.includes(record.defaultTier)
     ? record.defaultTier
     : tierIds.includes("certified") ? "certified" : tierIds[0];
@@ -89,6 +91,18 @@ export function getPremiumProductContent(familyId: string, language: WebsiteLang
     careTiers: record.vliCareTiers,
     careTitle: detail.careTitle,
     careDescription: detail.careDescription,
+  };
+}
+
+/** Specifications and box contents for products without package tiers (batteries, chargers, bags...). */
+export function getProductSpecsAndContents(familyId: string, language: WebsiteLanguage) {
+  const detail = getProductContent(familyId)?.detail?.[language];
+  if (!detail || (!detail.specifications.length && !detail.inTheBox.length)) return undefined;
+  return {
+    specificationsTitle: detail.specificationsTitle,
+    inTheBoxTitle: detail.inTheBoxTitle,
+    specifications: detail.specifications,
+    inTheBox: detail.inTheBox,
   };
 }
 

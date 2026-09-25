@@ -37,10 +37,10 @@ variant.29.imageAlt: TOPS Shield 220 PNP competition drone cage diagram
 ---
 
 <!-- locale:en -->
-The TOPS Shield 220 gives competition teams a balanced 220mm platform for repeatable training and event deployment. Choose a ready-to-fly configuration for a faster operational start, add the travel set when logistics matter, or bring your own receiver for an in-house build workflow.
+Features a high-elasticity protective cage engineered against shattering. Flexible composite material combines high resilience, impact resistance, and lightweight structure. Aerodynamic profile maximizes flight endurance. Brushless motors deliver high thrust and extreme agility. Racing 3-blade propellers ensure rapid acceleration. Precision gimbals, integrated touch display, and frequency-hopping ensure low latency and rock-solid connection. Available in RTF and PNP configurations.
 
 <!-- locale:zh-Hant -->
-TOPS Shield 220 為競賽隊伍提供平衡的 220 毫米平台，適合重複訓練及賽事部署。您可選擇開箱即飛配置以快速投入運作，在重視物流時加入運輸套裝，或使用自備接收器建立內部技術流程。
+這是一款具有強大彈性的護罩，不會輕易碎裂，靈活的防護罩複合材料具有高彈性、抗衝擊性和重量輕的特點。空氣動力學設計最大限度地延長了飛行時間。無刷電機提供強大的性能和極致的飛行性能。使用賽車專用的三翼螺旋槳實現更快的飛行。體驗更刺激的無人機飛行。精確的控制桿、集成的觸控顯示屏和多通道跳頻提供了低功耗和可靠的連接。有套裝和單球版，滿足初學者和專業級玩家的不同需求。
 
 <!-- detail:en -->
 specificationsTitle: Technical Specifications
@@ -57,15 +57,14 @@ careTitle: Includes 1-Year VLI CARE
 careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
 tier.certified.label: RTF
 tier.certified.subtitle: Ready-to-fly for competition teams and schools.
-tier.certified.features: Competition-ready receiver and flight setup. || VLI pre-flight configuration check before handover. || Includes 1-Year VLI CARE for approved programme deployments.
+tier.certified.inTheBox: 1x Drone soccer aircraft body || 4x 1404 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC || 1x Remote controller || 1x 3S 1100mAh LiPo battery || 1x A40 charger || 1x Multi-purpose screwdriver || 1x Accessory pack
 tier.travel.label: RTF + Travel Bag
 tier.travel.subtitle: Ready-to-fly with a transport bag for touring programmes.
-tier.travel.features: Ready-to-fly 220mm platform with matched flight electronics. || Includes a carrying bag for training and event travel. || Designed for teams moving equipment between venues.
+tier.travel.inTheBox: 1x Drone soccer aircraft body || 4x 1404 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC || 1x Remote controller || 1x 3S 1100mAh LiPo battery || 1x A40 charger || 1x Multi-purpose screwdriver || 1x Accessory pack || 1x Carrying bag
 tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: PNP platform for teams with their own control system.
-tier.builder.features: Bring your own receiver and control equipment. || Flexible starting point for technical teams and custom builds. || Standard manufacturer inspection before dispatch.
-specifications: Frame Diameter | 220 mm || Configuration | RTF, travel-ready, or PNP platform options || Use Case | Training, competition, and touring event programmes || Flight Setup | Competition-ready power and control configuration || Compatibility | Suitable for Smart Referee-supported drone sports workflows
-inTheBox: 1x TOPS Shield 220 Competition Ball Drone || 1x Receiver / Transmission Unit on RTF configurations || 2x Sets of Competition Propellers || 1x High-Impact Spare Outer Shell Segment || 1x Carrying Bag on Travel Edition
+tier.builder.inTheBox: 1x Drone soccer aircraft body || 4x 1404 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC
+specifications: Dimensions | 220*220*220mm || Weight | 172g (w/o battery) / 241g (with battery) || Flight Time | 8 mins (hover) || Motor | 1404 Brushless Motor || Wheelbase | 130mm || Battery | 1100mAh 11.1V 3S 60C LiPo || Carbon Plate Thickness | 3mm || Propeller | 60mm 3-blade || LED | Color-tunable LED + smart light controller || Other Functions | Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable) || Colour Options | White, Red, Blue
 
 <!-- detail:zh-Hant -->
 specificationsTitle: 技術規格
@@ -82,12 +81,11 @@ careTitle: 包括一年 VLI CARE
 careDescription: 涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。
 tier.certified.label: RTF
 tier.certified.subtitle: 適合競賽隊伍及學校的開箱即飛配置。
-tier.certified.features: 競賽就緒的接收器及飛行設定。 || 交付前由 VLI 進行配置檢查。 || 獲認可的計劃部署包括一年 VLI CARE。
+tier.certified.inTheBox: 1x 球機機體 || 4x 1404無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控 || 1x 遙控器 || 1x 3S 1100mAh 鋰電池 || 1x A40充電器 || 1x 多用螺絲刀 || 1x 配件包
 tier.travel.label: RTF全家桶 + 便攜袋
 tier.travel.subtitle: 配備運輸袋，適合巡迴計劃的開箱即飛配置。
-tier.travel.features: 配備匹配飛行電子設備的 220 毫米開箱即飛平台。 || 包括訓練及賽事運輸用攜行袋。 || 適合在不同場地之間運送設備的隊伍。
+tier.travel.inTheBox: 1x 球機機體 || 4x 1404無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控 || 1x 遙控器 || 1x 3S 1100mAh 鋰電池 || 1x A40充電器 || 1x 多用螺絲刀 || 1x 配件包 || 1x 收納包
 tier.builder.label: 無人機足球 (僅無人機)
 tier.builder.subtitle: 適合使用自備控制系統的隊伍的 PNP 平台。
-tier.builder.features: 使用自備接收器及控制設備。 || 為技術隊伍及客製化組裝提供靈活起點。 || 出貨前進行標準製造商檢查。
-specifications: 機架直徑 | 220 毫米 || 配置 | RTF、旅行就緒或 PNP 平台選項 || 用途 | 訓練、競賽及巡迴賽事計劃 || 飛行設定 | 競賽就緒的電源及控制配置 || 兼容性 | 適用於 Smart Referee 支援的無人機運動流程
-inTheBox: 1x TOPS Shield 220 競賽球形無人機 || 1x RTF 配置接收器／傳輸單元 || 2x 套競賽螺旋槳 || 1x 高抗衝擊備用外殼組件 || 1x Travel Edition 攜行袋
+tier.builder.inTheBox: 1x 球機機體 || 4x 1404無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控
+specifications: 外形尺寸 | 220*220*220mm || 機身重量 | 172g（不含電池）/241g（含電池） || 飛行時間 | 8分鐘（懸停） || 電機 | 無刷電機 1404 || 軸距 | 130mm || 電池 | 1100mAh 11.1V 3S 60C 鋰電池 || 碳板厚度 | 3mm || 螺旋槳 | 60mm 3葉槳葉 || LED | 可調色LED+智能燈控 || 其他功能 | 自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節） || 顏色 | 白、紅、藍可選

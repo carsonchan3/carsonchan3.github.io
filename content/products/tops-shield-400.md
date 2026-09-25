@@ -29,10 +29,10 @@ variant.36.imageAlt: TOPS Shield 400 PNP competition drone
 ---
 
 <!-- locale:en -->
-The TOPS Shield 400 is built for larger-format drone sports where teams need more physical presence and endurance at the arena boundary. Select a ready-to-fly system for a complete deployment package or use the PNP platform as the foundation for your own receiver and battery workflow.
+40cm full-size soccer drone, dedicated for competitive matches. Engineered through rigorous drone flight dynamics R&D and exhaustive flight testing. Delivers thrilling maneuverability and high power output, matching optimized hardware combinations for peak competitive performance. Striker series maximizes athletic responsiveness and tournament reliability.
 
 <!-- locale:zh-Hant -->
-TOPS Shield 400 為較大規模的無人機運動而設，適合隊伍在場館邊界需要更大體量及耐用性的情況。您可選擇完整部署套裝的開箱即飛系統，或以 PNP 平台作為自備接收器及電池流程的基礎。
+40公分大號足球無人機，專為比賽設計。通過對無人機運動的不斷研究、開發和無數次飛行測試，不僅以其動態機動性和強大的能量滿足用戶，還通過各種飛行測試和無數次練習賽研究遊戲的最佳設備組合，以最大限度地提高產品的性能。專為無人機足球開發的前鋒不僅通過其動態機動性和強大的能量提高了用戶的滿意度，而且我們還通過各種飛行測試和眾多練習賽研究了針對比賽優化的設備組合，以發揮產品的最佳性能。
 
 <!-- detail:en -->
 specificationsTitle: Technical Specifications
@@ -49,12 +49,11 @@ careTitle: Includes 1-Year VLI CARE
 careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
 tier.certified.label: RTF
 tier.certified.subtitle: Ready-to-fly for larger-format matches and venue deployments.
-tier.certified.features: Complete flight-electronics configuration for arena-scale use. || VLI pre-flight configuration check before handover. || Designed for larger-format match operations and venue planning.
+tier.certified.inTheBox: 1 set Protective outer cage || 1 set Carbon fiber center frame || 4x Brushless motor 2506 1960KV || 1x 50A 4-in-1 ESC (6S supported) || 1x Professional Drone Soccer FC || 1x POSITION LED || 1x REAR LED || 1x TEAM LED || 2 sets Propellers || 1 set ELRS remote controller
 tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: PNP platform for technical teams with their own electronics.
-tier.builder.features: Bring your own receiver and battery workflow. || Flexible foundation for venue-specific configuration. || Standard manufacturer inspection before dispatch.
-specifications: Frame Diameter | 400 mm || Design | Large-format spherical competition cage || Use Case | Arena-scale matches and boundary operations || Configuration | RTF or PNP platform options || Programme Fit | Suitable for larger venues and higher-visibility deployments
-inTheBox: 1x TOPS Shield 400 Competition Ball Drone || 1x Flight-Electronics Configuration on RTF Edition || 2x Sets of Competition Propellers || 1x High-Impact Outer Shell Component || 1x VLI Configuration Handover Checklist
+tier.builder.inTheBox: 1x Drone soccer aircraft (receiver not included, sold separately)
+specifications: Dimensions | 400*400*400mm || Weight | 1020g (with battery) || Flight Time | 6 mins (hover) || Motor | 2506 1960KV Brushless Motor || Flight Controller | STRIKER V3 F435 FC || ESC | STRIKER V3 55A || Battery | 4S 14.8V 120C 3000mAh LiPo (sold separately; 4S and 6S batteries supported) || BetaFlight | Parameter tuning supported || LED | Color-tunable LED + smart light controller || Other Functions | Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable) || Colour Options | Red, White, Blue
 
 <!-- detail:zh-Hant -->
 specificationsTitle: 技術規格
@@ -71,9 +70,8 @@ careTitle: 包括一年 VLI CARE
 careDescription: 涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。
 tier.certified.label: RTF 全家桶
 tier.certified.subtitle: 適合較大規模賽事及場館部署的開箱即飛配置。
-tier.certified.features: 完整的場館級飛行電子設備配置。 || 交付前由 VLI 進行配置檢查。 || 為較大規模賽事運作及場館規劃而設。
+tier.certified.inTheBox: 1套 保護外殼 || 1套 碳纖中心機架 || 4x 無刷電機2506 1960KV || 1x 50A 4 in 1電調（支持6S） || 1x 專業無人機足球飛控 || 1x POSITION LED || 1x REAR LED || 1x TEAM LED || 2套 螺旋槳 || 1套 ELRS版遙控器
 tier.builder.label: PNP 僅無人機 (+ELRS)
 tier.builder.subtitle: 適合使用自備電子設備的技術隊伍的 PNP 平台。
-tier.builder.features: 使用自備接收器及電池流程。 || 為場館特定配置提供靈活基礎。 || 出貨前進行標準製造商檢查。
-specifications: 機架直徑 | 400 毫米 || 設計 | 大型球形競賽保護架 || 用途 | 場館級賽事及邊界運作 || 配置 | RTF 或 PNP 平台選項 || 計劃適配 | 適合較大型場地及高可見度部署
-inTheBox: 1x TOPS Shield 400 競賽球形無人機 || 1x RTF Edition 飛行電子設備配置 || 2x 套競賽螺旋槳 || 1x 高抗衝擊外殼組件 || 1x VLI 配置交付清單
+tier.builder.inTheBox: 1x 球機（不含接收機，接收機另配）
+specifications: 外形尺寸 | 400*400*400mm || 機身重量 | 1020g（含電池） || 飛行時間 | 6分鐘（懸停） || 電機 | 2506 1960KV 無刷電機 || 飛控 | 前鋒 V3 F435 FC || 電調 | STRIKER V3 55A || 電池 | 4S 14.8V 120C 3000mAh鋰電池（電池另配，4S、6S電池均可） || BetaFlight | 支持調參 || LED | 可調色LED+智能燈控 || 其他功能 | 自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節） || 顏色 | 紅、白、藍可選

@@ -12,7 +12,21 @@ variant.83.model: 200 mm
 variant.83.image: /media/Droneequipment_2ab6c2b7.jpg
 variant.83.imageAlt: TOPS carry bag for a 200 mm drone
 ---
+
 <!-- locale:en -->
-A dedicated carry bag for transporting a 200 mm spherical drone and its essential accessories.
+Aircraft storage bag, 200mm sphere soccer drone competition outdoor portable carry case.
+
 <!-- locale:zh-Hant -->
-專為運送 200 毫米球形無人機及基本配件而設的收納包。
+飛行器收納包，200球形無人機競賽戶外便攜無人機包。
+
+<!-- detail:en -->
+specificationsTitle: Technical Specifications
+inTheBoxTitle: What's in the Box
+specifications: Weight | 1234g || External Dimensions | 373*222*223mm
+inTheBox: 1x Storage bag || 1x Shoulder strap
+
+<!-- detail:zh-Hant -->
+specificationsTitle: 技術規格
+inTheBoxTitle: 包裝內容
+specifications: 重量 | 1234g || 外尺寸 | 373*222*223mm
+inTheBox: 1x 收納包 || 1x 掛帶

@@ -9,7 +9,7 @@ const outputPath = path.join(projectRoot, "client", "src", "lib", "productConten
 const pricingOutputPath = path.join(projectRoot, "client", "src", "lib", "pricing.generated.ts");
 const refereePackageIds = ["assist", "managed", "evidence-pro"];
 
-type EquipmentPrice = { tier1: string; tier2?: string; care?: string };
+type EquipmentPrice = { tier1: string; tier2?: string; care?: string; tier1MinQty?: number };
 
 /** Reads the equipment tier-price table and the Smart Referee package table. */
 function parsePricingTables(rawSource: string) {
@@ -38,13 +38,17 @@ function parsePricingTables(rawSource: string) {
     const tier1Index = columns.indexOf("tier 1 – parts only");
     const tier2Index = columns.indexOf("tier 2 – vli-verified");
     const careIndex = columns.indexOf("tier 3 – vli-care add-on");
+    const minQtyIndex = columns.indexOf("tier 1 min. qty");
     if (idIndex === -1 || (priceIndex === -1 && tier1Index === -1)) throw new Error(`content/pricing.md: the table under "## ${heading}" needs a Price column or Tier 1 – PARTS only column`);
     const id = cells[idIndex] ?? "";
     if (!id) continue;
     const price = priceIndex === -1 ? cells[tier1Index] ?? "" : cells[priceIndex] ?? "";
     if (!price) throw new Error(`content/pricing.md: ID "${id}" has an empty Tier 1/Price value`);
+    const minQtyCell = minQtyIndex === -1 ? "" : cells[minQtyIndex] ?? "";
+    const tier1MinQty = minQtyCell ? Number(minQtyCell) : 1;
+    if (!Number.isInteger(tier1MinQty) || tier1MinQty < 1 || tier1MinQty > 99) throw new Error(`content/pricing.md: ID "${id}" has an invalid Tier 1 min. qty "${minQtyCell}" — use a whole number from 1 to 99, or leave it blank`);
     const value: EquipmentPrice | string = priceIndex === -1
-      ? { tier1: price, ...(cells[tier2Index] ? { tier2: cells[tier2Index] } : {}), ...(cells[careIndex] ? { care: cells[careIndex] } : {}) }
+      ? { tier1: price, ...(cells[tier2Index] ? { tier2: cells[tier2Index] } : {}), ...(cells[careIndex] ? { care: cells[careIndex] } : {}), ...(tier1MinQty > 1 ? { tier1MinQty } : {}) }
       : price;
     const table = tables.get(heading) ?? new Map<string, EquipmentPrice | string>();
     if (table.has(id)) throw new Error(`content/pricing.md: ID "${id}" appears more than once under "## ${heading}"`);
@@ -75,7 +79,7 @@ type Detail = {
   equipmentTierVerifiedDescription: string;
   careAddOnTitle: string;
   careAddOnDescription: string;
-  tiers: Record<string, { label: string; subtitle: string; features: string[] }>;
+  tiers: Record<string, { label: string; subtitle: string; features: string[]; inTheBox: string[] }>;
   specifications: Array<[string, string]>;
   inTheBox: string[];
 };
@@ -88,6 +92,7 @@ type Variant = {
   tier1Price: string;
   tier2Price?: string;
   vliCarePrice?: string;
+  tier1MinQty?: number;
   tier?: string;
   image: string;
   imageAlt: string;
@@ -120,40 +125,52 @@ function parseDetail(source: string, language: Language, file: string): Detail |
   const marker = new RegExp(`<!--\\s*detail:${language}\\s*-->\\s*([\\s\\S]*?)(?=<!--\\s*detail:|$)`).exec(source);
   if (!marker) return undefined;
   const values = parseKeyValue(marker[1].trim().split("\n"));
-  const required = ["platformLabel", "premiumTitle", "careTitle", "careDescription", "specificationsTitle", "inTheBoxTitle", "equipmentTierPartsLabel", "equipmentTierPartsDescription", "equipmentTierVerifiedLabel", "equipmentTierVerifiedDescription", "careAddOnTitle", "careAddOnDescription", "specifications", "inTheBox"];
+  const splitList = (value = "") => value.split("||").map((item) => item.trim()).filter(Boolean);
+  const tiers: Detail["tiers"] = {};
+  for (const [key, value] of Object.entries(values)) {
+    const match = /^tier\.([^.]+)\.(label|subtitle|features|inTheBox)$/.exec(key);
+    if (!match) continue;
+    const [, tier, field] = match;
+    tiers[tier] ??= { label: "", subtitle: "", features: [], inTheBox: [] };
+    if (field === "features" || field === "inTheBox") tiers[tier][field] = splitList(value);
+    else tiers[tier][field] = value;
+  }
+  // Packaged products (with tier.* lines) need the full package copy; simple products only need specs and/or contents.
+  const required = Object.keys(tiers).length
+    ? ["platformLabel", "premiumTitle", "careTitle", "careDescription", "specificationsTitle", "inTheBoxTitle", "equipmentTierPartsLabel", "equipmentTierPartsDescription", "equipmentTierVerifiedLabel", "equipmentTierVerifiedDescription", "careAddOnTitle", "careAddOnDescription", "specifications"]
+    : [];
   for (const key of required) {
     if (values[key] === undefined) throw new Error(`${file}: detail:${language} block is missing "${key}"`);
   }
-  const tiers: Detail["tiers"] = {};
-  for (const [key, value] of Object.entries(values)) {
-    const match = /^tier\.([^.]+)\.(label|subtitle|features)$/.exec(key);
-    if (!match) continue;
-    const [, tier, field] = match;
-    tiers[tier] ??= { label: "", subtitle: "", features: [] };
-    if (field === "features") tiers[tier].features = value.split("||").map((item) => item.trim()).filter(Boolean);
-    else tiers[tier][field] = value;
+  if (!required.length && !values.specifications && !values.inTheBox) throw new Error(`${file}: detail:${language} block needs "specifications" or "inTheBox"`);
+  const familyInTheBox = splitList(values.inTheBox);
+  for (const [tier, content] of Object.entries(tiers)) {
+    if (!content.inTheBox.length) {
+      if (!familyInTheBox.length) throw new Error(`${file}: detail:${language} needs "tier.${tier}.inTheBox" (what's in the box for that version)`);
+      content.inTheBox = familyInTheBox;
+    }
   }
-  const specifications = values.specifications.split("||").map((item) => item.trim()).filter(Boolean).map((item) => {
+  const specifications = (values.specifications ?? "").split("||").map((item) => item.trim()).filter(Boolean).map((item) => {
     const separator = item.indexOf("|");
     if (separator === -1) throw new Error(`${file}: detail:${language} specification "${item}" must use "Label | Value"`);
     return [item.slice(0, separator).trim(), item.slice(separator + 1).trim()] as [string, string];
   });
   return {
-    platformLabel: values.platformLabel,
-    premiumTitle: values.premiumTitle,
-    careTitle: values.careTitle,
-    careDescription: values.careDescription,
-    specificationsTitle: values.specificationsTitle,
-    inTheBoxTitle: values.inTheBoxTitle,
-    equipmentTierPartsLabel: values.equipmentTierPartsLabel,
-    equipmentTierPartsDescription: values.equipmentTierPartsDescription,
-    equipmentTierVerifiedLabel: values.equipmentTierVerifiedLabel,
-    equipmentTierVerifiedDescription: values.equipmentTierVerifiedDescription,
-    careAddOnTitle: values.careAddOnTitle,
-    careAddOnDescription: values.careAddOnDescription,
+    platformLabel: values.platformLabel ?? "",
+    premiumTitle: values.premiumTitle ?? "",
+    careTitle: values.careTitle ?? "",
+    careDescription: values.careDescription ?? "",
+    specificationsTitle: values.specificationsTitle || (language === "zh-Hant" ? "技術規格" : "Technical Specifications"),
+    inTheBoxTitle: values.inTheBoxTitle || (language === "zh-Hant" ? "包裝內容" : "What's in the Box"),
+    equipmentTierPartsLabel: values.equipmentTierPartsLabel ?? "",
+    equipmentTierPartsDescription: values.equipmentTierPartsDescription ?? "",
+    equipmentTierVerifiedLabel: values.equipmentTierVerifiedLabel ?? "",
+    equipmentTierVerifiedDescription: values.equipmentTierVerifiedDescription ?? "",
+    careAddOnTitle: values.careAddOnTitle ?? "",
+    careAddOnDescription: values.careAddOnDescription ?? "",
     tiers,
     specifications,
-    inTheBox: values.inTheBox.split("||").map((item) => item.trim()).filter(Boolean),
+    inTheBox: familyInTheBox,
   };
 }
 
@@ -175,6 +192,7 @@ function parseVariants(metadata: Record<string, string>, file: string, title: st
     const tier1Price = typeof price === "string" ? price : price.tier1;
     const tier2Price = typeof price === "string" ? undefined : price.tier2;
     const vliCarePrice = typeof price === "string" ? undefined : price.care;
+    const tier1MinQty = typeof price === "string" ? undefined : price.tier1MinQty;
     return {
       id,
       label: field("label"),
@@ -184,6 +202,7 @@ function parseVariants(metadata: Record<string, string>, file: string, title: st
       tier1Price,
       ...(tier2Price ? { tier2Price } : {}),
       ...(vliCarePrice ? { vliCarePrice } : {}),
+      ...(tier1MinQty ? { tier1MinQty } : {}),
       ...(field("tier") ? { tier: field("tier") } : {}),
       image: field("image"),
       imageAlt: field("imageAlt") || `${title} ${field("label")}`,
@@ -223,7 +242,7 @@ function parseProduct(rawSource: string, file: string): ProductContent {
 
   if (detailEn && detailZh) {
     const tierIds = Object.keys(detailEn.tiers);
-    if (!tierIds.length) throw new Error(`${file}: detail blocks need at least one tier.<name>.label`);
+    if (Boolean(tierIds.length) !== Boolean(Object.keys(detailZh.tiers).length)) throw new Error(`${file}: tier.<name>.* lines must appear in both detail:en and detail:zh-Hant, or in neither`);
     for (const tier of tierIds) {
       if (!detailZh.tiers[tier]) throw new Error(`${file}: tier "${tier}" is in detail:en but missing from detail:zh-Hant`);
       if (!variants.some((variant) => variant.tier === tier)) throw new Error(`${file}: no variant has "tier: ${tier}" — set variant.<id>.tier: ${tier}`);
@@ -231,7 +250,7 @@ function parseProduct(rawSource: string, file: string): ProductContent {
     for (const variant of variants) {
       if (variant.tier && !tierIds.includes(variant.tier)) throw new Error(`${file}: variant.${variant.id}.tier "${variant.tier}" has no matching tier.${variant.tier}.* lines in the detail blocks`);
     }
-    if (metadata.defaultTier && !tierIds.includes(metadata.defaultTier)) throw new Error(`${file}: defaultTier "${metadata.defaultTier}" is not one of: ${tierIds.join(", ")}`);
+    if (tierIds.length && metadata.defaultTier && !tierIds.includes(metadata.defaultTier)) throw new Error(`${file}: defaultTier "${metadata.defaultTier}" is not one of: ${tierIds.join(", ")}`);
   }
 
   return {
@@ -276,7 +295,7 @@ await writeFile(pricingOutputPath, `// Generated by scripts/generate-product-dat
 export const refereePackagePrices = ${JSON.stringify(Object.fromEntries(pricing.referee), null, 2)} as const;
 `, "utf8");
 
-const detailType = `{ platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] }`;
+const detailType = `{ platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[]; inTheBox: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] }`;
 await writeFile(outputPath, `// Generated by scripts/generate-product-data.mts. Edit Markdown files under content/products instead.
 export type ProductVariantContentRecord = {
   id: string;
@@ -287,6 +306,7 @@ export type ProductVariantContentRecord = {
   tier1Price: string;
   tier2Price?: string;
   vliCarePrice?: string;
+  tier1MinQty?: number;
   tier?: string;
   image: string;
   imageAlt: string;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { productContent } from "./productContent.generated";
-import { getPremiumProductContent, getProductContent } from "./productContent";
+import { getPremiumProductContent, getProductContent, getProductSpecsAndContents } from "./productContent";
 import { productFamilies } from "@/pages/Equipment";
 
 describe("Markdown-managed product content", () => {
@@ -16,7 +16,7 @@ describe("Markdown-managed product content", () => {
   });
 
   it("provides full localized detail blocks for the premium families", () => {
-    for (const familyId of ["tops-shield-205", "tops-shield-220", "r220f", "tops-shield-400"]) {
+    for (const familyId of ["tops-shield-205", "tops-shield-220", "r200f", "r220f", "tops-shield-400"]) {
       const content = getProductContent(familyId);
       expect(content?.detail?.en.premiumTitle).toBeTruthy();
       expect(content?.detail?.["zh-Hant"].premiumTitle).toBeTruthy();
@@ -33,8 +33,9 @@ describe("Markdown-managed product content", () => {
       expect(Object.keys(content?.detail?.en.tiers ?? {}).length).toBeGreaterThan(0);
       expect(Object.keys(content?.detail?.["zh-Hant"].tiers ?? {}).length).toBeGreaterThan(0);
       expect(content?.detail?.en.specifications.length).toBeGreaterThan(0);
-      expect(content?.detail?.en.inTheBox.length).toBeGreaterThan(0);
-      expect(content?.detail?.["zh-Hant"].inTheBox.length).toBeGreaterThan(0);
+      for (const language of ["en", "zh-Hant"] as const) {
+        for (const tier of Object.values(content?.detail?.[language].tiers ?? {})) expect(tier.inTheBox.length).toBeGreaterThan(0);
+      }
     }
   });
 
@@ -44,11 +45,24 @@ describe("Markdown-managed product content", () => {
     expect(new Set(variantIds).size).toBe(variantIds.length);
   });
 
-  it("maps every premium tier to a Markdown variant and keeps VLI CARE off R220F", () => {
+  it("maps every premium tier to a Markdown variant with its own box contents", () => {
     const shield220 = getPremiumProductContent("tops-shield-220", "en");
     expect(Object.keys(shield220?.tiers ?? {})).toEqual(["certified", "travel", "builder"]);
     expect(shield220?.careTiers).toEqual(["certified"]);
-    expect(getPremiumProductContent("r220f", "en")?.careTiers).toEqual([]);
+    expect(shield220?.tiers.certified.inTheBox).toContain("1x Remote controller");
+    expect(shield220?.tiers.builder.inTheBox).not.toContain("1x Remote controller");
     expect(getPremiumProductContent("d6-pro", "en")).toBeUndefined();
+  });
+
+  it("gives simple products specifications and box contents in both languages", () => {
+    for (const familyId of ["d6-pro", "ta300-charger", "tops-bag-200", "tops-shield-200"]) {
+      expect(getProductSpecsAndContents(familyId, "en")?.specifications.length).toBeGreaterThan(0);
+      expect(getProductSpecsAndContents(familyId, "zh-Hant")?.inTheBox.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("never publishes internal wholesale or MSRP pricing", () => {
+    const serialized = JSON.stringify(productContent);
+    expect(serialized).not.toMatch(/wholesale|批發|MSRP|零售價/i);
   });
 });

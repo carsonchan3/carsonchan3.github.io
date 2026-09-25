@@ -8,6 +8,7 @@ export type ProductVariantContentRecord = {
   tier1Price: string;
   tier2Price?: string;
   vliCarePrice?: string;
+  tier1MinQty?: number;
   tier?: string;
   image: string;
   imageAlt: string;
@@ -23,8 +24,8 @@ export type ProductDetailContentRecord = {
   defaultTier?: string;
   vliCareTiers: string[];
   detail?: {
-    en: { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
-    "zh-Hant": { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
+    en: { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[]; inTheBox: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
+    "zh-Hant": { platformLabel: string; premiumTitle: string; careTitle: string; careDescription: string; specificationsTitle: string; inTheBoxTitle: string; equipmentTierPartsLabel: string; equipmentTierPartsDescription: string; equipmentTierVerifiedLabel: string; equipmentTierVerifiedDescription: string; careAddOnTitle: string; careAddOnDescription: string; tiers: Record<string, { label: string; subtitle: string; features: string[]; inTheBox: string[] }>; specifications: Array<[string, string]>; inTheBox: string[] };
   };
 };
 export const productContent: readonly ProductDetailContentRecord[] = [
@@ -41,8 +42,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機平台"
     },
     "description": {
-      "en": "Engineered for high-intensity drone sports, the TOPS Shield 205 combines a lightweight 205mm spherical exoskeleton with a competition-tuned powertrain. Designed to bounce off arena walls and opponents without dropping from the sky, it is the ultimate platform for tight-quarters maneuverability.",
-      "zh-Hant": "TOPS Shield 205 專為高強度無人機運動而設，結合輕量化 205 毫米球形外骨骼與競賽調校動力系統。即使碰撞場地圍網或對手，也能保持飛行，是狹窄空間靈活操控的理想平台。"
+      "en": "Flying Shield 205 Brushless Soccer Drone, F9A-B Striker drone, designed for tournament competition. Features modular DIY-assembled cage, upgraded FC and motors for enhanced speed and power output. Upgraded shell material: thickened and stiffened for superior impact resistance! Open-source FC compatible with professional transmitters. Available in RTF and PNP versions to suit beginners and pro players alike.",
+      "zh-Hant": "飛盾205無刷球機，F9A-B主攻手球機，專為錦標賽設計，球殼可DIY組裝，飛控電機升級，速度提升，動力加碼～升級球殼材質，加厚加硬更耐撞擊！開源飛控，可適配各種專業遙控，有套裝和單球版，滿足初學者和專業級玩家的不同需求。"
     },
     "variants": [
       {
@@ -54,6 +55,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$2,430",
         "tier2Price": "HK$3,430",
         "vliCarePrice": "HK$560",
+        "tier1MinQty": 2,
         "tier": "certified",
         "image": "/manus-storage/excel_prod_30_a7d07b66.png",
         "imageAlt": "TOPS Shield 205 competition drone kit box"
@@ -67,6 +69,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$1,900",
         "tier2Price": "HK$2,900",
         "vliCarePrice": "HK$560",
+        "tier1MinQty": 2,
         "tier": "builder",
         "image": "/manus-storage/excel_prod_31_93c6811c.png",
         "imageAlt": "TOPS Shield 205 PNP competition drone product image"
@@ -89,56 +92,75 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "equipmentTierVerifiedLabel": "Tier 2 · VLI-verified",
         "equipmentTierVerifiedDescription": "The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.",
         "careAddOnTitle": "Add VLI-CARE",
-        "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
+        "careAddOnDescription": "a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "builder": {
-            "label": "Builder's Edition",
+            "label": "PNP (+ELRS)",
             "subtitle": "For teams with in-house technicians.",
-            "features": [
-              "Factory default settings (requires manual PID tuning).",
-              "Standard manufacturer visual inspection.",
-              "Standard 14-day defect return policy (Does not cover flight crashes)."
+            "features": [],
+            "inTheBox": [
+              "1x Drone soccer aircraft body"
             ]
           },
           "certified": {
-            "label": "VLI Certified Edition",
+            "label": "RTF",
             "subtitle": "Plug-and-play for professional arenas and schools.",
-            "features": [
-              "Professionally tuned by VLI engineers for arena agility.",
-              "15-point VLI Pre-Flight Verification (motors and ESCs stress-tested).",
-              "Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements."
+            "features": [],
+            "inTheBox": [
+              "1x Drone soccer aircraft",
+              "1x Remote controller",
+              "1x Battery",
+              "1x Accessory pack"
             ]
           }
         },
         "specifications": [
           [
-            "Frame Diameter",
-            "205 mm"
+            "Dimensions",
+            "205mm diameter"
           ],
           [
-            "Design",
-            "Spherical impact-resistant competition cage"
+            "Weight",
+            "200g (w/o battery) / 267g (with battery)"
           ],
           [
-            "Flight Dynamics",
-            "360-degree collision tolerance with auto-righting"
+            "Flight Time",
+            "8 mins (hover)"
           ],
           [
-            "Propulsion",
-            "High-torque brushless motors"
+            "Motor",
+            "1404 (or 1407) Brushless Motor"
           ],
           [
-            "Telemetry",
-            "Low-latency transmission, fully compatible with Smart Referee systems"
+            "Wheelbase",
+            "110mm"
+          ],
+          [
+            "Battery",
+            "1100mAh 11.1V 3S 60C LiPo"
+          ],
+          [
+            "Carbon Plate Thickness",
+            "3mm"
+          ],
+          [
+            "Propeller",
+            "75mm 3-blade"
+          ],
+          [
+            "LED",
+            "Color-tunable LED + smart light controller"
+          ],
+          [
+            "Other Functions",
+            "Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable)"
+          ],
+          [
+            "Colour Options",
+            "White, Red, Blue"
           ]
         ],
-        "inTheBox": [
-          "1x TOPS Shield 205 Competition Ball Drone",
-          "1x Pre-Bound Receiver / Transmission Unit",
-          "2x Sets of Competition Propellers",
-          "1x High-Impact Spare Outer Shell Segment",
-          "1x Custom VLI Transport Bag"
-        ]
+        "inTheBox": []
       },
       "zh-Hant": {
         "platformLabel": "205 毫米平台",
@@ -152,56 +174,75 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "equipmentTierVerifiedLabel": "Tier 2 · VLI 驗證",
         "equipmentTierVerifiedDescription": "無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 21 天。",
         "careAddOnTitle": "加購 VLI CARE",
-        "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
+        "careAddOnDescription": "一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "builder": {
-            "label": "Builder’s Edition",
+            "label": "無人機足球 (僅無人機)",
             "subtitle": "適合具備內部技術人員的隊伍。",
-            "features": [
-              "原廠預設設定（需要手動 PID 調校）。",
-              "標準製造商目視檢查。",
-              "標準 14 天產品缺陷退貨政策（不涵蓋飛行碰撞）。"
+            "features": [],
+            "inTheBox": [
+              "1x 球機機體"
             ]
           },
           "certified": {
-            "label": "VLI Certified Edition",
+            "label": "RTF全家桶",
             "subtitle": "適合專業場地及學校的即插即用配置。",
-            "features": [
-              "由 VLI 工程師為場地靈活性進行專業調校。",
-              "15 項 VLI 交付前檢查（馬達及 ESC 經壓力測試）。",
-              "包括一年 VLI CARE：涵蓋嚴重碰撞損壞、進水損壞及快速更換。"
+            "features": [],
+            "inTheBox": [
+              "1x 球機",
+              "1x 遙控",
+              "1x 電池",
+              "1x 配件包"
             ]
           }
         },
         "specifications": [
           [
-            "機架直徑",
-            "205 毫米"
+            "外形尺寸",
+            "205直徑"
           ],
           [
-            "設計",
-            "耐撞擊球形競賽保護架"
+            "機身重量",
+            "200g（不含電池）/267g（含電池）"
           ],
           [
-            "飛行動態",
-            "360 度碰撞容錯及自動翻正"
+            "飛行時間",
+            "8分鐘（懸停）"
           ],
           [
-            "推進系統",
-            "高扭矩無刷馬達"
+            "電機",
+            "無刷電機 1404（或1407）"
           ],
           [
-            "遙測",
-            "低延遲傳輸，完全兼容 Smart Referee 系統"
+            "軸距",
+            "110mm"
+          ],
+          [
+            "電池",
+            "1100mAh 11.1V 3S 60C 鋰電池"
+          ],
+          [
+            "碳板厚度",
+            "3mm"
+          ],
+          [
+            "螺旋槳",
+            "75mm 3葉槳葉"
+          ],
+          [
+            "LED",
+            "可調色LED+智能燈控"
+          ],
+          [
+            "其他功能",
+            "自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節）"
+          ],
+          [
+            "顏色",
+            "白、紅、藍可選"
           ]
         ],
-        "inTheBox": [
-          "1x TOPS Shield 205 競賽球形無人機",
-          "1x 已綁定接收器／傳輸單元",
-          "2x 套競賽螺旋槳",
-          "1x 高抗衝擊備用外殼組件",
-          "1x VLI 專用運輸袋"
-        ]
+        "inTheBox": []
       }
     }
   },
@@ -218,8 +259,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機平台"
     },
     "description": {
-      "en": "The TOPS Shield 220 gives competition teams a balanced 220mm platform for repeatable training and event deployment. Choose a ready-to-fly configuration for a faster operational start, add the travel set when logistics matter, or bring your own receiver for an in-house build workflow.",
-      "zh-Hant": "TOPS Shield 220 為競賽隊伍提供平衡的 220 毫米平台，適合重複訓練及賽事部署。您可選擇開箱即飛配置以快速投入運作，在重視物流時加入運輸套裝，或使用自備接收器建立內部技術流程。"
+      "en": "Features a high-elasticity protective cage engineered against shattering. Flexible composite material combines high resilience, impact resistance, and lightweight structure. Aerodynamic profile maximizes flight endurance. Brushless motors deliver high thrust and extreme agility. Racing 3-blade propellers ensure rapid acceleration. Precision gimbals, integrated touch display, and frequency-hopping ensure low latency and rock-solid connection. Available in RTF and PNP configurations.",
+      "zh-Hant": "這是一款具有強大彈性的護罩，不會輕易碎裂，靈活的防護罩複合材料具有高彈性、抗衝擊性和重量輕的特點。空氣動力學設計最大限度地延長了飛行時間。無刷電機提供強大的性能和極致的飛行性能。使用賽車專用的三翼螺旋槳實現更快的飛行。體驗更刺激的無人機飛行。精確的控制桿、集成的觸控顯示屏和多通道跳頻提供了低功耗和可靠的連接。有套裝和單球版，滿足初學者和專業級玩家的不同需求。"
     },
     "variants": [
       {
@@ -231,6 +272,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$2,430",
         "tier2Price": "HK$3,430",
         "vliCarePrice": "HK$560",
+        "tier1MinQty": 2,
         "tier": "certified",
         "image": "/manus-storage/excel_prod_9_417b350f.png",
         "imageAlt": "TOPS Shield 220 competition drone cage illustration"
@@ -244,6 +286,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$2,650",
         "tier2Price": "HK$3,650",
         "vliCarePrice": "HK$560",
+        "tier1MinQty": 2,
         "tier": "travel",
         "image": "/manus-storage/excel_prod_21_68f8cfe7.png",
         "imageAlt": "TOPS Shield 220 drone with remote controller"
@@ -257,6 +300,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$1,900",
         "tier2Price": "HK$2,900",
         "vliCarePrice": "HK$560",
+        "tier1MinQty": 2,
         "tier": "builder",
         "image": "/manus-storage/excel_prod_24_65d1f683.png",
         "imageAlt": "TOPS Shield 220 PNP competition drone cage diagram"
@@ -282,62 +326,97 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "certified": {
-            "label": "VLI Certified Edition",
+            "label": "RTF",
             "subtitle": "Ready-to-fly for competition teams and schools.",
-            "features": [
-              "Competition-ready receiver and flight setup.",
-              "VLI pre-flight configuration check before handover.",
-              "Includes 1-Year VLI CARE for approved programme deployments."
+            "features": [],
+            "inTheBox": [
+              "1x Drone soccer aircraft body",
+              "4x 1404 brushless motor",
+              "1x 4-in-1 35A ESC",
+              "1x Open-source FC",
+              "1x Remote controller",
+              "1x 3S 1100mAh LiPo battery",
+              "1x A40 charger",
+              "1x Multi-purpose screwdriver",
+              "1x Accessory pack"
             ]
           },
           "travel": {
-            "label": "Certified Travel Edition",
+            "label": "RTF + Travel Bag",
             "subtitle": "Ready-to-fly with a transport bag for touring programmes.",
-            "features": [
-              "Ready-to-fly 220mm platform with matched flight electronics.",
-              "Includes a carrying bag for training and event travel.",
-              "Designed for teams moving equipment between venues."
+            "features": [],
+            "inTheBox": [
+              "1x Drone soccer aircraft body",
+              "4x 1404 brushless motor",
+              "1x 4-in-1 35A ESC",
+              "1x Open-source FC",
+              "1x Remote controller",
+              "1x 3S 1100mAh LiPo battery",
+              "1x A40 charger",
+              "1x Multi-purpose screwdriver",
+              "1x Accessory pack",
+              "1x Carrying bag"
             ]
           },
           "builder": {
-            "label": "Builder's Edition",
+            "label": "PNP (+ELRS)",
             "subtitle": "PNP platform for teams with their own control system.",
-            "features": [
-              "Bring your own receiver and control equipment.",
-              "Flexible starting point for technical teams and custom builds.",
-              "Standard manufacturer inspection before dispatch."
+            "features": [],
+            "inTheBox": [
+              "1x Drone soccer aircraft body",
+              "4x 1404 brushless motor",
+              "1x 4-in-1 35A ESC",
+              "1x Open-source FC"
             ]
           }
         },
         "specifications": [
           [
-            "Frame Diameter",
-            "220 mm"
+            "Dimensions",
+            "220*220*220mm"
           ],
           [
-            "Configuration",
-            "RTF, travel-ready, or PNP platform options"
+            "Weight",
+            "172g (w/o battery) / 241g (with battery)"
           ],
           [
-            "Use Case",
-            "Training, competition, and touring event programmes"
+            "Flight Time",
+            "8 mins (hover)"
           ],
           [
-            "Flight Setup",
-            "Competition-ready power and control configuration"
+            "Motor",
+            "1404 Brushless Motor"
           ],
           [
-            "Compatibility",
-            "Suitable for Smart Referee-supported drone sports workflows"
+            "Wheelbase",
+            "130mm"
+          ],
+          [
+            "Battery",
+            "1100mAh 11.1V 3S 60C LiPo"
+          ],
+          [
+            "Carbon Plate Thickness",
+            "3mm"
+          ],
+          [
+            "Propeller",
+            "60mm 3-blade"
+          ],
+          [
+            "LED",
+            "Color-tunable LED + smart light controller"
+          ],
+          [
+            "Other Functions",
+            "Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable)"
+          ],
+          [
+            "Colour Options",
+            "White, Red, Blue"
           ]
         ],
-        "inTheBox": [
-          "1x TOPS Shield 220 Competition Ball Drone",
-          "1x Receiver / Transmission Unit on RTF configurations",
-          "2x Sets of Competition Propellers",
-          "1x High-Impact Spare Outer Shell Segment",
-          "1x Carrying Bag on Travel Edition"
-        ]
+        "inTheBox": []
       },
       "zh-Hant": {
         "platformLabel": "220 毫米平台",
@@ -354,62 +433,97 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "certified": {
-            "label": "VLI Certified Edition",
+            "label": "RTF",
             "subtitle": "適合競賽隊伍及學校的開箱即飛配置。",
-            "features": [
-              "競賽就緒的接收器及飛行設定。",
-              "交付前由 VLI 進行配置檢查。",
-              "獲認可的計劃部署包括一年 VLI CARE。"
+            "features": [],
+            "inTheBox": [
+              "1x 球機機體",
+              "4x 1404無刷電機",
+              "1x 4 in 1 35A 電調",
+              "1x 開源飛控",
+              "1x 遙控器",
+              "1x 3S 1100mAh 鋰電池",
+              "1x A40充電器",
+              "1x 多用螺絲刀",
+              "1x 配件包"
             ]
           },
           "travel": {
-            "label": "Certified Travel Edition",
+            "label": "RTF全家桶 + 便攜袋",
             "subtitle": "配備運輸袋，適合巡迴計劃的開箱即飛配置。",
-            "features": [
-              "配備匹配飛行電子設備的 220 毫米開箱即飛平台。",
-              "包括訓練及賽事運輸用攜行袋。",
-              "適合在不同場地之間運送設備的隊伍。"
+            "features": [],
+            "inTheBox": [
+              "1x 球機機體",
+              "4x 1404無刷電機",
+              "1x 4 in 1 35A 電調",
+              "1x 開源飛控",
+              "1x 遙控器",
+              "1x 3S 1100mAh 鋰電池",
+              "1x A40充電器",
+              "1x 多用螺絲刀",
+              "1x 配件包",
+              "1x 收納包"
             ]
           },
           "builder": {
-            "label": "Builder’s Edition",
+            "label": "無人機足球 (僅無人機)",
             "subtitle": "適合使用自備控制系統的隊伍的 PNP 平台。",
-            "features": [
-              "使用自備接收器及控制設備。",
-              "為技術隊伍及客製化組裝提供靈活起點。",
-              "出貨前進行標準製造商檢查。"
+            "features": [],
+            "inTheBox": [
+              "1x 球機機體",
+              "4x 1404無刷電機",
+              "1x 4 in 1 35A 電調",
+              "1x 開源飛控"
             ]
           }
         },
         "specifications": [
           [
-            "機架直徑",
-            "220 毫米"
+            "外形尺寸",
+            "220*220*220mm"
           ],
           [
-            "配置",
-            "RTF、旅行就緒或 PNP 平台選項"
+            "機身重量",
+            "172g（不含電池）/241g（含電池）"
           ],
           [
-            "用途",
-            "訓練、競賽及巡迴賽事計劃"
+            "飛行時間",
+            "8分鐘（懸停）"
           ],
           [
-            "飛行設定",
-            "競賽就緒的電源及控制配置"
+            "電機",
+            "無刷電機 1404"
           ],
           [
-            "兼容性",
-            "適用於 Smart Referee 支援的無人機運動流程"
+            "軸距",
+            "130mm"
+          ],
+          [
+            "電池",
+            "1100mAh 11.1V 3S 60C 鋰電池"
+          ],
+          [
+            "碳板厚度",
+            "3mm"
+          ],
+          [
+            "螺旋槳",
+            "60mm 3葉槳葉"
+          ],
+          [
+            "LED",
+            "可調色LED+智能燈控"
+          ],
+          [
+            "其他功能",
+            "自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節）"
+          ],
+          [
+            "顏色",
+            "白、紅、藍可選"
           ]
         ],
-        "inTheBox": [
-          "1x TOPS Shield 220 競賽球形無人機",
-          "1x RTF 配置接收器／傳輸單元",
-          "2x 套競賽螺旋槳",
-          "1x 高抗衝擊備用外殼組件",
-          "1x Travel Edition 攜行袋"
-        ]
+        "inTheBox": []
       }
     }
   },
@@ -516,8 +630,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機平台"
     },
     "description": {
-      "en": "Higher-output 200 mm ball drone platform with 3S–4S capability.",
-      "zh-Hant": "支援 3S 至 4S、輸出更高的 200 毫米球形無人機平台。"
+      "en": "F9A-B 200 mm brushless soccer drone, supplied ready to fly with a carrying bag. Suitable for the 2025 National Aeromodelling Championship, 2025 National Youth Aeromodelling Championship, 2025 China Drone Soccer League, 2025 World Drone Soccer Championship, and the 15th National Games.",
+      "zh-Hant": "F9A-B 200 無刷足球無人機，連球包開箱即飛。適用於參加2025年全國航空航天模型錦標賽、2025年全國青少年航空航天模型錦標賽、2025年中國無人機足球聯賽、2025年世界無人機足球錦標賽、第十五屆全運會。"
     },
     "variants": [
       {
@@ -529,11 +643,228 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$3,650",
         "tier2Price": "HK$4,650",
         "vliCarePrice": "HK$700",
+        "tier1MinQty": 2,
+        "tier": "certified",
         "image": "/manus-storage/excel_prod_15_cb880557.png",
         "imageAlt": "R200F RTF competition drone with remote controller"
       }
     ],
-    "vliCareTiers": []
+    "defaultTier": "certified",
+    "vliCareTiers": [
+      "certified"
+    ],
+    "detail": {
+      "en": {
+        "platformLabel": "R200F platform",
+        "premiumTitle": "R200F: The Compact Brushless Competition Kit",
+        "careTitle": "Includes 1-Year VLI CARE",
+        "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "Tier 1 · PARTS only",
+        "equipmentTierPartsDescription": "Parts-only supply with a limited warranty up to 7 days.",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI-verified",
+        "equipmentTierVerifiedDescription": "The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.",
+        "careAddOnTitle": "Add VLI-CARE",
+        "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
+        "tiers": {
+          "certified": {
+            "label": "RTF",
+            "subtitle": "Ready-to-fly kit with transmitter, receiver, charger, and carrying bag.",
+            "features": [],
+            "inTheBox": [
+              "1x Drone aircraft",
+              "1x Remote controller",
+              "1x Receiver",
+              "1x Charger",
+              "1x Battery",
+              "1x Handbag",
+              "2 pairs Propellers"
+            ]
+          }
+        },
+        "specifications": [
+          [
+            "Outer Diameter",
+            "200mm"
+          ],
+          [
+            "Takeoff Weight",
+            "257g"
+          ],
+          [
+            "Voltage",
+            "3-4S"
+          ],
+          [
+            "Wheelbase",
+            "103mm"
+          ],
+          [
+            "Carbon Plate",
+            "3.5mm"
+          ],
+          [
+            "Motor",
+            "Brushless MISS1407-3800KV"
+          ],
+          [
+            "Battery",
+            "15.2V 1120mAh"
+          ],
+          [
+            "FC + ESC",
+            "Open-source MR26-AIO-F411E35A"
+          ],
+          [
+            "Propeller",
+            "2.9 inch 3-blade"
+          ],
+          [
+            "Light Control",
+            "2CH smart light control + tunable LED"
+          ],
+          [
+            "Flight Time",
+            "> 4 mins"
+          ],
+          [
+            "ELRS Transmitter",
+            "ET01"
+          ],
+          [
+            "Receiver",
+            "ER01"
+          ],
+          [
+            "Charger",
+            "A400"
+          ],
+          [
+            "Carrying Bag",
+            "220mm drone handbag"
+          ],
+          [
+            "Package Weight",
+            "1800g"
+          ],
+          [
+            "Package Dimensions",
+            "398*245*240mm"
+          ],
+          [
+            "Colour Options",
+            "Red, Blue"
+          ]
+        ],
+        "inTheBox": []
+      },
+      "zh-Hant": {
+        "platformLabel": "R200F 平台",
+        "premiumTitle": "R200F：緊湊型無刷競賽套裝",
+        "careTitle": "包括一年 VLI CARE",
+        "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "Tier 1 · 僅零件",
+        "equipmentTierPartsDescription": "僅供應零件，有限保養期最長 7 天。",
+        "equipmentTierVerifiedLabel": "Tier 2 · VLI 驗證",
+        "equipmentTierVerifiedDescription": "無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 21 天。",
+        "careAddOnTitle": "加購 VLI CARE",
+        "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
+        "tiers": {
+          "certified": {
+            "label": "RTF 全家桶",
+            "subtitle": "包括遙控器、接收機、充電器及收納手提包的開箱即飛套裝。",
+            "features": [],
+            "inTheBox": [
+              "1x 球機",
+              "1x 遙控器",
+              "1x 接收機",
+              "1x 充電器",
+              "1x 電池",
+              "1x 手提包",
+              "2對 槳葉"
+            ]
+          }
+        },
+        "specifications": [
+          [
+            "外徑",
+            "200mm"
+          ],
+          [
+            "起飛重量",
+            "257g"
+          ],
+          [
+            "電壓",
+            "3-4S"
+          ],
+          [
+            "軸距",
+            "103mm"
+          ],
+          [
+            "碳板",
+            "3.5mm"
+          ],
+          [
+            "電機",
+            "無刷 MISS1407-3800KV"
+          ],
+          [
+            "電池",
+            "15.2V 1120mAh"
+          ],
+          [
+            "飛控+電調",
+            "開源 MR26-AIO-F411E35A"
+          ],
+          [
+            "螺旋槳",
+            "2.9寸三葉槳"
+          ],
+          [
+            "燈控",
+            "2CH智能燈控+可調LED"
+          ],
+          [
+            "飛行時間",
+            "大於4分鐘"
+          ],
+          [
+            "ELRS遙控器",
+            "ET01"
+          ],
+          [
+            "接收機",
+            "ER01"
+          ],
+          [
+            "充電器",
+            "A400"
+          ],
+          [
+            "收納手提包",
+            "220mm球機手提包"
+          ],
+          [
+            "包裝重量",
+            "1800g"
+          ],
+          [
+            "包裝尺寸",
+            "398*245*240mm"
+          ],
+          [
+            "顏色",
+            "紅、藍2色可選"
+          ]
+        ],
+        "inTheBox": []
+      }
+    }
   },
   {
     "familyId": "r220f",
@@ -548,8 +879,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機平台"
     },
     "description": {
-      "en": "The R220F is a practical 220mm ball-drone platform for organisations that need a complete, portable setup. Its upgraded motor, battery, and carrying bag make it a straightforward choice for training fleets, demonstrations, and event-side replacement capacity.",
-      "zh-Hant": "R220F 是一款實用的 220 毫米球形無人機平台，適合需要完整便攜配置的機構。升級馬達、電池及攜行袋讓它成為訓練機隊、示範活動及賽事備用機的直接選擇。"
+      "en": "F9A-B 220 mm brushless soccer drone, supplied ready to fly with a carrying bag. Suitable for the 2025 National Aeromodelling Championship, 2025 National Youth Aeromodelling Championship, 2025 China Drone Soccer League, 2025 World Drone Soccer Championship, and the 15th National Games.",
+      "zh-Hant": "F9A-B 220 無刷足球無人機，連球包開箱即飛。適用於參加2025年全國航空航天模型錦標賽、2025年全國青少年航空航天模型錦標賽、2025年中國無人機足球聯賽、2025年世界無人機足球錦標賽、第十五屆全運會。"
     },
     "variants": [
       {
@@ -561,19 +892,22 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$3,890",
         "tier2Price": "HK$4,890",
         "vliCarePrice": "HK$700",
+        "tier1MinQty": 2,
         "tier": "certified",
         "image": "/manus-storage/excel_prod_17_584dbd72.png",
         "imageAlt": "R220F RTF competition drone with remote controller"
       }
     ],
     "defaultTier": "certified",
-    "vliCareTiers": [],
+    "vliCareTiers": [
+      "certified"
+    ],
     "detail": {
       "en": {
         "platformLabel": "R220F platform",
         "premiumTitle": "R220F: The Ready-to-Deploy Training Platform",
-        "careTitle": "VLI CARE not included",
-        "careDescription": "This package does not include VLI CARE.",
+        "careTitle": "Includes 1-Year VLI CARE",
+        "careDescription": "Coverage for heavy collision damage, water damage, and rapid replacements.",
         "specificationsTitle": "Technical Specifications",
         "inTheBoxTitle": "What's in the Box",
         "equipmentTierPartsLabel": "Tier 1 · PARTS only",
@@ -584,50 +918,97 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "certified": {
-            "label": "VLI Ready-to-Deploy Edition",
+            "label": "RTF",
             "subtitle": "Complete RTF setup for training, demonstration, and event support.",
-            "features": [
-              "Upgraded motor and matched flight battery included.",
-              "Ready-to-fly configuration for faster programme setup.",
-              "Includes a carrying bag for practical transport between venues."
+            "features": [],
+            "inTheBox": [
+              "1x Drone aircraft",
+              "1x Remote controller",
+              "1x Receiver",
+              "1x Charger",
+              "1x Battery",
+              "1x Handbag",
+              "2 pairs Propellers"
             ]
           }
         },
         "specifications": [
           [
-            "Frame Diameter",
-            "220 mm"
+            "Outer Diameter",
+            "220mm"
           ],
           [
-            "Configuration",
-            "Ready-to-fly ball drone platform"
+            "Takeoff Weight",
+            "299g"
           ],
           [
-            "Powertrain",
-            "Upgraded motor with matched flight battery"
+            "Voltage",
+            "3-4S"
           ],
           [
-            "Deployment",
-            "Portable setup for training, demonstration, and event support"
+            "Wheelbase",
+            "115mm"
           ],
           [
-            "Transport",
-            "Carrying bag included"
+            "Carbon Plate",
+            "3.5mm"
+          ],
+          [
+            "Motor",
+            "Brushless MISS1407-3800KV"
+          ],
+          [
+            "Battery",
+            "15.2V 1120mAh"
+          ],
+          [
+            "FC + ESC",
+            "Open-source MR26-AIO-F411E35A"
+          ],
+          [
+            "Propeller",
+            "2.9 inch 3-blade"
+          ],
+          [
+            "Light Control",
+            "2CH smart light control + tunable LED"
+          ],
+          [
+            "Flight Time",
+            "> 4 mins"
+          ],
+          [
+            "ELRS Transmitter",
+            "ET01"
+          ],
+          [
+            "Receiver",
+            "ER01"
+          ],
+          [
+            "Charger",
+            "A400"
+          ],
+          [
+            "Carrying Bag",
+            "220mm drone handbag"
+          ],
+          [
+            "Package Dimensions",
+            "430*290*235mm"
+          ],
+          [
+            "Colour Options",
+            "Red, Blue"
           ]
         ],
-        "inTheBox": [
-          "1x R220F Ready-to-Fly Ball Drone",
-          "1x Upgraded Motor Configuration",
-          "1x Matched Flight Battery",
-          "1x Remote / Control Setup",
-          "1x Carrying Bag"
-        ]
+        "inTheBox": []
       },
       "zh-Hant": {
         "platformLabel": "R220F 平台",
         "premiumTitle": "R220F：即時部署訓練平台",
-        "careTitle": "不包括 VLI CARE",
-        "careDescription": "此配置不包括 VLI CARE。",
+        "careTitle": "包括一年 VLI CARE",
+        "careDescription": "涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。",
         "specificationsTitle": "技術規格",
         "inTheBoxTitle": "包裝內容",
         "equipmentTierPartsLabel": "Tier 1 · 僅零件",
@@ -638,44 +1019,91 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "certified": {
-            "label": "VLI Ready-to-Deploy Edition",
+            "label": "RTF 全家桶",
             "subtitle": "適合訓練、示範及賽事支援的完整 RTF 配置。",
-            "features": [
-              "包括升級馬達及匹配飛行電池。",
-              "開箱即飛配置，讓計劃更快投入運作。",
-              "包括適合在不同場地之間運輸的攜行袋。"
+            "features": [],
+            "inTheBox": [
+              "1x 球機",
+              "1x 遙控器",
+              "1x 接收機",
+              "1x 充電器",
+              "1x 電池",
+              "1x 手提包",
+              "2對 槳葉"
             ]
           }
         },
         "specifications": [
           [
-            "機架直徑",
-            "220 毫米"
+            "外徑",
+            "220mm"
           ],
           [
-            "配置",
-            "開箱即飛球形無人機平台"
+            "起飛重量",
+            "299g"
           ],
           [
-            "動力系統",
-            "升級馬達及匹配飛行電池"
+            "電壓",
+            "3-4S"
           ],
           [
-            "部署",
-            "適合訓練、示範及賽事支援的便攜配置"
+            "軸距",
+            "115mm"
           ],
           [
-            "運輸",
-            "包括攜行袋"
+            "碳板",
+            "3.5mm"
+          ],
+          [
+            "電機",
+            "無刷 MISS1407-3800KV"
+          ],
+          [
+            "電池",
+            "15.2V 1120mAh"
+          ],
+          [
+            "飛控+電調",
+            "開源 MR26-AIO-F411E35A"
+          ],
+          [
+            "螺旋槳",
+            "2.9寸三葉槳"
+          ],
+          [
+            "燈控",
+            "2CH智能燈控+可調LED"
+          ],
+          [
+            "飛行時間",
+            "大於4分鐘"
+          ],
+          [
+            "ELRS遙控器",
+            "ET01"
+          ],
+          [
+            "接收機",
+            "ER01"
+          ],
+          [
+            "充電器",
+            "A400"
+          ],
+          [
+            "收納手提包",
+            "220mm球機手提包"
+          ],
+          [
+            "包裝尺寸",
+            "430*290*235mm"
+          ],
+          [
+            "顏色",
+            "紅、藍2色可選"
           ]
         ],
-        "inTheBox": [
-          "1x R220F 開箱即飛球形無人機",
-          "1x 升級馬達配置",
-          "1x 匹配飛行電池",
-          "1x 遙控／控制設定",
-          "1x 攜行袋"
-        ]
+        "inTheBox": []
       }
     }
   },
@@ -692,8 +1120,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機平台"
     },
     "description": {
-      "en": "The TOPS Shield 400 is built for larger-format drone sports where teams need more physical presence and endurance at the arena boundary. Select a ready-to-fly system for a complete deployment package or use the PNP platform as the foundation for your own receiver and battery workflow.",
-      "zh-Hant": "TOPS Shield 400 為較大規模的無人機運動而設，適合隊伍在場館邊界需要更大體量及耐用性的情況。您可選擇完整部署套裝的開箱即飛系統，或以 PNP 平台作為自備接收器及電池流程的基礎。"
+      "en": "40cm full-size soccer drone, dedicated for competitive matches. Engineered through rigorous drone flight dynamics R&D and exhaustive flight testing. Delivers thrilling maneuverability and high power output, matching optimized hardware combinations for peak competitive performance. Striker series maximizes athletic responsiveness and tournament reliability.",
+      "zh-Hant": "40公分大號足球無人機，專為比賽設計。通過對無人機運動的不斷研究、開發和無數次飛行測試，不僅以其動態機動性和強大的能量滿足用戶，還通過各種飛行測試和無數次練習賽研究遊戲的最佳設備組合，以最大限度地提高產品的性能。專為無人機足球開發的前鋒不僅通過其動態機動性和強大的能量提高了用戶的滿意度，而且我們還通過各種飛行測試和眾多練習賽研究了針對比賽優化的設備組合，以發揮產品的最佳性能。"
     },
     "variants": [
       {
@@ -705,6 +1133,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$4,350",
         "tier2Price": "HK$5,350",
         "vliCarePrice": "HK$950",
+        "tier1MinQty": 2,
         "tier": "certified",
         "image": "/manus-storage/excel_prod_26_26e91f83.png",
         "imageAlt": "TOPS Shield 400 competition drone in a blue cage"
@@ -718,6 +1147,7 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "tier1Price": "HK$3,510",
         "tier2Price": "HK$4,510",
         "vliCarePrice": "HK$950",
+        "tier1MinQty": 2,
         "tier": "builder",
         "image": "/manus-storage/excel_prod_19_2844a82e.png",
         "imageAlt": "TOPS Shield 400 PNP competition drone"
@@ -743,53 +1173,78 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careAddOnDescription": "Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.",
         "tiers": {
           "certified": {
-            "label": "VLI Certified Arena Edition",
+            "label": "RTF",
             "subtitle": "Ready-to-fly for larger-format matches and venue deployments.",
-            "features": [
-              "Complete flight-electronics configuration for arena-scale use.",
-              "VLI pre-flight configuration check before handover.",
-              "Designed for larger-format match operations and venue planning."
+            "features": [],
+            "inTheBox": [
+              "1 set Protective outer cage",
+              "1 set Carbon fiber center frame",
+              "4x Brushless motor 2506 1960KV",
+              "1x 50A 4-in-1 ESC (6S supported)",
+              "1x Professional Drone Soccer FC",
+              "1x POSITION LED",
+              "1x REAR LED",
+              "1x TEAM LED",
+              "2 sets Propellers",
+              "1 set ELRS remote controller"
             ]
           },
           "builder": {
-            "label": "Arena Builder's Edition",
+            "label": "PNP (+ELRS)",
             "subtitle": "PNP platform for technical teams with their own electronics.",
-            "features": [
-              "Bring your own receiver and battery workflow.",
-              "Flexible foundation for venue-specific configuration.",
-              "Standard manufacturer inspection before dispatch."
+            "features": [],
+            "inTheBox": [
+              "1x Drone soccer aircraft (receiver not included, sold separately)"
             ]
           }
         },
         "specifications": [
           [
-            "Frame Diameter",
-            "400 mm"
+            "Dimensions",
+            "400*400*400mm"
           ],
           [
-            "Design",
-            "Large-format spherical competition cage"
+            "Weight",
+            "1020g (with battery)"
           ],
           [
-            "Use Case",
-            "Arena-scale matches and boundary operations"
+            "Flight Time",
+            "6 mins (hover)"
           ],
           [
-            "Configuration",
-            "RTF or PNP platform options"
+            "Motor",
+            "2506 1960KV Brushless Motor"
           ],
           [
-            "Programme Fit",
-            "Suitable for larger venues and higher-visibility deployments"
+            "Flight Controller",
+            "STRIKER V3 F435 FC"
+          ],
+          [
+            "ESC",
+            "STRIKER V3 55A"
+          ],
+          [
+            "Battery",
+            "4S 14.8V 120C 3000mAh LiPo (sold separately; 4S and 6S batteries supported)"
+          ],
+          [
+            "BetaFlight",
+            "Parameter tuning supported"
+          ],
+          [
+            "LED",
+            "Color-tunable LED + smart light controller"
+          ],
+          [
+            "Other Functions",
+            "Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable)"
+          ],
+          [
+            "Colour Options",
+            "Red, White, Blue"
           ]
         ],
-        "inTheBox": [
-          "1x TOPS Shield 400 Competition Ball Drone",
-          "1x Flight-Electronics Configuration on RTF Edition",
-          "2x Sets of Competition Propellers",
-          "1x High-Impact Outer Shell Component",
-          "1x VLI Configuration Handover Checklist"
-        ]
+        "inTheBox": []
       },
       "zh-Hant": {
         "platformLabel": "400 毫米平台",
@@ -806,53 +1261,78 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "careAddOnDescription": "僅適用於 Tier 2 的一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。",
         "tiers": {
           "certified": {
-            "label": "VLI Certified Arena Edition",
+            "label": "RTF 全家桶",
             "subtitle": "適合較大規模賽事及場館部署的開箱即飛配置。",
-            "features": [
-              "完整的場館級飛行電子設備配置。",
-              "交付前由 VLI 進行配置檢查。",
-              "為較大規模賽事運作及場館規劃而設。"
+            "features": [],
+            "inTheBox": [
+              "1套 保護外殼",
+              "1套 碳纖中心機架",
+              "4x 無刷電機2506 1960KV",
+              "1x 50A 4 in 1電調（支持6S）",
+              "1x 專業無人機足球飛控",
+              "1x POSITION LED",
+              "1x REAR LED",
+              "1x TEAM LED",
+              "2套 螺旋槳",
+              "1套 ELRS版遙控器"
             ]
           },
           "builder": {
-            "label": "Arena Builder’s Edition",
+            "label": "PNP 僅無人機 (+ELRS)",
             "subtitle": "適合使用自備電子設備的技術隊伍的 PNP 平台。",
-            "features": [
-              "使用自備接收器及電池流程。",
-              "為場館特定配置提供靈活基礎。",
-              "出貨前進行標準製造商檢查。"
+            "features": [],
+            "inTheBox": [
+              "1x 球機（不含接收機，接收機另配）"
             ]
           }
         },
         "specifications": [
           [
-            "機架直徑",
-            "400 毫米"
+            "外形尺寸",
+            "400*400*400mm"
           ],
           [
-            "設計",
-            "大型球形競賽保護架"
+            "機身重量",
+            "1020g（含電池）"
           ],
           [
-            "用途",
-            "場館級賽事及邊界運作"
+            "飛行時間",
+            "6分鐘（懸停）"
           ],
           [
-            "配置",
-            "RTF 或 PNP 平台選項"
+            "電機",
+            "2506 1960KV 無刷電機"
           ],
           [
-            "計劃適配",
-            "適合較大型場地及高可見度部署"
+            "飛控",
+            "前鋒 V3 F435 FC"
+          ],
+          [
+            "電調",
+            "STRIKER V3 55A"
+          ],
+          [
+            "電池",
+            "4S 14.8V 120C 3000mAh鋰電池（電池另配，4S、6S電池均可）"
+          ],
+          [
+            "BetaFlight",
+            "支持調參"
+          ],
+          [
+            "LED",
+            "可調色LED+智能燈控"
+          ],
+          [
+            "其他功能",
+            "自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節）"
+          ],
+          [
+            "顏色",
+            "紅、白、藍可選"
           ]
         ],
-        "inTheBox": [
-          "1x TOPS Shield 400 競賽球形無人機",
-          "1x RTF Edition 飛行電子設備配置",
-          "2x 套競賽螺旋槳",
-          "1x 高抗衝擊外殼組件",
-          "1x VLI 配置交付清單"
-        ]
+        "inTheBox": []
       }
     }
   },
@@ -869,8 +1349,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機電源"
     },
     "description": {
-      "en": "LiPo battery options for 200 mm, 220 mm, and higher-voltage 400 mm builds.",
-      "zh-Hant": "適用於 200 毫米、220 毫米及高電壓 400 毫米配置的 LiPo 電池選項。"
+      "en": "Gens ACE LiPo batteries for drone soccer and FPV racing. The 3S 11.1V 1100mAh pack suits 200 and 220 brushless soccer drones; the 4S and 6S 3000mAh 120C packs suit 400 brushless soccer drones.",
+      "zh-Hant": "格氏ACE鋰電池，適用於足球無人機及穿越機。3S 11.1V 1100mAh 適用於200或220無刷球機；4S及6S 3000mAh 120C 適用於400無刷球機。"
     },
     "variants": [
       {
@@ -904,7 +1384,73 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "ACE 6S 3000 mAh LiPo battery"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "3S 11.1V 1100mAh",
+            "For 200 or 220 brushless soccer drones and FPV racing drones; 68g; 60*28*20mm"
+          ],
+          [
+            "4S 3000mAh 120C",
+            "For 400 brushless soccer drones and FPV racing drones"
+          ],
+          [
+            "6S 3000mAh 120C",
+            "22.2V, 6S1P, XT60; for 400 brushless soccer drones and FPV racing drones"
+          ]
+        ],
+        "inTheBox": [
+          "1x Battery (selected version)"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "3S 11.1V 1100mAh",
+            "200或者220無刷球機、穿越機用；68g；60*28*20mm"
+          ],
+          [
+            "4S 3000mAh 120C",
+            "400無刷球機用、穿越機用"
+          ],
+          [
+            "6S 3000mAh 120C",
+            "22.2V，6S1P，XT60；400無刷球機用、穿越機用"
+          ]
+        ],
+        "inTheBox": [
+          "1x 電池（所選型號）"
+        ]
+      }
+    }
   },
   {
     "familyId": "usb-charger",
@@ -989,8 +1535,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機平台"
     },
     "description": {
-      "en": "A cost-conscious 200 mm brushless drone platform for training and entry-level competition preparation.",
-      "zh-Hant": "適合訓練及入門競賽準備的高性價比 200 毫米無刷球形無人機平台。"
+      "en": "2026 New Brushless Drone Highlights: This 200mm brushless soccer drone delivers ultimate cost-performance. Equipped with high-performance brushless motors, it achieves 90% performance of similar open-source brushless products on the market at only one-third the price. Perfect for hollow-cup pilots upgrading to brushless training. Features dual carbon fiber plates to minimize damage during daily practice and substantially reduce maintenance costs.",
+      "zh-Hant": "2026新款無刷無人機特色亮點：此款200mm無刷足球無人機，打造極致性價比，搭載高性能無刷電機對比市面上同類開源無刷產品，性能可達到其90%，價格只有其三分之一，可充分滿足空心杯進階選手的訓練需求，且採用雙碳板設計可以在日常訓練中減少配件的損壞解決了無刷訓練成本高的問題。"
     },
     "variants": [
       {
@@ -1004,7 +1550,139 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "TOPS Shield 200 brushless competition drone"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Dimensions",
+            "200*200*180mm"
+          ],
+          [
+            "Receiver Mode",
+            "Built-in or external"
+          ],
+          [
+            "Control Radius",
+            "< 100 m"
+          ],
+          [
+            "Recommended Battery",
+            "3S 650mAh - 3S 950mAh"
+          ],
+          [
+            "Motor",
+            "1505 4000KV"
+          ],
+          [
+            "ESC",
+            "25A 4-in-1 open-source ESC"
+          ],
+          [
+            "Flight Controller",
+            "GT02 closed-source FC"
+          ],
+          [
+            "Flight Time",
+            "4-6 mins"
+          ],
+          [
+            "Lighting",
+            "Dual-channel lighting interface"
+          ],
+          [
+            "Colour Options",
+            "Red, Blue, White"
+          ]
+        ],
+        "inTheBox": [
+          "1x Drone soccer aircraft",
+          "1x 3S battery",
+          "1x Remote controller",
+          "1x Charger",
+          "1x Accessory pack",
+          "1x Packaging box"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "外形尺寸",
+            "200*200*180"
+          ],
+          [
+            "接收機模式",
+            "內置或外接"
+          ],
+          [
+            "操控半徑",
+            "小於100米"
+          ],
+          [
+            "推薦電池",
+            "3S650-3S950"
+          ],
+          [
+            "電機",
+            "1505 4000KV"
+          ],
+          [
+            "電調",
+            "25A4合一開源電調"
+          ],
+          [
+            "飛控",
+            "GT02閉源飛控"
+          ],
+          [
+            "續航時間",
+            "4-6分鐘"
+          ],
+          [
+            "燈光",
+            "兩路燈光接口"
+          ],
+          [
+            "顏色",
+            "紅色、藍色、白色"
+          ]
+        ],
+        "inTheBox": [
+          "1x 足球無人機",
+          "1x 3S電池",
+          "1x 遙控器",
+          "1x 充電器",
+          "1x 配件包",
+          "1x 包裝盒"
+        ]
+      }
+    }
   },
   {
     "familyId": "d6-pro",
@@ -1019,8 +1697,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "充電設備"
     },
     "description": {
-      "en": "Dual-channel smart balance charger for 1S–6S battery systems.",
-      "zh-Hant": "適用於 1S 至 6S 電池系統的雙通道智能平衡充電器。"
+      "en": "Charges 1S-6S batteries. Each set includes 2x XT60 to XT30 adapters.",
+      "zh-Hant": "可充1S-6S電池，每套配2個XT60轉XT30轉接頭。"
     },
     "variants": [
       {
@@ -1034,7 +1712,139 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "D6 PRO smart balance charger"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Input Voltage",
+            "AC 100~240V / DC 6.5~30V"
+          ],
+          [
+            "Charge Current",
+            "0.1~15A x 2"
+          ],
+          [
+            "Charge Power",
+            "DC 325W x 2 (650W) / AC 200W (supports power distribution)"
+          ],
+          [
+            "Discharge Power",
+            "Internal 15W x 2 (balance port 10W) / External 325W x 2 (650W)"
+          ],
+          [
+            "Battery Types",
+            "LiHv/LiPo/LiFe/Lilon/Lixx: 1~6S; NiZn/Nicd/NiMH: 1~16S; Smart Battery: 1~6S; Lead Acid (Pb): 2~24V; Eneloop: 1~16S"
+          ],
+          [
+            "Balance Current",
+            "1600mA x 2"
+          ],
+          [
+            "Discharge Current",
+            "0.1~3A x 2 / External Discharge: 1~15A x 2"
+          ],
+          [
+            "USB Output",
+            "5V / 2.1A"
+          ],
+          [
+            "Dimensions",
+            "108x105x76mm"
+          ],
+          [
+            "Net Weight",
+            "555g"
+          ]
+        ],
+        "inTheBox": [
+          "1x D6 PRO Smart Balance Charger",
+          "2x XT60 to XT30 Adapter"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "輸入電壓",
+            "AC 100~240V/DC 6.5~30V"
+          ],
+          [
+            "充電電流",
+            "0.1~15Ax2"
+          ],
+          [
+            "充電功率",
+            "DC 325W x 2（650W） / AC 200W（支持配電）"
+          ],
+          [
+            "放電功率內部放電",
+            "15W x 2（平衡端口10W）"
+          ],
+          [
+            "外部放電",
+            "325W x2（650W）"
+          ],
+          [
+            "電池類型",
+            "LiHvLiPo/LiFe/Lilon/Lixx: 1~6S; NiZn/Nicd/NiMH: 1~16S; 智慧電池: 1~6S; 鉛酸(Pb): 2~24V; Eneloop: 1~16S"
+          ],
+          [
+            "平衡電流",
+            "1600mAx2"
+          ],
+          [
+            "放電電流",
+            "0.1~3Ax2"
+          ],
+          [
+            "外部放電電流",
+            "1~15Ax2"
+          ],
+          [
+            "USB輸出",
+            "5V/2.1A"
+          ],
+          [
+            "尺寸",
+            "108x105x76毫米"
+          ],
+          [
+            "淨重",
+            "555克"
+          ]
+        ],
+        "inTheBox": [
+          "1x D6 PRO智能平衡充電器",
+          "2x XT60轉XT30轉接頭"
+        ]
+      }
+    }
   },
   {
     "familyId": "tops-shield-200-cup",
@@ -1049,8 +1859,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機平台"
     },
     "description": {
-      "en": "A portable ready-to-fly 200 mm drone set for training, classroom use, and pre-event team preparation.",
-      "zh-Hant": "適合訓練、課堂使用及賽前隊伍準備的便攜式 200 毫米開箱即飛套裝。"
+      "en": "Purpose-built for competitions, compliant with ASFC F9A-B competition standards. Multiple mode switching: one-key takeoff/landing, 360° flips, 3-speed rates, auto-leveling, position hold, auto-roll, etc. Fully compliant with national and international drone soccer tournaments (e.g., Feibei National Competition, Golden Key Provincial Competition, World Drone Soccer Championship). Also ideal for STEM classes and pre-competition training. Features an ultra-flexible crash-resistant safety cage for maximum durability and safety among peers. Whitelisted tournament competition equipment.",
+      "zh-Hant": "專為競賽設計，符合ASFC F9A-B競賽標準。多種模式隨意切換，一鍵起飛降落、360度翻轉、三擋調速、自動穩定飛行、實現定點飛行、一鍵翻滾等。飛盾足球無人機參數符合各類空中足球無人機競賽項目，如飛北全國性競賽、金鑰匙省級競賽以及國際競賽等。同時也適合學生平時上課練習和賽前集訓。外殼採用柔韌安全殼，防碎防撞，集參賽、學習、玩樂於一體。在同類型產品中安全係數最高。白名單賽事用比賽器材。"
     },
     "variants": [
       {
@@ -1064,7 +1874,189 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "TOPS Shield 200 portable ready-to-fly drone set"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Dimensions",
+            "200*200*180mm"
+          ],
+          [
+            "Wheelbase",
+            "115mm"
+          ],
+          [
+            "Propeller Diameter",
+            "66mm"
+          ],
+          [
+            "Standard Battery",
+            "2S 450mAh 7.4V 42*25*10mm JST connector LiPo"
+          ],
+          [
+            "Flight Modes",
+            "Altitude hold, Self-leveling, Headless mode, 3-speed rates"
+          ],
+          [
+            "LED",
+            "Front/rear LED indicators with 7-color transition"
+          ],
+          [
+            "Communication",
+            "2.4G wireless RF"
+          ],
+          [
+            "Body Weight",
+            "75g (dry) / 100g (with battery)"
+          ],
+          [
+            "Standard Takeoff Weight",
+            "99g"
+          ],
+          [
+            "Max Takeoff Weight",
+            "<100g"
+          ],
+          [
+            "Max Flight Time",
+            ">5 mins"
+          ],
+          [
+            "Control Radius",
+            "<100m"
+          ],
+          [
+            "Battery Config",
+            "2x 2S batteries + 4x AAA controller batteries included"
+          ],
+          [
+            "OEM",
+            "Customization supported"
+          ],
+          [
+            "Box Dimensions",
+            "32*23.5*21.5cm"
+          ],
+          [
+            "Colour Options",
+            "Red, Blue, White"
+          ]
+        ],
+        "inTheBox": [
+          "1x Drone soccer aircraft",
+          "2x 2S battery",
+          "1x Remote controller",
+          "1x User manual",
+          "4x AAA battery",
+          "1x Accessory pack",
+          "1x Gift box packaging"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "外形尺寸",
+            "200*200*180mm"
+          ],
+          [
+            "飛機軸距",
+            "115mm"
+          ],
+          [
+            "槳葉直徑",
+            "66mm"
+          ],
+          [
+            "標配電池",
+            "2S 450mah 7.4V 42*25*10 JST接頭 鋰電池"
+          ],
+          [
+            "模式切換",
+            "定高、自穩、無頭模式、三段變速"
+          ],
+          [
+            "LED燈",
+            "前後LED指示燈，燈光七色變化"
+          ],
+          [
+            "通信方式",
+            "2.4G無線高頻信號"
+          ],
+          [
+            "機身重量",
+            "空機75g 含電池100g"
+          ],
+          [
+            "標準起飛重量",
+            "99克"
+          ],
+          [
+            "最大起飛重量",
+            "<100克"
+          ],
+          [
+            "最大飛行時間",
+            ">5分鐘"
+          ],
+          [
+            "飛行控制半徑",
+            "<100米"
+          ],
+          [
+            "電池配置",
+            "每套含配2S電池2塊、遙控器7號乾電池4個"
+          ],
+          [
+            "OEM",
+            "可接受OEM定制"
+          ],
+          [
+            "彩盒尺寸",
+            "32*23.5*21.5cm"
+          ],
+          [
+            "顏色",
+            "紅、藍、白可選"
+          ]
+        ],
+        "inTheBox": [
+          "1x 足球無人機",
+          "2x 2S電池",
+          "1x 遙控器",
+          "1x 說明書",
+          "4x 7號乾電池",
+          "1x 配件包",
+          "1x 禮盒包裝"
+        ]
+      }
+    }
   },
   {
     "familyId": "inflatable-drone-soccer-field",
@@ -1119,8 +2111,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機電源"
     },
     "description": {
-      "en": "A replacement 2S flight battery for compatible TOPS Shield 200 drone configurations.",
-      "zh-Hant": "適用於兼容 TOPS 飛盾 200 配置的替換用 2S 飛行電池。"
+      "en": "Dedicated drone soccer battery, compatible with Flying Shield & Feiying series.",
+      "zh-Hant": "足球無人機專用電池，飛盾飛影通用款。"
     },
     "variants": [
       {
@@ -1134,7 +2126,137 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "TOPS Shield 200 2S flight battery"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Product",
+            "Model Aviation Power LiPo Battery"
+          ],
+          [
+            "Material",
+            "Lithium Cobalt Oxide (LiCoO2)"
+          ],
+          [
+            "Nominal Voltage",
+            "7.4V"
+          ],
+          [
+            "Charge Voltage",
+            "7.4V"
+          ],
+          [
+            "Charge Current/Input",
+            "5V, 1A, 2A"
+          ],
+          [
+            "Discharge Rate",
+            "25C"
+          ],
+          [
+            "Storage Temperature",
+            "25±5°C / -1±5°C"
+          ],
+          [
+            "Storage Voltage",
+            "7.6V"
+          ],
+          [
+            "Storage Condition",
+            "Keep away from direct sunlight & moisture"
+          ],
+          [
+            "Compatibility",
+            "Drone soccer, multirotors, RC airplanes, helicopters, RC cars, etc."
+          ],
+          [
+            "Package Dimensions",
+            "5.5*2.5*0.8cm"
+          ]
+        ],
+        "inTheBox": [
+          "1x 450mAh 2S battery"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "產品名稱",
+            "航模動力鋰電池"
+          ],
+          [
+            "電池材質",
+            "鈷酸鋰"
+          ],
+          [
+            "標準電壓",
+            "7.4V"
+          ],
+          [
+            "充電電壓",
+            "7.4V"
+          ],
+          [
+            "充電電壓/電流",
+            "5V、1A、2A"
+          ],
+          [
+            "放電倍率",
+            "25C"
+          ],
+          [
+            "實際儲存溫度",
+            "25±5℃/-1±5℃"
+          ],
+          [
+            "儲存電壓",
+            "7.6V"
+          ],
+          [
+            "儲存環境",
+            "避免陽光直射、避免受潮"
+          ],
+          [
+            "適用範圍",
+            "航模無人機、多軸飛行器、遙控飛機、直升機、小汽車等"
+          ],
+          [
+            "包裝尺寸",
+            "5.5*2.5*0.8cm"
+          ]
+        ],
+        "inTheBox": [
+          "1x 450mah 2S電池"
+        ]
+      }
+    }
   },
   {
     "familyId": "gmb-4s-battery",
@@ -1149,8 +2271,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "無人機電源"
     },
     "description": {
-      "en": "A high-energy 4S battery for compatible brushless racing and drone-soccer platforms.",
-      "zh-Hant": "適用於兼容無刷競賽及無人機足球平台的高能 4S 電池。"
+      "en": "For brushless FPV racing drones and brushless soccer drones.",
+      "zh-Hant": "無刷穿越機、無刷球機用。"
     },
     "variants": [
       {
@@ -1164,7 +2286,73 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "GMB high-energy 4S drone battery"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Voltage",
+            "15.2V"
+          ],
+          [
+            "Capacity",
+            "3000mAh 4S"
+          ],
+          [
+            "Connector",
+            "120C XT60 discharge connector"
+          ]
+        ],
+        "inTheBox": [
+          "1x 15.2V 3000mAh 4S battery"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "電壓",
+            "15.2V"
+          ],
+          [
+            "容量",
+            "3000mAh 4S"
+          ],
+          [
+            "放電接頭",
+            "120C XT60放電接頭"
+          ]
+        ],
+        "inTheBox": [
+          "1x 15.2V 3000mAh 4S電池"
+        ]
+      }
+    }
   },
   {
     "familyId": "ta300-charger",
@@ -1179,8 +2367,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "充電設備"
     },
     "description": {
-      "en": "An eight-channel smart charger for preparing multiple 2–4S batteries efficiently and consistently.",
-      "zh-Hant": "適合高效及一致地準備多枚 2–4S 電池的八通道智能充電器。"
+      "en": "Equipped with 8 independent channels, real-time battery monitoring, plug-and-charge convenience, and 8-fold safety protection, balancing high efficiency and reliability.",
+      "zh-Hant": "配備8個獨立通道、實時電池監控、即插即充、八重安全防護，兼顧高效與可靠。"
     },
     "variants": [
       {
@@ -1194,7 +2382,121 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "TA300 eight-channel smart battery charger"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Input Voltage",
+            "AC 100V-240V"
+          ],
+          [
+            "Total Output Power",
+            "300W"
+          ],
+          [
+            "Total Discharge Power",
+            "3W x 8"
+          ],
+          [
+            "Max Charge Current",
+            "2A"
+          ],
+          [
+            "Supported Batteries",
+            "LiPo / LiHV / LiFe / Li-ion"
+          ],
+          [
+            "Cell Count",
+            "2-4S"
+          ],
+          [
+            "Functions",
+            "Charge, Storage"
+          ],
+          [
+            "Dimensions",
+            "161.3x95x58.7mm"
+          ],
+          [
+            "Weight",
+            "550g"
+          ]
+        ],
+        "inTheBox": [
+          "1x TATTU TA300 8-Channel Smart Charger"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "輸入電壓",
+            "AC 100V-240V"
+          ],
+          [
+            "總輸出功率",
+            "300W"
+          ],
+          [
+            "總放電功率",
+            "3WX8"
+          ],
+          [
+            "最大充電電流",
+            "2A"
+          ],
+          [
+            "充電電池類型",
+            "LiPo/LiHV/LiFe/Li-lon"
+          ],
+          [
+            "電池串數",
+            "2-4S"
+          ],
+          [
+            "功能",
+            "充電、存儲"
+          ],
+          [
+            "尺寸",
+            "161.3x95x58.7mm"
+          ],
+          [
+            "重量",
+            "550g"
+          ]
+        ],
+        "inTheBox": [
+          "1x TATTU TA300八通道智能充電器"
+        ]
+      }
+    }
   },
   {
     "familyId": "tops-bag-200",
@@ -1209,8 +2511,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "賽事設備"
     },
     "description": {
-      "en": "A dedicated carry bag for transporting a 200 mm spherical drone and its essential accessories.",
-      "zh-Hant": "專為運送 200 毫米球形無人機及基本配件而設的收納包。"
+      "en": "Aircraft storage bag, 200mm sphere soccer drone competition outdoor portable carry case.",
+      "zh-Hant": "飛行器收納包，200球形無人機競賽戶外便攜無人機包。"
     },
     "variants": [
       {
@@ -1224,7 +2526,67 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "TOPS carry bag for a 200 mm drone"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Weight",
+            "1234g"
+          ],
+          [
+            "External Dimensions",
+            "373*222*223mm"
+          ]
+        ],
+        "inTheBox": [
+          "1x Storage bag",
+          "1x Shoulder strap"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "重量",
+            "1234g"
+          ],
+          [
+            "外尺寸",
+            "373*222*223mm"
+          ]
+        ],
+        "inTheBox": [
+          "1x 收納包",
+          "1x 掛帶"
+        ]
+      }
+    }
   },
   {
     "familyId": "tops-bag-220",
@@ -1239,8 +2601,8 @@ export const productContent: readonly ProductDetailContentRecord[] = [
       "zh-Hant": "賽事設備"
     },
     "description": {
-      "en": "A portable carry bag for transporting compatible 200–220 mm spherical drones between training and event venues.",
-      "zh-Hant": "適合在訓練場地及賽事場館之間運送兼容 200–220 毫米球形無人機的便攜式收納包。"
+      "en": "Aircraft storage bag, 200-220mm diameter sphere soccer drone competition outdoor portable carry case (universal model).",
+      "zh-Hant": "飛行器收納包，200-220直徑球形無人機競賽戶外便攜無人機包（通用款）。"
     },
     "variants": [
       {
@@ -1254,6 +2616,66 @@ export const productContent: readonly ProductDetailContentRecord[] = [
         "imageAlt": "TOPS carry bag for a 200 to 220 mm drone"
       }
     ],
-    "vliCareTiers": []
+    "vliCareTiers": [],
+    "detail": {
+      "en": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "Technical Specifications",
+        "inTheBoxTitle": "What's in the Box",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "Weight",
+            "1220g"
+          ],
+          [
+            "External Dimensions",
+            "376*200*210mm"
+          ]
+        ],
+        "inTheBox": [
+          "1x Storage bag",
+          "1x Shoulder strap"
+        ]
+      },
+      "zh-Hant": {
+        "platformLabel": "",
+        "premiumTitle": "",
+        "careTitle": "",
+        "careDescription": "",
+        "specificationsTitle": "技術規格",
+        "inTheBoxTitle": "包裝內容",
+        "equipmentTierPartsLabel": "",
+        "equipmentTierPartsDescription": "",
+        "equipmentTierVerifiedLabel": "",
+        "equipmentTierVerifiedDescription": "",
+        "careAddOnTitle": "",
+        "careAddOnDescription": "",
+        "tiers": {},
+        "specifications": [
+          [
+            "重量",
+            "1220g"
+          ],
+          [
+            "外尺寸",
+            "376*200*210mm"
+          ]
+        ],
+        "inTheBox": [
+          "1x 收納包",
+          "1x 掛帶"
+        ]
+      }
+    }
   }
 ];

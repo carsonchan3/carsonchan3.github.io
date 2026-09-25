@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { sanitizeProductCart } from "@/lib/productCart";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
-import { equipmentPricingNote, getVisibleProductFamilies, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
+import { cartKey, minimumQuantity, serviceOptionLabel, servicePrice } from "@/lib/productPricing";
+import { cartLineMinimum, equipmentPricingNote, getVisibleProductFamilies, isValidCatalogImageUrl, mergeCatalogueWithDatabase, productFamilies, quoteCartTopRightClasses } from "./Equipment";
 
 describe("Markdown-backed equipment catalogue content", () => {
   it("provides formal starting-price guidance before shopping items in both site languages", () => {
@@ -46,11 +47,30 @@ describe("Markdown-backed equipment catalogue content", () => {
     expect(variants.every((variant) => variant.image.length > 0 && variant.imageAlt.length > 0)).toBe(true);
   });
 
-  it("restores only valid known cart quantities from local persistence", () => {
-    const variantIds = productFamilies.flatMap((family) => family.variants.map((variant) => variant.sourceId));
-    const savedCart = sanitizeProductCart({ "25": 2, "26": 99, "79": 1, unknown: 1, "27": 0, "28": 100, "29": "3" }, variantIds);
+  it("restores only valid known cart lines from local persistence and applies the Tier 1 minimum", () => {
+    const keys = ["25-t1", "25-t2", "26-t2care", "79-t1", "28-t1", "29-t1"];
+    const savedCart = sanitizeProductCart({ "25-t1": 1, "25-t2": 1, "26-t2care": 99, "79-t1": 1, "25": 3, unknown: 1, "28-t1": 100, "29-t1": "3" }, keys, cartLineMinimum);
 
-    expect(savedCart).toEqual({ "25": 2, "26": 99, "79": 1 });
+    expect(savedCart).toEqual({ "25-t1": 2, "25-t2": 1, "26-t2care": 99, "79-t1": 1 });
+  });
+
+  it("requires 2 pcs for Tier 1 PARTS only drones but allows a single Tier 2 unit", () => {
+    const rtf205 = productFamilies.find((family) => family.familyId === "tops-shield-205")!.variants[0];
+    const charger = productFamilies.find((family) => family.familyId === "d6-pro")!.variants[0];
+    expect(minimumQuantity(rtf205, "t1")).toBe(2);
+    expect(minimumQuantity(rtf205, "t2")).toBe(1);
+    expect(minimumQuantity(rtf205, "t2care")).toBe(1);
+    expect(minimumQuantity(charger, "t1")).toBe(1);
+    expect(cartLineMinimum(cartKey(rtf205.sourceId, "t1"))).toBe(2);
+  });
+
+  it("prices and labels each service option for the quote request", () => {
+    const rtf205 = productFamilies.find((family) => family.familyId === "tops-shield-205")!.variants[0];
+    expect(servicePrice(rtf205, "t1")).toBe("HK$2,430");
+    expect(servicePrice(rtf205, "t2")).toBe("HK$3,430");
+    expect(servicePrice(rtf205, "t2care")).toBe("HK$3,990");
+    expect(serviceOptionLabel(rtf205, "t2care")).toBe("Tier 2 VLI-verified + VLI-CARE");
+    expect(serviceOptionLabel(productFamilies.find((family) => family.familyId === "d6-pro")!.variants[0], "t1")).toBe("");
   });
 
   it("keeps static product images when an existing database record has an incomplete upload URL", () => {

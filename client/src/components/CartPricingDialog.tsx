@@ -16,6 +16,8 @@ export type CartPricingSelection = {
   category: string;
   price: string;
   quantity: number;
+  /** Tier 1 minimum order quantity for this line; the cart will not go below it. */
+  minQuantity?: number;
 };
 
 type CartPricingDialogProps = {
@@ -85,7 +87,7 @@ export default function CartPricingDialog({ items, open, onOpenChange, onSubmitt
           email: formData.email,
           organisation: formData.company || undefined,
           organisationType: formData.organizationType || undefined,
-          message: `${formData.message}\n\nDelivery address:\n${formData.deliveryAddress}`,
+          message: `${formData.message}\n\nRequested items:\n${cartItems.map((item) => `${item.quantity} × ${item.name} (${item.model || "no model"}) @ ${item.price}`).join("\n")}\n\nDelivery address:\n${formData.deliveryAddress}`,
           website: formData.website || undefined,
           payload: { cartItems, deliveryAddress: formData.deliveryAddress },
           turnstileToken,

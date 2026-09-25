@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Box, Check, Gauge, ShieldCheck, ShoppingCart, Wrench } from "lucide-react";
+import { Box, Check, Gauge, ShieldCheck, ShoppingCart } from "lucide-react";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { traditionalChineseTranslations } from "@/lib/zhTranslations";
-import { getPremiumProductContent } from "@/lib/productContent";
+import { getPremiumProductContent, getProductSpecsAndContents } from "@/lib/productContent";
+import { minimumQuantity, servicePrice, type ServiceOption } from "@/lib/productPricing";
 import { useEffect, useMemo, useState } from "react";
 
 export type ProductVariant = {
@@ -17,6 +18,8 @@ export type ProductVariant = {
   tier1Price?: string;
   tier2Price?: string;
   vliCarePrice?: string;
+  /** Minimum order quantity for Tier 1 PARTS only (Tier 1 min. qty in content/pricing.md). */
+  tier1MinQty?: number;
   image: string;
   fallbackImage?: string;
   imageAlt: string;
@@ -36,14 +39,16 @@ export type ProductDetail = {
 type ProductDetailDialogProps = {
   product: ProductDetail | null;
   onOpenChange: (open: boolean) => void;
-  onAddToCart: (variant: ProductVariant, family: ProductDetail) => void;
+  onAddToCart: (variant: ProductVariant, family: ProductDetail, option: ServiceOption) => void;
 };
 
 export type PremiumTier = string;
 export type PremiumTierContent = {
   label: string;
   subtitle: string;
-  features: readonly string[];
+  features?: readonly string[];
+  /** What's in the box for the variant sold under this tier (e.g. RTF vs PNP). */
+  inTheBox: readonly string[];
 };
 export type PremiumProductContent = {
   testId: string;
@@ -74,16 +79,13 @@ export function getPremiumVariant(product: ProductDetail, tier: PremiumTier) {
 
 type EquipmentTier = "parts" | "verified";
 
-function addPrices(base: string, addOn?: string) {
-  if (!addOn) return base;
-  const baseValue = Number(base.replace(/[^\d.]/g, ""));
-  const addOnValue = Number(addOn.replace(/[^\d.]/g, ""));
-  return Number.isFinite(baseValue) && Number.isFinite(addOnValue) ? `HK$${(baseValue + addOnValue).toLocaleString("en-HK")}` : `${base} + ${addOn}`;
+function getServiceOption(variant: ProductVariant, tier: EquipmentTier, includeCare: boolean): ServiceOption {
+  if (tier !== "verified" || !variant.tier2Price) return "t1";
+  return includeCare && variant.vliCarePrice ? "t2care" : "t2";
 }
 
-function getDisplayedVariant(variant: ProductVariant, tier: EquipmentTier, includeCare = false): ProductVariant {
-  if (tier === "verified" && variant.tier2Price) return { ...variant, price: addPrices(variant.tier2Price, includeCare ? variant.vliCarePrice : undefined), label: `${variant.label} · Tier 2${includeCare && variant.vliCarePrice ? " + VLI-CARE" : ""}` };
-  return { ...variant, price: variant.tier1Price ?? variant.price, label: tier === "parts" ? `${variant.label} · Tier 1` : variant.label };
+function minimumOrderNote(quantity: number, isChinese: boolean) {
+  return isChinese ? `最少訂購 ${quantity} 件` : `Minimum order: ${quantity} pcs`;
 }
 
 function EquipmentTierOptions({ variant, selectedTier, onChange, includeCare, onIncludeCareChange, content }: { variant: ProductVariant; selectedTier: EquipmentTier; onChange: (tier: EquipmentTier) => void; includeCare: boolean; onIncludeCareChange: (include: boolean) => void; content?: PremiumProductContent }) {
@@ -91,10 +93,15 @@ function EquipmentTierOptions({ variant, selectedTier, onChange, includeCare, on
   const isChinese = language === "zh-Hant";
   if (!variant.tier2Price || !content) return null;
   const options = [
-    { id: "parts" as const, label: content.equipmentTierPartsLabel, description: content.equipmentTierPartsDescription, price: variant.tier1Price ?? variant.price },
-    { id: "verified" as const, label: content.equipmentTierVerifiedLabel, description: content.equipmentTierVerifiedDescription, price: variant.tier2Price },
+    { id: "parts" as const, label: content.equipmentTierPartsLabel, description: content.equipmentTierPartsDescription, price: variant.tier1Price ?? variant.price, minimum: minimumQuantity(variant, "t1") },
+    { id: "verified" as const, label: content.equipmentTierVerifiedLabel, description: content.equipmentTierVerifiedDescription, price: variant.tier2Price, minimum: 1 },
   ];
-  return <div className="mt-5" data-testid="equipment-tier-options"><p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/55">{isChinese ? "選擇服務級別" : "Choose service tier"}</p><div className="grid gap-2 sm:grid-cols-2">{options.map((option) => <button type="button" key={option.id} aria-pressed={selectedTier === option.id} onClick={() => { onChange(option.id); if (option.id === "parts") onIncludeCareChange(false); }} className={`rounded-2xl border p-3 text-left transition-colors ${selectedTier === option.id ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/30"}`}><span className="block text-sm font-semibold text-white">{option.label}</span><span className="mt-1 block min-h-10 text-xs leading-5 text-white/55">{option.description}</span><span className="mt-2 block text-sm font-semibold text-accent">{option.price}</span></button>)}</div>{variant.vliCarePrice ? <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 p-3 text-xs leading-5 text-white/65"><button type="button" aria-pressed={selectedTier === "verified" && includeCare} disabled={selectedTier !== "verified"} onClick={() => onIncludeCareChange(!includeCare)} className="flex w-full items-start gap-2 text-left disabled:cursor-not-allowed disabled:opacity-45"><span className={`mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border text-[10px] ${selectedTier === "verified" && includeCare ? "border-accent bg-accent text-black" : "border-white/30"}`}>{selectedTier === "verified" && includeCare ? "✓" : ""}</span><span><strong className="text-white">{content.careAddOnTitle}</strong><span className="ml-2 text-accent">{variant.vliCarePrice}</span><span className="mt-1 block leading-5">{content.careAddOnDescription}</span></span></button></div> : null}</div>;
+  return <div className="mt-5" data-testid="equipment-tier-options"><p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/55">{isChinese ? "選擇服務級別" : "Choose service tier"}</p><div className="grid gap-2 sm:grid-cols-2">{options.map((option) => <button type="button" key={option.id} aria-pressed={selectedTier === option.id} onClick={() => { onChange(option.id); if (option.id === "parts") onIncludeCareChange(false); }} className={`rounded-2xl border p-3 text-left transition-colors ${selectedTier === option.id ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/30"}`}><span className="block text-sm font-semibold text-white">{option.label}</span><span className="mt-1 block min-h-10 text-xs leading-5 text-white/55">{option.description}</span><span className="mt-2 block text-sm font-semibold text-accent">{option.price}</span>{option.minimum > 1 ? <span data-testid="tier-minimum-order" className="mt-1 block text-[11px] font-semibold uppercase tracking-[0.1em] text-amber-300">{minimumOrderNote(option.minimum, isChinese)}</span> : null}</button>)}</div>{variant.vliCarePrice ? <div className="mt-3 rounded-xl border border-accent/20 bg-accent/5 p-3 text-xs leading-5 text-white/65"><button type="button" aria-pressed={selectedTier === "verified" && includeCare} disabled={selectedTier !== "verified"} onClick={() => onIncludeCareChange(!includeCare)} className="flex w-full items-start gap-2 text-left disabled:cursor-not-allowed disabled:opacity-45"><span className={`mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border text-[10px] ${selectedTier === "verified" && includeCare ? "border-accent bg-accent text-black" : "border-white/30"}`}>{selectedTier === "verified" && includeCare ? "✓" : ""}</span><span><strong className="text-white">{content.careAddOnTitle}</strong><span className="ml-2 text-accent">{variant.vliCarePrice}</span><span className="mt-1 block leading-5">{content.careAddOnDescription}</span></span></button></div> : null}</div>;
+}
+
+function SpecificationsPanel({ testId, title, specifications, translate = (value: string) => value }: { testId: string; title: string; specifications: readonly (readonly [string, string])[]; translate?: (value: string) => string }) {
+  if (!specifications.length) return null;
+  return <section data-testid={testId} className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Gauge size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{title}</h3></div><dl className="grid gap-x-8 md:grid-cols-2">{specifications.map(([label, value]) => <div key={label} className="grid grid-cols-[0.8fr_1.2fr] gap-3 border-t border-white/10 py-3 text-sm"><dt className="text-white/45">{translate(label)}</dt><dd className="text-right text-white/75">{translate(value)}</dd></div>)}</dl></section>;
 }
 
 function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierChange, equipmentTier, onEquipmentTierChange, includeCare, onIncludeCareChange, onAddToCart, content }: {
@@ -106,14 +113,16 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
   onEquipmentTierChange: (tier: EquipmentTier) => void;
   includeCare: boolean;
   onIncludeCareChange: (include: boolean) => void;
-  onAddToCart: (variant: ProductVariant, family: ProductDetail) => void;
+  onAddToCart: (variant: ProductVariant, family: ProductDetail, option: ServiceOption) => void;
   content: PremiumProductContent;
 }) {
   const { language } = useWebsiteLanguage();
   const isChinese = language === "zh-Hant";
   const translate = (value: string) => isChinese ? traditionalChineseTranslations[value] ?? value : value;
   const tier = content.tiers[selectedTier] ?? content.tiers[content.defaultTier];
-  const certified = content.careTiers.includes(selectedTier) && equipmentTier === "verified" && includeCare;
+  const serviceOption = getServiceOption(selectedVariant, equipmentTier, includeCare);
+  const certified = content.careTiers.includes(selectedTier) && serviceOption === "t2care";
+  const minimum = minimumQuantity(selectedVariant, serviceOption);
   const { careTitle, careDescription } = content;
 
   return (
@@ -142,7 +151,7 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
                   {isRecommended ? <span className="absolute -top-3 right-3 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-black">{translate("Recommended")}</span> : null}
                   <span className="block text-sm font-semibold text-white">{translate(optionContent.label)}</span>
                   <span className="mt-1 block min-h-10 text-xs leading-5 text-white/55">{translate(optionContent.subtitle)}</span>
-                  <span className="mt-3 block text-lg font-semibold text-accent">{getDisplayedVariant(optionVariant, equipmentTier, includeCare).price}</span>
+                  <span className="mt-3 block text-lg font-semibold text-accent">{servicePrice(optionVariant, getServiceOption(optionVariant, equipmentTier, includeCare))}</span>
                   <span className="mt-1 block text-[10px] uppercase tracking-[0.12em] text-white/40">{translate("Starting point")}</span>
                 </button>
               );
@@ -151,21 +160,19 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
 
           <EquipmentTierOptions variant={selectedVariant} selectedTier={equipmentTier} onChange={onEquipmentTierChange} includeCare={includeCare} onIncludeCareChange={onIncludeCareChange} content={content} />
 
-          <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-            <div className="flex items-start gap-3"><div className="mt-0.5 rounded-full bg-accent/15 p-2 text-accent"><Wrench size={16} /></div><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/45">{translate(tier.label)}</p><p className="mt-2 text-sm leading-6 text-white/75">{translate(tier.subtitle)}</p><ul className="mt-3 space-y-2">{tier.features.map((feature) => <li key={feature} className="flex gap-2 text-xs leading-5 text-white/65"><Check size={15} className="mt-0.5 shrink-0 text-accent" />{translate(feature)}</li>)}</ul></div></div>
+          <div data-testid={`${content.testId}-in-the-box`} className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <div className="flex items-start gap-3"><div className="mt-0.5 rounded-full bg-accent/15 p-2 text-accent"><Box size={16} /></div><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/45">{translate(content.inTheBoxTitle)} · {translate(tier.label)}</p><ul className="mt-3 space-y-2">{[...tier.inTheBox, ...(certified ? ["1x VLI CARE Activation Code"] : [])].map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/75"><Check size={15} className="mt-1 shrink-0 text-accent" />{translate(item)}</li>)}</ul></div></div>
           </div>
 
           {certified ? <div data-testid={`${content.testId}-vli-care-badge`} className="mt-4 flex items-center gap-3 rounded-2xl border border-accent/35 bg-accent/10 p-4 text-accent"><ShieldCheck size={24} className="shrink-0" /><div><p className="text-sm font-bold">{translate(careTitle)}{selectedVariant.vliCarePrice ? ` · ${selectedVariant.vliCarePrice}` : ""}</p><p className="mt-1 text-xs leading-5 text-white/65">{translate(careDescription)}</p></div></div> : null}
 
-          <Button type="button" data-testid="product-detail-add-to-quote" onClick={() => onAddToCart(getDisplayedVariant(selectedVariant, equipmentTier, includeCare), product)} className="mt-5 h-12 w-full rounded-full bg-accent font-semibold text-black hover:opacity-90"><ShoppingCart className="mr-2 size-4" />{translate("Add to Quote")}</Button>
+          <Button type="button" data-testid="product-detail-add-to-quote" onClick={() => onAddToCart(selectedVariant, product, serviceOption)} className="mt-5 h-12 w-full rounded-full bg-accent font-semibold text-black hover:opacity-90"><ShoppingCart className="mr-2 size-4" />{translate("Add to Quote")}{minimum > 1 ? ` · ×${minimum}` : ""}</Button>
+          {minimum > 1 ? <p data-testid="tier-minimum-order-hint" className="mt-3 text-center text-xs leading-5 text-amber-200/80">{isChinese ? `Tier 1（僅零件）最少訂購 ${minimum} 件；如只需 1 件，請選擇 Tier 2。` : `Tier 1 (PARTS only) is sold in quantities of ${minimum} or more. For a single unit, choose Tier 2.`}</p> : null}
           <p className="mt-3 text-center text-xs leading-5 text-white/45">{translate("Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.")}</p>
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <section data-testid={`${content.testId}-specifications`} className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Gauge size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{translate(content.specificationsTitle)}</h3></div><dl className="space-y-3">{content.specifications.map(([label, value]) => <div key={label} className="grid grid-cols-[0.8fr_1.2fr] gap-3 border-t border-white/10 pt-3 text-sm"><dt className="text-white/45">{translate(label)}</dt><dd className="text-right text-white/75">{translate(value)}</dd></div>)}</dl></section>
-        <section data-testid={`${content.testId}-in-the-box`} className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Box size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{translate(content.inTheBoxTitle)}</h3></div><ul className="space-y-3">{[...content.inTheBox, ...(certified ? ["1x VLI CARE Activation Code"] : [])].map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/75"><Check size={15} className="mt-1 shrink-0 text-accent" />{translate(item)}</li>)}</ul></section>
-      </div>
+      <SpecificationsPanel testId={`${content.testId}-specifications`} title={translate(content.specificationsTitle)} specifications={content.specifications} translate={translate} />
     </div>
   );
 }
@@ -176,7 +183,9 @@ export default function ProductDetailDialog({ product, onOpenChange, onAddToCart
   const [selectedPremiumTier, setSelectedPremiumTier] = useState<PremiumTier>("certified");
   const [selectedEquipmentTier, setSelectedEquipmentTier] = useState<EquipmentTier>("parts");
   const [includeCare, setIncludeCare] = useState(false);
+  const isChinese = language === "zh-Hant";
   const premiumContent = product ? getPremiumProductContent(product.familyId, language) : undefined;
+  const simpleDetail = product && !premiumContent ? getProductSpecsAndContents(product.familyId, language) : undefined;
 
   useEffect(() => {
     setSelectedPremiumTier(premiumContent?.defaultTier ?? "certified");
@@ -198,7 +207,8 @@ export default function ProductDetailDialog({ product, onOpenChange, onAddToCart
           premiumContent ? <PremiumProductDetail product={product} selectedVariant={selectedVariant} selectedTier={selectedPremiumTier} onTierChange={setSelectedPremiumTier} equipmentTier={selectedEquipmentTier} onEquipmentTierChange={setSelectedEquipmentTier} includeCare={includeCare} onIncludeCareChange={setIncludeCare} onAddToCart={onAddToCart} content={premiumContent} /> : (
             <>
               <DialogHeader><p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Product information</p><DialogTitle data-testid="product-detail-title" className="text-2xl text-white sm:text-3xl">{product.name}</DialogTitle><DialogDescription className="text-white/65">Choose a version to view its listed price, then add that exact configuration to your quote request.</DialogDescription></DialogHeader>
-              <div className="mt-2 grid gap-6 md:grid-cols-[0.9fr_1.1fr]"><div className="flex min-h-56 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-black/25 p-5"><img data-testid="product-detail-image" src={selectedVariant.image} alt={selectedVariant.imageAlt} onError={(event) => { if (selectedVariant.fallbackImage && event.currentTarget.src !== selectedVariant.fallbackImage) event.currentTarget.src = selectedVariant.fallbackImage; else { event.currentTarget.style.display = "none"; event.currentTarget.alt = ""; } }} className="max-h-72 w-full object-contain" /></div><div className="flex flex-col">{product.variants.length > 1 ? <div data-testid="product-detail-variant-options" className="mb-5"><p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/55">Choose a version</p><div className="grid gap-2 sm:grid-cols-2">{product.variants.map((variant) => { const selected = variant.sourceId === selectedVariant.sourceId; return <button type="button" data-testid="product-detail-variant" key={variant.sourceId} aria-pressed={selected} onClick={() => setSelectedVariantId(variant.sourceId)} className={`rounded-md border p-3 text-left transition-colors ${selected ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/35"}`}><span className="block text-sm font-semibold text-white">{variant.label}</span><span className="mt-1 block text-xs text-white/55">{variant.model}</span><span className="mt-2 block text-sm font-semibold text-accent">{variant.price}</span></button>; })}</div></div> : null}<EquipmentTierOptions variant={selectedVariant} selectedTier={selectedEquipmentTier} onChange={setSelectedEquipmentTier} includeCare={includeCare} onIncludeCareChange={setIncludeCare} /><div className="grid grid-cols-2 gap-3 text-sm"><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Category</p><p className="mt-1 font-medium text-white">{product.category}</p></div><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Model</p><p data-testid="product-detail-model" className="mt-1 font-medium text-white">{selectedVariant.model}</p></div><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Product ref.</p><p className="mt-1 font-medium text-white">#{selectedVariant.number}</p></div><div className="rounded-md border border-accent/25 bg-accent/10 p-3"><p className="text-xs uppercase tracking-[0.14em] text-accent">Listed price</p><p data-testid="product-detail-price" className="mt-1 font-semibold text-accent">{getDisplayedVariant(selectedVariant, selectedEquipmentTier, includeCare).price}</p></div></div><p data-testid="product-detail-description" className="mt-5 text-sm leading-7 text-white/75">{selectedVariant.description}</p><p className="mt-4 text-xs leading-5 text-white/50">Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.</p><Button type="button" data-testid="product-detail-add-to-cart" onClick={() => onAddToCart(getDisplayedVariant(selectedVariant, selectedEquipmentTier, includeCare), product)} className="mt-6 w-full bg-accent font-semibold text-black hover:opacity-90"><ShoppingCart className="mr-2 size-4" />Add {selectedVariant.label} to cart</Button></div></div>
+              <div className="mt-2 grid gap-6 md:grid-cols-[0.9fr_1.1fr]"><div className="flex min-h-56 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-black/25 p-5"><img data-testid="product-detail-image" src={selectedVariant.image} alt={selectedVariant.imageAlt} onError={(event) => { if (selectedVariant.fallbackImage && event.currentTarget.src !== selectedVariant.fallbackImage) event.currentTarget.src = selectedVariant.fallbackImage; else { event.currentTarget.style.display = "none"; event.currentTarget.alt = ""; } }} className="max-h-72 w-full object-contain" /></div><div className="flex flex-col">{product.variants.length > 1 ? <div data-testid="product-detail-variant-options" className="mb-5"><p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/55">Choose a version</p><div className="grid gap-2 sm:grid-cols-2">{product.variants.map((variant) => { const selected = variant.sourceId === selectedVariant.sourceId; return <button type="button" data-testid="product-detail-variant" key={variant.sourceId} aria-pressed={selected} onClick={() => setSelectedVariantId(variant.sourceId)} className={`rounded-md border p-3 text-left transition-colors ${selected ? "border-accent bg-accent/10" : "border-white/10 bg-black/20 hover:border-white/35"}`}><span className="block text-sm font-semibold text-white">{variant.label}</span><span className="mt-1 block text-xs text-white/55">{variant.model}</span><span className="mt-2 block text-sm font-semibold text-accent">{variant.price}</span></button>; })}</div></div> : null}<EquipmentTierOptions variant={selectedVariant} selectedTier={selectedEquipmentTier} onChange={setSelectedEquipmentTier} includeCare={includeCare} onIncludeCareChange={setIncludeCare} /><div className="grid grid-cols-2 gap-3 text-sm"><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Category</p><p className="mt-1 font-medium text-white">{product.category}</p></div><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Model</p><p data-testid="product-detail-model" className="mt-1 font-medium text-white">{selectedVariant.model}</p></div><div className="rounded-md border border-white/10 bg-black/20 p-3"><p className="text-xs uppercase tracking-[0.14em] text-white/45">Product ref.</p><p className="mt-1 font-medium text-white">#{selectedVariant.number}</p></div><div className="rounded-md border border-accent/25 bg-accent/10 p-3"><p className="text-xs uppercase tracking-[0.14em] text-accent">Listed price</p><p data-testid="product-detail-price" className="mt-1 font-semibold text-accent">{servicePrice(selectedVariant, getServiceOption(selectedVariant, selectedEquipmentTier, includeCare))}</p></div></div><p data-testid="product-detail-description" className="mt-5 text-sm leading-7 text-white/75">{selectedVariant.description}</p><p className="mt-4 text-xs leading-5 text-white/50">Listed prices provide a starting point. Final availability, shipping, and programme requirements are confirmed in your tailored quote.</p>{minimumQuantity(selectedVariant, "t1") > 1 ? <p data-testid="tier-minimum-order-hint" className="mt-3 text-xs font-semibold text-amber-200/80">{minimumOrderNote(minimumQuantity(selectedVariant, "t1"), isChinese)}</p> : null}<Button type="button" data-testid="product-detail-add-to-cart" onClick={() => onAddToCart(selectedVariant, product, getServiceOption(selectedVariant, selectedEquipmentTier, includeCare))} className="mt-6 w-full bg-accent font-semibold text-black hover:opacity-90"><ShoppingCart className="mr-2 size-4" />Add {selectedVariant.label} to cart</Button></div></div>
+              {simpleDetail ? <div className="mt-6 space-y-4">{simpleDetail.inTheBox.length ? <section data-testid="product-detail-in-the-box" className="rounded-2xl border border-white/10 bg-black/20 p-5"><div className="mb-4 flex items-center gap-2"><Box size={17} className="text-accent" /><h3 className="text-lg font-semibold text-white">{simpleDetail.inTheBoxTitle}</h3></div><ul className="grid gap-x-8 gap-y-2 sm:grid-cols-2">{simpleDetail.inTheBox.map((item) => <li key={item} className="flex gap-2 text-sm leading-6 text-white/75"><Check size={15} className="mt-1 shrink-0 text-accent" />{item}</li>)}</ul></section> : null}<SpecificationsPanel testId="product-detail-specifications" title={simpleDetail.specificationsTitle} specifications={simpleDetail.specifications} /></div> : null}
             </>
           )
         ) : null}

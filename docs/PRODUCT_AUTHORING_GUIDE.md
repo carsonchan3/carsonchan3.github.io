@@ -74,6 +74,7 @@ Each version is a group of `variant.<id>.<field>` lines. The `<id>` can be any s
 | `tier` | Premium only | Which premium package this version is sold as (must match a `tier.<name>` in the detail blocks). |
 
 **To change a price:** edit the relevant tier column in `content/pricing.md` and commit. Tier 1 is always the parts-only starting price. If Tier 2 is blank, the item has one purchase level. If Tier 2 is present, the site shows Tier 1 and Tier 2 as selectable options; VLI-CARE is shown only as an add-on for Tier 2.
+**Minimum order:** the `Tier 1 min. qty` column in `content/pricing.md` sets the minimum quantity for Tier 1 – PARTS only (currently `2` for the drones that also offer Tier 2). The product window shows the rule and the cart will not go below it. Tier 2 has no minimum. Leave the cell blank for no minimum.
 **To add a version:** copy a variant group, give it a new unique id, edit the values, and add a row with that id to `content/pricing.md`.
 **To add a product:** copy an existing file, rename it, change `familyId` and every variant id, and add a price row for each new id.
 
@@ -95,20 +96,38 @@ equipmentTierVerifiedLabel: Tier 2 · VLI-verified
 equipmentTierVerifiedDescription: The drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.
 careAddOnTitle: Add VLI-CARE
 careAddOnDescription: Optional Tier 2 add-on: a 1-year plan with up to 2 replacements and free repair; shipping is not included.
-tier.certified.label: VLI Certified Edition
+tier.certified.label: RTF
 tier.certified.subtitle: Ready-to-fly for competition teams and schools.
-tier.certified.features: First feature. || Second feature. || Third feature.
-tier.builder.label: Builder's Edition
+tier.certified.inTheBox: 1x Drone soccer aircraft body || 1x Remote controller || 1x 3S 1100mAh LiPo battery
+tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: PNP platform for teams with their own control system.
-tier.builder.features: Bring your own receiver. || Standard inspection.
+tier.builder.inTheBox: 1x Drone soccer aircraft body
 specifications: Frame Diameter | 220 mm || Configuration | RTF or PNP
-inTheBox: 1x Competition Ball Drone || 2x Sets of Competition Propellers
 ```
 
 - Tiers appear in the order they are written. The customer-facing tier names, such as `VLI Certified Edition` and `Builder's Edition`, are the values after `tier.<name>.label` and can be changed independently in each language. The internal tier key (`certified`, `builder`, `travel`, or any new word) must be the same in both languages, and each tier needs at least one variant with a matching `variant.<id>.tier`.
+- `tier.<name>.inTheBox` is what's in the box for that version (e.g. RTF vs PNP). It is shown in the product window next to the selected version and changes when the customer switches version. When VLI-CARE is selected, "1x VLI CARE Activation Code" is added automatically. A family-wide `inTheBox:` line can be used instead when every version ships with the same contents.
 - Separate list items with `||`. In `specifications`, each row is `Label | Value`.
 - `specificationsTitle` controls the heading above the technical specification table. `inTheBoxTitle` controls the heading above the included-items list. Both are required in both language blocks and can be renamed per product.
 - `equipmentTierPartsLabel` / `equipmentTierPartsDescription` and `equipmentTierVerifiedLabel` / `equipmentTierVerifiedDescription` control the Tier 1 and Tier 2 purchase choices. `careAddOnTitle` / `careAddOnDescription` control the optional VLI-CARE add-on copy. These fields are also required in both language blocks.
+
+## Specifications for simple products
+
+Products without package tiers (batteries, chargers, bags) can still show a specification table and box contents. Add detail blocks with only these lines:
+
+```markdown
+<!-- detail:en -->
+specificationsTitle: Technical Specifications
+inTheBoxTitle: What's in the Box
+specifications: Input Voltage | AC 100V-240V || Weight | 550g
+inTheBox: 1x Smart Charger
+
+<!-- detail:zh-Hant -->
+specificationsTitle: 技術規格
+inTheBoxTitle: 包裝內容
+specifications: 輸入電壓 | AC 100V-240V || 重量 | 550g
+inTheBox: 1x 智能充電器
+```
 
 ## Keep it accurate
 
