@@ -52,7 +52,7 @@ tier.certified.subtitle: Ready-to-fly for larger-format matches and venue deploy
 tier.certified.inTheBox: 1 set Protective outer cage || 1 set Carbon fiber center frame || 4x Brushless motor 2506 1960KV || 1x 50A 4-in-1 ESC (6S supported) || 1x Professional Drone Soccer FC || 1x POSITION LED || 1x REAR LED || 1x TEAM LED || 2 sets Propellers || 1 set ELRS remote controller
 tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: PNP platform for technical teams with their own electronics.
-tier.builder.inTheBox: 1x Drone soccer aircraft (receiver not included, sold separately)
+tier.builder.inTheBox: 1x Drone soccer aircraft (ELRS)
 specifications: Dimensions | 400*400*400mm || Weight | 1020g (with battery) || Flight Time | 6 mins (hover) || Motor | 2506 1960KV Brushless Motor || Flight Controller | STRIKER V3 F435 FC || ESC | STRIKER V3 55A || Battery | 4S 14.8V 120C 3000mAh LiPo (sold separately; 4S and 6S batteries supported) || BetaFlight | Parameter tuning supported || LED | Color-tunable LED + smart light controller || Other Functions | Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable) || Colour Options | Red, White, Blue
 
 <!-- detail:zh-Hant -->
@@ -73,5 +73,5 @@ tier.certified.subtitle: 適合較大規模賽事及場館部署的開箱即飛�
 tier.certified.inTheBox: 1套 保護外殼 || 1套 碳纖中心機架 || 4x 無刷電機2506 1960KV || 1x 50A 4 in 1電調（支持6S） || 1x 專業無人機足球飛控 || 1x POSITION LED || 1x REAR LED || 1x TEAM LED || 2套 螺旋槳 || 1套 ELRS版遙控器
 tier.builder.label: PNP 僅無人機 (+ELRS)
 tier.builder.subtitle: 適合使用自備電子設備的技術隊伍的 PNP 平台。
-tier.builder.inTheBox: 1x 球機（不含接收機，接收機另配）
+tier.builder.inTheBox: 1x 球機 (ELRS)
 specifications: 外形尺寸 | 400*400*400mm || 機身重量 | 1020g（含電池） || 飛行時間 | 6分鐘（懸停） || 電機 | 2506 1960KV 無刷電機 || 飛控 | 前鋒 V3 F435 FC || 電調 | STRIKER V3 55A || 電池 | 4S 14.8V 120C 3000mAh鋰電池（電池另配，4S、6S電池均可） || BetaFlight | 支持調參 || LED | 可調色LED+智能燈控 || 其他功能 | 自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節） || 顏色 | 紅、白、藍可選
