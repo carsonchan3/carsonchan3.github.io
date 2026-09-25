@@ -121,7 +121,8 @@ function PremiumProductDetail({ product, selectedVariant, selectedTier, onTierCh
   const translate = (value: string) => isChinese ? traditionalChineseTranslations[value] ?? value : value;
   const tier = content.tiers[selectedTier] ?? content.tiers[content.defaultTier];
   const serviceOption = getServiceOption(selectedVariant, equipmentTier, includeCare);
-  const certified = content.careTiers.includes(selectedTier) && serviceOption === "t2care";
+  // VLI-CARE is sold per version in content/pricing.md, so the badge and activation code follow the add-on itself.
+  const certified = serviceOption === "t2care";
   const minimum = minimumQuantity(selectedVariant, serviceOption);
   const { careTitle, careDescription } = content;
 
