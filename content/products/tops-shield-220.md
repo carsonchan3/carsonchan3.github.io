@@ -57,14 +57,14 @@ careTitle: Includes 1-Year VLI CARE
 careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
 tier.certified.label: RTF
 tier.certified.subtitle: Ready-to-fly for competition teams and schools.
-tier.certified.inTheBox: 1x Drone soccer aircraft body || 4x 1404 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC || 1x Remote controller || 1x 3S 1100mAh LiPo battery || 1x A40 charger || 1x Multi-purpose screwdriver || 1x Accessory pack
+tier.certified.inTheBox: 1x Drone soccer aircraft body || 4x 1507 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC || 1x Remote controller || 1x 4S 1100mAh LiPo battery || 1x A40 charger || 1x Multi-purpose screwdriver || 1x Accessory pack
 tier.travel.label: RTF + Travel Bag
 tier.travel.subtitle: Ready-to-fly with a transport bag for touring programmes.
-tier.travel.inTheBox: 1x Drone soccer aircraft body || 4x 1404 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC || 1x Remote controller || 1x 3S 1100mAh LiPo battery || 1x A40 charger || 1x Multi-purpose screwdriver || 1x Accessory pack || 1x Carrying bag
+tier.travel.inTheBox: 1x Drone soccer aircraft body || 4x 1507 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC || 1x Remote controller || 1x 4S 1100mAh LiPo battery || 1x A40 charger || 1x Multi-purpose screwdriver || 1x Accessory pack || 1x Carrying bag
 tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: PNP platform for teams with their own control system.
-tier.builder.inTheBox: 1x Drone soccer aircraft body || 4x 1404 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC
-specifications: Dimensions | 220*220*220mm || Weight | 172g (w/o battery) / 241g (with battery) || Flight Time | 8 mins (hover) || Motor | 1404 Brushless Motor || Wheelbase | 130mm || Battery | 1100mAh 11.1V 3S 60C LiPo || Carbon Plate Thickness | 3mm || Propeller | 60mm 3-blade || LED | Color-tunable LED + smart light controller || Other Functions | Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable) || Colour Options | White, Red, Blue
+tier.builder.inTheBox: 1x Drone soccer aircraft body || 4x 1507 brushless motor || 1x 4-in-1 35A ESC || 1x Open-source FC
+specifications: Dimensions | 215*215*195mm || Weight | 191g (w/o battery) / 285g (with battery) || Flight Time | 5 mins (hover) || Motor | 1505 4100KV Brushless Motor || Wheelbase | 130mm || Battery | 1100mAh 4S 90C LiPo || Carbon Plate Thickness | 3mm || Propeller | HQ2826 || LED | Color-tunable LED + smart light controller || Other Functions | Self-leveling, adjustable cage LED, orientation taillights (headless mode, turtle mode, semi-stable/acro mode software adjustable) || Colour Options | White, Red, Blue
 
 <!-- detail:zh-Hant -->
 specificationsTitle: 技術規格
@@ -81,11 +81,11 @@ careTitle: 包括一年 VLI CARE
 careDescription: 涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。
 tier.certified.label: RTF
 tier.certified.subtitle: 適合競賽隊伍及學校的開箱即飛配置。
-tier.certified.inTheBox: 1x 球機機體 || 4x 1404無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控 || 1x 遙控器 || 1x 3S 1100mAh 鋰電池 || 1x A40充電器 || 1x 多用螺絲刀 || 1x 配件包
+tier.certified.inTheBox: 1x 球機機體 || 4x 1507無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控 || 1x 遙控器 || 1x 4S 1100mAh 鋰電池 || 1x A40充電器 || 1x 多用螺絲刀 || 1x 配件包
 tier.travel.label: RTF全家桶 + 便攜袋
 tier.travel.subtitle: 配備運輸袋，適合巡迴計劃的開箱即飛配置。
-tier.travel.inTheBox: 1x 球機機體 || 4x 1404無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控 || 1x 遙控器 || 1x 3S 1100mAh 鋰電池 || 1x A40充電器 || 1x 多用螺絲刀 || 1x 配件包 || 1x 收納包
+tier.travel.inTheBox: 1x 球機機體 || 4x 1507無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控 || 1x 遙控器 || 1x 4S 1100mAh 鋰電池 || 1x A40充電器 || 1x 多用螺絲刀 || 1x 配件包 || 1x 收納包
 tier.builder.label: 無人機足球 (僅無人機)
 tier.builder.subtitle: 適合使用自備控制系統的隊伍的 PNP 平台。
-tier.builder.inTheBox: 1x 球機機體 || 4x 1404無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控
-specifications: 外形尺寸 | 220*220*220mm || 機身重量 | 172g（不含電池）/241g（含電池） || 飛行時間 | 8分鐘（懸停） || 電機 | 無刷電機 1404 || 軸距 | 130mm || 電池 | 1100mAh 11.1V 3S 60C 鋰電池 || 碳板厚度 | 3mm || 螺旋槳 | 60mm 3葉槳葉 || LED | 可調色LED+智能燈控 || 其他功能 | 自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節） || 顏色 | 白、紅、藍可選
+tier.builder.inTheBox: 1x 球機機體 || 4x 1507無刷電機 || 1x 4 in 1 35A 電調 || 1x 開源飛控
+specifications: 外形尺寸 | 215*215*190mm || 機身重量 | 191g（不含電池）/285g（含電池） || 飛行時間 | 5分鐘（懸停） || 電機 | 無刷電機 1505 4100KV || 軸距 | 130mm || 電池 | 1100mAh 4S 90C 鋰電池 || 碳板厚度 | 3mm || 螺旋槳 | HQ2826 || LED | 可調色LED+智能燈控 || 其他功能 | 自穩、可調節球體燈光、姿態尾燈（無頭模式、反烏龜，半自穩、手動模式都可軟件調節） || 顏色 | 白、紅、藍可選
