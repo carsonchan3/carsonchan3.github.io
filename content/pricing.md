@@ -22,7 +22,7 @@ Prices below are the public starting prices from the supplied VLI Drone Soccer c
 | 26 | TOPS飞盾205-足球无人机PNP单球 (+ELRS)（无刷-竞赛版 F9A-B   20.5无刷 主攻手）球壳可DIY组装 | PNP | HK$1,900 | HK$2,900 | HK$560 | 2 |
 | 27 | TOPS飞盾220-足球无人机RTF套装（无刷-竞赛版 F9A-B   220无刷） | RTF | HK$2,430 | HK$3,430 | HK$560 | 2 |
 | 28 | TOPS飞盾220-足球无人机RTF套装球包款（无刷-竞赛版 F9A-B   220无刷） | RTF + Bag | HK$2,650 | HK$3,650 | HK$560 | 2 |
-| 29 | TOPS飞盾220-足球无人机PNP单球(+ELRS)（无刷-竞赛版 F9A-B   220无刷） | PNP | HK$1,900 | HK$2,900 | HK$560 | 2 |
+| 29 | TOPS飞盾220-足球无人机PNP单球(+ELRS)（无刷-竞赛版 F9A-B   220无刷） | PNP | HK$2,250 | HK$3,250 | HK$560 | 2 |
 | 30 | FB200 Racer (hidden) | RTF | HK$5,252 |  |  |  |
 | 31 | FB210 Racer (hidden) | RTF | HK$5,993 |  |  |  |
 | 32 | R200 (hidden) | RTF | HK$5,590 |  |  |  |
