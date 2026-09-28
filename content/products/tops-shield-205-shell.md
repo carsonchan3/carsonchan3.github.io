@@ -13,7 +13,7 @@ variant.95.label: TOPS 205 Shell
 variant.95.name: TOPS 205 Shell
 variant.95.model: TOPS 205 Shell
 variant.95.image: /media/Droneequipment_2ab6c2b7.jpg
-variant.95.imageAlt: D6 PRO smart balance charger
+variant.95.imageAlt: TOPS 205 Shell
 ---
 
 <!-- locale:en -->
