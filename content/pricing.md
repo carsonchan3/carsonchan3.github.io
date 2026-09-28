@@ -43,6 +43,7 @@ Prices below are the public starting prices from the supplied VLI Drone Soccer c
 | 84 | TOPS无人机收纳包(20-22公分球机专用) | Catalogue item | HK$264 |  |  |  |
 | 91 | Inflatable Drone Soccer Field (hidden) | 3 × 3 × 3 m | HK$5,733 |  |  |  |
 | 94 | Inflatable Drone Soccer Field (hidden) | 6 × 3 × 3 m | HK$7,813 |  |  |  |
+| 95 | TOPS 205 Shell | Maintenance Parts | HK$300 |  |  |  |
 
 > **Tier 1 — PARTS only:** limited warranty up to 7 days only; repair, PID tuning, and related servicing are not included.
 >
