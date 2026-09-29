@@ -28,8 +28,8 @@ Prices below are the public starting prices from the supplied VLI Drone Soccer c
 | 32 | R200 (hidden) | RTF | HK$5,590 |  |  |  |
 | 33 | R200F RTF （无刷+球包） F9A-B 200无刷 | RTF | HK$3,650 | HK$5,250 | HK$700 | 2 |
 | 34 | R220F RTF （无刷+球包） F9A-B 200无刷 | RTF | HK$3,890 | HK$5,490 | HK$700 | 2 |
-| 35 | TOPS飞盾400-足球无人机RTF套装版（无刷-竞赛版-F9A-A 400无刷） | RTF | HK$4,350 | HK$5,550 | HK$1000 | 2 |
-| 36 | TOPS飞盾400-足球无人机PNP单机版（无刷-竞赛版-F9A-A 400无刷） | PNP | HK$3,510 | HK$3,630 | HK$1000 | 2 |
+| 35 | TOPS飞盾400-足球无人机RTF套装版（无刷-竞赛版-F9A-A 400无刷） | RTF | HK$4,350 | HK$5,550 | HK$1,000 | 2 |
+| 36 | TOPS飞盾400-足球无人机PNP单机版（无刷-竞赛版-F9A-A 400无刷） | PNP | HK$3,510 | HK$3,630 | HK$1,000 | 2 |
 | 69 | 格氏ACE 3S电池 11.1V 1100mAh | 3S · 1100 mAh | HK$144 |  |  |  |
 | 70 | 格氏ACE 4S 3000mAh 4S 120C | 4S · 3000 mAh | HK$330 |  |  |  |
 | 71 | 格氏ACE 6S 3000mAh 6S 120C-22.2V-6S1P-XT60 | 6S · 3000 mAh | HK$477.60 |  |  |  |
