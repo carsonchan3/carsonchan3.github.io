@@ -11,8 +11,6 @@ import { localizedPath } from "@/lib/seo";
 import { staticSitePath } from "@/lib/staticPreview";
 import { equipmentPricingNote } from "./Equipment";
 
-const bundleContentUrl = "https://github.com/carsonchan3/carsonchan3.github.io/tree/main/content/bundles";
-
 /** The quote line sent with a bundle request, in English for the enquiry inbox. */
 export function bundleQuoteLine(bundle: BundleContentRecord): CartPricingSelection {
   const option = bundle.optionPrice ? ` (option: ${bundle.optionPrice} ${bundle.optionPriceNote.en})` : "";
@@ -37,7 +35,6 @@ export default function Bundles() {
       intro: "按教學、訓練及賽事規模預先配置的套裝，包含器材、電源及支援。我們會按您的計劃確認細節。",
       featured: "最受歡迎",
       included: "套裝包括",
-      edit: "在 GitHub 編輯套裝內容",
       customEyebrow: "想自行配搭？",
       customTitle: "由產品目錄逐件揀選。",
       customBody: "每件器材都可以單獨加入報價清單，或告訴我們您的需要，我們為您配置。",
@@ -50,7 +47,6 @@ export default function Bundles() {
       intro: "Pre-configured packs for teaching, training, and tournaments, with the equipment, power, and support already matched. We confirm the details around your programme.",
       featured: "Most popular",
       included: "What's included",
-      edit: "Edit bundle content on GitHub",
       customEyebrow: "Prefer to build your own?",
       customTitle: "Pick items from the product catalogue.",
       customBody: "Every item can be added to your quote cart individually, or tell us what you need and we will configure it for you.",
@@ -72,7 +68,7 @@ export default function Bundles() {
           <div className="container">
             <ProductSectionNav active="bundles" />
             <div data-reveal className="reveal-up mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{copy.eyebrow}</p><h1 className="velocity-headline text-white">{copy.title}</h1></div><p className="max-w-lg text-white/65">{copy.intro}</p></div>
-            <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-6"><p className="border-l-2 border-accent/70 bg-[#101113] px-4 py-3 text-sm leading-6 text-white/70 sm:px-5">{equipmentPricingNote[language]}</p><a href={bundleContentUrl} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent underline decoration-accent/50 underline-offset-4 transition-colors hover:text-white">{copy.edit}<ArrowRight size={15} /></a></div>
+            <div className="mb-8 sm:mb-10"><p className="border-l-2 border-accent/70 bg-[#101113] px-4 py-3 text-sm leading-6 text-white/70 sm:px-5">{equipmentPricingNote[language]}</p></div>
 
             <div data-testid="bundle-grid" className="grid items-stretch gap-5 lg:grid-cols-3">
               {visibleBundles.map((bundle, index) => (

@@ -5,7 +5,7 @@ import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { localizedPath } from "@/lib/seo";
 import { staticSitePath } from "@/lib/staticPreview";
 
-/** The referee console is a standalone page in client/public/scoreboard; it only runs on velocity-lab.com and localhost. */
+/** The referee console is a standalone page in client/public/scoreboard; its domain lock only allows velocity-lab.com. */
 export const refereeConsolePath = "/scoreboard/referee-console.html";
 const consoleSrc = `${(import.meta.env?.BASE_URL ?? "/").replace(/\/$/, "")}${refereeConsolePath}`;
 
