@@ -78,7 +78,7 @@ export default function Bundles() {
               {visibleBundles.map((bundle, index) => (
                 <article key={bundle.id} data-testid="bundle-card" data-featured={bundle.featured} data-reveal className={`reveal-up relative flex flex-col overflow-hidden rounded-xl border bg-[#27282B] transition-all duration-300 hover:-translate-y-1 ${bundle.featured ? "border-accent/70 shadow-[0_24px_60px_rgba(64,224,208,0.14)]" : "border-white/10 hover:border-accent/50"}`} style={{ transitionDelay: `${index * 70}ms` }}>
                   <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10 bg-[#161719]">
-                    <img src={bundle.image} alt={bundle.imageAlt[language]} loading={index < 3 ? "eager" : "lazy"} decoding="async" className="size-full object-contain p-4" />
+                    <img src={bundle.image} alt={bundle.imageAlt[language]} loading={index < 3 ? "eager" : "lazy"} decoding="async" className="size-full object-cover" />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#27282B] via-transparent to-transparent" />
                     <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-xs font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
                     {bundle.featured ? <span className="absolute right-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-black"><Sparkles size={13} aria-hidden="true" />{copy.featured}</span> : null}
