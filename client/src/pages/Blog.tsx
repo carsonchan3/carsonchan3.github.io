@@ -7,20 +7,17 @@ import { staticSitePath } from "@/lib/staticPreview";
 
 export default function Blog() {
   const { language } = useWebsiteLanguage();
-  const editorialUrl = "https://github.com/carsonchan3/carsonchan3.github.io/new/main/content/blog";
   const copy = language === "zh-Hant" ? {
     eyebrow: "VLI Journal",
     title: "洞察與實務指南",
     description: "分享無人機運動裁判、賽事營運、設備配置及技術驗證的實用內容。",
     read: "閱讀文章",
-    publish: "在 GitHub 發布文章",
     empty: "文章即將發布。",
   } : {
     eyebrow: "VLI Journal",
     title: "Insights for better-run drone sports",
     description: "Practical guidance on drone-sports officiating, event operations, equipment configuration, and technical proof.",
     read: "Read article",
-    publish: "Publish via GitHub",
     empty: "New articles are coming soon.",
   };
 
@@ -34,7 +31,6 @@ export default function Blog() {
             <div className="max-w-3xl">
               <h1 className="velocity-headline mb-5 text-white">{copy.title}</h1>
               <p className="velocity-body max-w-2xl">{copy.description}</p>
-              <a href={editorialUrl} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent underline decoration-accent/50 underline-offset-4 transition-colors hover:text-white">{copy.publish}<ArrowRight size={15} /></a>
             </div>
           </div>
         </section>
