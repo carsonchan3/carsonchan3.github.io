@@ -22,7 +22,9 @@ export default function SiteFooter() {
             <p className="vli-footer-label mb-4">Offerings</p>
             <ul className="space-y-2 text-white/70">
               <li><a href={staticSitePath(localizedPath("/dronesportsreferee", language))} className="transition-colors hover:text-accent">Smart Referee</a></li>
+              <li><a href={staticSitePath(localizedPath("/scoreboard", language))} className="transition-colors hover:text-accent">Score Board</a></li>
               <li><a href={staticSitePath(localizedPath("/product", language))} className="transition-colors hover:text-accent">Drone Equipment</a></li>
+              <li><a href={staticSitePath(localizedPath("/product/bundles", language))} className="transition-colors hover:text-accent">Bundles</a></li>
               <li><a href={staticSitePath(localizedPath("/services", language))} className="transition-colors hover:text-accent">Services</a></li>
             </ul>
           </div>

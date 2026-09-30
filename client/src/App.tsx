@@ -16,6 +16,8 @@ import Privacy from "./pages/Privacy";
 import Pricing from "./pages/Pricing";
 import Product from "./pages/Product";
 import Equipment from "./pages/Equipment";
+import Bundles from "./pages/Bundles";
+import Scoreboard from "./pages/Scoreboard";
 import Services from "./pages/Services";
 import UseCases from "./pages/UseCases";
 import OwnerEnquiries from "./pages/OwnerEnquiries";
@@ -34,7 +36,9 @@ function Router() {
       <Route path={"/people"} component={People} />
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/dronesportsreferee"} component={Product} />
+      <Route path={"/product/bundles"} component={Bundles} />
       <Route path={"/product"} component={Equipment} />
+      <Route path={"/scoreboard"} component={Scoreboard} />
       <Route path={"/equipment"}>{() => <Redirect to="/product" />}</Route>
       <Route path={"/services"} component={Services} />
       <Route path={"/blog"} component={Blog} />

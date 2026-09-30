@@ -63,7 +63,8 @@ function localizeStaticLinks(document: Document, language: WebsiteLanguage) {
   if (language === "en") return;
   document.querySelectorAll("a[href]").forEach((anchor) => {
     const href = anchor.getAttribute("href");
-    if (!href || href.startsWith("#") || href.startsWith("/manus-storage/") || /^(https?:|mailto:|tel:)/.test(href)) return;
+    // Direct file links (e.g. /scoreboard/referee-console.html) are not localized pages.
+    if (!href || href.startsWith("#") || href.startsWith("/manus-storage/") || /^(https?:|mailto:|tel:)/.test(href) || /\.[a-z0-9]+(?:[?#].*)?$/i.test(href)) return;
     if (href.startsWith("/")) anchor.setAttribute("href", localizedPath(href, language));
   });
 }

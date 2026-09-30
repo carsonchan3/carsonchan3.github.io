@@ -1,6 +1,7 @@
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import CartPricingDialog, { type CartPricingSelection } from "@/components/CartPricingDialog";
+import ProductSectionNav from "@/components/ProductSectionNav";
 import ProductDetailDialog, { type ProductDetail, type ProductVariant } from "@/components/ProductDetailDialog";
 import { PRODUCT_CART_STORAGE_KEY, sanitizeProductCart, type ProductCart } from "@/lib/productCart";
 import { localizedPath } from "@/lib/seo";
@@ -189,6 +190,7 @@ export default function Equipment() {
       <main className="pt-16">
         <section className="bg-black pb-20 pt-12 md:pb-28 md:pt-16">
           <div className="container">
+            <ProductSectionNav active="products" />
             <div data-reveal className="reveal-up mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Equipment catalogue</p><h1 className="velocity-headline text-white">Select a starting point.</h1></div><p className="max-w-lg text-white/65">Browse equipment, power, charging, and venue systems from the supplied product list, then let us help configure the details around your programme.</p></div>
             <div className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-6"><p data-testid="equipment-pricing-note" data-reveal className="reveal-up border-l-2 border-accent/70 bg-[#101113] px-4 py-3 text-sm leading-6 text-white/70 sm:px-5">{equipmentPricingNote[language]}</p><a href={productContentUrl} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent underline decoration-accent/50 underline-offset-4 transition-colors hover:text-white">{language === "zh-Hant" ? "在 GitHub 編輯產品內容" : "Edit product content on GitHub"}<ArrowRight size={15} /></a></div>
             <article data-reveal data-testid="product-custom-request-card" className="reveal-up relative mb-8 overflow-hidden rounded-lg border border-accent/35 bg-[linear-gradient(115deg,rgba(64,224,208,0.16),rgba(39,40,43,0.94)_42%,rgba(22,23,25,1))] p-6 shadow-[0_20px_50px_rgba(64,224,208,0.08)] sm:mb-10 sm:p-8 lg:p-10">

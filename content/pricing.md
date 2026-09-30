@@ -60,3 +60,13 @@ Shown on the Smart Referee page, under “Event delivery options”.
 | assist | Assist | From HK$6,800 |
 | managed | Managed | From HK$11,800 |
 | evidence-pro | Evidence Pro | From HK$16,800 |
+
+## Bundles
+
+Shown on the Products page, under the **Bundles** tab. Each ID matches a file in `content/bundles/` (what's included, wording and images are edited there). **Option price** is a second price shown under the main one — e.g. the price with support included, or a yearly support plan — and its wording comes from `optionPriceNote` in the bundle file. Leave it blank if there is none.
+
+| ID | Bundle | Price | Option price |
+| --- | --- | --- | --- |
+| classroom-starter | Classroom Starter Pack | HK$19,800 | HK$23,800 |
+| competition-team | Competition Team Pack | HK$46,800 | HK$10,800 |
+| full-arena | Full Arena & Tournament System | From HK$128,000 |  |

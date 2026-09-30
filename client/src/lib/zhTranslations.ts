@@ -454,6 +454,8 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "Product pricing request": "產品價格詢問",
   "Product ref.": "產品參考編號",
   "Products": "產品",
+  "Score Board": "記分板",
+  "Bundles": "套裝",
   "Protect the run sheet—and the cost of delivery.": "保障賽程表 — 以及執行成本。",
   "Quote cart": "報價購物車",
   "Quote cart is empty": "報價購物車為空",

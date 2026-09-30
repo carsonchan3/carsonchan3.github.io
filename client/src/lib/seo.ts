@@ -2,7 +2,7 @@ import type { WebsiteLanguage } from "@/contexts/LanguageContext";
 
 export const siteOrigin = "https://velocity-lab.com";
 export const chineseLocalePrefix = "/zh-hant";
-export const publicRoutePaths = ["/", "/dronesportsreferee", "/product", "/services", "/blog", "/use-cases", "/people", "/contact", "/privacy"] as const;
+export const publicRoutePaths = ["/", "/dronesportsreferee", "/scoreboard", "/product", "/product/bundles", "/services", "/blog", "/use-cases", "/people", "/contact", "/privacy"] as const;
 export type PublicRoutePath = (typeof publicRoutePaths)[number];
 
 export type LocalizedSeoCopy = {
@@ -12,7 +12,7 @@ export type LocalizedSeoCopy = {
 
 export type PublicSeoPage = {
   path: PublicRoutePath;
-  key: "home" | "referee" | "product" | "services" | "blog" | "useCases" | "people" | "contact" | "privacy";
+  key: "home" | "referee" | "scoreboard" | "product" | "bundles" | "services" | "blog" | "useCases" | "people" | "contact" | "privacy";
   copy: Record<WebsiteLanguage, LocalizedSeoCopy>;
   breadcrumb: string;
   socialImage: string;
@@ -58,6 +58,23 @@ export const publicSeoPages: PublicSeoPage[] = [
     schemas: ["breadcrumb", "service", "video"],
   },
   {
+    path: "/scoreboard",
+    key: "scoreboard",
+    copy: {
+      en: {
+        title: "Free Drone Soccer Score Board & Referee Console | VLI",
+        description: "Run FAI F9A drone soccer matches with a free, browser-based referee console: match clock, scores, yellow cards, penalty shot clock, spectator display, and match reports.",
+      },
+      "zh-Hant": {
+        title: "免費無人機足球記分板及裁判控制台 | 速研創新",
+        description: "以免費網頁版裁判控制台執法 FAI F9A 無人機足球：比賽計時、比分、黃牌、罰球計時、觀眾畫面及比賽報告。",
+      },
+    },
+    breadcrumb: "Score Board",
+    socialImage: managedMediaUrl("/media/flex13camerasys_aa73a4e5.jpg"),
+    schemas: ["breadcrumb"],
+  },
+  {
     path: "/product",
     key: "product",
     copy: {
@@ -72,6 +89,23 @@ export const publicSeoPages: PublicSeoPage[] = [
     },
     breadcrumb: "Products",
     socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
+    schemas: ["breadcrumb"],
+  },
+  {
+    path: "/product/bundles",
+    key: "bundles",
+    copy: {
+      en: {
+        title: "Drone Soccer Bundles for Schools, Teams & Arenas | VLI",
+        description: "Pre-configured drone soccer bundles from Velocity Lab Innovation: a classroom starter pack, a competition team pack, and a full arena and tournament system.",
+      },
+      "zh-Hant": {
+        title: "無人機足球套裝：學校、隊伍及場地 | 速研創新",
+        description: "速研創新預先配置的無人機足球套裝：課室入門套裝、競賽隊伍套裝，以及全場地及賽事系統。",
+      },
+    },
+    breadcrumb: "Bundles",
+    socialImage: managedMediaUrl("/media/flex13camerasys_aa73a4e5.jpg"),
     schemas: ["breadcrumb"],
   },
   {
