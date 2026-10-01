@@ -21,7 +21,8 @@ export type PublicSeoPage = {
 };
 
 const managedMediaOrigin = "https://velolab-gkpolzge.manus.space";
-export const managedMediaUrl = (path: string) => path.startsWith("/media/") ? absoluteUrl(path) : `${managedMediaOrigin}${path}`;
+// Media files are not pages: build the URL directly (absoluteUrl would add a trailing slash and 404).
+export const managedMediaUrl = (path: string) => path.startsWith("/media/") ? new URL(path, siteOrigin).toString() : `${managedMediaOrigin}${path}`;
 
 export const publicSeoPages: PublicSeoPage[] = [
   {
