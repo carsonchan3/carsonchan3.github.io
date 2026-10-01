@@ -455,6 +455,7 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "Product ref.": "產品參考編號",
   "Products": "產品",
   "Score Board": "記分板",
+  "Free Drone Soccer Scoreboard": "免費無人機足球記分板",
   "Bundles": "套裝",
   "Protect the run sheet—and the cost of delivery.": "保障賽程表 — 以及執行成本。",
   "Quote cart": "報價購物車",

@@ -2,6 +2,7 @@ import { ArrowRight, CircleCheck, Crosshair, Eye, FileCheck2, Radar, RefreshCw, 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import ScoreboardPromo from "@/components/ScoreboardPromo";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
@@ -515,6 +516,7 @@ export default function Product() {
             <div className="max-w-2xl"><p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">06 · READY TO SCOPE</p><h2 className="velocity-headline mt-4 text-white">A clearer event day starts <span className="text-accent">before the first call.</span></h2><p className="mt-5 text-lg leading-8 text-white/70">Bring your venue, cage count, match format, and programme schedule. We will help define the appropriate Smart Referee delivery path.</p></div>
             <a href="#pricing" onClick={() => trackConversion("smart_referee_cta", { action: "event_scope_pricing", route: "dronesportsreferee" })} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-black transition-opacity hover:opacity-90">Request an event scope <ArrowRight size={18} /></a>
           </div>
+          <div className="container mt-8"><ScoreboardPromo /></div>
         </section>
       </main>
       <SiteFooter />

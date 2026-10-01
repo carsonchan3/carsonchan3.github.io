@@ -1,7 +1,8 @@
-import { ArrowRight, ExternalLink, Keyboard, MonitorPlay, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, ExternalLink, Keyboard, MonitorPlay, ShieldCheck } from "lucide-react";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
+import { scoreboardFaq, scoreboardSocialImage } from "@/lib/scoreboardContent";
 import { localizedPath } from "@/lib/seo";
 import { staticSitePath } from "@/lib/staticPreview";
 
@@ -29,15 +30,23 @@ export default function Scoreboard() {
   const zh = language === "zh-Hant";
   const copy = zh
     ? {
-      eyebrow: "免費裁判工具",
-      title: "無人機足球記分板",
-      intro: "免費的網頁版裁判控制台，適用於 FAI F9A 無人機足球：比賽計時、比分、黃牌、10 秒罰球計時、哨聲，以及供投影或 OBS 使用的觀眾畫面。毋須註冊，毋須安裝。",
+      eyebrow: "FAI F9A 裁判系統 · 免費",
+      title: "免費網上無人機足球記分板",
+      intro: "免費的網上無人機足球記分板（計分板）及裁判系統，適用於 FAI F9A 比賽：比賽計時、比分、黃牌、10 秒罰球計時、哨聲及 5 秒倒數音效，以及供投影或 OBS 使用的觀眾畫面。毋須註冊，毋須安裝。",
       openFull: "全螢幕開啟",
       openDisplay: "開啟觀眾畫面",
-      features: ["三局制比賽計時", "比分及黃牌記錄", "10 秒罰球計時", "觀眾及 OBS 廣播畫面", "CSV／JSON 匯出及列印比賽報告"],
+      features: ["三局制比賽計時", "比分及黃牌記錄", "10 秒罰球計時", "5 秒倒數音效", "觀眾及 OBS 廣播畫面", "CSV／JSON 匯出及列印比賽報告"],
       phoneNotice: "控制台為手提電腦或橫向平板而設。使用手機時，請按「全螢幕開啟」並橫放裝置。",
       focusTip: "先點擊控制台一次，即可使用鍵盤快捷鍵。",
-      frameTitle: "無人機足球裁判記分板",
+      frameTitle: "免費網上無人機足球記分板及 FAI F9A 裁判系統",
+      aboutTitle: "為無人機足球而設的記分板及裁判計時器",
+      aboutBody: [
+        "VLI 無人機足球記分板把比賽所需的一切集中在一個畫面：三局比賽計時、兩隊比分、黃牌、勝局及 10 秒罰球計時。它按 FAI F9A 無人機足球規則預設，亦可按青少年賽、練習或本地賽事調整。",
+        "由學校課堂、會所訓練以至公開賽事，裁判只需一部手提電腦：開啟網頁、輸入隊名、鳴哨開賽，觀眾則可在投影機或直播中看到同步比分。",
+      ],
+      aboutFor: ["學校及 STEM 無人機足球課程", "無人機足球會所及練習", "本地及公開 F9A 賽事", "直播及 OBS 賽事轉播"],
+      aboutImageAlt: "免費網上無人機足球記分板：FAI F9A 比賽計時、比分及黃牌",
+      faqTitle: "常見問題",
       howTitle: "三步開始比賽",
       steps: [
         { title: "設定比賽", body: "按「SETUP」或 S 鍵輸入隊名，並選擇每局時間及罰球時間。" },
@@ -54,15 +63,23 @@ export default function Scoreboard() {
       bundles: "查看賽事套裝",
     }
     : {
-      eyebrow: "Free referee tool",
-      title: "Drone Soccer Score Board",
-      intro: "A free, browser-based referee console for FAI F9A drone soccer: match clock, scores, yellow cards, a 10-second penalty shot clock, whistle, and a spectator display for projectors or OBS. No sign-up, nothing to install.",
+      eyebrow: "Free FAI F9A referee system",
+      title: "Free Online Drone Soccer Scoreboard",
+      intro: "A free online drone soccer scoreboard and referee system for FAI F9A matches: match timer, scores, yellow cards, a 10-second penalty shot clock, whistle and 5-second countdown audio, plus a spectator display for projectors or OBS. No sign-up, nothing to install.",
       openFull: "Open full screen",
       openDisplay: "Open spectator display",
-      features: ["3-set match clock", "Scores and yellow cards", "10-second penalty shot clock", "Spectator and OBS broadcast view", "CSV / JSON export and printable match report"],
+      features: ["3-set match clock", "Scores and yellow cards", "10-second penalty shot clock", "5-second countdown audio", "Spectator and OBS broadcast view", "CSV / JSON export and printable match report"],
       phoneNotice: "The console is built for a laptop or a tablet in landscape. On a phone, tap “Open full screen” and turn your device sideways.",
       focusTip: "Click inside the console once to turn on the keyboard shortcuts.",
-      frameTitle: "Drone soccer referee score board",
+      frameTitle: "Free online drone soccer scoreboard and FAI F9A referee system",
+      aboutTitle: "A scoreboard and referee timer built for drone soccer",
+      aboutBody: [
+        "The VLI drone soccer scoreboard puts everything a referee needs on one screen: a three-set match timer, both team scores, yellow cards, set wins and the 10-second penalty shot clock. It is set up for FAI F9A drone soccer rules out of the box, and set and shot times can be changed for youth, practice or local events.",
+        "From school lessons and club training to open tournaments, all you need is a laptop: open the page, enter the team names and blow the whistle, while spectators follow the same live score on a projector or stream.",
+      ],
+      aboutFor: ["Schools and STEM drone soccer programmes", "Drone soccer clubs and practice sessions", "Local and open FAI F9A tournaments", "Live streams and OBS broadcasts"],
+      aboutImageAlt: "Free online drone soccer scoreboard showing an FAI F9A match timer, scores and yellow cards",
+      faqTitle: "Frequently asked questions",
       howTitle: "Run a match in three steps",
       steps: [
         { title: "Set up the match", body: "Press SETUP (or S) to enter team names and choose the set length and penalty shot time." },
@@ -111,6 +128,19 @@ export default function Scoreboard() {
           </div>
         </section>
 
+        <section className="bg-black pt-10 md:pt-14">
+          <div className="container grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+            <div>
+              <h2 className="velocity-headline mb-5 text-white">{copy.aboutTitle}</h2>
+              {copy.aboutBody.map((paragraph) => <p key={paragraph} className="mb-4 text-base leading-7 text-white/70 md:text-lg md:leading-8">{paragraph}</p>)}
+              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+                {copy.aboutFor.map((item) => <li key={item} className="flex gap-2.5 text-sm leading-6 text-white/80"><Check size={17} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />{item}</li>)}
+              </ul>
+            </div>
+            <img src={scoreboardSocialImage} alt={copy.aboutImageAlt} width={1200} height={630} loading="lazy" decoding="async" className="w-full rounded-xl border border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.45)]" />
+          </div>
+        </section>
+
         <section className="velocity-section bg-black pt-10">
           <div className="container">
             <h2 className="velocity-headline mb-8 text-white">{copy.howTitle}</h2>
@@ -150,6 +180,18 @@ export default function Scoreboard() {
                     <a href={staticSitePath(localizedPath("/product/bundles", language))} className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent">{copy.bundles}</a>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="mt-14">
+              <h2 className="velocity-headline mb-6 text-white">{copy.faqTitle}</h2>
+              <div className="divide-y divide-white/10 rounded-lg border border-white/10 bg-[#111215]">
+                {scoreboardFaq[language].map((item) => (
+                  <details key={item.question} className="group px-5 py-4 sm:px-6">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-white [&::-webkit-details-marker]:hidden"><h3 className="text-base font-semibold">{item.question}</h3><ChevronDown size={18} className="shrink-0 text-accent transition-transform group-open:rotate-180" aria-hidden="true" /></summary>
+                    <p className="mt-3 max-w-3xl leading-7 text-white/70">{item.answer}</p>
+                  </details>
+                ))}
               </div>
             </div>
           </div>

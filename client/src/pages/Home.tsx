@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import ScoreboardPromo from "@/components/ScoreboardPromo";
 import LogoCarousel from "@/components/LogoCarousel";
 import LanguageToggle from "@/components/LanguageToggle";
 import { headerLogoSrc, mobileHeaderLogoScaleClass } from "@/lib/brandAssets";
@@ -145,6 +146,7 @@ export default function Home() {
                 </a>
               ))}
             </div>
+            <ScoreboardPromo className="mt-6" />
           </div>
         </section>
 

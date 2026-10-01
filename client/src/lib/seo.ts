@@ -1,4 +1,5 @@
 import type { WebsiteLanguage } from "@/contexts/LanguageContext";
+import { scoreboardFaq, scoreboardFeatureList, scoreboardSocialImage } from "./scoreboardContent";
 
 export const siteOrigin = "https://velocity-lab.com";
 export const chineseLocalePrefix = "/zh-hant";
@@ -16,7 +17,7 @@ export type PublicSeoPage = {
   copy: Record<WebsiteLanguage, LocalizedSeoCopy>;
   breadcrumb: string;
   socialImage: string;
-  schemas: Array<"organization" | "website" | "breadcrumb" | "service" | "video">;
+  schemas: Array<"organization" | "website" | "breadcrumb" | "service" | "video" | "webapp" | "faq">;
 };
 
 const managedMediaOrigin = "https://velolab-gkpolzge.manus.space";
@@ -62,17 +63,17 @@ export const publicSeoPages: PublicSeoPage[] = [
     key: "scoreboard",
     copy: {
       en: {
-        title: "Free Drone Soccer Score Board & Referee Console | VLI",
-        description: "Run FAI F9A drone soccer matches with a free, browser-based referee console: match clock, scores, yellow cards, penalty shot clock, spectator display, and match reports.",
+        title: "Free Online Drone Soccer Scoreboard & F9A Referee System | VLI",
+        description: "Free online drone soccer scoreboard and referee system for FAI F9A matches: match timer, scores, yellow cards, 10-second penalty shot clock and spectator display. No sign-up.",
       },
       "zh-Hant": {
-        title: "免費無人機足球記分板及裁判控制台 | 速研創新",
-        description: "以免費網頁版裁判控制台執法 FAI F9A 無人機足球：比賽計時、比分、黃牌、罰球計時、觀眾畫面及比賽報告。",
+        title: "免費網上無人機足球記分板及 F9A 裁判系統 | 速研創新",
+        description: "免費網上無人機足球記分板（計分板）及裁判系統，適用於 FAI F9A 比賽：比賽計時、比分、黃牌、10 秒罰球計時及觀眾畫面，毋須註冊。",
       },
     },
-    breadcrumb: "Score Board",
-    socialImage: managedMediaUrl("/media/flex13camerasys_aa73a4e5.jpg"),
-    schemas: ["breadcrumb"],
+    breadcrumb: "Drone Soccer Scoreboard",
+    socialImage: managedMediaUrl(scoreboardSocialImage),
+    schemas: ["breadcrumb", "webapp", "faq"],
   },
   {
     path: "/product",
@@ -306,6 +307,40 @@ export function buildStructuredData(page: PublicSeoPage, language: WebsiteLangua
         areaServed: { "@type": "AdministrativeArea", name: "Hong Kong" },
       });
     }
+  }
+
+  if (page.schemas.includes("webapp")) {
+    schemas.push({
+      ...common,
+      "@type": "WebApplication",
+      "@id": `${absoluteUrl(page.path, "en")}#app`,
+      name: language === "zh-Hant" ? "無人機足球記分板及裁判系統" : "Drone Soccer Scoreboard & Referee System",
+      alternateName: ["Drone Soccer Score Board", "FAI F9A Scoreboard", "Drone Soccer Referee Timer", "無人機足球記分板", "無人機足球計分板"],
+      description: copy.description,
+      url: canonicalUrl,
+      applicationCategory: "SportsApplication",
+      operatingSystem: "Any (web browser)",
+      browserRequirements: "Requires a modern web browser with JavaScript",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "HKD" },
+      featureList: scoreboardFeatureList[language],
+      screenshot: managedMediaUrl(scoreboardSocialImage),
+      image: managedMediaUrl(scoreboardSocialImage),
+      publisher: serviceProvider,
+      provider: serviceProvider,
+    });
+  }
+
+  if (page.schemas.includes("faq")) {
+    schemas.push({
+      ...common,
+      "@type": "FAQPage",
+      mainEntity: scoreboardFaq[language].map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    });
   }
 
   if (page.schemas.includes("video")) {
