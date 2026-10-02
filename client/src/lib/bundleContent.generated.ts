@@ -18,164 +18,183 @@ export type BundleContentRecord = {
 };
 export const bundleContent: readonly BundleContentRecord[] = [
   {
-    "id": "classroom-starter",
+    "id": "stem-classroom-kit",
     "order": 1,
     "visible": true,
     "featured": false,
     "title": {
-      "en": "Classroom Starter Pack",
-      "zh-Hant": "課室入門套裝"
+      "en": "STEM Classroom Kit",
+      "zh-Hant": "STEM 課室套裝"
     },
     "tagline": {
-      "en": "Introductory STEM",
-      "zh-Hant": "入門 STEM 教學"
+      "en": "Primary & junior secondary",
+      "zh-Hant": "小學及初中"
     },
-    "price": "HK$19,800",
+    "price": "HK$6,680",
     "priceNote": {
-      "en": "One-time purchase",
-      "zh-Hant": "一次性購買"
+      "en": "Class set for 6 groups · equipment at catalogue price, training included",
+      "zh-Hant": "6 組課室套裝 · 器材按目錄價，已包括培訓"
     },
-    "optionPrice": "HK$23,800",
+    "optionPrice": "HK$12,980",
     "optionPriceNote": {
-      "en": "Bundled with 1-year basic support (save 15%)",
-      "zh-Hant": "連一年基本支援（節省 15%）"
+      "en": "Double class set (12 drones) · save about 3%",
+      "zh-Hant": "雙倍課室套裝（12 部無人機）· 節省約 3%"
     },
     "cta": {
-      "en": "Request this bundle",
-      "zh-Hant": "查詢此套裝"
+      "en": "Request a school quotation",
+      "zh-Hant": "索取學校報價"
     },
     "image": "/media/Droneequipment_2ab6c2b7.jpg",
     "imageAlt": {
-      "en": "TOPS Shield 200 brushed drone soccer set for classroom use",
-      "zh-Hant": "適用於課室的 TOPS 飛盾 200 空心杯足球無人機套裝"
+      "en": "TOPS Shield 200 brushed drone soccer sets for a school STEM class",
+      "zh-Hant": "供學校 STEM 課堂使用的 TOPS 飛盾 200 空心杯足球無人機套裝"
     },
     "summary": {
-      "en": "Everything a classroom needs to start drone soccer safely: lightweight brushed drones, plenty of flight time, and a ready-made lesson guide.",
-      "zh-Hant": "課室開展無人機足球所需的一切：輕巧的空心杯無人機、充足的飛行時間，以及現成的教學指南。"
+      "en": "A safe first step into drone soccer for STEM lessons: lightweight brushed drones in protective cages, enough batteries for a full lesson, and a teacher who knows how to run it.",
+      "zh-Hant": "以安全方式在 STEM 課堂引入無人機足球：附保護球殼的輕巧空心杯無人機、足夠一堂課使用的電池，並由導師教老師如何帶領課堂。"
     },
     "includes": {
       "en": [
-        "4× TOPS Shield 200 Brushed RTF sets",
-        "12× 1S LiPo flight batteries",
+        "6× TOPS Shield 200 Brushed RTF sets (one per group)",
+        "18× TOPS Shield 200 2S 450 mAh flight batteries (3 per drone)",
         "1× 10-port USB charger",
-        "Digital student learning guide (flight basics and safety rules)",
-        "30-day warranty against manufacturing defects"
+        "6× TOPS drone carry bags (20 cm)",
+        "2-hour on-site teacher training: setup, flight safety and running a class",
+        "Lesson pack: 4 lesson plans, student worksheets and safety rules",
+        "Free access to the VLI drone soccer [Score Board](/scoreboard) for class matches",
+        "30-day warranty against manufacturing defects",
+        "Itemised quotation for school procurement and funding applications"
       ],
       "zh-Hant": [
-        "4 套 TOPS 飛盾 200 空心杯 RTF 套裝",
-        "12 粒 1S LiPo 飛行電池",
+        "6 套 TOPS 飛盾 200 空心杯 RTF 套裝（每組一套）",
+        "18 粒 TOPS 飛盾 200 2S 450 mAh 飛行電池（每部 3 粒）",
         "1 部 10 埠 USB 充電器",
-        "學生數碼學習指南（飛行基礎及安全守則）",
-        "30 日製造缺陷保養"
+        "6 個 TOPS 無人機收納包（20 公分）",
+        "2 小時到校教師培訓：設定、飛行安全及課堂帶領",
+        "教材套：4 份教案、學生工作紙及安全守則",
+        "免費使用 VLI 無人機足球[記分板](/scoreboard)進行課堂比賽",
+        "30 日製造缺陷保養",
+        "提供分項報價，方便學校採購及申請資助"
       ]
     }
   },
   {
-    "id": "competition-team",
+    "id": "school-team-pack",
     "order": 2,
     "visible": true,
     "featured": true,
     "title": {
-      "en": "Competition Team Pack",
-      "zh-Hant": "競賽隊伍套裝"
+      "en": "School Competition Team Pack",
+      "zh-Hant": "學校競賽隊伍套裝"
     },
     "tagline": {
-      "en": "The core offering",
-      "zh-Hant": "核心方案"
+      "en": "Secondary school team",
+      "zh-Hant": "中學校隊"
     },
-    "price": "HK$46,800",
+    "price": "HK$24,600",
     "priceNote": {
-      "en": "Hardware",
-      "zh-Hant": "硬件"
-    },
-    "optionPrice": "HK$10,800",
-    "optionPriceNote": {
-      "en": "per year · Team Support SLA",
-      "zh-Hant": "每年 · 隊伍支援服務協議（SLA）"
-    },
-    "cta": {
-      "en": "Request this bundle",
-      "zh-Hant": "查詢此套裝"
-    },
-    "image": "/manus-storage/excel_prod_30_a7d07b66.png",
-    "imageAlt": {
-      "en": "TOPS Shield 205 brushless competition drone set",
-      "zh-Hant": "TOPS Shield 205 無刷競賽無人機套裝"
-    },
-    "summary": {
-      "en": "A full five-drone competition squad with the arena, power, and support to train and compete all season.",
-      "zh-Hant": "完整的五機競賽隊伍配置，連同場地、電源及支援，讓隊伍全季訓練及參賽。"
-    },
-    "includes": {
-      "en": [
-        "5× TOPS Shield 205 brushless Striker sets (open-source flight controller with tuned PID profiles)",
-        "20× 4S 1100 mAh LiPo batteries",
-        "2× dual-channel smart field chargers",
-        "1× inflatable drone soccer arena (6 × 3 × 3 m) with blower",
-        "Professional multi-protocol transmitters, configured for ELRS",
-        "1-year priority maintenance: 3-day repair turnaround and free diagnostic checks",
-        "4 hours of on-site instructor training and flight optimisation"
-      ],
-      "zh-Hant": [
-        "5 套 TOPS Shield 205 無刷主攻手套裝（開源飛控，已調校 PID 設定）",
-        "20 粒 4S 1100 mAh LiPo 電池",
-        "2 部雙通道智能場地充電器",
-        "1 個充氣式無人機足球場（6 × 3 × 3 米）連鼓風機",
-        "專業多協議遙控器，已設定 ELRS",
-        "一年優先維修：3 日維修周轉及免費檢測",
-        "4 小時到場導師培訓及飛行優化"
-      ]
-    }
-  },
-  {
-    "id": "full-arena",
-    "order": 3,
-    "visible": true,
-    "featured": false,
-    "title": {
-      "en": "Full Arena & Tournament System",
-      "zh-Hant": "全場地及賽事系統"
-    },
-    "tagline": {
-      "en": "Enterprise / scale",
-      "zh-Hant": "企業／大型規模"
-    },
-    "price": "From HK$128,000",
-    "priceNote": {
-      "en": "One-time setup · bespoke quotation from our sales team",
-      "zh-Hant": "一次性建置 · 由銷售團隊度身報價"
+      "en": "One full 5-drone F9A team · save 5% vs buying separately",
+      "zh-Hant": "一隊 5 部 F9A 無人機 · 比分開購買節省 5%"
     },
     "optionPriceNote": {
       "en": "",
       "zh-Hant": ""
     },
     "cta": {
-      "en": "Request a bespoke quotation",
-      "zh-Hant": "索取度身報價"
+      "en": "Request a school quotation",
+      "zh-Hant": "索取學校報價"
     },
-    "image": "/media/flex13camerasys_aa73a4e5.jpg",
+    "image": "/manus-storage/excel_prod_30_a7d07b66.png",
     "imageAlt": {
-      "en": "Smart Referee camera system set up around a drone soccer arena",
-      "zh-Hant": "設置於無人機足球場周圍的 Smart Referee 攝影系統"
+      "en": "TOPS Shield 205 brushless competition drone set for a school team",
+      "zh-Hant": "供學校隊伍使用的 TOPS Shield 205 無刷競賽無人機套裝"
     },
     "summary": {
-      "en": "A turnkey venue and officiating system for schools, clubs, and organisers running recurring tournaments.",
-      "zh-Hant": "為定期舉辦賽事的學校、會所及主辦方而設的一站式場地及裁判系統。"
+      "en": "Everything a school needs to field its own drone soccer team and enter inter-school competitions, with drones tuned by VLI and a full year of repair cover.",
+      "zh-Hant": "學校組建自己的無人機足球隊並參加校際比賽所需的一切：無人機由 VLI 調校，並附一整年維修保障。"
     },
     "includes": {
       "en": [
-        "10× TOPS Shield 205/220 brushless competition drones",
-        "2× events with the integrated [Smart Referee](/dronesportsreferee) setup, including calibrated video playback",
-        "Central match control software with real-time score display and automated timing buzzer ([try the free Score Board](/scoreboard))",
-        "40× flight batteries and a safe LiPo charging station",
-        "Full-year comprehensive maintenance, including bi-monthly on-site safety audits"
+        "5× TOPS Shield 205 brushless RTF sets, Tier 2 VLI-verified: checked, PID-tuned, 21-day warranty",
+        "1-year VLI-CARE on all 5 drones: accidental damage, collisions and free repair, up to two replacements each",
+        "20× ACE 3S 1100 mAh LiPo batteries (4 per drone)",
+        "2× D6 PRO dual-channel smart chargers",
+        "5× TOPS drone carry bags (20–22 cm)",
+        "4-hour on-site coach training: team flying, tactics, battery safety and basic repairs",
+        "Free access to the VLI drone soccer [Score Board](/scoreboard) for training matches",
+        "Itemised quotation for school procurement and funding applications"
       ],
       "zh-Hant": [
-        "10 部 TOPS Shield 205／220 無刷競賽無人機",
-        "2 場賽事的整合式 [Smart Referee](/dronesportsreferee) 設置，包括經校準的影片重播",
-        "中央賽事控制軟件，具即時比分顯示及自動計時蜂鳴器（[免費試用記分板](/scoreboard)）",
-        "40 粒飛行電池及安全 LiPo 充電站",
-        "全年全面維修保養，包括每兩個月一次到場安全審核"
+        "5 套 TOPS Shield 205 無刷 RTF 套裝，Tier 2 VLI 驗證：檢測、PID 調校，21 日保養",
+        "5 部無人機均附一年 VLI-CARE：意外損壞、碰撞及免費維修，每部最多兩次更換",
+        "20 粒 ACE 3S 1100 mAh LiPo 電池（每部 4 粒）",
+        "2 部 D6 PRO 雙通道智能充電器",
+        "5 個 TOPS 無人機收納包（20–22 公分）",
+        "4 小時到校教練培訓：隊伍飛行、戰術、電池安全及基本維修",
+        "免費使用 VLI 無人機足球[記分板](/scoreboard)進行練習賽",
+        "提供分項報價，方便學校採購及申請資助"
+      ]
+    }
+  },
+  {
+    "id": "host-school-arena",
+    "order": 3,
+    "visible": true,
+    "featured": false,
+    "title": {
+      "en": "Host School Arena Pack",
+      "zh-Hant": "主辦學校場地套裝"
+    },
+    "tagline": {
+      "en": "Whole-school programme & inter-school events",
+      "zh-Hant": "全校計劃及校際賽事"
+    },
+    "price": "HK$53,800",
+    "priceNote": {
+      "en": "Two full teams plus arena · save over 8% vs buying separately",
+      "zh-Hant": "兩隊無人機連場地 · 比分開購買節省超過 8%"
+    },
+    "optionPriceNote": {
+      "en": "",
+      "zh-Hant": ""
+    },
+    "cta": {
+      "en": "Request a school quotation",
+      "zh-Hant": "索取學校報價"
+    },
+    "image": "/manus-storage/excel_prod_8_903cb396.png",
+    "imageAlt": {
+      "en": "Inflatable 6 × 3 × 3 m drone soccer arena for a school hall",
+      "zh-Hant": "適用於學校禮堂的 6 × 3 × 3 米充氣式無人機足球場"
+    },
+    "summary": {
+      "en": "Turn the school hall into a drone soccer venue: two full teams, a full-size inflatable arena and a charging station, so your school can run its own programme and host inter-school matches.",
+      "zh-Hant": "把學校禮堂變成無人機足球場：兩隊完整無人機、標準大小的充氣式球場及充電站，讓學校自行推行計劃並主辦校際比賽。"
+    },
+    "includes": {
+      "en": [
+        "10× TOPS Shield brushless RTF sets (5× TOPS Shield 205 + 5× TOPS Shield 220), Tier 2 VLI-verified",
+        "1-year VLI-CARE on all 10 drones",
+        "1× inflatable drone soccer arena (6 × 3 × 3 m) with blower",
+        "40× ACE 3S 1100 mAh LiPo batteries (4 per drone)",
+        "Charging station: 1× TA300 8-channel smart charger and 2× D6 PRO dual-channel chargers",
+        "10× TOPS drone carry bags (20–22 cm)",
+        "8 hours of on-site training for teachers and student technical crew",
+        "First inter-school event day supported by a VLI technical official, run on the free [Score Board](/scoreboard)",
+        "Optional [Smart Referee](/dronesportsreferee) video review for your event, quoted separately",
+        "Itemised quotation for school procurement and funding applications"
+      ],
+      "zh-Hant": [
+        "10 套 TOPS Shield 無刷 RTF 套裝（5 套 TOPS Shield 205 + 5 套 TOPS Shield 220），Tier 2 VLI 驗證",
+        "10 部無人機均附一年 VLI-CARE",
+        "1 個充氣式無人機足球場（6 × 3 × 3 米）連鼓風機",
+        "40 粒 ACE 3S 1100 mAh LiPo 電池（每部 4 粒）",
+        "充電站：1 部 TA300 八通道智能充電器及 2 部 D6 PRO 雙通道充電器",
+        "10 個 TOPS 無人機收納包（20–22 公分）",
+        "8 小時到校培訓，對象為老師及學生技術團隊",
+        "首場校際賽事由 VLI 技術裁判支援，使用免費[記分板](/scoreboard)運作",
+        "可選加 [Smart Referee](/dronesportsreferee) 賽事影片覆核，另行報價",
+        "提供分項報價，方便學校採購及申請資助"
       ]
     }
   }

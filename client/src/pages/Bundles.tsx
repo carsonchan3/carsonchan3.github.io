@@ -30,9 +30,9 @@ export default function Bundles() {
   const [requestOpen, setRequestOpen] = useState(false);
   const copy = language === "zh-Hant"
     ? {
-      eyebrow: "無人機套裝",
-      title: "由課室到賽場，一步到位。",
-      intro: "按教學、訓練及賽事規模預先配置的套裝，包含器材、電源及支援。我們會按您的計劃確認細節。",
+      eyebrow: "學校無人機足球套裝",
+      title: "由課室到校際賽，一步到位。",
+      intro: "為學校預先配置的無人機足球套裝：器材、電池、充電、培訓及支援已配搭妥當，並附分項報價，方便採購及申請資助。",
       featured: "最受歡迎",
       included: "套裝包括",
       customEyebrow: "想自行配搭？",
@@ -42,9 +42,9 @@ export default function Bundles() {
       talk: "與團隊商討",
     }
     : {
-      eyebrow: "Drone bundles",
-      title: "From classroom to championship.",
-      intro: "Pre-configured packs for teaching, training, and tournaments, with the equipment, power, and support already matched. We confirm the details around your programme.",
+      eyebrow: "Drone soccer bundles for schools",
+      title: "From classroom to inter-school cup.",
+      intro: "Ready-to-order drone soccer packs for schools, with drones, batteries, charging, teacher training and support already matched, plus an itemised quotation for procurement and funding applications.",
       featured: "Most popular",
       included: "What's included",
       customEyebrow: "Prefer to build your own?",

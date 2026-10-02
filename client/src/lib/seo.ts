@@ -98,12 +98,12 @@ export const publicSeoPages: PublicSeoPage[] = [
     key: "bundles",
     copy: {
       en: {
-        title: "Drone Soccer Bundles for Schools, Teams & Arenas | VLI",
-        description: "Pre-configured drone soccer bundles from Velocity Lab Innovation: a classroom starter pack, a competition team pack, and a full arena and tournament system.",
+        title: "Drone Soccer Kits for Schools: Classroom, Team & Arena | VLI",
+        description: "Drone soccer bundles for Hong Kong schools: a STEM classroom kit, a 5-drone competition team pack and a host school arena pack, with teacher training and itemised quotations.",
       },
       "zh-Hant": {
-        title: "無人機足球套裝：學校、隊伍及場地 | 速研創新",
-        description: "速研創新預先配置的無人機足球套裝：課室入門套裝、競賽隊伍套裝，以及全場地及賽事系統。",
+        title: "學校無人機足球套裝：課室、校隊及場地 | 速研創新",
+        description: "為香港學校而設的無人機足球套裝：STEM 課室套裝、5 部無人機競賽隊伍套裝及主辦學校場地套裝，包括教師培訓及分項報價。",
       },
     },
     breadcrumb: "Bundles",

@@ -63,10 +63,10 @@ Shown on the Smart Referee page, under “Event delivery options”.
 
 ## Bundles
 
-Shown on the Products page, under the **Bundles** tab. Each ID matches a file in `content/bundles/` (what's included, wording and images are edited there). **Option price** is a second price shown under the main one — e.g. the price with support included, or a yearly support plan — and its wording comes from `optionPriceNote` in the bundle file. Leave it blank if there is none.
+Shown on the Products page, under the **Bundles** tab. Each ID matches a file in `content/bundles/` (what's included, wording and images are edited there). **Option price** is a second price shown under the main one — e.g. a larger set — and its wording comes from `optionPriceNote` in the bundle file. Leave it blank if there is none. Bundle prices are based on the catalogue prices above; if you change those, check the "save X%" wording in the bundle files still holds.
 
 | ID | Bundle | Price | Option price |
 | --- | --- | --- | --- |
-| classroom-starter | Classroom Starter Pack | HK$19,800 | HK$23,800 |
-| competition-team | Competition Team Pack | HK$46,800 | HK$10,800 |
-| full-arena | Full Arena & Tournament System | From HK$128,000 |  |
+| stem-classroom-kit | STEM Classroom Kit (6 drones) | HK$6,680 | HK$12,980 |
+| school-team-pack | School Competition Team Pack (5 drones) | HK$24,600 |  |
+| host-school-arena | Host School Arena Pack (10 drones + arena) | HK$53,800 |  |
