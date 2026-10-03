@@ -11,8 +11,8 @@ title.zh-Hant: 學校競賽隊伍套裝
 tagline.en: Secondary school team
 tagline.zh-Hant: 中學校隊
 
-priceNote.en: One full 5-drone F9A team · save 5% vs buying separately
-priceNote.zh-Hant: 一隊 5 部 F9A 無人機 · 比分開購買節省 5%
+priceNote.en: One full 5-drone F9A team · 5% off equipment, coach training included
+priceNote.zh-Hant: 一隊 5 部 F9A 無人機 · 器材 95 折，已包括教練培訓
 
 cta.en: Request a school quotation
 cta.zh-Hant: 索取學校報價
@@ -27,7 +27,7 @@ Everything a school needs to field its own drone soccer team and enter inter-sch
 
 - 5× TOPS Shield 205 brushless RTF sets, Tier 2 VLI-verified: checked, PID-tuned, 21-day warranty
 - 1-year VLI-CARE on all 5 drones: accidental damage, collisions and free repair, up to two replacements each
-- 20× ACE 3S 1100 mAh LiPo batteries (4 per drone)
+- 20× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)
 - 2× D6 PRO dual-channel smart chargers
 - 5× TOPS drone carry bags (20–22 cm)
 - 4-hour on-site coach training: team flying, tactics, battery safety and basic repairs
@@ -39,7 +39,7 @@ Everything a school needs to field its own drone soccer team and enter inter-sch
 
 - 5 套 TOPS Shield 205 無刷 RTF 套裝，Tier 2 VLI 驗證：檢測、PID 調校，21 日保養
 - 5 部無人機均附一年 VLI-CARE：意外損壞、碰撞及免費維修，每部最多兩次更換
-- 20 粒 ACE 3S 1100 mAh LiPo 電池（每部 4 粒）
+- 20 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）
 - 2 部 D6 PRO 雙通道智能充電器
 - 5 個 TOPS 無人機收納包（20–22 公分）
 - 4 小時到校教練培訓：隊伍飛行、戰術、電池安全及基本維修

@@ -10,10 +10,10 @@ title.zh-Hant: STEM 課室套裝
 tagline.en: Primary & junior secondary
 tagline.zh-Hant: 小學及初中
 
-priceNote.en: Class set for 6 groups · equipment at catalogue price, training included
-priceNote.zh-Hant: 6 組課室套裝 · 器材按目錄價，已包括培訓
-optionPriceNote.en: Double class set (12 drones) · save about 3%
-optionPriceNote.zh-Hant: 雙倍課室套裝（12 部無人機）· 節省約 3%
+priceNote.en: Class set for 6 groups · includes teacher training and printed lesson materials
+priceNote.zh-Hant: 6 組課室套裝 · 包括教師培訓及印刷教材
+optionPriceNote.en: Double class set (12 drones) · about 3% off equipment
+optionPriceNote.zh-Hant: 雙倍課室套裝（12 部無人機）· 器材約 97 折
 
 cta.en: Request a school quotation
 cta.zh-Hant: 索取學校報價

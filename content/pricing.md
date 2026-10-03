@@ -45,6 +45,8 @@ Prices below are the public starting prices from the supplied VLI Drone Soccer c
 | 94 | Inflatable Drone Soccer Field (hidden) | 6 × 3 × 3 m | HK$7,813 |  |  |  |
 | 95 | TOPS 205 Shell | Maintenance Parts | HK$340 |  |  |  |
 | 96 | TOPS 220 Shell | Maintenance Parts | HK$150 |  |  |  |
+| 97 | OVONIC 4S 14.8V 1080mAh 110C XT30 (Taobao ¥85 × 1.44) | 4S · 1080 mAh | HK$122.40 |  |  |  |
+| 98 | Gens ACE TATTU 4S 14.8V 1100mAh 110C XT30 (Taobao ¥116 × 1.44) | 4S · 1100 mAh | HK$167.04 |  |  |  |
 
 > **Tier 1 — PARTS only:** limited warranty up to 7 days only; repair, PID tuning, and related servicing are not included.
 >
@@ -63,10 +65,10 @@ Shown on the Smart Referee page, under “Event delivery options”.
 
 ## Bundles
 
-Shown on the Products page, under the **Bundles** tab. Each ID matches a file in `content/bundles/` (what's included, wording and images are edited there). **Option price** is a second price shown under the main one — e.g. a larger set — and its wording comes from `optionPriceNote` in the bundle file. Leave it blank if there is none. Bundle prices are based on the catalogue prices above; if you change those, check the "save X%" wording in the bundle files still holds.
+Shown on the Products page, under the **Bundles** tab. Each ID matches a file in `content/bundles/` (what's included, wording and images are edited there). **Option price** is a second price shown under the main one — e.g. a larger set — and its wording comes from `optionPriceNote` in the bundle file. Leave it blank if there is none. Bundle prices are based on the catalogue prices above; if you change those, check the "X% off equipment" wording in the bundle files still holds. Bundle prices = equipment at catalogue price less the bundle discount, plus staff time at HK$300/hour and printed materials (breakdown in the 3 Oct bundle pricing PDF).
 
 | ID | Bundle | Price | Option price |
 | --- | --- | --- | --- |
-| stem-classroom-kit | STEM Classroom Kit (6 drones) | HK$6,680 | HK$12,980 |
-| school-team-pack | School Competition Team Pack (5 drones) | HK$25,100 |  |
-| host-school-arena | Host School Arena Pack (10 drones + arena) | HK$53,800 |  |
+| stem-classroom-kit | STEM Classroom Kit (6 drones) | HK$8,180 | HK$14,780 |
+| school-team-pack | School Competition Team Pack (5 drones) | HK$26,140 |  |
+| host-school-arena | Host School Arena Pack (10 drones + arena) | HK$61,830 |  |

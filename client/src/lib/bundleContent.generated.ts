@@ -30,15 +30,15 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": "Primary & junior secondary",
       "zh-Hant": "小學及初中"
     },
-    "price": "HK$6,680",
+    "price": "HK$8,180",
     "priceNote": {
-      "en": "Class set for 6 groups · equipment at catalogue price, training included",
-      "zh-Hant": "6 組課室套裝 · 器材按目錄價，已包括培訓"
+      "en": "Class set for 6 groups · includes teacher training and printed lesson materials",
+      "zh-Hant": "6 組課室套裝 · 包括教師培訓及印刷教材"
     },
-    "optionPrice": "HK$12,980",
+    "optionPrice": "HK$14,780",
     "optionPriceNote": {
-      "en": "Double class set (12 drones) · save about 3%",
-      "zh-Hant": "雙倍課室套裝（12 部無人機）· 節省約 3%"
+      "en": "Double class set (12 drones) · about 3% off equipment",
+      "zh-Hant": "雙倍課室套裝（12 部無人機）· 器材約 97 折"
     },
     "cta": {
       "en": "Request a school quotation",
@@ -91,10 +91,10 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": "Secondary school team",
       "zh-Hant": "中學校隊"
     },
-    "price": "HK$24,600",
+    "price": "HK$26,140",
     "priceNote": {
-      "en": "One full 5-drone F9A team · save 5% vs buying separately",
-      "zh-Hant": "一隊 5 部 F9A 無人機 · 比分開購買節省 5%"
+      "en": "One full 5-drone F9A team · 5% off equipment, coach training included",
+      "zh-Hant": "一隊 5 部 F9A 無人機 · 器材 95 折，已包括教練培訓"
     },
     "optionPriceNote": {
       "en": "",
@@ -117,7 +117,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": [
         "5× TOPS Shield 205 brushless RTF sets, Tier 2 VLI-verified: checked, PID-tuned, 21-day warranty",
         "1-year VLI-CARE on all 5 drones: accidental damage, collisions and free repair, up to two replacements each",
-        "20× ACE 3S 1100 mAh LiPo batteries (4 per drone)",
+        "20× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)",
         "2× D6 PRO dual-channel smart chargers",
         "5× TOPS drone carry bags (20–22 cm)",
         "4-hour on-site coach training: team flying, tactics, battery safety and basic repairs",
@@ -127,7 +127,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "zh-Hant": [
         "5 套 TOPS Shield 205 無刷 RTF 套裝，Tier 2 VLI 驗證：檢測、PID 調校，21 日保養",
         "5 部無人機均附一年 VLI-CARE：意外損壞、碰撞及免費維修，每部最多兩次更換",
-        "20 粒 ACE 3S 1100 mAh LiPo 電池（每部 4 粒）",
+        "20 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）",
         "2 部 D6 PRO 雙通道智能充電器",
         "5 個 TOPS 無人機收納包（20–22 公分）",
         "4 小時到校教練培訓：隊伍飛行、戰術、電池安全及基本維修",
@@ -149,10 +149,10 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": "Whole-school programme & inter-school events",
       "zh-Hant": "全校計劃及校際賽事"
     },
-    "price": "HK$53,800",
+    "price": "HK$61,830",
     "priceNote": {
-      "en": "Two full teams plus arena · save over 8% vs buying separately",
-      "zh-Hant": "兩隊無人機連場地 · 比分開購買節省超過 8%"
+      "en": "Two full teams plus arena · 8.5% off equipment, training and event day included",
+      "zh-Hant": "兩隊無人機連場地 · 器材減 8.5%，已包括培訓及賽事日支援"
     },
     "optionPriceNote": {
       "en": "",
@@ -176,7 +176,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "10× TOPS Shield brushless RTF sets (5× TOPS Shield 205 + 5× TOPS Shield 220), Tier 2 VLI-verified",
         "1-year VLI-CARE on all 10 drones",
         "1× inflatable drone soccer arena (6 × 3 × 3 m) with blower",
-        "40× ACE 3S 1100 mAh LiPo batteries (4 per drone)",
+        "40× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)",
         "Charging station: 1× TA300 8-channel smart charger and 2× D6 PRO dual-channel chargers",
         "10× TOPS drone carry bags (20–22 cm)",
         "8 hours of on-site training for teachers and student technical crew",
@@ -188,7 +188,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "10 套 TOPS Shield 無刷 RTF 套裝（5 套 TOPS Shield 205 + 5 套 TOPS Shield 220），Tier 2 VLI 驗證",
         "10 部無人機均附一年 VLI-CARE",
         "1 個充氣式無人機足球場（6 × 3 × 3 米）連鼓風機",
-        "40 粒 ACE 3S 1100 mAh LiPo 電池（每部 4 粒）",
+        "40 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）",
         "充電站：1 部 TA300 八通道智能充電器及 2 部 D6 PRO 雙通道充電器",
         "10 個 TOPS 無人機收納包（20–22 公分）",
         "8 小時到校培訓，對象為老師及學生技術團隊",
