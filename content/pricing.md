@@ -68,5 +68,5 @@ Shown on the Products page, under the **Bundles** tab. Each ID matches a file in
 | ID | Bundle | Price | Option price |
 | --- | --- | --- | --- |
 | stem-classroom-kit | STEM Classroom Kit (6 drones) | HK$6,680 | HK$12,980 |
-| school-team-pack | School Competition Team Pack (5 drones) | HK$24,600 |  |
+| school-team-pack | School Competition Team Pack (5 drones) | HK$25,100 |  |
 | host-school-arena | Host School Arena Pack (10 drones + arena) | HK$53,800 |  |
