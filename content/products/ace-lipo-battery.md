@@ -11,7 +11,7 @@ category.zh-Hant: 無人機電源
 variant.69.label: 3S · 1100 mAh
 variant.69.name: ACE 3S 1100 mAh Battery
 variant.69.model: 3S battery
-variant.69.image: /manus-storage/excel_prod_3_aa72f902.png
+variant.69.image: /media/Droneequipment_2ab6c2b7.jpg
 variant.69.imageAlt: ACE 3S 1100 mAh LiPo battery
 
 # Variant 70
