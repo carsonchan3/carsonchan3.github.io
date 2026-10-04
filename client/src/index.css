@@ -420,8 +420,17 @@
 .policy-prose td { border-top: 1px solid var(--line); padding: .7rem .9rem; vertical-align: top; }
 .policy-prose td:first-child { color: var(--paper); font-weight: 600; }
 @media print {
-  .vli-site-header, .vli-footer { display: none !important; }
+  .vli-site-header, .vli-footer, .policy-toolbar { display: none !important; }
+  /* "Print this document" marks one article; everything else on the page is hidden. */
+  html[data-printing-doc] .policy-hero,
+  html[data-printing-doc] .policy-doc:not([data-print-target]) { display: none !important; }
+  /* Collapsed documents print fully expanded (Ctrl+P prints them all, one per page). */
+  .policy-doc .policy-panel { grid-template-rows: 1fr !important; opacity: 1 !important; }
+  .policy-doc { border: 0 !important; background: #fff !important; }
+  .policy-doc + .policy-doc { break-before: page; }
+  html[data-printing-doc] .policy-doc { break-before: auto !important; }
+  .policy-doc h2 button svg, .policy-doc h2 button > span:first-child { display: none !important; }
   body, main, .policy-prose, .policy-prose h2, .policy-prose h3, .policy-prose strong, .policy-prose th, .policy-prose td:first-child { background: #fff !important; color: #000 !important; }
-  main h1, main h2, main p, main dd, main dt { color: #000 !important; }
+  main h1, main h2, main h2 span, main p { color: #000 !important; }
   .policy-prose a { color: #000 !important; }
 }
