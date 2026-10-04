@@ -1,7 +1,7 @@
 ---
 familyId: inflatable-drone-soccer-field
 order: 13
-visible: false
+visible: true
 
 title.en: Inflatable Drone Soccer Field
 title.zh-Hant: 充氣式無人機足球場

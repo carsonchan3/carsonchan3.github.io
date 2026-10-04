@@ -13,7 +13,7 @@ export const footerSocialLinks: Array<{ label: "LinkedIn" | "Instagram" | "YouTu
 
 export default function SiteFooter() {
   const { language } = useWebsiteLanguage();
-  const footerCopy = language === "zh-Hant" ? { about: "關於速研創新", privacy: "私隱聲明" } : { about: "About VLI", privacy: "Privacy notice" };
+  const footerCopy = language === "zh-Hant" ? { about: "關於速研創新", legal: "法律條款", sales: "銷售及政策" } : { about: "About VLI", legal: "Legal", sales: "Sales and Policy" };
   return (
     <footer className="vli-footer border-t py-14 text-white md:py-16">
       <div className="container">
@@ -34,7 +34,8 @@ export default function SiteFooter() {
               <li><a href={staticSitePath(localizedPath("/dronesportsreferee#pricing", language))} className="transition-colors hover:text-accent">Pricing &amp; configuration</a></li>
               <li><a href={staticSitePath(localizedPath("/#partners", language))} className="transition-colors hover:text-accent">Partners</a></li>
               <li><a href={staticSitePath(localizedPath("/people", language))} className="transition-colors hover:text-accent">{footerCopy.about}</a></li>
-              <li><a href={staticSitePath(localizedPath("/privacy", language))} className="transition-colors hover:text-accent">{footerCopy.privacy}</a></li>
+              <li><a href={staticSitePath(localizedPath("/legal", language))} className="transition-colors hover:text-accent">{footerCopy.legal}</a></li>
+              <li><a href={staticSitePath(localizedPath("/sales-policy", language))} className="transition-colors hover:text-accent">{footerCopy.sales}</a></li>
             </ul>
           </div>
           <div>

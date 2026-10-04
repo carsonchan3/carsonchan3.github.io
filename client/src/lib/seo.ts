@@ -3,7 +3,7 @@ import { scoreboardFaq, scoreboardFeatureList, scoreboardSocialImage } from "./s
 
 export const siteOrigin = "https://velocity-lab.com";
 export const chineseLocalePrefix = "/zh-hant";
-export const publicRoutePaths = ["/", "/dronesportsreferee", "/scoreboard", "/product", "/product/bundles", "/services", "/blog", "/use-cases", "/people", "/contact", "/privacy"] as const;
+export const publicRoutePaths = ["/", "/dronesportsreferee", "/scoreboard", "/product", "/product/bundles", "/services", "/blog", "/use-cases", "/people", "/contact", "/legal", "/sales-policy"] as const;
 export type PublicRoutePath = (typeof publicRoutePaths)[number];
 
 export type LocalizedSeoCopy = {
@@ -13,7 +13,7 @@ export type LocalizedSeoCopy = {
 
 export type PublicSeoPage = {
   path: PublicRoutePath;
-  key: "home" | "referee" | "scoreboard" | "product" | "bundles" | "services" | "blog" | "useCases" | "people" | "contact" | "privacy";
+  key: "home" | "referee" | "scoreboard" | "product" | "bundles" | "services" | "blog" | "useCases" | "people" | "contact" | "legal" | "sales";
   copy: Record<WebsiteLanguage, LocalizedSeoCopy>;
   breadcrumb: string;
   socialImage: string;
@@ -196,19 +196,36 @@ export const publicSeoPages: PublicSeoPage[] = [
     schemas: ["breadcrumb"],
   },
   {
-    path: "/privacy",
-    key: "privacy",
+    path: "/legal",
+    key: "legal",
     copy: {
       en: {
-        title: "Privacy Notice | Velocity Lab Innovation",
-        description: "Read how Velocity Lab Innovation handles information shared through website enquiries and how to contact the team with privacy questions.",
+        title: "Legal: Privacy Policy, Terms of Use & Drone Regulations | VLI",
+        description: "Velocity Lab Innovation's Personal Information Collection Statement and Privacy Policy, Website Terms of Use, and Hong Kong small unmanned aircraft (Cap. 448G) compliance advisory.",
       },
       "zh-Hant": {
-        title: "私隱聲明 | 速研創新",
-        description: "了解速研創新如何處理您透過網站查詢提供的資料，以及如何聯絡團隊查詢私隱事宜。",
+        title: "法律條款：私隱政策、使用條款及無人機規管 | 速研創新",
+        description: "速研創新的收集個人資料聲明及私隱政策、網站使用條款，以及香港小型無人機（第 448G 章）合規指引。",
       },
     },
-    breadcrumb: "Privacy Notice",
+    breadcrumb: "Legal",
+    socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
+    schemas: ["breadcrumb"],
+  },
+  {
+    path: "/sales-policy",
+    key: "sales",
+    copy: {
+      en: {
+        title: "Sales and Policy: Returns, Warranty, Safety & Referrals | VLI",
+        description: "Velocity Lab Innovation's equipment return, refund, warranty and repair policy, participant safety rules and liability waiver, and institutional referral credit policy.",
+      },
+      "zh-Hant": {
+        title: "銷售及政策：退貨、保養、安全及轉介 | 速研創新",
+        description: "速研創新的器材退貨、退款、保養及維修政策、參加者安全守則及責任豁免，以及機構轉介積分政策。",
+      },
+    },
+    breadcrumb: "Sales and Policy",
     socialImage: managedMediaUrl("/media/vli-hero-video-first-frame_6e981c30.jpg"),
     schemas: ["breadcrumb"],
   },

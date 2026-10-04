@@ -765,7 +765,7 @@ export const traditionalChineseTranslations: Record<string, string> = {
   "Includes 1-Year VLI CARE: Covers heavy collision damage, water damage, and rapid replacements.": "包括 1 年 VLI CARE：涵蓋嚴重碰撞損壞、水損壞及快速更換支援。",
   "Starting point": "起始價格",
   "Includes 1-Year VLI CARE": "包括 1 年 VLI CARE",
-  "Coverage for heavy collision damage, water damage, and rapid replacements.": "涵蓋嚴重碰撞損壞、水損壞及快速更換支援。",
+  "Free repair labour and core-part replacement for gameplay damage, up to 2 major repair incidents a year.": "訓練及比賽損壞享免費維修人工及核心零件更換，每年最多兩次主要維修。",
   "Add to Quote": "加入報價",
   "Technical Specifications": "技術規格",
   "In the Box": "包裝內容",

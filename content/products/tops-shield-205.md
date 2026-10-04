@@ -42,11 +42,11 @@ equipmentTierPartsDescription: Parts-only supply with a limited warranty up to 7
 equipmentTierVerifiedLabel: Tier 2 · VLI-verified
 equipmentTierVerifiedDescription: The drone is checked and reported, then PID-tuned to its finest performance, with a 30-day warranty.
 careAddOnTitle: Add VLI-CARE
-careAddOnDescription: a 1-year plan with up to 2 replacements and free repair for accidental damage, user error, collisions, water damage, and flyaway incidents. Submit a repair request through support email; shipping is not included.
+careAddOnDescription: Optional Tier 2 add-on: a 12-month service plan with free repair labour and free replacement of core components damaged in training and competition, for up to 2 major repair incidents per drone per year. Excludes propellers, cage panels, batteries, water damage and flyaways without wreckage. Shipping is not included. See the Warranty and Repair Policy.
 platformLabel: 205 mm platform
 premiumTitle: TOPS Shield 205: The Agile Striker
 careTitle: Includes 1-Year VLI CARE
-careDescription: Coverage for heavy collision damage, water damage, and rapid replacements.
+careDescription: Free repair labour and core-part replacement for gameplay damage, up to 2 major repair incidents a year.
 tier.builder.label: PNP (+ELRS)
 tier.builder.subtitle: For teams with in-house technicians.
 tier.builder.inTheBox: 1x Drone soccer aircraft body
@@ -63,11 +63,11 @@ equipmentTierPartsDescription: 僅供應零件，有限保養期最長 7 天。
 equipmentTierVerifiedLabel: Tier 2 · VLI 驗證
 equipmentTierVerifiedDescription: 無人機會經過檢查及報告，並進行 PID 微調至最佳性能，保養期 30 天。
 careAddOnTitle: 加購 VLI CARE
-careAddOnDescription: 一年附加計劃：最多兩次更換及免費維修，涵蓋意外損壞、操作失誤、碰撞、進水及飛失事故。請透過支援電郵提交維修申請；運費不包括在內。
+careAddOnDescription: 僅適用於 Tier 2 的 12 個月保養計劃：免費維修人工，並免費更換於訓練及比賽中損壞的核心零件，每部無人機每年最多兩次主要維修。不包括槳葉、球殼面板、電池、進水損壞及無殘骸的飛失。運費不包括在內，詳見保養及維修政策。
 platformLabel: 205 毫米平台
 premiumTitle: TOPS Shield 205：靈活進攻平台
 careTitle: 包括一年 VLI CARE
-careDescription: 涵蓋嚴重碰撞損壞、進水損壞及快速更換支援。
+careDescription: 訓練及比賽損壞享免費維修人工及核心零件更換，每年最多兩次主要維修。
 tier.builder.label: 無人機足球 (僅無人機)
 tier.builder.subtitle: 適合具備內部技術人員的隊伍。
 tier.builder.inTheBox: 1x 球機機體

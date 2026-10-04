@@ -12,7 +12,7 @@ import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import People from "./pages/People";
-import Privacy from "./pages/Privacy";
+import PolicyPage from "./pages/PolicyPage";
 import Pricing from "./pages/Pricing";
 import Product from "./pages/Product";
 import Equipment from "./pages/Equipment";
@@ -34,7 +34,9 @@ function Router() {
       <Route path={"/contact"} component={Contact} />
       <Route path={"/"} component={Home} />
       <Route path={"/people"} component={People} />
-      <Route path={"/privacy"} component={Privacy} />
+      <Route path={"/legal"}>{() => <PolicyPage page="legal" />}</Route>
+      <Route path={"/sales-policy"}>{() => <PolicyPage page="sales" />}</Route>
+      <Route path={"/privacy"}>{() => <PolicyPage page="legal" />}</Route>
       <Route path={"/dronesportsreferee"} component={Product} />
       <Route path={"/product/bundles"} component={Bundles} />
       <Route path={"/product"} component={Equipment} />

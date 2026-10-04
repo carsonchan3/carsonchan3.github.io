@@ -41,8 +41,8 @@ Prices below are the public starting prices from the supplied VLI Drone Soccer c
 | 79 | TA300 300W八通道2-4S智能充电器 | Catalogue item | HK$958.80 |  |  |  |
 | 83 | TOPS无人机收纳包(20公分球机专用) | Catalogue item | HK$180 |  |  |  |
 | 84 | TOPS无人机收纳包(20-22公分球机专用) | Catalogue item | HK$264 |  |  |  |
-| 91 | Inflatable Drone Soccer Field (hidden) | 3 × 3 × 3 m | HK$5,750 |  |  |  |
-| 94 | Inflatable Drone Soccer Field (hidden) | 6 × 3 × 3 m | HK$7,820 |  |  |  |
+| 91 | Inflatable Drone Soccer Field | 3 × 3 × 3 m | HK$5,750 |  |  |  |
+| 94 | Inflatable Drone Soccer Field | 6 × 3 × 3 m | HK$7,820 |  |  |  |
 | 95 | TOPS 205 Shell | Maintenance Parts | HK$340 |  |  |  |
 | 96 | TOPS 220 Shell | Maintenance Parts | HK$150 |  |  |  |
 | 97 | OVONIC 4S 14.8V 1080mAh 110C XT30 | 4S · 1080 mAh | HK$125 |  |  |  |
@@ -50,9 +50,9 @@ Prices below are the public starting prices from the supplied VLI Drone Soccer c
 
 > **Tier 1 — PARTS only:** limited warranty up to 7 days only; repair, PID tuning, and related servicing are not included.
 >
-> **Tier 2 — VLI-verified:** the drone is checked and reported, then PID-tuned to its finest performance, with a 21-day warranty.
+> **Tier 2 — VLI-verified:** the drone is checked and reported, then PID-tuned to its finest performance, with a 30-day workmanship warranty.
 >
-> **VLI-CARE add-on:** available only with Tier 2. This official one-year service plan covers accidental damage, user error, collisions, water damage, and flyaway incidents; it includes up to two replacements and free repair. Submit a repair request through the support email. Shipping fees are not included.
+> **VLI-CARE add-on:** available only with Tier 2. A 12-month service plan with free repair labour and free replacement of core components damaged in training and competition, for up to two major repair incidents per drone per year. Excludes consumables (propellers, cage panels, batteries), water damage and flyaways without wreckage. Shipping is not included. Full terms: Sales and Policy page.
 ## Smart Referee packages
 
 Shown on the Smart Referee page, under “Event delivery options”.

@@ -42,7 +42,7 @@ function createStaticApp(route: string, language: WebsiteLanguage) {
 function translateStaticTree(root: Element, language: WebsiteLanguage) {
   if (language === "en") return;
   const visit = (element: Element) => {
-    const shouldSkip = element.closest(".vli-language-toggle, [data-live-metric]") || ["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA"].includes(element.tagName);
+    const shouldSkip = element.closest(".vli-language-toggle, [data-live-metric], [data-no-translate]") || ["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA"].includes(element.tagName);
     if (shouldSkip) return;
     for (const attribute of translatableAttributes) {
       const current = element.getAttribute(attribute);
@@ -181,6 +181,7 @@ async function writeDocument(destination: string, html: string) {
 const staticAliases = [
   { alias: "/equipment", source: "/product" },
   { alias: "/pricing", source: "/dronesportsreferee" },
+  { alias: "/privacy", source: "/legal" },
 ] as const;
 async function writeStaticAlias(template: string, alias: string, source: string, language: WebsiteLanguage) {
   const { document } = parseHTML(template);
