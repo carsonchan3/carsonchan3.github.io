@@ -91,9 +91,9 @@ export default function PolicyPage({ page }: { page: PolicyPageKey }) {
                     <button type="button" onClick={() => toggle(policy.id)} aria-expanded={open} aria-controls={panelId} className="group flex w-full items-start gap-4 p-5 text-left transition-colors hover:bg-white/[0.03] sm:p-6">
                       <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full border border-accent/40 text-xs font-bold text-accent">{String(index + 1).padStart(2, "0")}</span>
                       <span className="min-w-0 flex-1">
-                        <span className="block text-lg font-semibold leading-snug text-white md:text-xl">{policy.title.en}</span>
-                        {zh && policy.title["zh-Hant"] !== policy.title.en ? <span className="mt-0.5 block text-sm text-white/65">{policy.title["zh-Hant"]}</span> : null}
-                        <span className="mt-1.5 block text-xs text-white/45">{ui.version} {policy.version} · {ui.effective} {formatPolicyDate(policy.effective, language)}</span>
+                        <span className="block text-lg font-semibold leading-snug text-[var(--paper)] md:text-xl">{policy.title.en}</span>
+                        {zh && policy.title["zh-Hant"] !== policy.title.en ? <span className="mt-0.5 block text-sm text-[var(--mist)]">{policy.title["zh-Hant"]}</span> : null}
+                        <span className="mt-1.5 block text-xs text-[var(--mist)] opacity-70">{ui.version} {policy.version} · {ui.effective} {formatPolicyDate(policy.effective, language)}</span>
                       </span>
                       <span className="sr-only">{open ? ui.close : ui.open}</span>
                       <ChevronDown size={20} aria-hidden="true" className={`mt-2 shrink-0 text-accent transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
