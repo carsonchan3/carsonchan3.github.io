@@ -431,6 +431,7 @@
   html[data-printing-doc] .policy-doc { break-before: auto !important; }
   .policy-doc h2 button svg, .policy-doc h2 button > span:first-child { display: none !important; }
   body, main, .policy-prose, .policy-prose h2, .policy-prose h3, .policy-prose strong, .policy-prose th, .policy-prose td:first-child { background: #fff !important; color: #000 !important; }
-  main h1, main h2, main h2 span, main p { color: #000 !important; }
+  /* Beat the theme override .vli-flight-deck .text-white (also !important). */
+  .vli-flight-deck main h1, .vli-flight-deck main h2, .vli-flight-deck main .policy-doc h2 span, .vli-flight-deck main p, .vli-flight-deck .policy-doc .text-white { color: #000 !important; }
   .policy-prose a { color: #000 !important; }
 }
