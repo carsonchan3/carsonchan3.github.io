@@ -41,12 +41,12 @@ Prices below are the public starting prices from the supplied VLI Drone Soccer c
 | 79 | TA300 300W八通道2-4S智能充电器 | Catalogue item | HK$958.80 |  |  |  |
 | 83 | TOPS无人机收纳包(20公分球机专用) | Catalogue item | HK$180 |  |  |  |
 | 84 | TOPS无人机收纳包(20-22公分球机专用) | Catalogue item | HK$264 |  |  |  |
-| 91 | Inflatable Drone Soccer Field (hidden) | 3 × 3 × 3 m | HK$5,733 |  |  |  |
-| 94 | Inflatable Drone Soccer Field (hidden) | 6 × 3 × 3 m | HK$7,813 |  |  |  |
+| 91 | Inflatable Drone Soccer Field (hidden) | 3 × 3 × 3 m | HK$5,750 |  |  |  |
+| 94 | Inflatable Drone Soccer Field (hidden) | 6 × 3 × 3 m | HK$7,820 |  |  |  |
 | 95 | TOPS 205 Shell | Maintenance Parts | HK$340 |  |  |  |
 | 96 | TOPS 220 Shell | Maintenance Parts | HK$150 |  |  |  |
-| 97 | OVONIC 4S 14.8V 1080mAh 110C XT30 (Taobao ¥85 × 1.44) | 4S · 1080 mAh | HK$122.40 |  |  |  |
-| 98 | Gens ACE TATTU 4S 14.8V 1100mAh 110C XT30 (Taobao ¥116 × 1.44) | 4S · 1100 mAh | HK$167.04 |  |  |  |
+| 97 | OVONIC 4S 14.8V 1080mAh 110C XT30 | 4S · 1080 mAh | HK$125 |  |  |  |
+| 98 | Gens ACE TATTU 4S 14.8V 1100mAh 110C XT30  | 4S · 1100 mAh | HK$170 |  |  |  |
 
 > **Tier 1 — PARTS only:** limited warranty up to 7 days only; repair, PID tuning, and related servicing are not included.
 >
