@@ -9,7 +9,7 @@ category.zh-Hant: 無人機平台
 variant.19.label: Portable RTF set
 variant.19.name: TOPS Shield 200 Brushed RTF Set
 variant.19.model: TZ001
-variant.19.image: /media/Droneequipment_2ab6c2b7.jpg
+variant.19.image: /media/product-tops-shield-200-brushed-set.jpg
 variant.19.imageAlt: TOPS Shield 200 portable ready-to-fly drone set
 ---
 

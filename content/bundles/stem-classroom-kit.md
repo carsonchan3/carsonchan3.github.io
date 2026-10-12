@@ -18,7 +18,7 @@ optionPriceNote.zh-Hant: 雙倍課室套裝（12 部無人機）· 器材約 97 
 cta.en: Request a school quotation
 cta.zh-Hant: 索取學校報價
 
-image: /media/Droneequipment_2ab6c2b7.jpg
+image: /media/product-tops-shield-200-brushed-set.jpg
 imageAlt.en: TOPS Shield 200 brushed drone soccer sets for a school STEM class
 imageAlt.zh-Hant: 供學校 STEM 課堂使用的 TOPS 飛盾 200 空心杯足球無人機套裝
 ---

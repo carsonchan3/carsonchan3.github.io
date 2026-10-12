@@ -12,7 +12,7 @@ category.zh-Hant: 後備配件
 variant.96.label: TOPS Shield 220 Shell
 variant.96.name: TOPS Shield 220 Shell
 variant.96.model: TOPS Shield 220 Shell
-variant.96.image: /media/Droneequipment_2ab6c2b7.jpg
+variant.96.image: /media/product-tops-220-shell.jpg
 variant.96.imageAlt: TOPS Shield 220 Shell
 ---
 

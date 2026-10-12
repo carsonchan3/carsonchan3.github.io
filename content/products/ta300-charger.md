@@ -9,7 +9,7 @@ category.zh-Hant: 充電設備
 variant.79.label: Eight-channel
 variant.79.name: TA300 300W Eight-Channel 2–4S Smart Charger
 variant.79.model: TA300
-variant.79.image: /media/Droneequipment_2ab6c2b7.jpg
+variant.79.image: /media/product-ta300-charger.jpg
 variant.79.imageAlt: TA300 eight-channel smart battery charger
 ---
 

@@ -9,7 +9,7 @@ category.zh-Hant: 無人機平台
 variant.5.label: Standard
 variant.5.name: TOPS Shield 200 Brushless
 variant.5.model: 200 mm brushless
-variant.5.image: /media/Droneequipment_2ab6c2b7.jpg
+variant.5.image: /media/product-tops-shield-200-brushless.jpg
 variant.5.imageAlt: TOPS Shield 200 brushless competition drone
 ---
 

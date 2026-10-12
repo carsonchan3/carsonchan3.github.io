@@ -9,7 +9,7 @@ category.zh-Hant: 賽事設備
 variant.83.label: 200 mm
 variant.83.name: TOPS Drone Carry Bag for 200 mm Ball Drone
 variant.83.model: 200 mm
-variant.83.image: /media/Droneequipment_2ab6c2b7.jpg
+variant.83.image: /media/product-tops-bag-20cm.jpg
 variant.83.imageAlt: TOPS carry bag for a 200 mm drone
 ---
 

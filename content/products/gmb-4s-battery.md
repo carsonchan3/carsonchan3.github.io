@@ -9,7 +9,7 @@ category.zh-Hant: 無人機電源
 variant.72.label: 3000 mAh · 4S
 variant.72.name: GMB High-Energy 15.2 V 3000 mAh 4S Battery
 variant.72.model: 4S 15.2 V
-variant.72.image: /media/Droneequipment_2ab6c2b7.jpg
+variant.72.image: /media/product-gmb-4s-3000-battery.jpg
 variant.72.imageAlt: GMB high-energy 4S drone battery
 ---
 

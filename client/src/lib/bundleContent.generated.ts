@@ -44,7 +44,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": "Request a school quotation",
       "zh-Hant": "索取學校報價"
     },
-    "image": "/media/Droneequipment_2ab6c2b7.jpg",
+    "image": "/media/product-tops-shield-200-brushed-set.jpg",
     "imageAlt": {
       "en": "TOPS Shield 200 brushed drone soccer sets for a school STEM class",
       "zh-Hant": "供學校 STEM 課堂使用的 TOPS 飛盾 200 空心杯足球無人機套裝"
@@ -115,8 +115,8 @@ export const bundleContent: readonly BundleContentRecord[] = [
     },
     "includes": {
       "en": [
-        "5× TOPS Shield 205 brushless RTF sets, Tier 2 VLI-verified: checked, PID-tuned, 21-day warranty",
-        "1-year VLI-CARE on all 5 drones: accidental damage, collisions and free repair, up to two replacements each",
+        "5× TOPS Shield 205 brushless RTF sets, Tier 2 VLI-verified: checked, PID-tuned, 30-day workmanship warranty",
+        "1-year VLI-CARE on all 5 drones: free repair labour and core-part replacement for gameplay damage, up to 2 major repair incidents per drone",
         "20× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)",
         "2× D6 PRO dual-channel smart chargers",
         "5× TOPS drone carry bags (20–22 cm)",
@@ -125,8 +125,8 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "Itemised quotation for school procurement and funding applications"
       ],
       "zh-Hant": [
-        "5 套 TOPS Shield 205 無刷 RTF 套裝，Tier 2 VLI 驗證：檢測、PID 調校，21 日保養",
-        "5 部無人機均附一年 VLI-CARE：意外損壞、碰撞及免費維修，每部最多兩次更換",
+        "5 套 TOPS Shield 205 無刷 RTF 套裝，Tier 2 VLI 驗證：檢測、PID 調校，30 日工藝保養",
+        "5 部無人機均附一年 VLI-CARE：比賽及訓練損壞享免費維修人工及核心零件更換，每部每年最多兩次主要維修",
         "20 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）",
         "2 部 D6 PRO 雙通道智能充電器",
         "5 個 TOPS 無人機收納包（20–22 公分）",

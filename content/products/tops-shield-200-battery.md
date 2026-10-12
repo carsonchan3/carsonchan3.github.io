@@ -9,7 +9,7 @@ category.zh-Hant: 無人機電源
 variant.20.label: 450 mAh · 2S
 variant.20.name: TOPS Shield 200 450 mAh 2S Battery
 variant.20.model: 2S 7.4 V 25C
-variant.20.image: /media/Droneequipment_2ab6c2b7.jpg
+variant.20.image: /media/product-tops-200-2s-battery.jpg
 variant.20.imageAlt: TOPS Shield 200 2S flight battery
 ---
 
