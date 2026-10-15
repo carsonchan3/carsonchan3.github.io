@@ -2,13 +2,12 @@ import { publicContactEmail, publicContactEmailHref } from "@/lib/contactDetails
 import { staticSitePath } from "@/lib/staticPreview";
 import { localizedPath } from "@/lib/seo";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { Facebook, Instagram, Linkedin, Youtube, type LucideIcon } from "lucide-react";
+import { Facebook, Linkedin, Youtube, type LucideIcon } from "lucide-react";
 
-export const footerSocialLinks: Array<{ label: "LinkedIn" | "Instagram" | "YouTube" | "Facebook"; href: string; icon: LucideIcon }> = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/", icon: Linkedin },
-  { label: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
-  { label: "YouTube", href: "https://www.youtube.com/", icon: Youtube },
-  { label: "Facebook", href: "https://www.facebook.com/", icon: Facebook },
+export const footerSocialLinks: Array<{ label: "LinkedIn" | "YouTube" | "Facebook"; href: string; icon: LucideIcon }> = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/velocity-lab-innovation", icon: Linkedin },
+  { label: "YouTube", href: "https://www.youtube.com/@VelocityLabInnovation", icon: Youtube },
+  { label: "Facebook", href: "https://www.facebook.com/people/Velocity-Lab-Innovation/61594792029836/", icon: Facebook },
 ];
 
 export default function SiteFooter() {
@@ -51,9 +50,9 @@ export default function SiteFooter() {
             <a href={staticSitePath(localizedPath("/contact", language))} className="inline-flex bg-accent px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-[#7ff2e6]">Request a Demo</a>
             <div className="mt-7 border-t border-white/10 pt-5">
               <p className="vli-footer-label mb-3">Follow VLI</p>
-              <div className="flex flex-wrap gap-2" aria-label="Social media placeholder links">
+              <div className="flex flex-wrap gap-2" aria-label="Velocity Lab Innovation on social media">
                 {footerSocialLinks.map(({ label, href, icon: Icon }) => (
-                  <a key={label} href={href} target="_blank" rel="noreferrer" data-social-placeholder="true" title={`${label} placeholder link — replace with the official VLI profile URL`} aria-label={`Open ${label} placeholder link`} className="inline-flex size-10 items-center justify-center border border-white/20 text-white transition-colors hover:border-accent hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" title={`Velocity Lab Innovation on ${label}`} aria-label={`Velocity Lab Innovation on ${label} (opens in a new tab)`} className="inline-flex size-10 items-center justify-center border border-white/20 text-white transition-colors hover:border-accent hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
                     <Icon aria-hidden="true" size={18} strokeWidth={1.8} />
                     <span className="sr-only">{label}</span>
                   </a>

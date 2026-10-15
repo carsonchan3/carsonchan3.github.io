@@ -1,14 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { footerSocialLinks } from "./SiteFooter";
 
-describe("footer social-media placeholders", () => {
-  it("provides the four requested branded social destinations as replaceable external links", () => {
-    expect(footerSocialLinks.map((link) => link.label)).toEqual(["LinkedIn", "Instagram", "YouTube", "Facebook"]);
+describe("footer social-media links", () => {
+  it("links to the official VLI profiles", () => {
+    expect(footerSocialLinks.map((link) => link.label)).toEqual(["LinkedIn", "YouTube", "Facebook"]);
     expect(footerSocialLinks.map((link) => link.href)).toEqual([
-      "https://www.linkedin.com/",
-      "https://www.instagram.com/",
-      "https://www.youtube.com/",
-      "https://www.facebook.com/",
+      "https://www.linkedin.com/company/velocity-lab-innovation",
+      "https://www.youtube.com/@VelocityLabInnovation",
+      "https://www.facebook.com/people/Velocity-Lab-Innovation/61594792029836/",
     ]);
   });
 });
