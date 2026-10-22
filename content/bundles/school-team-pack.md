@@ -29,7 +29,6 @@ Everything a school needs to field its own drone soccer team and enter inter-sch
 - 1-year VLI-CARE on all 5 drones: free repair labour and core-part replacement for gameplay damage, up to 2 major repair incidents per drone
 - 20× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)
 - 2× D6 PRO dual-channel smart chargers
-- 5× TOPS drone carry bags (20–22 cm)
 - 4-hour on-site coach training: team flying, tactics, battery safety and basic repairs
 - Free access to the VLI drone soccer [Score Board](/scoreboard) for training matches
 - Itemised quotation for school procurement and funding applications
@@ -41,7 +40,6 @@ Everything a school needs to field its own drone soccer team and enter inter-sch
 - 5 部無人機均附一年 VLI-CARE：比賽及訓練損壞享免費維修人工及核心零件更換，每部每年最多兩次主要維修
 - 20 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）
 - 2 部 D6 PRO 雙通道智能充電器
-- 5 個 TOPS 無人機收納包（20–22 公分）
 - 4 小時到校教練培訓：隊伍飛行、戰術、電池安全及基本維修
 - 免費使用 VLI 無人機足球[記分板](/scoreboard)進行練習賽
 - 提供分項報價，方便學校採購及申請資助

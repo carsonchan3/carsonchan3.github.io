@@ -28,7 +28,6 @@ Turn the school hall into a drone soccer venue: two full teams, a full-size infl
 - 1× inflatable drone soccer arena (6 × 3 × 3 m) with blower
 - 40× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)
 - Charging station: 1× TA300 8-channel smart charger and 2× D6 PRO dual-channel chargers
-- 10× TOPS drone carry bags (20–22 cm)
 - 8 hours of on-site training for teachers and student technical crew
 - First inter-school event day supported by a VLI technical official, run on the free [Score Board](/scoreboard)
 - Optional [Smart Referee](/dronesportsreferee) video review for your event, quoted separately
@@ -42,7 +41,6 @@ Turn the school hall into a drone soccer venue: two full teams, a full-size infl
 - 1 個充氣式無人機足球場（6 × 3 × 3 米）連鼓風機
 - 40 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）
 - 充電站：1 部 TA300 八通道智能充電器及 2 部 D6 PRO 雙通道充電器
-- 10 個 TOPS 無人機收納包（20–22 公分）
 - 8 小時到校培訓，對象為老師及學生技術團隊
 - 首場校際賽事由 VLI 技術裁判支援，使用免費[記分板](/scoreboard)運作
 - 可選加 [Smart Referee](/dronesportsreferee) 賽事影片覆核，另行報價

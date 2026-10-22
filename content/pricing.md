@@ -65,10 +65,10 @@ Shown on the Smart Referee page, under “Event delivery options”.
 
 ## Bundles
 
-Shown on the Products page, under the **Bundles** tab. Each ID matches a file in `content/bundles/` (what's included, wording and images are edited there). **Option price** is a second price shown under the main one — e.g. a larger set — and its wording comes from `optionPriceNote` in the bundle file. Leave it blank if there is none. Bundle prices are based on the catalogue prices above; if you change those, check the "X% off equipment" wording in the bundle files still holds. Bundle prices = equipment at catalogue price less the bundle discount, plus staff time at HK$300/hour and printed materials (breakdown in the 3 Oct bundle pricing PDF).
+Shown on the Products page, under the **Bundles** tab. Each ID matches a file in `content/bundles/` (what's included, wording and images are edited there). **Option price** is a second price shown under the main one — e.g. a larger set — and its wording comes from `optionPriceNote` in the bundle file. Leave it blank if there is none. Bundle prices are based on the catalogue prices above; if you change those, check the "X% off equipment" wording in the bundle files still holds. Bundle prices = equipment at catalogue price less the bundle discount, plus staff time at HK$500/hour and printed materials (22 Oct 2026: carry bags removed because each drone set already includes one).
 
 | ID | Bundle | Price | Option price |
 | --- | --- | --- | --- |
-| stem-classroom-kit | STEM Classroom Kit (6 drones) | HK$8,180 | HK$14,780 |
-| school-team-pack | School Competition Team Pack (5 drones) | HK$26,140 |  |
-| host-school-arena | Host School Arena Pack (10 drones + arena) | HK$61,830 |  |
+| stem-classroom-kit | STEM Classroom Kit (6 drones) | HK$7,900 | HK$13,470 |
+| school-team-pack | School Competition Team Pack (5 drones) | HK$26,130 |  |
+| host-school-arena | Host School Arena Pack (10 drones + arena) | HK$65,110 |  |

@@ -29,7 +29,6 @@ A safe first step into drone soccer for STEM lessons: lightweight brushed drones
 - 6× TOPS Shield 200 Brushed RTF sets (one per group)
 - 18× TOPS Shield 200 2S 450 mAh flight batteries (3 per drone)
 - 1× 10-port USB charger
-- 6× TOPS drone carry bags (20 cm)
 - 2-hour on-site teacher training: setup, flight safety and running a class
 - Lesson pack: 4 lesson plans, student worksheets and safety rules
 - Free access to the VLI drone soccer [Score Board](/scoreboard) for class matches
@@ -42,7 +41,6 @@ A safe first step into drone soccer for STEM lessons: lightweight brushed drones
 - 6 套 TOPS 飛盾 200 空心杯 RTF 套裝（每組一套）
 - 18 粒 TOPS 飛盾 200 2S 450 mAh 飛行電池（每部 3 粒）
 - 1 部 10 埠 USB 充電器
-- 6 個 TOPS 無人機收納包（20 公分）
 - 2 小時到校教師培訓：設定、飛行安全及課堂帶領
 - 教材套：4 份教案、學生工作紙及安全守則
 - 免費使用 VLI 無人機足球[記分板](/scoreboard)進行課堂比賽

@@ -30,12 +30,12 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": "Primary & junior secondary",
       "zh-Hant": "小學及初中"
     },
-    "price": "HK$8,180",
+    "price": "HK$7,900",
     "priceNote": {
       "en": "Class set for 6 groups · includes teacher training and printed lesson materials",
       "zh-Hant": "6 組課室套裝 · 包括教師培訓及印刷教材"
     },
-    "optionPrice": "HK$14,780",
+    "optionPrice": "HK$13,470",
     "optionPriceNote": {
       "en": "Double class set (12 drones) · about 3% off equipment",
       "zh-Hant": "雙倍課室套裝（12 部無人機）· 器材約 97 折"
@@ -58,7 +58,6 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "6× TOPS Shield 200 Brushed RTF sets (one per group)",
         "18× TOPS Shield 200 2S 450 mAh flight batteries (3 per drone)",
         "1× 10-port USB charger",
-        "6× TOPS drone carry bags (20 cm)",
         "2-hour on-site teacher training: setup, flight safety and running a class",
         "Lesson pack: 4 lesson plans, student worksheets and safety rules",
         "Free access to the VLI drone soccer [Score Board](/scoreboard) for class matches",
@@ -69,7 +68,6 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "6 套 TOPS 飛盾 200 空心杯 RTF 套裝（每組一套）",
         "18 粒 TOPS 飛盾 200 2S 450 mAh 飛行電池（每部 3 粒）",
         "1 部 10 埠 USB 充電器",
-        "6 個 TOPS 無人機收納包（20 公分）",
         "2 小時到校教師培訓：設定、飛行安全及課堂帶領",
         "教材套：4 份教案、學生工作紙及安全守則",
         "免費使用 VLI 無人機足球[記分板](/scoreboard)進行課堂比賽",
@@ -91,7 +89,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": "Secondary school team",
       "zh-Hant": "中學校隊"
     },
-    "price": "HK$26,140",
+    "price": "HK$26,130",
     "priceNote": {
       "en": "One full 5-drone F9A team · 5% off equipment, coach training included",
       "zh-Hant": "一隊 5 部 F9A 無人機 · 器材 95 折，已包括教練培訓"
@@ -119,7 +117,6 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "1-year VLI-CARE on all 5 drones: free repair labour and core-part replacement for gameplay damage, up to 2 major repair incidents per drone",
         "20× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)",
         "2× D6 PRO dual-channel smart chargers",
-        "5× TOPS drone carry bags (20–22 cm)",
         "4-hour on-site coach training: team flying, tactics, battery safety and basic repairs",
         "Free access to the VLI drone soccer [Score Board](/scoreboard) for training matches",
         "Itemised quotation for school procurement and funding applications"
@@ -129,7 +126,6 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "5 部無人機均附一年 VLI-CARE：比賽及訓練損壞享免費維修人工及核心零件更換，每部每年最多兩次主要維修",
         "20 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）",
         "2 部 D6 PRO 雙通道智能充電器",
-        "5 個 TOPS 無人機收納包（20–22 公分）",
         "4 小時到校教練培訓：隊伍飛行、戰術、電池安全及基本維修",
         "免費使用 VLI 無人機足球[記分板](/scoreboard)進行練習賽",
         "提供分項報價，方便學校採購及申請資助"
@@ -149,7 +145,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
       "en": "Whole-school programme & inter-school events",
       "zh-Hant": "全校計劃及校際賽事"
     },
-    "price": "HK$61,830",
+    "price": "HK$65,110",
     "priceNote": {
       "en": "Two full teams plus arena · 8.5% off equipment, training and event day included",
       "zh-Hant": "兩隊無人機連場地 · 器材減 8.5%，已包括培訓及賽事日支援"
@@ -178,7 +174,6 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "1× inflatable drone soccer arena (6 × 3 × 3 m) with blower",
         "40× OVONIC 4S 1080 mAh 110C LiPo batteries (4 per drone)",
         "Charging station: 1× TA300 8-channel smart charger and 2× D6 PRO dual-channel chargers",
-        "10× TOPS drone carry bags (20–22 cm)",
         "8 hours of on-site training for teachers and student technical crew",
         "First inter-school event day supported by a VLI technical official, run on the free [Score Board](/scoreboard)",
         "Optional [Smart Referee](/dronesportsreferee) video review for your event, quoted separately",
@@ -190,7 +185,6 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "1 個充氣式無人機足球場（6 × 3 × 3 米）連鼓風機",
         "40 粒 OVONIC 4S 1080 mAh 110C LiPo 電池（每部 4 粒）",
         "充電站：1 部 TA300 八通道智能充電器及 2 部 D6 PRO 雙通道充電器",
-        "10 個 TOPS 無人機收納包（20–22 公分）",
         "8 小時到校培訓，對象為老師及學生技術團隊",
         "首場校際賽事由 VLI 技術裁判支援，使用免費[記分板](/scoreboard)運作",
         "可選加 [Smart Referee](/dronesportsreferee) 賽事影片覆核，另行報價",
