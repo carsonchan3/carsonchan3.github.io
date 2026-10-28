@@ -2,10 +2,11 @@ import { publicContactEmail, publicContactEmailHref } from "@/lib/contactDetails
 import { staticSitePath } from "@/lib/staticPreview";
 import { localizedPath } from "@/lib/seo";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { Facebook, Linkedin, Youtube, type LucideIcon } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube, type LucideIcon } from "lucide-react";
 
-export const footerSocialLinks: Array<{ label: "LinkedIn" | "YouTube" | "Facebook"; href: string; icon: LucideIcon }> = [
+export const footerSocialLinks: Array<{ label: "LinkedIn" | "Instagram" | "YouTube" | "Facebook"; href: string; icon: LucideIcon }> = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/velocity-lab-innovation", icon: Linkedin },
+  { label: "Instagram", href: "https://www.instagram.com/velocitylabinnovation/", icon: Instagram },
   { label: "YouTube", href: "https://www.youtube.com/@VelocityLabInnovation", icon: Youtube },
   { label: "Facebook", href: "https://www.facebook.com/people/Velocity-Lab-Innovation/61594792029836/", icon: Facebook },
 ];

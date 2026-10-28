@@ -281,6 +281,12 @@ export function buildStructuredData(page: PublicSeoPage, language: WebsiteLangua
       url: siteOrigin,
       logo: managedMediaUrl("/media/vli_logo_with_text_bb6773ef.png"),
       email: "info@velocity-lab.com",
+      sameAs: [
+        "https://www.linkedin.com/company/velocity-lab-innovation",
+        "https://www.instagram.com/velocitylabinnovation/",
+        "https://www.youtube.com/@VelocityLabInnovation",
+        "https://www.facebook.com/people/Velocity-Lab-Innovation/61594792029836/",
+      ],
       address: { "@type": "PostalAddress", addressLocality: "Hong Kong", addressCountry: "HK" },
     });
   }

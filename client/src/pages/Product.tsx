@@ -5,7 +5,8 @@ import SiteHeader from "@/components/SiteHeader";
 import ScoreboardPromo from "@/components/ScoreboardPromo";
 import RefereePricingConfigurator from "@/components/RefereePricingConfigurator";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
-import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
+import { homepageHeroVideoPosterSrc } from "@/lib/heroMedia";
+import HeroVideoSources from "@/components/HeroVideoSources";
 import { trackConversion } from "@/lib/conversionTracking";
 
 export const proofPoints = [
@@ -326,7 +327,7 @@ export default function Product() {
       <main data-reveal-page className="pt-16">
         <section id="organiser-promise" data-testid="smart-referee-hero" data-background-treatment={smartRefereeHeroBackgroundPresentation.treatment} data-presentation={smartRefereeReferenceFormatPresentation.hero} className="relative isolate min-h-[calc(100svh-4rem)] overflow-hidden border-b border-white/10 bg-[#071117]">
           <img src={smartRefereeMedia.trackingPoster} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 z-0 h-full w-full object-cover object-right" />
-          <video data-testid="smart-referee-hero-video" src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline={smartRefereeHeroBackgroundPresentation.playsInline} preload={smartRefereeHeroBackgroundPresentation.preload} onCanPlay={(event) => { void event.currentTarget.play().catch(() => undefined); }} className="absolute inset-0 z-[1] h-full w-full object-cover object-center" />
+          <video data-testid="smart-referee-hero-video" poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay={smartRefereeHeroBackgroundPresentation.autoPlay} muted={smartRefereeHeroBackgroundPresentation.muted} loop={smartRefereeHeroBackgroundPresentation.loop} playsInline={smartRefereeHeroBackgroundPresentation.playsInline} preload={smartRefereeHeroBackgroundPresentation.preload} onCanPlay={(event) => { void event.currentTarget.play().catch(() => undefined); }} className="absolute inset-0 z-[1] h-full w-full object-cover object-center"><HeroVideoSources /></video>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[2] opacity-35 [background-image:linear-gradient(rgba(64,224,208,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(64,224,208,0.12)_1px,transparent_1px)] [background-size:3rem_3rem]" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(7,17,23,0.98)_0%,rgba(7,17,23,0.9)_48%,rgba(7,17,23,0.34)_100%)]" />
           <div className="container relative z-20 flex min-h-[calc(100svh-4rem)] flex-col justify-end py-12 md:py-16 lg:py-20">

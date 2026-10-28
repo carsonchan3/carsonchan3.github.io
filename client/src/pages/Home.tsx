@@ -9,7 +9,8 @@ import { localizedPath } from "@/lib/seo";
 import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import SiteFooter from "@/components/SiteFooter";
 import { offeringCards } from "@/lib/offeringRoutes";
-import { homepageHeroVideoPosterSrc, homepageHeroVideoSrc } from "@/lib/heroMedia";
+import { homepageHeroVideoPosterSrc } from "@/lib/heroMedia";
+import HeroVideoSources from "@/components/HeroVideoSources";
 import { getRevealTransitionDelay } from "@/lib/revealMotion";
 import { trackConversion } from "@/lib/conversionTracking";
 import { ArrowRight, Menu, X } from "lucide-react";
@@ -101,7 +102,7 @@ export default function Home() {
       <main data-reveal-page>
         <section id="hero" data-mobile-video-aspect-ratio={mobileHomeHeroVideoAspectRatio} data-desktop-video-aspect-ratio={desktopHomeHeroVideoAspectRatio} data-mobile-content-policy={mobileHomeHeroContentPolicy.presentation} className="vli-home-hero relative isolate flex aspect-[4/5] min-h-[31rem] items-end overflow-hidden pt-16 sm:min-h-[34rem] sm:aspect-video sm:pt-20 lg:min-h-0 lg:aspect-[32/9]">
           <img src={homepageHeroVideoPosterSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-center" />
-          <video src={homepageHeroVideoSrc} poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+          <video poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 -z-20 h-full w-full object-cover object-center"><HeroVideoSources /></video>
           <div className="absolute inset-0 -z-10 bg-[#051018]/12" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#051018]/78 via-[#051018]/34 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#051018]/72 to-transparent" />
