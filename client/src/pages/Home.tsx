@@ -17,9 +17,9 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export const collaborators = [
-  { name: "Hong Kong Drone Sports Association", logo: "/manus-storage/HKDSA_9a3a9c17.jpeg", isPublic: true },
-  { name: "Eastern District Drone Association", logo: "/manus-storage/EDD_61b82de0.jpg", isPublic: true },
-  { name: "Hong Kong Science and Technology Parks Ideation Programme", logo: "/manus-storage/HKSTP_6e2bc852.png", isPublic: true },
+  { name: "Hong Kong Drone Sports Association", logo: "/media/partner-hkdsa_5811bcf9.jpg", isPublic: true },
+  { name: "Eastern District Drone Association", logo: "/media/partner-edda_d7c32006.jpg", isPublic: true },
+  { name: "Hong Kong Science and Technology Parks Ideation Programme", logo: "/media/partner-hkstp_6f085bbc.jpg", isPublic: true },
 ];
 
 export const publicCollaborators = collaborators.filter((collaborator) => collaborator.isPublic);

@@ -375,7 +375,7 @@ export function buildStructuredData(page: PublicSeoPage, language: WebsiteLangua
       description: language === "zh-Hant" ? "為主辦方、裁判及執行團隊提供的 Smart Referee 工作流程重點概覽。" : "A focused overview of the Smart Referee workflow for organisers, officials, and delivery teams.",
       thumbnailUrl: managedMediaUrl("/media/flex13camerasys_aa73a4e5.jpg"),
       uploadDate: "2026-08-24T12:26:38+00:00",
-      contentUrl: managedMediaUrl("/manus-storage/v2fulluncompressed_1dc97341.mp4"),
+      contentUrl: managedMediaUrl("/media/vli-referee-pitch-1080_b68fb134.mp4"),
       embedUrl: canonicalUrl,
     });
   }

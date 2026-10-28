@@ -106,9 +106,9 @@ describe("Smart Referee organiser-first journey", () => {
     expect(smartRefereeMedia.humanReferee).toBe("/manus-storage/referee-angle_083e0bbc.webp");
     expect(smartRefereeMedia.stickers).toBe("/manus-storage/cheapstickers_6b71bf1e.jpg");
     expect(smartRefereeMedia.precisionPoster).toBe("/media/flex13camerasys_aa73a4e5.jpg");
-    expect(smartRefereeMedia.precisionVideo).toBe("/manus-storage/v2fulluncompressed_1dc97341.mp4");
+    expect(smartRefereeMedia.precisionVideo).toBe("/media/vli-referee-pitch-1080_b68fb134.mp4");
     expect(smartRefereeMedia.continuousCalibrationVideo).toBe("/manus-storage/cont-calibration_a6322d41.mp4");
-    expect(smartRefereeMedia.trackingVideo).toBe("/manus-storage/vli-tracking-test-video_f82aa6d7.mp4");
+    expect(smartRefereeMedia.trackingVideo).toBe("/media/vli-tracking-test-1280_e3b5cd40.mp4");
   });
 
   it("defines the premium TOPS Shield 205 product experience from Markdown without checkout language", () => {

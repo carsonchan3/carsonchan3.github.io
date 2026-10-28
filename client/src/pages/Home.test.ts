@@ -6,14 +6,14 @@ describe("homepage supporting organisations", () => {
   it("identifies the HKSTP logo as the Ideation Programme", () => {
     expect(collaborators).toContainEqual(expect.objectContaining({
       name: "Hong Kong Science and Technology Parks Ideation Programme",
-      logo: "/manus-storage/HKSTP_6e2bc852.png",
+      logo: "/media/partner-hkstp_6f085bbc.jpg",
     }));
   });
 
   it("includes HKDSA in the public partner strip using its preserved supplied record", () => {
     expect(collaborators).toContainEqual(expect.objectContaining({
       name: "Hong Kong Drone Sports Association",
-      logo: "/manus-storage/HKDSA_9a3a9c17.jpeg",
+      logo: "/media/partner-hkdsa_5811bcf9.jpg",
       isPublic: true,
     }));
     expect(publicCollaborators.map((collaborator) => collaborator.name)).toContain("Hong Kong Drone Sports Association");
