@@ -10,7 +10,7 @@ import { useWebsiteLanguage } from "@/contexts/LanguageContext";
 import SiteFooter from "@/components/SiteFooter";
 import { offeringCards } from "@/lib/offeringRoutes";
 import { homepageHeroVideoPosterSrc } from "@/lib/heroMedia";
-import HeroVideoSources from "@/components/HeroVideoSources";
+import HeroVideo from "@/components/HeroVideo";
 import { getRevealTransitionDelay } from "@/lib/revealMotion";
 import { trackConversion } from "@/lib/conversionTracking";
 import { ArrowRight, Menu, X } from "lucide-react";
@@ -102,13 +102,13 @@ export default function Home() {
       <main data-reveal-page>
         <section id="hero" data-mobile-video-aspect-ratio={mobileHomeHeroVideoAspectRatio} data-desktop-video-aspect-ratio={desktopHomeHeroVideoAspectRatio} data-mobile-content-policy={mobileHomeHeroContentPolicy.presentation} className="vli-home-hero relative isolate flex aspect-[4/5] min-h-[31rem] items-end overflow-hidden pt-16 sm:min-h-[34rem] sm:aspect-video sm:pt-20 lg:min-h-0 lg:aspect-[32/9]">
           <img src={homepageHeroVideoPosterSrc} alt="" aria-hidden="true" fetchPriority="high" className="absolute inset-0 -z-30 h-full w-full object-cover object-center" />
-          <video poster={homepageHeroVideoPosterSrc} aria-hidden="true" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 -z-20 h-full w-full object-cover object-center"><HeroVideoSources /></video>
+          <HeroVideo className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
           <div className="absolute inset-0 -z-10 bg-[#051018]/12" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#051018]/78 via-[#051018]/34 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#051018]/72 to-transparent" />
 
           <div className="relative z-10 w-full pb-4 pl-4 pr-4 sm:pb-12 sm:pl-8 sm:pr-8 lg:pb-7 lg:pl-12 lg:pt-24 xl:pl-20">
-            <div data-reveal className="reveal-up max-w-2xl bg-[#051018]/46 p-3 backdrop-blur-[2px] sm:p-6 lg:max-w-xl lg:p-4">
+            <div data-reveal className="reveal-up max-w-2xl bg-[#051018]/52 p-3 sm:p-6 lg:max-w-xl lg:p-4">
               <p className="vli-home-kicker mb-2 sm:mb-6 lg:mb-2">Precision drone sports systems</p>
               <h1 className="vli-home-title mb-2 text-white sm:mb-9 lg:mb-3 lg:text-[clamp(2.35rem,3.7vw,3.75rem)]">Every Frame Matters.<br /><span className="text-accent">Every Call Counts.</span></h1>
               <div className="grid max-w-2xl gap-3 sm:gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end lg:block">

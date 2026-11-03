@@ -28,7 +28,7 @@ export default function LanguageToggle({ className = "", placement = "inline" }:
   }
 
   return (
-    <div data-placement={placement} className={`vli-language-toggle ${placementClass} items-center rounded-full border p-1 text-xs font-semibold backdrop-blur ${className}`} role="group" aria-label="Language selector">
+    <div data-placement={placement} className={`vli-language-toggle ${placementClass} items-center rounded-full border p-1 text-xs font-semibold ${className}`} role="group" aria-label="Language selector">
       <a href={languageHref("zh-Hant")} data-testid="language-zh" data-language={language === "zh-Hant" ? "active" : "inactive"} onClick={(event) => chooseLanguage(event, "zh-Hant")} aria-pressed={language === "zh-Hant"} className={`rounded-full px-3 py-1.5 transition-colors ${placement === "inline" ? "inline-flex min-h-11 touch-manipulation items-center" : ""}`}>中</a>
       <a href={languageHref("en")} data-testid="language-en" data-language={language === "en" ? "active" : "inactive"} onClick={(event) => chooseLanguage(event, "en")} aria-pressed={language === "en"} className={`rounded-full px-3 py-1.5 transition-colors ${placement === "inline" ? "inline-flex min-h-11 touch-manipulation items-center" : ""}`}>ENG</a>
     </div>

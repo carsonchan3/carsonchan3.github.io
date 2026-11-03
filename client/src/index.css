@@ -333,7 +333,7 @@
   .vli-flight-deck .text-black { color: var(--ink-deep) !important; }
   .vli-flight-deck .bg-white { background-color: var(--paper); }
 
-  .vli-site-header { background: rgba(5,16,24,.92); border-color: var(--line); backdrop-filter: blur(18px); box-shadow: none; }
+  .vli-site-header { background: rgba(5,16,24,.92); border-color: var(--line); box-shadow: none; }
   .vli-site-header .vli-brand-logo { height: 50px; width: 8.75rem; object-fit: cover; object-position: center; filter: none; }
   .vli-site-header .vli-nav-link { color: var(--mist); font-family: 'Space Grotesk', sans-serif; font-size: .78rem; letter-spacing: .02em; }
   .vli-site-header .vli-nav-link:hover, .vli-site-header .vli-nav-link[data-active='true'] { color: var(--signal); }
