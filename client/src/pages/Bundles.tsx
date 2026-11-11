@@ -73,8 +73,8 @@ export default function Bundles() {
   };
 
   const groups = [
-    { id: "equipment", eyebrow: copy.equipmentEyebrow, title: copy.equipmentTitle, intro: copy.equipmentIntro, bundles: equipmentBundles },
     { id: "programmes", eyebrow: copy.programmeEyebrow, title: copy.programmeTitle, intro: copy.programmeIntro, bundles: programmeBundles },
+    { id: "equipment", eyebrow: copy.equipmentEyebrow, title: copy.equipmentTitle, intro: copy.equipmentIntro, bundles: equipmentBundles },
   ].filter((group) => group.bundles.length);
 
   return (
