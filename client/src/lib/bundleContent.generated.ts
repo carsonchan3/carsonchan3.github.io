@@ -2,6 +2,7 @@
 export type BundleContentRecord = {
   id: string;
   order: number;
+  group: "equipment" | "programme";
   visible: boolean;
   featured: boolean;
   title: { en: string; "zh-Hant": string };
@@ -20,6 +21,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
   {
     "id": "stem-classroom-kit",
     "order": 1,
+    "group": "equipment",
     "visible": true,
     "featured": false,
     "title": {
@@ -79,6 +81,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
   {
     "id": "school-team-pack",
     "order": 2,
+    "group": "equipment",
     "visible": true,
     "featured": true,
     "title": {
@@ -135,6 +138,7 @@ export const bundleContent: readonly BundleContentRecord[] = [
   {
     "id": "host-school-arena",
     "order": 3,
+    "group": "equipment",
     "visible": true,
     "featured": false,
     "title": {
@@ -188,6 +192,184 @@ export const bundleContent: readonly BundleContentRecord[] = [
         "8 小時到校培訓，對象為老師及學生技術團隊",
         "首場校際賽事由 VLI 技術裁判支援，使用免費[記分板](/scoreboard)運作",
         "可選加 [Smart Referee](/dronesportsreferee) 賽事影片覆核，另行報價",
+        "提供分項報價，方便學校採購及申請資助"
+      ]
+    }
+  },
+  {
+    "id": "stem-discovery-programme",
+    "order": 11,
+    "group": "programme",
+    "visible": true,
+    "featured": false,
+    "title": {
+      "en": "STEM Discovery Programme",
+      "zh-Hant": "STEM 探索課程"
+    },
+    "tagline": {
+      "en": "Primary & junior secondary · 8 weekly lessons",
+      "zh-Hant": "小學及初中 · 8 堂每週課堂"
+    },
+    "price": "HK$20,780",
+    "priceNote": {
+      "en": "One group of up to 12 students · brushed drones with floor gates as goals, no arena needed",
+      "zh-Hant": "一組最多 12 名學生 · 空心杯無人機以地面門作球門，毋須場地"
+    },
+    "optionPrice": "HK$30,880",
+    "optionPriceNote": {
+      "en": "Second group of 12 on the same visit days (24 students)",
+      "zh-Hant": "同日加開第二組 12 人（共 24 名學生）"
+    },
+    "cta": {
+      "en": "Request a programme quotation",
+      "zh-Hant": "索取課程報價"
+    },
+    "image": "/media/product-tops-shield-200-brushed-set.jpg",
+    "imageAlt": {
+      "en": "TOPS Shield 200 brushed drone soccer sets for a primary school STEM programme",
+      "zh-Hant": "供小學 STEM 課程使用的 TOPS 飛盾 200 空心杯足球無人機套裝"
+    },
+    "summary": {
+      "en": "The lowest-cost way to run drone soccer as a taught STEM programme. A VLI coach teaches eight 1-hour lessons with lightweight brushed drones, and students score by flying through folding floor gates instead of goals, so any classroom or hall will do.",
+      "zh-Hant": "以最低成本把無人機足球作為 STEM 課程推行。VLI 導師以輕巧的空心杯無人機教授 8 堂一小時課堂，學生飛越可摺疊的地面門得分，毋須球門，課室或禮堂即可進行。"
+    },
+    "includes": {
+      "en": [
+        "6× TOPS Shield 200 Brushed RTF sets, one per pair of students",
+        "18× TOPS Shield 200 2S 450 mAh batteries (3 per drone) and a 10-port USB charger",
+        "4× folding floor gates (150 cm), used as goals and for flying drills",
+        "8 weekly 1-hour lessons taught by a VLI coach, for up to 12 students",
+        "Lessons: safety and controls, how drones fly, precision flying, then team play and a class tournament on the free [Score Board](/scoreboard)",
+        "Student workbooks, safety cards and certificates",
+        "Optional inflatable arena hire for the tournament lesson, quoted separately",
+        "Itemised quotation for school procurement and funding applications"
+      ],
+      "zh-Hant": [
+        "6 套 TOPS 飛盾 200 空心杯 RTF 套裝，每兩名學生一套",
+        "18 粒 TOPS 飛盾 200 2S 450 mAh 電池（每部 3 粒）及 1 部 10 埠 USB 充電器",
+        "4 個可摺疊地面門（150 公分），用作球門及飛行訓練",
+        "8 堂每週一小時課堂，由 VLI 導師教授，最多 12 名學生",
+        "課堂內容：安全及操控、無人機飛行原理、精準飛行，最後進行隊際練習，並以免費[記分板](/scoreboard)舉行班際比賽",
+        "學生作業本、安全卡及證書",
+        "可另加租用充氣式場地作比賽課之用，另行報價",
+        "提供分項報價，方便學校採購及申請資助"
+      ]
+    }
+  },
+  {
+    "id": "drone-soccer-stem-programme",
+    "order": 12,
+    "group": "programme",
+    "visible": true,
+    "featured": true,
+    "title": {
+      "en": "Drone Soccer STEM Programme",
+      "zh-Hant": "無人機足球 STEM 課程"
+    },
+    "tagline": {
+      "en": "Secondary school team · 8 weekly sessions",
+      "zh-Hant": "中學校隊 · 8 節每週課堂"
+    },
+    "price": "HK$49,370",
+    "priceNote": {
+      "en": "Up to 12 students · F9A team kit, own arena and 12 hours of coaching · 5% off equipment",
+      "zh-Hant": "最多 12 名學生 · F9A 隊伍器材、自設場地及 12 小時教練課 · 器材 95 折"
+    },
+    "optionPriceNote": {
+      "en": "",
+      "zh-Hant": ""
+    },
+    "cta": {
+      "en": "Request a programme quotation",
+      "zh-Hant": "索取課程報價"
+    },
+    "image": "/media/vli-hero-video-poster-1920_ec259fde.jpg",
+    "imageAlt": {
+      "en": "Drone soccer drones flying through the goal rings of an inflatable arena",
+      "zh-Hant": "無人機足球在充氣式場地內穿越球門"
+    },
+    "summary": {
+      "en": "A complete secondary-school programme: a VLI coach teaches your team for eight weeks, and the school keeps a competition-ready F9A kit with a year of repair cover and its own arena to train in.",
+      "zh-Hant": "完整的中學課程：VLI 導師為校隊授課八週，學校保留一套可參賽的 F9A 器材、一年維修保障，以及自己的練習場地。"
+    },
+    "includes": {
+      "en": [
+        "5× TOPS Shield 205 brushless RTF sets, Tier 2 VLI-verified, with 1-year VLI-CARE",
+        "20× OVONIC 4S 1080 mAh 110C batteries (4 per drone) and a TA300 8-channel smart charger",
+        "Inflatable drone soccer arena (6 × 3 × 3 m) with goals, plus a high-power air pump for fast set-up and pack-down",
+        "2× folding floor gates (150 cm) for flying drills",
+        "8 weekly 1.5-hour sessions taught by a VLI coach, for up to 12 students",
+        "Sessions: piloting, battery care and maintenance, FAI F9A rules and tactics, and how PID tuning works, ending with an inter-class match on the free [Score Board](/scoreboard)",
+        "Workbooks, tactics cards, certificates and a final-match pack",
+        "Itemised quotation for school procurement and funding applications"
+      ],
+      "zh-Hant": [
+        "5 套 TOPS 飛盾 205 無刷 RTF 套裝，Tier 2 VLI 驗證，附一年 VLI-CARE",
+        "20 粒 OVONIC 4S 1080 mAh 110C 電池（每部 4 粒）及 1 部 TA300 八通道智能充電器",
+        "充氣式無人機足球場（6 × 3 × 3 米）連球門，另附大功率氣泵，加快搭建及收拾",
+        "2 個可摺疊地面門（150 公分），用作飛行訓練",
+        "8 節每週 1.5 小時課堂，由 VLI 導師教授，最多 12 名學生",
+        "課堂內容：操控技巧、電池保養及維修、FAI F9A 規則及戰術、PID 調校原理，最後以免費[記分板](/scoreboard)舉行班際比賽",
+        "作業本、戰術卡、證書及決賽物資",
+        "提供分項報價，方便學校採購及申請資助"
+      ]
+    }
+  },
+  {
+    "id": "teach-the-teacher-programme",
+    "order": 13,
+    "group": "programme",
+    "visible": true,
+    "featured": false,
+    "title": {
+      "en": "Teach-the-Teacher STEM Programme",
+      "zh-Hant": "教師培訓 STEM 課程"
+    },
+    "tagline": {
+      "en": "Any level · builds in-house teaching",
+      "zh-Hant": "各級適用 · 培養校內導師"
+    },
+    "price": "HK$51,700",
+    "priceNote": {
+      "en": "Up to 8 teachers and 12 students · mixed fleet and own arena · 5% off equipment",
+      "zh-Hant": "最多 8 名老師及 12 名學生 · 混合機隊及自設場地 · 器材 95 折"
+    },
+    "optionPriceNote": {
+      "en": "",
+      "zh-Hant": ""
+    },
+    "cta": {
+      "en": "Request a programme quotation",
+      "zh-Hant": "索取課程報價"
+    },
+    "image": "/media/service-card_c463c693.jpg",
+    "imageAlt": {
+      "en": "Students flying drone soccer drones in a school STEM lab",
+      "zh-Hant": "學生在學校 STEM 實驗室操控無人機足球"
+    },
+    "summary": {
+      "en": "VLI trains your teachers, then co-teaches the first student sessions with them, so the school can keep running the programme on its own, with beginner and competition drones and its own arena.",
+      "zh-Hant": "VLI 先培訓學校老師，再與老師合教首幾節學生課堂，讓學校日後可自行推行課程，並備有入門及比賽用無人機和自己的場地。"
+    },
+    "includes": {
+      "en": [
+        "6× TOPS Shield 200 Brushed RTF sets with 18 batteries and a 10-port USB charger, for beginners",
+        "3× TOPS Shield 220 brushless RTF sets, Tier 2 VLI-verified, with 12 OVONIC 4S batteries and a D6 PRO charger",
+        "Inflatable drone soccer arena (6 × 3 × 3 m) with goals, plus a high-power air pump",
+        "4× folding floor gates (150 cm) for drills and beginner games",
+        "Full-day teacher course for up to 8 teachers: safety, flying, battery care, running a lesson and the [Score Board](/scoreboard)",
+        "4 co-taught 2-hour student sessions for up to 12 students: VLI leads first, then hands over to your teachers",
+        "Teacher guide and reusable student lesson pack",
+        "Itemised quotation for school procurement and funding applications"
+      ],
+      "zh-Hant": [
+        "6 套 TOPS 飛盾 200 空心杯 RTF 套裝，連 18 粒電池及 1 部 10 埠 USB 充電器，供初學者使用",
+        "3 套 TOPS 飛盾 220 無刷 RTF 套裝，Tier 2 VLI 驗證，連 12 粒 OVONIC 4S 電池及 1 部 D6 PRO 充電器",
+        "充氣式無人機足球場（6 × 3 × 3 米）連球門，另附大功率氣泵",
+        "4 個可摺疊地面門（150 公分），用作訓練及入門比賽",
+        "全日教師課程，最多 8 名老師：安全、飛行、電池保養、帶領課堂及使用[記分板](/scoreboard)",
+        "4 節合教的兩小時學生課堂，最多 12 名學生：先由 VLI 帶領，再逐步交由老師教授",
+        "教師指引及可重用的學生教材",
         "提供分項報價，方便學校採購及申請資助"
       ]
     }

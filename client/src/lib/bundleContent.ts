@@ -8,6 +8,9 @@ export type { BundleContentRecord };
 export { bundleContent };
 
 export const visibleBundles = bundleContent.filter((bundle) => bundle.visible);
+/** The Bundles page shows equipment bundles and taught STEM programmes as separate groups. */
+export const equipmentBundles = visibleBundles.filter((bundle) => bundle.group === "equipment");
+export const programmeBundles = visibleBundles.filter((bundle) => bundle.group === "programme");
 
 /** Renders one "What's included" line; site links such as (/scoreboard) follow the page language. */
 export function renderBundleLine(markdown: string, language: WebsiteLanguage) {

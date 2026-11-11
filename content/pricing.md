@@ -72,3 +72,8 @@ Shown on the Products page, under the **Bundles** tab. Each ID matches a file in
 | stem-classroom-kit | STEM Classroom Kit (6 drones) | HK$7,900 | HK$13,470 |
 | school-team-pack | School Competition Team Pack (5 drones) | HK$26,130 |  |
 | host-school-arena | Host School Arena Pack (10 drones + arena) | HK$65,110 |  |
+| stem-discovery-programme | STEM Discovery Programme (A, taught by VLI) | HK$20,780 | HK$30,880 |
+| drone-soccer-stem-programme | Drone Soccer STEM Programme (B, taught by VLI) | HK$49,370 |  |
+| teach-the-teacher-programme | Teach-the-Teacher STEM Programme (C, taught by VLI) | HK$51,700 |  |
+
+STEM programme prices (A, B, C) = equipment at catalogue price less the bundle discount (0% / 5% / 5%), plus VLI coaching from the Services price sheet (HK$9,800 per 8-hour block, pro-rated at 1.5 blocks for B's 12 hours; HK$12,800 teacher course for C), plus 1 travel and setup hour per visit at HK$500, plus printed materials, rounded down to the nearest HK$10. Floor gates are Gemfan Airgates at HK$270 each; the air pump is budgeted at HK$200 (model to be confirmed). Breakdown: STEM programme proposal rev 3 (28 Oct 2026), with A changed on 10 Nov 2026 to floor gates as goals and no arena hire (was HK$22,480).
